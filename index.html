@@ -58,24 +58,37 @@
     * { box-sizing: border-box; }
 
     :root {
-      --bg-a: #18132e;
-      --bg-b: #3c2676;
-      --bg-c: #7c3aed;
-      --bg-d: #ec4899;
+      --bg-1: #120f24;
+      --bg-2: #231942;
+      --bg-3: #4c1d95;
+      --bg-4: #7c3aed;
+      --bg-5: #ec4899;
+
       --white: #ffffff;
-      --muted: rgba(255,255,255,.78);
-      --glass: rgba(255,255,255,.10);
-      --glass-2: rgba(255,255,255,.14);
-      --glass-border: rgba(255,255,255,.20);
-      --card: rgba(255,255,255,.94);
-      --card-text: #171923;
+      --text-soft: rgba(255,255,255,.84);
+      --text-dim: rgba(255,255,255,.66);
+
+      --glass: rgba(255,255,255,.09);
+      --glass-2: rgba(255,255,255,.12);
+      --glass-3: rgba(255,255,255,.16);
+      --glass-border: rgba(255,255,255,.17);
+
+      --card: rgba(255,255,255,.96);
+      --card-text: #111827;
       --card-sub: #6b7280;
-      --shadow-xl: 0 30px 80px rgba(0,0,0,.28);
-      --shadow-lg: 0 18px 40px rgba(0,0,0,.16);
-      --radius-xl: 36px;
-      --radius-lg: 24px;
-      --radius-md: 18px;
-      --max: 760px;
+      --card-line: rgba(17,24,39,.07);
+
+      --shadow-shell: 0 28px 90px rgba(0,0,0,.30);
+      --shadow-hero: 0 20px 50px rgba(0,0,0,.24);
+      --shadow-card: 0 12px 28px rgba(15,23,42,.10);
+      --shadow-hover: 0 18px 34px rgba(15,23,42,.14);
+
+      --radius-shell: 34px;
+      --radius-hero: 28px;
+      --radius-card: 22px;
+      --radius-pill: 999px;
+
+      --max: 780px;
     }
 
     html { scroll-behavior: smooth; }
@@ -86,17 +99,20 @@
       font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
       color: var(--white);
       background:
-        radial-gradient(circle at 0% 0%, rgba(255,255,255,.14), transparent 26%),
-        radial-gradient(circle at 100% 0%, rgba(255,255,255,.12), transparent 24%),
-        radial-gradient(circle at 50% 100%, rgba(255,255,255,.07), transparent 22%),
-        linear-gradient(135deg, var(--bg-a) 0%, var(--bg-b) 28%, var(--bg-c) 66%, var(--bg-d) 100%);
-      padding: 26px 16px;
+        radial-gradient(circle at 15% 0%, rgba(255,255,255,.12), transparent 24%),
+        radial-gradient(circle at 100% 0%, rgba(255,255,255,.08), transparent 22%),
+        radial-gradient(circle at 50% 100%, rgba(255,255,255,.05), transparent 20%),
+        linear-gradient(135deg, var(--bg-1) 0%, var(--bg-2) 28%, var(--bg-4) 70%, var(--bg-5) 100%);
+      padding: 28px 16px;
       display: flex;
       align-items: center;
       justify-content: center;
     }
 
-    a { color: inherit; text-decoration: none; }
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
 
     .wrap {
       width: 100%;
@@ -106,43 +122,56 @@
     .shell {
       position: relative;
       overflow: hidden;
-      background: linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.08));
+      border-radius: var(--radius-shell);
+      padding: 20px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.07));
       border: 1px solid var(--glass-border);
-      border-radius: var(--radius-xl);
-      box-shadow: var(--shadow-xl);
+      box-shadow: var(--shadow-shell);
       backdrop-filter: blur(18px);
       -webkit-backdrop-filter: blur(18px);
-      padding: 20px;
+      isolation: isolate;
     }
 
     .shell::before {
       content: "";
       position: absolute;
       inset: 0;
-      background:
-        radial-gradient(circle at 50% 0%, rgba(255,255,255,.10), transparent 30%),
-        linear-gradient(180deg, rgba(255,255,255,.05), transparent 22%, transparent 80%, rgba(255,255,255,.03));
       pointer-events: none;
+      background:
+        radial-gradient(circle at 50% 0%, rgba(255,255,255,.08), transparent 26%),
+        linear-gradient(180deg, rgba(255,255,255,.03), transparent 18%, transparent 82%, rgba(255,255,255,.03));
+      z-index: 0;
     }
 
     .hero {
       position: relative;
       z-index: 1;
-      min-height: 360px;
-      border-radius: 30px;
-      overflow: hidden;
-      background:
-        linear-gradient(rgba(14,12,24,.18), rgba(14,12,24,.52)),
-        url('profile.jpeg') center/cover;
+      min-height: 390px;
       display: flex;
       align-items: end;
-      box-shadow: var(--shadow-lg);
+      overflow: hidden;
+      border-radius: var(--radius-hero);
+      background:
+        linear-gradient(180deg, rgba(9,8,15,.10) 0%, rgba(9,8,15,.42) 55%, rgba(9,8,15,.72) 100%),
+        url('profile.jpeg') center/cover no-repeat;
+      box-shadow: var(--shadow-hero);
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(120deg, rgba(255,255,255,.06), transparent 28%, transparent 72%, rgba(255,255,255,.04));
+      pointer-events: none;
     }
 
     .hero-overlay {
+      position: relative;
       width: 100%;
-      padding: 26px 22px 22px;
-      background: linear-gradient(180deg, transparent 0%, rgba(10,10,18,.58) 100%);
+      padding: 26px 24px 24px;
+      z-index: 1;
     }
 
     .topbar {
@@ -153,21 +182,21 @@
     }
 
     .avatar-wrap {
-      width: 74px;
-      height: 74px;
-      padding: 4px;
+      width: 72px;
+      height: 72px;
+      flex: 0 0 72px;
+      padding: 3px;
       border-radius: 50%;
-      background: linear-gradient(135deg, rgba(255,255,255,.95), rgba(255,255,255,.32));
-      box-shadow: 0 12px 28px rgba(0,0,0,.22);
-      flex: 0 0 74px;
+      background: linear-gradient(135deg, rgba(255,255,255,.96), rgba(255,255,255,.28));
+      box-shadow: 0 14px 30px rgba(0,0,0,.24);
     }
 
     .avatar {
       width: 100%;
       height: 100%;
-      border-radius: 50%;
-      object-fit: cover;
       display: block;
+      object-fit: cover;
+      border-radius: 50%;
     }
 
     .identity {
@@ -176,34 +205,40 @@
 
     .eyebrow {
       display: inline-flex;
-      padding: 8px 13px;
-      border-radius: 999px;
-      background: rgba(255,255,255,.16);
-      border: 1px solid rgba(255,255,255,.18);
-      box-shadow: inset 0 1px 0 rgba(255,255,255,.14);
-      font-size: .82rem;
-      font-weight: 800;
-      letter-spacing: .05em;
-      text-transform: uppercase;
-      backdrop-filter: blur(8px);
+      align-items: center;
+      gap: 8px;
       margin-bottom: 10px;
+      padding: 8px 13px;
+      border-radius: var(--radius-pill);
+      font-size: .78rem;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: #fff;
+      background: rgba(255,255,255,.14);
+      border: 1px solid rgba(255,255,255,.16);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.08);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
     }
 
     h1 {
       margin: 0;
-      font-size: clamp(2.4rem, 6vw, 4.6rem);
-      line-height: 1.01;
-      letter-spacing: -.05em;
+      font-size: clamp(2.35rem, 6vw, 4.6rem);
+      line-height: .98;
+      letter-spacing: -.06em;
       font-weight: 900;
+      text-wrap: balance;
     }
 
     .hero-sub {
-      max-width: 560px;
-      margin: 10px 0 0;
-      color: rgba(255,255,255,.9);
-      font-size: 1.03rem;
-      line-height: 1.65;
+      max-width: 580px;
+      margin: 12px 0 0;
+      color: rgba(255,255,255,.90);
+      font-size: 1.02rem;
+      line-height: 1.7;
       font-weight: 500;
+      text-wrap: pretty;
     }
 
     .cta-row {
@@ -216,59 +251,73 @@
     }
 
     .cta {
-      display: flex;
+      min-height: 54px;
+      display: inline-flex;
       align-items: center;
       justify-content: center;
-      min-height: 58px;
+      gap: 9px;
       border-radius: 18px;
+      padding: 0 18px;
+      font-size: .98rem;
       font-weight: 800;
-      text-align: center;
-      transition: transform .18s ease, box-shadow .18s ease;
+      transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease, background .18s ease;
     }
 
-    .cta:hover { transform: translateY(-2px); }
+    .cta:hover {
+      transform: translateY(-2px);
+    }
 
     .cta.primary {
-      background: linear-gradient(135deg, #ffffff, #f4f1ff);
-      color: #312e81;
-      box-shadow: 0 14px 30px rgba(0,0,0,.16);
+      color: #2e1065;
+      background: linear-gradient(135deg, #ffffff, #f4f0ff);
+      box-shadow: 0 14px 28px rgba(0,0,0,.14);
     }
 
     .cta.secondary {
-      background: rgba(255,255,255,.14);
       color: #fff;
-      border: 1px solid rgba(255,255,255,.18);
+      background: rgba(255,255,255,.11);
+      border: 1px solid rgba(255,255,255,.16);
       backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
     }
 
     .grid {
       position: relative;
       z-index: 1;
       display: grid;
+      grid-template-columns: 1.08fr .92fr;
       gap: 14px;
-      grid-template-columns: 1.05fr .95fr;
       margin-top: 16px;
+    }
+
+    .panel,
+    .stats {
+      min-height: 100%;
     }
 
     .panel {
       background: rgba(255,255,255,.10);
-      border: 1px solid rgba(255,255,255,.16);
+      border: 1px solid rgba(255,255,255,.14);
       border-radius: 24px;
-      padding: 18px;
+      padding: 18px 18px;
       backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
     }
 
     .panel h2 {
       margin: 0 0 10px;
-      font-size: 1rem;
+      font-size: .98rem;
+      font-weight: 800;
       letter-spacing: -.02em;
+      color: #fff;
     }
 
     .intro {
-      color: var(--muted);
-      font-size: 1rem;
-      line-height: 1.72;
       margin: 0;
+      color: var(--text-soft);
+      line-height: 1.75;
+      font-size: .99rem;
+      text-wrap: pretty;
     }
 
     .stats {
@@ -278,61 +327,100 @@
 
     .stat {
       background: rgba(255,255,255,.08);
-      border: 1px solid rgba(255,255,255,.14);
+      border: 1px solid rgba(255,255,255,.12);
       border-radius: 18px;
       padding: 14px 14px;
+      transition: transform .18s ease, background .18s ease;
+    }
+
+    .stat:hover {
+      transform: translateY(-1px);
+      background: rgba(255,255,255,.10);
     }
 
     .stat strong {
       display: block;
-      font-size: .98rem;
       margin-bottom: 4px;
+      font-size: .97rem;
+      color: #fff;
     }
 
     .stat span {
       display: block;
-      color: var(--muted);
-      font-size: .92rem;
-      line-height: 1.45;
+      color: var(--text-dim);
+      font-size: .91rem;
+      line-height: 1.48;
+    }
+
+    .links-wrap {
+      position: relative;
+      z-index: 1;
+      margin-top: 18px;
+      padding: 14px;
+      border-radius: 26px;
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.12);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    .links-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 12px;
+      padding: 2px 2px 0;
+    }
+
+    .links-head h2 {
+      margin: 0;
+      font-size: 1rem;
+      color: #fff;
+      letter-spacing: -.02em;
+    }
+
+    .links-head span {
+      color: var(--text-dim);
+      font-size: .87rem;
+      font-weight: 600;
     }
 
     .links {
-      position: relative;
-      z-index: 1;
       display: grid;
-      gap: 14px;
-      margin-top: 18px;
+      gap: 10px;
     }
 
     .link {
       display: flex;
       align-items: center;
-      gap: 14px;
+      gap: 12px;
       background: var(--card);
       color: var(--card-text);
-      border-radius: 24px;
-      padding: 17px 18px;
-      box-shadow: 0 16px 30px rgba(0,0,0,.12);
-      transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+      border-radius: 18px;
+      padding: 12px 14px;
+      border: 1px solid var(--card-line);
+      box-shadow: var(--shadow-card);
+      transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
     }
 
     .link:hover {
       transform: translateY(-2px);
-      box-shadow: 0 20px 36px rgba(0,0,0,.16);
-      background: #ffffff;
+      box-shadow: var(--shadow-hover);
+      border-color: rgba(124,58,237,.14);
     }
 
     .icon {
-      width: 50px;
-      height: 50px;
-      border-radius: 16px;
-      flex: 0 0 50px;
+      width: 40px;
+      height: 40px;
+      flex: 0 0 40px;
+      border-radius: 13px;
       display: grid;
       place-items: center;
       color: #fff;
-      font-size: 1.25rem;
+      font-size: 1rem;
       font-weight: 900;
-      box-shadow: 0 10px 22px rgba(0,0,0,.12);
+      box-shadow: 0 8px 18px rgba(0,0,0,.10);
     }
 
     .icon.tiktok { background: linear-gradient(135deg, #111111, #000000); }
@@ -348,44 +436,52 @@
 
     .text strong {
       display: block;
-      font-size: 1.12rem;
-      line-height: 1.2;
-      margin-bottom: 4px;
+      margin-bottom: 2px;
+      font-size: .98rem;
+      line-height: 1.22;
+      letter-spacing: -.01em;
     }
 
     .text span {
       display: block;
       color: var(--card-sub);
-      font-size: .97rem;
-      line-height: 1.46;
+      font-size: .88rem;
+      line-height: 1.42;
     }
 
     .arrow {
       color: #9ca3af;
-      font-size: 1.35rem;
+      font-size: 1.18rem;
       line-height: 1;
-      margin-left: 8px;
+      margin-left: 6px;
+      transition: transform .18s ease, color .18s ease;
+    }
+
+    .link:hover .arrow {
+      transform: translateX(2px);
+      color: #6b7280;
     }
 
     .footer {
       position: relative;
       z-index: 1;
-      text-align: center;
       margin-top: 22px;
-      padding-top: 22px;
-      border-top: 1px solid rgba(255,255,255,.16);
+      padding-top: 20px;
+      border-top: 1px solid rgba(255,255,255,.14);
+      text-align: center;
     }
 
     .location {
+      margin-bottom: 7px;
+      font-size: 1rem;
       font-weight: 800;
-      font-size: 1.06rem;
-      color: #ffffff;
-      margin-bottom: 8px;
+      color: #fff;
+      letter-spacing: -.01em;
     }
 
     .sub {
-      color: var(--muted);
-      font-size: .97rem;
+      color: var(--text-dim);
+      font-size: .93rem;
       line-height: 1.55;
     }
 
@@ -403,7 +499,9 @@
         align-items: stretch;
       }
 
-      .wrap { max-width: 100%; }
+      .wrap {
+        max-width: 100%;
+      }
 
       .shell {
         min-height: 100vh;
@@ -412,7 +510,35 @@
       }
 
       .hero {
-        min-height: 330px;
+        min-height: 350px;
+      }
+
+      .hero-overlay {
+        padding: 22px 18px 18px;
+      }
+
+      .topbar {
+        align-items: flex-end;
+      }
+
+      .avatar-wrap {
+        width: 64px;
+        height: 64px;
+        flex-basis: 64px;
+      }
+
+      .eyebrow {
+        font-size: .72rem;
+        padding: 7px 11px;
+      }
+
+      h1 {
+        font-size: clamp(2.1rem, 9vw, 3.2rem);
+      }
+
+      .hero-sub {
+        font-size: .96rem;
+        line-height: 1.66;
       }
 
       .cta-row,
@@ -420,8 +546,45 @@
         grid-template-columns: 1fr;
       }
 
-      .hero-title {
-        font-size: 2.55rem;
+      .links-wrap {
+        padding: 12px;
+      }
+
+      .link {
+        padding: 11px 12px;
+        gap: 10px;
+      }
+
+      .icon {
+        width: 36px;
+        height: 36px;
+        flex-basis: 36px;
+        border-radius: 11px;
+        font-size: .92rem;
+      }
+
+      .text strong {
+        font-size: .94rem;
+      }
+
+      .text span {
+        font-size: .84rem;
+      }
+    }
+
+    @media (max-width: 420px) {
+      .cta {
+        min-height: 50px;
+        font-size: .94rem;
+      }
+
+      .panel,
+      .stat {
+        border-radius: 18px;
+      }
+
+      .hero {
+        min-height: 330px;
       }
     }
   </style>
@@ -476,52 +639,59 @@
         </div>
       </div>
 
-      <div class="links">
-        <a class="link" href="https://www.tiktok.com/@hoaidangllc" target="_blank" rel="noopener noreferrer">
-          <div class="icon tiktok">♪</div>
-          <div class="text">
-            <strong>TikTok</strong>
-            <span>Xem video ngắn về cuộc sống, công việc và chuyện thật ở Mỹ.</span>
-          </div>
-          <div class="arrow">›</div>
-        </a>
+      <section class="links-wrap">
+        <div class="links-head">
+          <h2>Kết nối &amp; nội dung</h2>
+          <span>Gọn hơn • sạch hơn • pro hơn</span>
+        </div>
 
-        <a class="link" href="https://www.facebook.com/hoaidangllc" target="_blank" rel="noopener noreferrer">
-          <div class="icon facebook">f</div>
-          <div class="text">
-            <strong>Facebook</strong>
-            <span>Theo dõi bài viết, video và các chia sẻ hằng ngày của Hoài.</span>
-          </div>
-          <div class="arrow">›</div>
-        </a>
+        <div class="links">
+          <a class="link" href="https://www.tiktok.com/@hoaidangllc" target="_blank" rel="noopener noreferrer">
+            <div class="icon tiktok">♪</div>
+            <div class="text">
+              <strong>TikTok</strong>
+              <span>Video ngắn về cuộc sống, công việc và chuyện thật ở Mỹ.</span>
+            </div>
+            <div class="arrow">›</div>
+          </a>
 
-        <a class="link" href="https://www.youtube.com/@hoaidangllc" target="_blank" rel="noopener noreferrer">
-          <div class="icon youtube">▶</div>
-          <div class="text">
-            <strong>YouTube</strong>
-            <span>Xem thêm nội dung dài hơn, review và video hành trình cuộc sống.</span>
-          </div>
-          <div class="arrow">›</div>
-        </a>
+          <a class="link" href="https://www.facebook.com/hoaidangllc" target="_blank" rel="noopener noreferrer">
+            <div class="icon facebook">f</div>
+            <div class="text">
+              <strong>Facebook</strong>
+              <span>Bài viết, video và chia sẻ hằng ngày của Hoài.</span>
+            </div>
+            <div class="arrow">›</div>
+          </a>
 
-        <a class="link" href="/blog.html">
-          <div class="icon blog">✍</div>
-          <div class="text">
-            <strong>Blog | Bài viết</strong>
-            <span>Chia sẻ cuộc sống ở Mỹ, kinh nghiệm nghề nail và chuyện đời thật.</span>
-          </div>
-          <div class="arrow">›</div>
-        </a>
+          <a class="link" href="https://www.youtube.com/@hoaidangllc" target="_blank" rel="noopener noreferrer">
+            <div class="icon youtube">▶</div>
+            <div class="text">
+              <strong>YouTube</strong>
+              <span>Nội dung dài hơn, review và hành trình cuộc sống.</span>
+            </div>
+            <div class="arrow">›</div>
+          </a>
 
-        <a class="link" href="https://annienail.com/" target="_blank" rel="noopener noreferrer">
-          <div class="icon nails">✦</div>
-          <div class="text">
-            <strong>Annie’s Nails &amp; Spa</strong>
-            <span>Website chính thức của tiệm nail tại Odessa, Texas.</span>
-          </div>
-          <div class="arrow">›</div>
-        </a>
-      </div>
+          <a class="link" href="/blog.html">
+            <div class="icon blog">✍</div>
+            <div class="text">
+              <strong>Blog</strong>
+              <span>Bài viết về cuộc sống ở Mỹ, nghề nail và chuyện đời thật.</span>
+            </div>
+            <div class="arrow">›</div>
+          </a>
+
+          <a class="link" href="https://annienail.com/" target="_blank" rel="noopener noreferrer">
+            <div class="icon nails">✦</div>
+            <div class="text">
+              <strong>Annie’s Nails &amp; Spa</strong>
+              <span>Website chính thức của tiệm nail tại Odessa, Texas.</span>
+            </div>
+            <div class="arrow">›</div>
+          </a>
+        </div>
+      </section>
 
       <div class="footer">
         <div class="location">Odessa, Texas – USA</div>
