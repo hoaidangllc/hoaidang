@@ -3,35 +3,289 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>Cuộc Sống Ở Texas Có Tốt Không?</title>
-  <link rel="stylesheet" href="blog.css">
   <meta name="description" content="Cuộc sống ở Texas có tốt không? Tìm hiểu chi phí sống, cơ hội việc làm, thời tiết và những điểm mạnh khi định cư hoặc làm việc ở Texas.">
+  <link rel="stylesheet" href="blog.css">
+
   <style>
-    body{font-family:Arial,sans-serif;background:#f8fafc;color:#1f2937;margin:0;line-height:1.8}
-    .wrap{max-width:900px;margin:40px auto;padding:0 20px}
-    article{background:#fff;padding:35px;border-radius:18px;box-shadow:0 10px 28px rgba(0,0,0,.08)}
-    a{color:#2563eb;text-decoration:none}
+    *{
+      box-sizing:border-box;
+    }
+
+    :root{
+      --bg:#eef2ff;
+      --card:#ffffff;
+      --text:#1f2937;
+      --muted:#6b7280;
+      --line:#e5e7eb;
+      --primary:#2563eb;
+      --dark:#0f172a;
+      --shadow:0 20px 50px rgba(15,23,42,.10);
+      --radius:24px;
+    }
+
+    html{
+      scroll-behavior:smooth;
+    }
+
+    body{
+      margin:0;
+      font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(99,102,241,.12), transparent 30%),
+        radial-gradient(circle at top right, rgba(59,130,246,.10), transparent 28%),
+        linear-gradient(180deg, #f8fbff 0%, #eef2ff 100%);
+      color:var(--text);
+      line-height:1.85;
+    }
+
+    a{
+      color:inherit;
+      text-decoration:none;
+    }
+
+    .nav{
+      position:sticky;
+      top:0;
+      z-index:100;
+      backdrop-filter:blur(12px);
+      -webkit-backdrop-filter:blur(12px);
+      background:rgba(15,23,42,.88);
+      color:#fff;
+      padding:16px 22px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      border-bottom:1px solid rgba(255,255,255,.08);
+    }
+
+    .brand{
+      font-weight:800;
+      letter-spacing:.2px;
+    }
+
+    .nav-links{
+      display:flex;
+      align-items:center;
+      gap:18px;
+      flex-wrap:wrap;
+    }
+
+    .nav a{
+      color:#fff;
+      text-decoration:none;
+      font-weight:600;
+      opacity:.92;
+      transition:.25s ease;
+    }
+
+    .nav a:hover{
+      opacity:1;
+      transform:translateY(-1px);
+    }
+
+    .container{
+      max-width:980px;
+      margin:48px auto;
+      padding:0 20px;
+    }
+
+    .article{
+      background:var(--card);
+      border:1px solid rgba(255,255,255,.7);
+      border-radius:32px;
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+
+    .article-hero{
+      padding:44px 40px 28px;
+      background:
+        linear-gradient(135deg, rgba(37,99,235,.08), rgba(99,102,241,.10)),
+        linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+      border-bottom:1px solid var(--line);
+    }
+
+    .back{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      margin-bottom:18px;
+      text-decoration:none;
+      color:var(--primary);
+      font-weight:700;
+      font-size:15px;
+    }
+
+    .back:hover{
+      text-decoration:underline;
+    }
+
+    .article-tag{
+      display:inline-block;
+      padding:8px 14px;
+      border-radius:999px;
+      background:#dbeafe;
+      color:#1d4ed8;
+      font-size:13px;
+      font-weight:800;
+      letter-spacing:.3px;
+      margin-bottom:18px;
+      text-transform:uppercase;
+    }
+
+    h1{
+      font-size:clamp(30px, 4vw, 44px);
+      line-height:1.15;
+      margin:0 0 14px;
+      color:var(--dark);
+      letter-spacing:-.03em;
+    }
+
+    .article-sub{
+      font-size:18px;
+      color:var(--muted);
+      max-width:760px;
+      margin:0;
+    }
+
+    .article-body{
+      padding:36px 40px 44px;
+    }
+
+    .article-body p{
+      font-size:18px;
+      margin:0 0 22px;
+      color:var(--text);
+    }
+
+    .related{
+      margin-top:36px;
+      padding:26px;
+      background:linear-gradient(180deg,#f8fbff 0%, #eef4ff 100%);
+      border:1px solid #dbeafe;
+      border-radius:24px;
+    }
+
+    .related h3{
+      margin:0 0 16px;
+      font-size:22px;
+      color:var(--dark);
+    }
+
+    .related-grid{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:14px;
+    }
+
+    .related a{
+      display:block;
+      text-decoration:none;
+      color:var(--text);
+      background:#fff;
+      border:1px solid #e5e7eb;
+      padding:18px;
+      border-radius:18px;
+      font-weight:700;
+      transition:.25s ease;
+      box-shadow:0 8px 20px rgba(15,23,42,.05);
+    }
+
+    .related a:hover{
+      transform:translateY(-3px);
+      border-color:#bfdbfe;
+      box-shadow:0 16px 30px rgba(37,99,235,.10);
+      color:var(--primary);
+    }
+
+    footer{
+      text-align:center;
+      padding:34px 20px 42px;
+      color:var(--muted);
+      font-size:15px;
+    }
+
+    @media (max-width:768px){
+      .nav{
+        padding:14px 16px;
+      }
+
+      .nav-links{
+        gap:12px;
+        font-size:14px;
+      }
+
+      .container{
+        margin:24px auto;
+        padding:0 14px;
+      }
+
+      .article-hero,
+      .article-body{
+        padding:26px 20px;
+      }
+
+      .article-body p{
+        font-size:17px;
+      }
+
+      .related-grid{
+        grid-template-columns:1fr;
+      }
+    }
   </style>
 </head>
 <body>
-<div class="wrap">
-<article>
-  <p><a href="blog.html">← Quay lại Blog</a></p>
-  <h1>Cuộc Sống Ở Texas Có Tốt Không?</h1>
 
-  <p>Texas là một trong những bang được nhiều người Việt lựa chọn khi sinh sống và làm việc tại Mỹ. Vậy cuộc sống ở Texas có tốt không? Câu trả lời là khá tốt với nhiều người, đặc biệt nếu bạn ưu tiên chi phí sống dễ chịu hơn và cơ hội xây dựng cuộc sống ổn định lâu dài.</p>
+  <div class="nav">
+    <div class="brand">Hoài Đặng</div>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="blog.html">Blog</a>
+      <a href="about.html">About</a>
+    </div>
+  </div>
 
-  <p>Một điểm mạnh của Texas là chi phí nhà cửa ở nhiều khu vực vẫn mềm hơn so với các bang lớn khác. Ngoài ra, Texas không có thuế thu nhập cá nhân cấp bang, nên với nhiều người đi làm hoặc kinh doanh, đây là lợi thế khá rõ. Cơ hội việc làm cũng đa dạng, từ dịch vụ, làm đẹp, giao hàng đến nhiều ngành nghề chuyên môn khác.</p>
+  <div class="container">
+    <article class="article">
 
-  <p>Tuy nhiên, Texas cũng có những mặt không phải ai cũng hợp. Thời tiết ở đây có thể rất nóng, gió mạnh và khô, nhất là ở một số khu vực phía Tây Texas. Nếu bạn thích khí hậu mát mẻ quanh năm thì có thể cần thời gian để quen. Khoảng cách di chuyển ở Texas cũng khá xa, nên xe cộ gần như là điều bắt buộc trong cuộc sống hàng ngày.</p>
+      <div class="article-hero">
+        <a class="back" href="blog.html">← Quay lại Blog</a>
+        <div class="article-tag">Texas</div>
+        <h1>Cuộc Sống Ở Texas Có Tốt Không?</h1>
+        <p class="article-sub">
+          Tìm hiểu chi phí sống, cơ hội việc làm, thời tiết và những điểm mạnh khi định cư hoặc làm việc ở Texas.
+        </p>
+      </div>
 
-  <p>Với gia đình có con nhỏ, Texas thường được đánh giá là nơi có không gian sống thoải mái hơn nếu so với các thành phố cực đắt đỏ. Nhiều người thích cảm giác cuộc sống bớt gấp gáp hơn, dễ mua nhà hơn và phù hợp để ổn định lâu dài. Dĩ nhiên, tốt hay không còn phụ thuộc vào thành phố cụ thể và mục tiêu sống của từng người.</p>
+      <div class="article-body">
+        <p>Texas là một trong những bang được nhiều người Việt lựa chọn khi sinh sống và làm việc tại Mỹ. Vậy cuộc sống ở Texas có tốt không? Câu trả lời là khá tốt với nhiều người, đặc biệt nếu bạn ưu tiên chi phí sống dễ chịu hơn và cơ hội xây dựng cuộc sống ổn định lâu dài.</p>
 
-  <p>Nói chung, Texas là lựa chọn đáng cân nhắc cho người muốn sống thực tế, làm việc chăm chỉ và xây nền tài chính bền hơn. Không hào nhoáng kiểu điện ảnh, nhưng rất hợp kiểu sống biết lo cho tương lai. Mà sống được bền lâu mới là phim hay, chứ trailer đẹp chưa chắc kết có hậu.</p>
+        <p>Một điểm mạnh của Texas là chi phí nhà cửa ở nhiều khu vực vẫn mềm hơn so với các bang lớn khác. Ngoài ra, Texas không có thuế thu nhập cá nhân cấp bang, nên với nhiều người đi làm hoặc kinh doanh, đây là lợi thế khá rõ. Cơ hội việc làm cũng đa dạng, từ dịch vụ, làm đẹp, giao hàng đến nhiều ngành nghề chuyên môn khác.</p>
 
-  <p>Xem thêm: <a href="nguoi-viet-o-odessa-texas.html">Cuộc Sống Người Việt Ở Odessa Texas</a></p>
-  <p>Xem thêm: <a href="chi-phi-song-o-my-bao-nhieu.html">Chi Phí Sinh Hoạt Ở Mỹ Bao Nhiêu Một Tháng?</a></p>
-</article>
-</div>
+        <p>Tuy nhiên, Texas cũng có những mặt không phải ai cũng hợp. Thời tiết ở đây có thể rất nóng, gió mạnh và khô, nhất là ở một số khu vực phía Tây Texas. Nếu bạn thích khí hậu mát mẻ quanh năm thì có thể cần thời gian để quen. Khoảng cách di chuyển ở Texas cũng khá xa, nên xe cộ gần như là điều bắt buộc trong cuộc sống hàng ngày.</p>
+
+        <p>Với gia đình có con nhỏ, Texas thường được đánh giá là nơi có không gian sống thoải mái hơn nếu so với các thành phố cực đắt đỏ. Nhiều người thích cảm giác cuộc sống bớt gấp gáp hơn, dễ mua nhà hơn và phù hợp để ổn định lâu dài. Dĩ nhiên, tốt hay không còn phụ thuộc vào thành phố cụ thể và mục tiêu sống của từng người.</p>
+
+        <p>Nói chung, Texas là lựa chọn đáng cân nhắc cho người muốn sống thực tế, làm việc chăm chỉ và xây nền tài chính bền hơn. Không hào nhoáng kiểu điện ảnh, nhưng rất hợp kiểu sống biết lo cho tương lai. Mà sống được bền lâu mới là phim hay, chứ trailer đẹp chưa chắc kết có hậu.</p>
+
+        <div class="related">
+          <h3>Xem thêm</h3>
+          <div class="related-grid">
+            <a href="nguoi-viet-o-odessa-texas.html">Cuộc Sống Người Việt Ở Odessa Texas</a>
+            <a href="chi-phi-song-o-my-bao-nhieu.html">Chi Phí Sinh Hoạt Ở Mỹ Bao Nhiêu Một Tháng?</a>
+          </div>
+        </div>
+      </div>
+
+    </article>
+  </div>
+
+  <footer>
+    © 2026 Hoài Đặng · hoaidang.com
+  </footer>
+
 </body>
 </html>
