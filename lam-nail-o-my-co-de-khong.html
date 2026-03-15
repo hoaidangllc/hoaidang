@@ -3,36 +3,294 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>Làm Nail Ở Mỹ Có Dễ Không? Sự Thật Công Việc Nail Tại Mỹ</title>
-  <link rel="stylesheet" href="blog.css">
   <meta name="description" content="Làm nail ở Mỹ có dễ không? Tìm hiểu sự thật về công việc nail tại Mỹ, những khó khăn ban đầu và cơ hội thu nhập cho người mới.">
+  <link rel="stylesheet" href="blog.css">
+
   <style>
-    body{font-family:Arial,sans-serif;background:#f8fafc;color:#1f2937;margin:0;line-height:1.8}
-    .wrap{max-width:900px;margin:40px auto;padding:0 20px}
-    article{background:#fff;padding:35px;border-radius:18px;box-shadow:0 10px 28px rgba(0,0,0,.08)}
-    h1{line-height:1.3} a{color:#2563eb;text-decoration:none} .meta{color:#6b7280}
+    *{
+      box-sizing:border-box;
+    }
+
+    :root{
+      --bg:#eef2ff;
+      --card:#ffffff;
+      --text:#1f2937;
+      --muted:#6b7280;
+      --line:#e5e7eb;
+      --primary:#2563eb;
+      --dark:#0f172a;
+      --shadow:0 20px 50px rgba(15,23,42,.10);
+      --radius:24px;
+    }
+
+    html{
+      scroll-behavior:smooth;
+    }
+
+    body{
+      margin:0;
+      font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(99,102,241,.12), transparent 30%),
+        radial-gradient(circle at top right, rgba(59,130,246,.10), transparent 28%),
+        linear-gradient(180deg, #f8fbff 0%, #eef2ff 100%);
+      color:var(--text);
+      line-height:1.85;
+    }
+
+    a{
+      color:inherit;
+      text-decoration:none;
+    }
+
+    .nav{
+      position:sticky;
+      top:0;
+      z-index:100;
+      backdrop-filter:blur(12px);
+      -webkit-backdrop-filter:blur(12px);
+      background:rgba(15,23,42,.88);
+      color:#fff;
+      padding:16px 22px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      border-bottom:1px solid rgba(255,255,255,.08);
+    }
+
+    .brand{
+      font-weight:800;
+      letter-spacing:.2px;
+    }
+
+    .nav-links{
+      display:flex;
+      align-items:center;
+      gap:18px;
+      flex-wrap:wrap;
+    }
+
+    .nav a{
+      color:#fff;
+      text-decoration:none;
+      font-weight:600;
+      opacity:.92;
+      transition:.25s ease;
+    }
+
+    .nav a:hover{
+      opacity:1;
+      transform:translateY(-1px);
+    }
+
+    .container{
+      max-width:980px;
+      margin:48px auto;
+      padding:0 20px;
+    }
+
+    .article{
+      background:var(--card);
+      border:1px solid rgba(255,255,255,.7);
+      border-radius:32px;
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+
+    .article-hero{
+      padding:44px 40px 28px;
+      background:
+        linear-gradient(135deg, rgba(37,99,235,.08), rgba(99,102,241,.10)),
+        linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+      border-bottom:1px solid var(--line);
+    }
+
+    .back{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      margin-bottom:18px;
+      text-decoration:none;
+      color:var(--primary);
+      font-weight:700;
+      font-size:15px;
+    }
+
+    .back:hover{
+      text-decoration:underline;
+    }
+
+    .article-tag{
+      display:inline-block;
+      padding:8px 14px;
+      border-radius:999px;
+      background:#dbeafe;
+      color:#1d4ed8;
+      font-size:13px;
+      font-weight:800;
+      letter-spacing:.3px;
+      margin-bottom:18px;
+      text-transform:uppercase;
+    }
+
+    h1{
+      font-size:clamp(30px, 4vw, 44px);
+      line-height:1.15;
+      margin:0 0 14px;
+      color:var(--dark);
+      letter-spacing:-.03em;
+    }
+
+    .article-sub{
+      font-size:18px;
+      color:var(--muted);
+      max-width:760px;
+      margin:0;
+    }
+
+    .article-body{
+      padding:36px 40px 44px;
+    }
+
+    .article-body p{
+      font-size:18px;
+      margin:0 0 22px;
+      color:var(--text);
+    }
+
+    .related{
+      margin-top:36px;
+      padding:26px;
+      background:linear-gradient(180deg,#f8fbff 0%, #eef4ff 100%);
+      border:1px solid #dbeafe;
+      border-radius:24px;
+    }
+
+    .related h3{
+      margin:0 0 16px;
+      font-size:22px;
+      color:var(--dark);
+    }
+
+    .related-grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:14px;
+    }
+
+    .related a{
+      display:block;
+      text-decoration:none;
+      color:var(--text);
+      background:#fff;
+      border:1px solid #e5e7eb;
+      padding:18px;
+      border-radius:18px;
+      font-weight:700;
+      transition:.25s ease;
+      box-shadow:0 8px 20px rgba(15,23,42,.05);
+    }
+
+    .related a:hover{
+      transform:translateY(-3px);
+      border-color:#bfdbfe;
+      box-shadow:0 16px 30px rgba(37,99,235,.10);
+      color:var(--primary);
+    }
+
+    footer{
+      text-align:center;
+      padding:34px 20px 42px;
+      color:var(--muted);
+      font-size:15px;
+    }
+
+    @media (max-width:768px){
+      .nav{
+        padding:14px 16px;
+      }
+
+      .nav-links{
+        gap:12px;
+        font-size:14px;
+      }
+
+      .container{
+        margin:24px auto;
+        padding:0 14px;
+      }
+
+      .article-hero,
+      .article-body{
+        padding:26px 20px;
+      }
+
+      .article-body p{
+        font-size:17px;
+      }
+
+      .related-grid{
+        grid-template-columns:1fr;
+      }
+    }
   </style>
 </head>
 <body>
-<div class="wrap">
-<article>
-  <p><a href="blog.html">← Quay lại Blog</a></p>
-  <h1>Làm Nail Ở Mỹ Có Dễ Không? Sự Thật Công Việc Nail Tại Mỹ</h1>
-  <p class="meta">Chia sẻ thực tế về nghề nail tại Mỹ dành cho người mới tìm hiểu</p>
 
-  <p>Làm nail là một trong những nghề quen thuộc của cộng đồng người Việt tại Mỹ. Tuy nhiên nhiều người mới vẫn băn khoăn rằng làm nail ở Mỹ có dễ không, có phù hợp để theo lâu dài hay không. Câu trả lời thật lòng là nghề này không quá khó để bắt đầu, nhưng cũng không hề nhẹ nhàng như nhiều người tưởng.</p>
+  <div class="nav">
+    <div class="brand">Hoài Đặng</div>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="blog.html">Blog</a>
+      <a href="about.html">About</a>
+    </div>
+  </div>
 
-  <p>Điều đầu tiên là bạn phải quen với nhịp làm việc nhanh. Những ngày cuối tuần hoặc mùa cao điểm, tiệm nail ở Mỹ có thể rất đông khách. Thợ phải làm liên tục, giữ thái độ vui vẻ, đúng giờ và luôn sạch sẽ. Ngoài tay nghề, cách giao tiếp với khách cũng rất quan trọng vì khách hàng ở Mỹ thường đánh giá trải nghiệm tổng thể chứ không chỉ nhìn bộ móng đẹp hay không.</p>
+  <div class="container">
+    <article class="article">
 
-  <p>Nếu bạn mới vào nghề, thời gian đầu có thể hơi áp lực. Bạn cần học cách làm đúng kỹ thuật, giữ vệ sinh, ghi nhớ nhiều bước và đồng thời học thêm tiếng Anh giao tiếp cơ bản. Nhưng điểm tích cực là nghề nail có thể học dần, làm dần và tiến bộ theo thời gian. Nhiều người ban đầu chưa giỏi nhưng nhờ siêng năng, chịu khó và đi làm đều nên sau vài tháng đã bắt đầu quen việc.</p>
+      <div class="article-hero">
+        <a class="back" href="blog.html">← Quay lại Blog</a>
+        <div class="article-tag">Nail ở Mỹ</div>
+        <h1>Làm Nail Ở Mỹ Có Dễ Không? Sự Thật Công Việc Nail Tại Mỹ</h1>
+        <p class="article-sub">
+          Chia sẻ thực tế về nghề nail tại Mỹ dành cho người mới tìm hiểu.
+        </p>
+      </div>
 
-  <p>Một lợi thế lớn của nghề nail là thu nhập khá ổn so với nhiều nghề phổ thông khác. Nếu làm ở tiệm ổn định, đông khách và có tip tốt, người thợ hoàn toàn có thể có mức thu nhập đủ để trang trải cuộc sống và tiết kiệm. Với người có kinh nghiệm, cơ hội tăng thu nhập còn rõ hơn nữa.</p>
+      <div class="article-body">
+        <p>Làm nail là một trong những nghề quen thuộc của cộng đồng người Việt tại Mỹ. Tuy nhiên nhiều người mới vẫn băn khoăn rằng làm nail ở Mỹ có dễ không, có phù hợp để theo lâu dài hay không. Câu trả lời thật lòng là nghề này không quá khó để bắt đầu, nhưng cũng không hề nhẹ nhàng như nhiều người tưởng.</p>
 
-  <p>Tóm lại, làm nail ở Mỹ không phải nghề dễ theo kiểu nhàn hạ, nhưng là nghề có cơ hội thật cho người chịu học và chịu làm. Nếu bạn kiên trì trong giai đoạn đầu, nghề này có thể mở ra con đường ổn định lâu dài.</p>
+        <p>Điều đầu tiên là bạn phải quen với nhịp làm việc nhanh. Những ngày cuối tuần hoặc mùa cao điểm, tiệm nail ở Mỹ có thể rất đông khách. Thợ phải làm liên tục, giữ thái độ vui vẻ, đúng giờ và luôn sạch sẽ. Ngoài tay nghề, cách giao tiếp với khách cũng rất quan trọng vì khách hàng ở Mỹ thường đánh giá trải nghiệm tổng thể chứ không chỉ nhìn bộ móng đẹp hay không.</p>
 
-  <p>Xem thêm: <a href="lam-nail-o-my-kiem-bao-nhieu.html">Làm Nail Ở Mỹ Kiếm Bao Nhiêu?</a></p>
-  <p>Xem thêm: <a href="hoc-lam-nail-o-my-mat-bao-nhieu.html">Học Làm Nail Ở Mỹ Mất Bao Nhiêu Tiền?</a></p>
-</article>
-</div>
+        <p>Nếu bạn mới vào nghề, thời gian đầu có thể hơi áp lực. Bạn cần học cách làm đúng kỹ thuật, giữ vệ sinh, ghi nhớ nhiều bước và đồng thời học thêm tiếng Anh giao tiếp cơ bản. Nhưng điểm tích cực là nghề nail có thể học dần, làm dần và tiến bộ theo thời gian. Nhiều người ban đầu chưa giỏi nhưng nhờ siêng năng, chịu khó và đi làm đều nên sau vài tháng đã bắt đầu quen việc.</p>
+
+        <p>Một lợi thế lớn của nghề nail là thu nhập khá ổn so với nhiều nghề phổ thông khác. Nếu làm ở tiệm ổn định, đông khách và có tip tốt, người thợ hoàn toàn có thể có mức thu nhập đủ để trang trải cuộc sống và tiết kiệm. Với người có kinh nghiệm, cơ hội tăng thu nhập còn rõ hơn nữa.</p>
+
+        <p>Tóm lại, làm nail ở Mỹ không phải nghề dễ theo kiểu nhàn hạ, nhưng là nghề có cơ hội thật cho người chịu học và chịu làm. Nếu bạn kiên trì trong giai đoạn đầu, nghề này có thể mở ra con đường ổn định lâu dài.</p>
+
+        <div class="related">
+          <h3>Xem thêm</h3>
+          <div class="related-grid">
+            <a href="lam-nail-o-my-kiem-bao-nhieu.html">Làm Nail Ở Mỹ Kiếm Bao Nhiêu?</a>
+            <a href="hoc-lam-nail-o-my-mat-bao-nhieu.html">Học Làm Nail Ở Mỹ Mất Bao Nhiêu Tiền?</a>
+            <a href="tho-nail-o-my-co-can-bang-khong.html">Thợ Nail Ở Mỹ Có Cần Bằng Không?</a>
+          </div>
+        </div>
+      </div>
+
+    </article>
+  </div>
+
+  <footer>
+    © 2026 Hoài Đặng · hoaidang.com
+  </footer>
+
+  <div style="opacity:0;height:0;overflow:hidden">
+    lam nail o my co de khong, nghe nail tai my, cong viec nail tai my, hoc nghe nail o my, tho nail o my, thu nhap nghe nail o my, nguoi viet lam nail o my
+  </div>
+
 </body>
 </html>
