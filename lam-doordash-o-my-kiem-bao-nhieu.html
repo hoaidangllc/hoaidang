@@ -3,35 +3,294 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>Chạy DoorDash Ở Mỹ Kiếm Bao Nhiêu Tiền?</title>
-  <link rel="stylesheet" href="blog.css">
   <meta name="description" content="Chạy DoorDash ở Mỹ kiếm bao nhiêu tiền? Tìm hiểu thu nhập thực tế, tip, khu vực chạy và kinh nghiệm để tối ưu doanh thu.">
+  <link rel="stylesheet" href="blog.css">
+
   <style>
-    body{font-family:Arial,sans-serif;background:#f8fafc;color:#1f2937;margin:0;line-height:1.8}
-    .wrap{max-width:900px;margin:40px auto;padding:0 20px}
-    article{background:#fff;padding:35px;border-radius:18px;box-shadow:0 10px 28px rgba(0,0,0,.08)}
-    a{color:#2563eb;text-decoration:none}
+    *{
+      box-sizing:border-box;
+    }
+
+    :root{
+      --bg:#eef2ff;
+      --card:#ffffff;
+      --text:#1f2937;
+      --muted:#6b7280;
+      --line:#e5e7eb;
+      --primary:#2563eb;
+      --dark:#0f172a;
+      --shadow:0 20px 50px rgba(15,23,42,.10);
+      --radius:24px;
+    }
+
+    html{
+      scroll-behavior:smooth;
+    }
+
+    body{
+      margin:0;
+      font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(99,102,241,.12), transparent 30%),
+        radial-gradient(circle at top right, rgba(59,130,246,.10), transparent 28%),
+        linear-gradient(180deg, #f8fbff 0%, #eef2ff 100%);
+      color:var(--text);
+      line-height:1.85;
+    }
+
+    a{
+      color:inherit;
+      text-decoration:none;
+    }
+
+    .nav{
+      position:sticky;
+      top:0;
+      z-index:100;
+      backdrop-filter:blur(12px);
+      -webkit-backdrop-filter:blur(12px);
+      background:rgba(15,23,42,.88);
+      color:#fff;
+      padding:16px 22px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      border-bottom:1px solid rgba(255,255,255,.08);
+    }
+
+    .brand{
+      font-weight:800;
+      letter-spacing:.2px;
+    }
+
+    .nav-links{
+      display:flex;
+      align-items:center;
+      gap:18px;
+      flex-wrap:wrap;
+    }
+
+    .nav a{
+      color:#fff;
+      text-decoration:none;
+      font-weight:600;
+      opacity:.92;
+      transition:.25s ease;
+    }
+
+    .nav a:hover{
+      opacity:1;
+      transform:translateY(-1px);
+    }
+
+    .container{
+      max-width:980px;
+      margin:48px auto;
+      padding:0 20px;
+    }
+
+    .article{
+      background:var(--card);
+      border:1px solid rgba(255,255,255,.7);
+      border-radius:32px;
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+
+    .article-hero{
+      padding:44px 40px 28px;
+      background:
+        linear-gradient(135deg, rgba(37,99,235,.08), rgba(99,102,241,.10)),
+        linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+      border-bottom:1px solid var(--line);
+    }
+
+    .back{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      margin-bottom:18px;
+      text-decoration:none;
+      color:var(--primary);
+      font-weight:700;
+      font-size:15px;
+    }
+
+    .back:hover{
+      text-decoration:underline;
+    }
+
+    .article-tag{
+      display:inline-block;
+      padding:8px 14px;
+      border-radius:999px;
+      background:#dbeafe;
+      color:#1d4ed8;
+      font-size:13px;
+      font-weight:800;
+      letter-spacing:.3px;
+      margin-bottom:18px;
+      text-transform:uppercase;
+    }
+
+    h1{
+      font-size:clamp(30px, 4vw, 44px);
+      line-height:1.15;
+      margin:0 0 14px;
+      color:var(--dark);
+      letter-spacing:-.03em;
+    }
+
+    .article-sub{
+      font-size:18px;
+      color:var(--muted);
+      max-width:760px;
+      margin:0;
+    }
+
+    .article-body{
+      padding:36px 40px 44px;
+    }
+
+    .article-body p{
+      font-size:18px;
+      margin:0 0 22px;
+      color:var(--text);
+    }
+
+    .related{
+      margin-top:36px;
+      padding:26px;
+      background:linear-gradient(180deg,#f8fbff 0%, #eef4ff 100%);
+      border:1px solid #dbeafe;
+      border-radius:24px;
+    }
+
+    .related h3{
+      margin:0 0 16px;
+      font-size:22px;
+      color:var(--dark);
+    }
+
+    .related-grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:14px;
+    }
+
+    .related a{
+      display:block;
+      text-decoration:none;
+      color:var(--text);
+      background:#fff;
+      border:1px solid #e5e7eb;
+      padding:18px;
+      border-radius:18px;
+      font-weight:700;
+      transition:.25s ease;
+      box-shadow:0 8px 20px rgba(15,23,42,.05);
+    }
+
+    .related a:hover{
+      transform:translateY(-3px);
+      border-color:#bfdbfe;
+      box-shadow:0 16px 30px rgba(37,99,235,.10);
+      color:var(--primary);
+    }
+
+    footer{
+      text-align:center;
+      padding:34px 20px 42px;
+      color:var(--muted);
+      font-size:15px;
+    }
+
+    @media (max-width:768px){
+      .nav{
+        padding:14px 16px;
+      }
+
+      .nav-links{
+        gap:12px;
+        font-size:14px;
+      }
+
+      .container{
+        margin:24px auto;
+        padding:0 14px;
+      }
+
+      .article-hero,
+      .article-body{
+        padding:26px 20px;
+      }
+
+      .article-body p{
+        font-size:17px;
+      }
+
+      .related-grid{
+        grid-template-columns:1fr;
+      }
+    }
   </style>
 </head>
 <body>
-<div class="wrap">
-<article>
-  <p><a href="blog.html">← Quay lại Blog</a></p>
-  <h1>Chạy DoorDash Ở Mỹ Kiếm Bao Nhiêu Tiền?</h1>
 
-  <p>DoorDash là một trong những công việc linh hoạt được nhiều người chọn để kiếm thêm thu nhập tại Mỹ. Không cần lịch làm cố định, có thể bật app lên chạy lúc rảnh, nên công việc này phù hợp với cả người làm full-time lẫn part-time. Nhưng câu hỏi thực tế nhất vẫn là: chạy DoorDash ở Mỹ kiếm được bao nhiêu tiền?</p>
+  <div class="nav">
+    <div class="brand">Hoài Đặng</div>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="blog.html">Blog</a>
+      <a href="about.html">About</a>
+    </div>
+  </div>
 
-  <p>Thu nhập DoorDash không cố định. Nó phụ thuộc vào khu vực bạn chạy, khung giờ, số lượng đơn, quãng đường, traffic và đặc biệt là tiền tip từ khách. Có nơi chạy rất tốt vào giờ ăn trưa, có nơi mạnh vào buổi tối hoặc cuối tuần. Nếu khu vực đông nhà hàng và khách tip ổn, doanh thu sẽ khác hẳn so với khu ít đơn hoặc đơn đi xa.</p>
+  <div class="container">
+    <article class="article">
 
-  <p>Ngoài số tiền hiện trên app, người chạy DoorDash cũng cần tính chi phí thực tế như xăng, hao mòn xe, bảo trì, thời gian chờ đơn và quãng đường chạy không lương. Vì vậy, nhìn tổng doanh thu thôi chưa đủ, mà phải nhìn lợi nhuận sau chi phí mới phản ánh đúng.</p>
+      <div class="article-hero">
+        <a class="back" href="blog.html">← Quay lại Blog</a>
+        <div class="article-tag">DoorDash</div>
+        <h1>Chạy DoorDash Ở Mỹ Kiếm Bao Nhiêu Tiền?</h1>
+        <p class="article-sub">
+          Tìm hiểu thu nhập thực tế, tip, khu vực chạy và kinh nghiệm để tối ưu doanh thu.
+        </p>
+      </div>
 
-  <p>Nhiều người có kinh nghiệm thường chọn đơn kỹ hơn, tránh đơn quá xa hoặc quá thấp. Biết khung giờ nào nên chạy, khu nào nên đứng và khi nào nên nghỉ là yếu tố tạo khác biệt lớn. Chạy khôn thì đỡ mệt, còn chạy kiểu nhận hết đơn rác thì có ngày nhìn app xong chỉ muốn ngồi ngắm trần nhà.</p>
+      <div class="article-body">
+        <p>DoorDash là một trong những công việc linh hoạt được nhiều người chọn để kiếm thêm thu nhập tại Mỹ. Không cần lịch làm cố định, có thể bật app lên chạy lúc rảnh, nên công việc này phù hợp với cả người làm full-time lẫn part-time. Nhưng câu hỏi thực tế nhất vẫn là: chạy DoorDash ở Mỹ kiếm được bao nhiêu tiền?</p>
 
-  <p>Tóm lại, DoorDash có thể là nguồn thu nhập tốt nếu bạn biết cách tối ưu. Đây không phải tiền dễ rơi từ trên trời xuống, nhưng với người hiểu thị trường và kiểm soát tốt chi phí, nó vẫn là một lựa chọn linh hoạt và thực tế ở Mỹ.</p>
+        <p>Thu nhập DoorDash không cố định. Nó phụ thuộc vào khu vực bạn chạy, khung giờ, số lượng đơn, quãng đường, traffic và đặc biệt là tiền tip từ khách. Có nơi chạy rất tốt vào giờ ăn trưa, có nơi mạnh vào buổi tối hoặc cuối tuần. Nếu khu vực đông nhà hàng và khách tip ổn, doanh thu sẽ khác hẳn so với khu ít đơn hoặc đơn đi xa.</p>
 
-  <p>Xem thêm: <a href="chi-phi-song-o-my-bao-nhieu.html">Chi Phí Sinh Hoạt Ở Mỹ Bao Nhiêu Một Tháng?</a></p>
-  <p>Xem thêm: <a href="nguoi-viet-lam-gi-o-my.html">Người Việt Làm Nghề Gì Ở Mỹ?</a></p>
-</article>
-</div>
+        <p>Ngoài số tiền hiện trên app, người chạy DoorDash cũng cần tính chi phí thực tế như xăng, hao mòn xe, bảo trì, thời gian chờ đơn và quãng đường chạy không lương. Vì vậy, nhìn tổng doanh thu thôi chưa đủ, mà phải nhìn lợi nhuận sau chi phí mới phản ánh đúng.</p>
+
+        <p>Nhiều người có kinh nghiệm thường chọn đơn kỹ hơn, tránh đơn quá xa hoặc quá thấp. Biết khung giờ nào nên chạy, khu nào nên đứng và khi nào nên nghỉ là yếu tố tạo khác biệt lớn. Chạy khôn thì đỡ mệt, còn chạy kiểu nhận hết đơn rác thì có ngày nhìn app xong chỉ muốn ngồi ngắm trần nhà.</p>
+
+        <p>Tóm lại, DoorDash có thể là nguồn thu nhập tốt nếu bạn biết cách tối ưu. Đây không phải tiền dễ rơi từ trên trời xuống, nhưng với người hiểu thị trường và kiểm soát tốt chi phí, nó vẫn là một lựa chọn linh hoạt và thực tế ở Mỹ.</p>
+
+        <div class="related">
+          <h3>Xem thêm</h3>
+          <div class="related-grid">
+            <a href="chi-phi-song-o-my-bao-nhieu.html">Chi Phí Sinh Hoạt Ở Mỹ Bao Nhiêu Một Tháng?</a>
+            <a href="nguoi-viet-lam-gi-o-my.html">Người Việt Làm Nghề Gì Ở Mỹ?</a>
+            <a href="cuoc-song-o-texas-co-tot-khong.html">Cuộc Sống Ở Texas Có Tốt Không?</a>
+          </div>
+        </div>
+      </div>
+
+    </article>
+  </div>
+
+  <footer>
+    © 2026 Hoài Đặng · hoaidang.com
+  </footer>
+
+  <div style="opacity:0;height:0;overflow:hidden">
+    chay doordash o my kiem bao nhieu, thu nhap doordash o my, lam doordash o my, kiem tien voi doordash, giao hang o my, cong viec part time o my, cuoc song o my
+  </div>
+
 </body>
 </html>
