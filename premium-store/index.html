@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Premium Digital Access | HoaiDang</title>
+  <meta name="description" content="Simple premium digital storefront in USD with fast contact, clean product cards, and no login required." />
+  <style>
+    :root {
+      --bg: #0a1020;
+      --bg-soft: #101933;
+      --card: rgba(255,255,255,0.08);
+      --card-2: rgba(255,255,255,0.05);
+      --border: rgba(255,255,255,0.12);
+      --text: #f5f7ff;
+      --muted: #b6c0d9;
+      --gold: #ffd54a;
+      --gold-2: #f0b90b;
+      --green: #25d366;
+      --blue: #0084ff;
+      --shadow: 0 20px 50px rgba(0,0,0,0.28);
+      --radius: 22px;
+      --max: 1220px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, Arial, Helvetica, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(0,132,255,0.22), transparent 28%),
+        radial-gradient(circle at top right, rgba(255,213,74,0.14), transparent 24%),
+        linear-gradient(180deg, #0f1730 0%, #0a1020 100%);
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    .container {
+      width: min(calc(100% - 28px), var(--max));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(14px);
+      background: rgba(7, 10, 19, 0.7);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .topbar-inner {
+      min-height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+      white-space: nowrap;
+    }
+
+    .brand-mark {
+      width: 38px;
+      height: 38px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--gold), var(--gold-2));
+      color: #1f1700;
+      display: grid;
+      place-items: center;
+      font-size: 1rem;
+      font-weight: 900;
+      box-shadow: 0 12px 22px rgba(240,185,11,0.24);
+      flex-shrink: 0;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .pill,
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      padding: 10px 16px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      transition: transform 0.18s ease, opacity 0.18s ease, border-color 0.18s ease;
+    }
+
+    .pill {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      color: var(--text);
+    }
+
+    .btn:hover,
+    .pill:hover,
+    .card:hover,
+    .feature:hover {
+      transform: translateY(-1px);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--gold), var(--gold-2));
+      color: #221900;
+      box-shadow: 0 14px 28px rgba(240,185,11,0.22);
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.08);
+      color: var(--text);
+      border: 1px solid rgba(255,255,255,0.12);
+    }
+
+    .hero {
+      padding: 56px 0 28px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.08fr 0.92fr;
+      gap: 28px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 13px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin-bottom: 16px;
+    }
+
+    h1 {
+      margin: 0 0 14px;
+      font-size: clamp(2.2rem, 4.4vw, 4.3rem);
+      line-height: 1.03;
+      letter-spacing: -0.045em;
+    }
+
+    .hero p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.75;
+      font-size: 1.06rem;
+      max-width: 760px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 26px;
+    }
+
+    .hero-points {
+      display: flex;
+      gap: 12px 18px;
+      flex-wrap: wrap;
+      margin-top: 24px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .hero-card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 30px;
+      padding: 22px;
+      box-shadow: var(--shadow);
+    }
+
+    .hero-panel {
+      min-height: 100%;
+      border-radius: 24px;
+      background:
+        linear-gradient(160deg, rgba(255,255,255,0.08), rgba(255,255,255,0.03)),
+        linear-gradient(135deg, #162447, #0f1730 55%, #101933);
+      border: 1px solid rgba(255,255,255,0.1);
+      padding: 22px;
+      display: grid;
+      gap: 16px;
+    }
+
+    .mock-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .mock-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .mock-item {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 18px;
+      padding: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .mock-title {
+      font-weight: 800;
+      margin-bottom: 4px;
+    }
+
+    .mock-sub {
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .mock-price {
+      font-size: 1.1rem;
+      font-weight: 900;
+      color: var(--gold);
+      white-space: nowrap;
+    }
+
+    .section {
+      padding: 26px 0;
+    }
+
+    .section-head {
+      margin-bottom: 20px;
+    }
+
+    .section-head h2 {
+      margin: 0 0 10px;
+      font-size: clamp(1.55rem, 2.8vw, 2.4rem);
+    }
+
+    .section-head p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .feature {
+      background: var(--card-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px;
+      box-shadow: var(--shadow);
+    }
+
+    .feature h3,
+    .contact-card h3,
+    .faq-item h3 {
+      margin: 0 0 10px;
+      font-size: 1.05rem;
+    }
+
+    .feature p,
+    .contact-card p,
+    .faq-item p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 0.96rem;
+    }
+
+    .products {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .card {
+      position: relative;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 20px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      transition: transform 0.18s ease, border-color 0.18s ease;
+    }
+
+    .card.popular {
+      border-color: rgba(255,213,74,0.35);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.28), 0 0 0 1px rgba(255,213,74,0.12) inset;
+    }
+
+    .label {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 800;
+      background: rgba(255,213,74,0.14);
+      border: 1px solid rgba(255,213,74,0.26);
+      color: var(--gold);
+    }
+
+    .icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 16px;
+      display: grid;
+      place-items: center;
+      font-weight: 900;
+      font-size: 1rem;
+      margin-bottom: 14px;
+      background: linear-gradient(135deg, rgba(255,213,74,0.22), rgba(0,132,255,0.2));
+      border: 1px solid rgba(255,255,255,0.12);
+    }
+
+    .product-title {
+      font-size: 1.15rem;
+      font-weight: 800;
+      margin: 0 0 6px;
+      letter-spacing: -0.02em;
+    }
+
+    .product-sub {
+      color: var(--muted);
+      font-size: 0.95rem;
+      margin-bottom: 16px;
+    }
+
+    .price {
+      font-size: 2rem;
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      margin-bottom: 4px;
+    }
+
+    .price-note {
+      color: var(--muted);
+      font-size: 0.92rem;
+      margin-bottom: 16px;
+    }
+
+    .list {
+      display: grid;
+      gap: 10px;
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.55;
+      margin-bottom: 18px;
+    }
+
+    .btn-stack {
+      display: grid;
+      gap: 10px;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .contact-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 22px;
+      box-shadow: var(--shadow);
+    }
+
+    .contact-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 18px;
+    }
+
+    .btn-sms {
+      background: var(--green);
+      color: #091a0e;
+    }
+
+    .btn-msg {
+      background: var(--blue);
+      color: #fff;
+    }
+
+    .faq-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .faq-item {
+      background: var(--card-2);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 18px;
+      box-shadow: var(--shadow);
+    }
+
+    .notice {
+      margin-top: 20px;
+      padding: 16px 18px;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(255,255,255,0.05);
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 0.95rem;
+    }
+
+    footer {
+      padding: 30px 0 42px;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .footer-box {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      flex-wrap: wrap;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding-top: 18px;
+    }
+
+    @media (max-width: 1080px) {
+      .features-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .products { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .faq-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 860px) {
+      .hero-grid,
+      .contact-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 640px) {
+      .container { width: min(calc(100% - 18px), var(--max)); }
+      .products,
+      .features-grid { grid-template-columns: 1fr; }
+      .topbar-inner { min-height: 60px; }
+      .hero { padding-top: 36px; }
+      .hero-card,
+      .card,
+      .contact-card,
+      .faq-item,
+      .feature { padding: 18px; }
+      .pill,
+      .btn { padding: 10px 14px; font-size: 0.92rem; }
+      h1 { font-size: clamp(2rem, 10vw, 3rem); }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <a class="brand" href="https://hoaidang.com/" aria-label="Go to homepage">
+        <span class="brand-mark">HD</span>
+        <span>HoaiDang Home</span>
+      </a>
+      <nav class="nav">
+        <a class="pill" href="https://hoaidang.com/">Home</a>
+        <a class="pill" href="#products">Products</a>
+        <a class="btn btn-secondary" href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow">USD pricing • No login required • Fast contact flow</div>
+          <h1>Premium digital offers,<br />priced for the U.S. market.</h1>
+          <p>
+            This storefront is built for quick conversions: clear product cards, simple USD pricing, and direct contact instead of a slow checkout process. You can change every title, badge, price, and message later in seconds.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#products">Shop Now</a>
+            <a class="btn btn-secondary" href="#contact">Ask First</a>
+          </div>
+          <div class="hero-points">
+            <span>• Prices already styled for U.S. buyers</span>
+            <span>• Easy to raise or lower later</span>
+            <span>• Built to work well on mobile</span>
+          </div>
+        </div>
+
+        <div class="hero-card">
+          <div class="hero-panel">
+            <div class="mock-head">
+              <span>Featured Offers</span>
+              <span>Updated anytime</span>
+            </div>
+            <div class="mock-list">
+              <div class="mock-item">
+                <div>
+                  <div class="mock-title">Premium Access 30 Days</div>
+                  <div class="mock-sub">Fast setup • Best seller</div>
+                </div>
+                <div class="mock-price">$24.99</div>
+              </div>
+              <div class="mock-item">
+                <div>
+                  <div class="mock-title">Creative Pro 1 Year</div>
+                  <div class="mock-sub">High value • Popular</div>
+                </div>
+                <div class="mock-price">$79.99</div>
+              </div>
+              <div class="mock-item">
+                <div>
+                  <div class="mock-title">Writing Premium 1 Year</div>
+                  <div class="mock-sub">Good margin • Clean offer</div>
+                </div>
+                <div class="mock-price">$49.99</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="features-grid">
+          <article class="feature">
+            <h3>Simple product cards</h3>
+            <p>Each item shows the title, duration, price, and a direct buy button. No messy catalog feel.</p>
+          </article>
+          <article class="feature">
+            <h3>U.S. style pricing</h3>
+            <p>Use $7.99, $24.99, $49.99, $79.99, or any other clean psychological price point later.</p>
+          </article>
+          <article class="feature">
+            <h3>No login needed</h3>
+            <p>Customers click, message you, and you close the order directly. Less friction, higher response rate.</p>
+          </article>
+          <article class="feature">
+            <h3>Easy to duplicate</h3>
+            <p>You can reuse this exact layout later for other digital product pages on hoaidang.com.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="products">
+      <div class="container">
+        <div class="section-head">
+          <h2>Top Products</h2>
+          <p>These are placeholder product cards with U.S. pricing style already baked in. Swap names and prices anytime.</p>
+        </div>
+
+        <div class="products">
+          <article class="card popular">
+            <div class="label">Best Seller</div>
+            <div class="icon">PA</div>
+            <div class="product-title">Premium Access</div>
+            <div class="product-sub">30-day plan</div>
+            <div class="price">$24.99</div>
+            <div class="price-note">Strong starter offer</div>
+            <div class="list">
+              <span>Fast response flow</span>
+              <span>Easy entry price</span>
+              <span>Good for first-time buyers</span>
+            </div>
+            <div class="btn-stack">
+              <a class="btn btn-primary" href="sms:+14322999999?body=Hi%2C%20I%20want%20Premium%20Access%2030-day%20plan.">Buy Now</a>
+              <a class="btn btn-secondary" href="#contact">Ask a Question</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="icon">CP</div>
+            <div class="product-title">Creative Pro</div>
+            <div class="product-sub">1-year plan</div>
+            <div class="price">$79.99</div>
+            <div class="price-note">Higher-margin option</div>
+            <div class="list">
+              <span>Premium yearly pricing</span>
+              <span>Great value anchor product</span>
+              <span>Good visual upsell item</span>
+            </div>
+            <div class="btn-stack">
+              <a class="btn btn-primary" href="sms:+14322999999?body=Hi%2C%20I%20want%20Creative%20Pro%201-year%20plan.">Buy Now</a>
+              <a class="btn btn-secondary" href="#contact">Ask a Question</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="icon">WP</div>
+            <div class="product-title">Writing Premium</div>
+            <div class="product-sub">1-year plan</div>
+            <div class="price">$49.99</div>
+            <div class="price-note">Balanced U.S. pricing</div>
+            <div class="list">
+              <span>Clean mid-ticket offer</span>
+              <span>Fits premium look</span>
+              <span>Easy to rename later</span>
+            </div>
+            <div class="btn-stack">
+              <a class="btn btn-primary" href="sms:+14322999999?body=Hi%2C%20I%20want%20Writing%20Premium%201-year%20plan.">Buy Now</a>
+              <a class="btn btn-secondary" href="#contact">Ask a Question</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="icon">VS</div>
+            <div class="product-title">Video Suite</div>
+            <div class="product-sub">90-day plan</div>
+            <div class="price">$29.99</div>
+            <div class="price-note">Quick-close price point</div>
+            <div class="list">
+              <span>Strong impulse tier</span>
+              <span>Nice bridge between low and high</span>
+              <span>Simple promo card</span>
+            </div>
+            <div class="btn-stack">
+              <a class="btn btn-primary" href="sms:+14322999999?body=Hi%2C%20I%20want%20Video%20Suite%2090-day%20plan.">Buy Now</a>
+              <a class="btn btn-secondary" href="#contact">Ask a Question</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="icon">NS</div>
+            <div class="product-title">Network Shield</div>
+            <div class="product-sub">1-year plan</div>
+            <div class="price">$39.99</div>
+            <div class="price-note">Solid mid-tier offer</div>
+            <div class="list">
+              <span>Looks credible on a store grid</span>
+              <span>Useful supporting product</span>
+              <span>Easy to duplicate as variants</span>
+            </div>
+            <div class="btn-stack">
+              <a class="btn btn-primary" href="sms:+14322999999?body=Hi%2C%20I%20want%20Network%20Shield%201-year%20plan.">Buy Now</a>
+              <a class="btn btn-secondary" href="#contact">Ask a Question</a>
+            </div>
+          </article>
+
+          <article class="card popular">
+            <div class="label">Popular</div>
+            <div class="icon">AP</div>
+            <div class="product-title">AI Pro Bundle</div>
+            <div class="product-sub">30-day plan</div>
+            <div class="price">$34.99</div>
+            <div class="price-note">Hot modern offer</div>
+            <div class="list">
+              <span>Clean card for current demand</span>
+              <span>Good modern storefront look</span>
+              <span>Works well in ads and screenshots</span>
+            </div>
+            <div class="btn-stack">
+              <a class="btn btn-primary" href="sms:+14322999999?body=Hi%2C%20I%20want%20AI%20Pro%20Bundle%2030-day%20plan.">Buy Now</a>
+              <a class="btn btn-secondary" href="#contact">Ask a Question</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="icon">ES</div>
+            <div class="product-title">Editing Studio</div>
+            <div class="product-sub">1-year plan</div>
+            <div class="price">$89.99</div>
+            <div class="price-note">Premium anchor tier</div>
+            <div class="list">
+              <span>Helps justify lower tiers</span>
+              <span>Makes the store feel complete</span>
+              <span>Useful for bundle comparison</span>
+            </div>
+            <div class="btn-stack">
+              <a class="btn btn-primary" href="sms:+14322999999?body=Hi%2C%20I%20want%20Editing%20Studio%201-year%20plan.">Buy Now</a>
+              <a class="btn btn-secondary" href="#contact">Ask a Question</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="icon">BS</div>
+            <div class="product-title">Business Suite</div>
+            <div class="product-sub">1-year plan</div>
+            <div class="price">$99.99</div>
+            <div class="price-note">Top pricing tier</div>
+            <div class="list">
+              <span>Creates high-end perception</span>
+              <span>Supports stronger upsell logic</span>
+              <span>Easy to edit later</span>
+            </div>
+            <div class="btn-stack">
+              <a class="btn btn-primary" href="sms:+14322999999?body=Hi%2C%20I%20want%20Business%20Suite%201-year%20plan.">Buy Now</a>
+              <a class="btn btn-secondary" href="#contact">Ask a Question</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <div class="container">
+        <div class="section-head">
+          <h2>Quick Contact</h2>
+          <p>No account creation. No checkout maze. Just message, confirm the product, and close the order fast.</p>
+        </div>
+
+        <div class="contact-grid">
+          <div class="contact-card">
+            <h3>Text Message</h3>
+            <p>Use SMS for the fastest close. The product buttons above already prefill the product name, so the buyer only needs to hit send.</p>
+            <div class="contact-actions">
+              <a class="btn btn-sms" href="sms:+14322999999?body=Hi%2C%20I%20want%20to%20buy%20a%20premium%20digital%20offer.">Text Now</a>
+              <a class="btn btn-secondary" href="#products">See Products</a>
+            </div>
+          </div>
+
+          <div class="contact-card">
+            <h3>Messenger</h3>
+            <p>Use Messenger as your backup path for people who do not want to text. Replace the link below with your real page later.</p>
+            <div class="contact-actions">
+              <a class="btn btn-msg" href="https://m.me/" target="_blank" rel="noopener">Open Messenger</a>
+              <a class="btn btn-secondary" href="https://hoaidang.com/">Back Home</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="notice">
+          <strong>Easy edits later:</strong> you can change every product name, duration, price, label, button text, and SMS message without changing the layout. So yes — the prices can be updated later in two minutes, no drama.
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-head">
+          <h2>FAQ</h2>
+          <p>Short answers only. This keeps the page clean and conversion-focused.</p>
+        </div>
+        <div class="faq-grid">
+          <article class="faq-item">
+            <h3>Can prices change later?</h3>
+            <p>Yes. This layout is built so you can update prices any time without rebuilding the page.</p>
+          </article>
+          <article class="faq-item">
+            <h3>Why no login system?</h3>
+            <p>Because it slows people down. This page is designed to reduce friction and push direct contact.</p>
+          </article>
+          <article class="faq-item">
+            <h3>Can I duplicate this page?</h3>
+            <p>Absolutely. Copy the file, rename the products, swap the prices, and you have a second storefront.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-box">
+      <div>© 2026 HoaiDang. Premium digital storefront template.</div>
+      <a class="pill" href="https://hoaidang.com/">Back to Home</a>
+    </div>
+  </footer>
+</body>
+</html>
