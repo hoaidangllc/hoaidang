@@ -3,682 +3,871 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hoai Dang | Zynga Poker Chips</title>
-  <meta name="description" content="Fast delivery Zynga Poker Chips with Zelle payment and quick support." />
+
+  <title>Zynga Poker Chips | HoaiDang.com</title>
+  <meta name="description" content="Buy Zynga Poker Chips with fast support, clear packages, and simple Zelle payment." />
+  <meta name="robots" content="index, follow" />
+  <meta name="theme-color" content="#0f172a" />
+  <link rel="canonical" href="https://hoaidang.com/zynga/" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Zynga Poker Chips | HoaiDang.com" />
+  <meta property="og:description" content="Buy Zynga Poker Chips with clear pricing, fast support, and easy Zelle payment." />
+  <meta property="og:url" content="https://hoaidang.com/zynga/" />
+  <meta property="og:site_name" content="HoaiDang.com" />
+  <meta property="og:image" content="https://hoaidang.com/zynga/zynga-logo.png" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Zynga Poker Chips | HoaiDang.com" />
+  <meta name="twitter:description" content="Buy Zynga Poker Chips with clear pricing, fast support, and easy Zelle payment." />
+  <meta name="twitter:image" content="https://hoaidang.com/zynga/zynga-logo.png" />
+
   <style>
     :root {
-      --bg: #0b1020;
-      --bg2: #121933;
-      --card: rgba(255,255,255,0.08);
+      --bg-1: #07101f;
+      --bg-2: #0f1b33;
+      --bg-3: #13233f;
+      --panel: rgba(255,255,255,0.08);
+      --panel-2: rgba(255,255,255,0.06);
       --line: rgba(255,255,255,0.12);
-      --text: #f5f7fb;
-      --muted: #b7bfd6;
-      --accent: #ffd34d;
-      --accent2: #4de0ff;
-      --danger: #ff5d6c;
-      --success: #31d07f;
-      --shadow: 0 18px 40px rgba(0,0,0,0.35);
-      --radius: 22px;
+      --text: #f8fafc;
+      --muted: rgba(255,255,255,0.72);
+      --gold-1: #ffd34d;
+      --gold-2: #f59e0b;
+      --red-1: #d91f26;
+      --red-2: #9f1239;
+      --cyan-1: #59e5ff;
+      --cyan-2: #6ee7b7;
+      --ok: #22c55e;
+      --danger: #ff627b;
+      --shadow: 0 20px 50px rgba(0,0,0,0.35);
+      --radius-xl: 28px;
+      --radius-lg: 22px;
+      --radius-md: 18px;
       --max: 1180px;
     }
 
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
+
     body {
       margin: 0;
-      font-family: Inter, Arial, Helvetica, sans-serif;
-      background:
-        radial-gradient(circle at top left, rgba(77,224,255,0.14), transparent 28%),
-        radial-gradient(circle at top right, rgba(255,211,77,0.14), transparent 24%),
-        linear-gradient(180deg, #0a0f1d 0%, #11172d 50%, #0a0f1d 100%);
+      font-family: Inter, Arial, sans-serif;
       color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(89,229,255,0.12), transparent 24%),
+        radial-gradient(circle at top right, rgba(217,31,38,0.14), transparent 26%),
+        linear-gradient(180deg, var(--bg-1) 0%, var(--bg-2) 40%, var(--bg-3) 100%);
     }
 
     a { color: inherit; text-decoration: none; }
-    .wrap { width: min(var(--max), calc(100% - 32px)); margin: 0 auto; }
+    button { font: inherit; }
 
-    .nav {
+    .wrap {
+      width: min(var(--max), calc(100% - 28px));
+      margin: 0 auto;
+    }
+
+    .topbar {
       position: sticky;
       top: 0;
-      z-index: 40;
-      backdrop-filter: blur(16px);
-      background: rgba(8, 12, 24, 0.68);
+      z-index: 50;
+      backdrop-filter: blur(14px);
+      background: rgba(7, 16, 31, 0.72);
       border-bottom: 1px solid rgba(255,255,255,0.08);
     }
-    .nav-inner {
+
+    .topbar-inner {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 14px 0;
-      gap: 16px;
-    }
-    .brand {
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-    }
-    .brand strong { font-size: 18px; letter-spacing: 0.4px; }
-    .brand span { color: var(--muted); font-size: 12px; }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex-wrap: wrap;
+      gap: 12px;
+      padding: 12px 0;
     }
 
-    .btn {
+    .home-link {
       display: inline-flex;
       align-items: center;
-      justify-content: center;
       gap: 8px;
-      padding: 12px 18px;
+      padding: 8px 12px;
       border-radius: 999px;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.10);
+      color: var(--text);
+      font-size: 13px;
+      font-weight: 800;
+      line-height: 1;
+      white-space: nowrap;
+    }
+
+    .home-link span {
+      color: var(--muted);
+      font-size: 12px;
       font-weight: 700;
-      border: 1px solid transparent;
-      transition: 0.18s ease;
+    }
+
+    .contact-toggle {
+      border: 0;
       cursor: pointer;
-    }
-    .btn:hover { transform: translateY(-1px); }
-    .btn-primary {
-      background: linear-gradient(135deg, var(--accent), #ffb84d);
+      padding: 9px 14px;
+      border-radius: 999px;
+      font-weight: 900;
+      font-size: 13px;
       color: #1a1a1a;
-      box-shadow: 0 12px 30px rgba(255, 211, 77, 0.22);
-    }
-    .btn-secondary {
-      background: rgba(255,255,255,0.08);
-      border-color: rgba(255,255,255,0.12);
-      color: var(--text);
-    }
-    .btn-outline {
-      background: transparent;
-      border-color: rgba(255,255,255,0.16);
-      color: var(--text);
+      background: linear-gradient(135deg, var(--gold-1), var(--gold-2));
+      box-shadow: 0 10px 24px rgba(245,158,11,0.24);
     }
 
     .hero {
-      padding: 64px 0 28px;
+      padding: 24px 0 16px;
     }
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1.15fr 0.85fr;
-      gap: 28px;
-      align-items: stretch;
-    }
-    .hero-card, .panel, .product-card, .review-card, .faq-item, .policy-card, .floating-box {
-      background: var(--card);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-    }
-    .hero-card {
-      padding: 36px;
+
+    .hero-box {
       position: relative;
       overflow: hidden;
+      border-radius: var(--radius-xl);
+      background:
+        radial-gradient(circle at top left, rgba(89,229,255,0.10), transparent 25%),
+        radial-gradient(circle at top right, rgba(217,31,38,0.14), transparent 28%),
+        linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.05));
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      padding: 28px;
     }
-    .hero-card::after {
-      content: "";
-      position: absolute;
-      inset: auto -50px -70px auto;
-      width: 220px;
-      height: 220px;
-      background: radial-gradient(circle, rgba(77,224,255,0.35), transparent 65%);
-      pointer-events: none;
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 24px;
+      align-items: center;
     }
+
     .eyebrow {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      font-size: 12px;
-      font-weight: 800;
-      letter-spacing: 0.8px;
-      text-transform: uppercase;
-      color: #061019;
-      background: linear-gradient(135deg, var(--accent2), #7fffd4);
       padding: 8px 12px;
       border-radius: 999px;
-      margin-bottom: 18px;
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #081019;
+      background: linear-gradient(135deg, var(--cyan-1), var(--cyan-2));
+      margin-bottom: 16px;
     }
+
     h1 {
-      margin: 0 0 14px;
+      margin: 0 0 12px;
       font-size: clamp(34px, 6vw, 62px);
-      line-height: 0.97;
-      letter-spacing: -1.5px;
+      line-height: 0.95;
+      letter-spacing: -0.05em;
     }
-    .lead {
+
+    .hero p {
+      margin: 0;
       color: var(--muted);
       font-size: 18px;
-      line-height: 1.6;
-      max-width: 760px;
-      margin-bottom: 24px;
+      line-height: 1.65;
+      max-width: 700px;
     }
+
     .trust-row {
       display: flex;
       gap: 12px;
       flex-wrap: wrap;
-      margin-bottom: 20px;
+      margin-top: 20px;
     }
-    .trust-pill {
+
+    .pill {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      padding: 10px 14px;
+      padding: 11px 14px;
       border-radius: 999px;
       background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.1);
-      color: var(--text);
-      font-weight: 600;
+      border: 1px solid rgba(255,255,255,0.10);
       font-size: 14px;
-    }
-    .hero-actions {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-      margin-top: 6px;
-    }
-    .hero-side {
-      display: flex;
-      flex-direction: column;
-      gap: 18px;
-    }
-    .panel {
-      padding: 24px;
-    }
-    .panel h3 {
-      margin: 0 0 14px;
-      font-size: 21px;
-    }
-    .stat-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 12px;
-    }
-    .stat {
-      padding: 16px;
-      border-radius: 18px;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.08);
-    }
-    .stat strong {
-      display: block;
-      font-size: 28px;
-      margin-bottom: 4px;
-    }
-    .stat span {
-      color: var(--muted);
-      font-size: 13px;
+      font-weight: 800;
+      color: var(--text);
     }
 
-    section { padding: 24px 0; }
+    .live-pill {
+      color: #ffd7de;
+      border-color: rgba(255,98,123,0.25);
+      background: rgba(255,98,123,0.08);
+    }
+
+    .live-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--danger);
+      box-shadow: 0 0 0 0 rgba(255,98,123,0.8);
+      animation: pulse 1.7s infinite;
+    }
+
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(255,98,123,0.8); }
+      70% { box-shadow: 0 0 0 9px rgba(255,98,123,0); }
+      100% { box-shadow: 0 0 0 0 rgba(255,98,123,0); }
+    }
+
+    .logo-card {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 280px;
+      border-radius: var(--radius-lg);
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.10);
+      padding: 24px;
+    }
+
+    .logo-card img {
+      max-width: 100%;
+      width: min(320px, 100%);
+      height: auto;
+      display: block;
+      object-fit: contain;
+      filter: drop-shadow(0 10px 30px rgba(0,0,0,0.28));
+      border-radius: 18px;
+    }
+
+    section {
+      padding: 14px 0;
+    }
+
     .section-head {
       display: flex;
       align-items: end;
       justify-content: space-between;
-      gap: 20px;
-      margin-bottom: 18px;
+      gap: 18px;
+      margin-bottom: 16px;
       flex-wrap: wrap;
     }
+
     .section-head h2 {
       margin: 0;
-      font-size: clamp(26px, 3vw, 38px);
-      letter-spacing: -0.8px;
+      font-size: clamp(26px, 4vw, 38px);
+      letter-spacing: -0.04em;
     }
+
     .section-head p {
       margin: 6px 0 0;
       color: var(--muted);
-      max-width: 700px;
       line-height: 1.6;
+      max-width: 720px;
     }
 
     .products {
       display: grid;
       grid-template-columns: repeat(5, minmax(0, 1fr));
-      gap: 18px;
+      gap: 16px;
     }
+
     .product-card {
-      padding: 22px;
       position: relative;
       display: flex;
       flex-direction: column;
       min-height: 100%;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.05));
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
     }
+
+    .product-top {
+      padding: 16px 16px 12px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.03), transparent);
+    }
+
     .badge {
-      position: absolute;
-      top: 16px;
-      right: 16px;
+      display: inline-flex;
+      padding: 6px 10px;
+      border-radius: 999px;
       font-size: 11px;
       font-weight: 900;
-      letter-spacing: 0.6px;
+      letter-spacing: 0.06em;
       text-transform: uppercase;
-      padding: 7px 10px;
-      border-radius: 999px;
-      color: #081019;
-      background: linear-gradient(135deg, #7fffd4, var(--accent2));
-    }
-    .badge.hot { background: linear-gradient(135deg, #ffd34d, #ff884d); }
-    .badge.value { background: linear-gradient(135deg, #9fff8f, #31d07f); }
-    .product-size {
-      color: var(--accent);
-      font-size: 14px;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 0.7px;
       margin-bottom: 10px;
+      color: #111827;
+      background: linear-gradient(135deg, var(--gold-1), var(--gold-2));
     }
-    .product-card h3 {
-      margin: 0 0 8px;
-      font-size: 28px;
-      letter-spacing: -0.8px;
-    }
-    .price {
-      margin: 0 0 12px;
-      font-size: 34px;
-      font-weight: 900;
-      letter-spacing: -1px;
-    }
-    .price small {
-      color: var(--muted);
-      font-size: 13px;
-      font-weight: 600;
+
+    .card-logo {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      border-radius: 18px;
+      object-fit: cover;
       display: block;
-      margin-top: 4px;
-      letter-spacing: 0;
+      background: #7f1d1d;
+      border: 1px solid rgba(255,255,255,0.08);
     }
-    .features {
-      display: grid;
+
+    .product-body {
+      padding: 14px 16px 18px;
+      display: flex;
+      flex-direction: column;
       gap: 10px;
-      padding: 0;
-      margin: 0 0 20px;
+      flex: 1;
+    }
+
+    .product-body h3 {
+      margin: 0;
+      font-size: 28px;
+      letter-spacing: -0.04em;
+    }
+
+    .subline {
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .price-row {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .old-price {
+      color: rgba(255,255,255,0.45);
+      text-decoration: line-through;
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    .new-price {
+      color: var(--gold-1);
+      font-size: 32px;
+      font-weight: 900;
+      letter-spacing: -0.04em;
+    }
+
+    .save {
+      color: #93ffd2;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .features {
       list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 8px;
       color: var(--muted);
       font-size: 14px;
     }
+
     .features li::before {
       content: "✔";
-      color: var(--success);
+      color: var(--ok);
       margin-right: 8px;
       font-weight: 900;
     }
-    .card-actions {
-      display: grid;
-      gap: 10px;
+
+    .buy-btn {
       margin-top: auto;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 14px;
+      border-radius: 14px;
+      color: #1a1a1a;
+      font-weight: 900;
+      background: linear-gradient(135deg, var(--gold-1), var(--gold-2));
+      box-shadow: 0 12px 24px rgba(245,158,11,0.22);
     }
 
-    .zelle-box {
+    .info-grid {
       display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
-      gap: 18px;
-      align-items: stretch;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
     }
-    .floating-box {
-      padding: 26px;
+
+    .panel {
+      border-radius: var(--radius-lg);
+      background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.05));
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      padding: 22px;
     }
-    .zelle-phone {
-      font-size: clamp(28px, 4vw, 46px);
-      font-weight: 900;
-      line-height: 1;
-      letter-spacing: -1px;
-      margin: 10px 0 14px;
-      color: var(--accent);
-      word-break: break-word;
+
+    .panel h3 {
+      margin: 0 0 14px;
+      font-size: 24px;
+      letter-spacing: -0.03em;
     }
+
+    .panel p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
     .steps {
       display: grid;
       gap: 12px;
-      margin-top: 14px;
+      margin-top: 16px;
     }
+
     .step {
       display: flex;
       gap: 12px;
       align-items: flex-start;
       padding: 14px;
-      border-radius: 18px;
+      border-radius: 16px;
       background: rgba(255,255,255,0.05);
       border: 1px solid rgba(255,255,255,0.08);
     }
+
     .step-num {
       width: 32px;
       height: 32px;
+      flex: 0 0 32px;
       border-radius: 50%;
-      background: linear-gradient(135deg, var(--accent), #ff884d);
-      color: #1a1a1a;
       display: inline-flex;
       align-items: center;
       justify-content: center;
       font-weight: 900;
-      flex: 0 0 auto;
+      color: #111827;
+      background: linear-gradient(135deg, var(--gold-1), var(--gold-2));
     }
-    .step strong { display: block; margin-bottom: 4px; }
-    .step p { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.55; }
 
-    .support-grid, .reviews, .faq-grid {
-      display: grid;
-      gap: 18px;
+    .step strong {
+      display: block;
+      margin-bottom: 4px;
     }
-    .support-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-    .support-card, .review-card, .faq-item, .policy-card {
-      padding: 22px;
-      background: var(--card);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-    }
-    .support-card h3, .policy-card h3, .review-card h3 {
-      margin: 0 0 10px;
-      font-size: 20px;
-    }
-    .support-card p, .policy-card p, .review-card p, .faq-answer {
+
+    .step p {
       margin: 0;
-      color: var(--muted);
-      line-height: 1.6;
-    }
-    .support-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 16px; }
-
-    .reviews { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-    .stars { color: var(--accent); letter-spacing: 1px; font-size: 18px; margin-bottom: 12px; }
-    .review-meta { margin-top: 14px; color: #dce7ff; font-weight: 700; font-size: 14px; }
-
-    .faq-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    .faq-item h3 { margin: 0 0 10px; font-size: 18px; }
-
-    .policy-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 18px;
-    }
-    .policy-list {
-      list-style: none;
-      padding: 0;
-      margin: 14px 0 0;
-      display: grid;
-      gap: 10px;
-      color: var(--muted);
       font-size: 14px;
     }
-    .policy-list li::before {
-      content: "•";
-      color: var(--accent2);
-      margin-right: 8px;
+
+    .zelle-number {
+      font-size: clamp(30px, 5vw, 46px);
       font-weight: 900;
+      letter-spacing: -0.05em;
+      color: var(--gold-1);
+      margin: 8px 0 12px;
+      word-break: break-word;
+    }
+
+    .copy-btn {
+      border: 0;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 16px;
+      border-radius: 14px;
+      color: #111827;
+      font-weight: 900;
+      background: linear-gradient(135deg, var(--gold-1), var(--gold-2));
+    }
+
+    .reviews {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .review-card {
+      border-radius: var(--radius-lg);
+      background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.05));
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      padding: 20px;
+    }
+
+    .stars {
+      color: var(--gold-1);
+      letter-spacing: 1px;
+      margin-bottom: 10px;
+      font-size: 18px;
+    }
+
+    .review-card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    .review-meta {
+      margin-top: 12px;
+      font-weight: 800;
+      font-size: 14px;
     }
 
     .footer {
-      padding: 34px 0 50px;
+      padding: 26px 0 40px;
       color: var(--muted);
       text-align: center;
       font-size: 14px;
     }
 
-    .live-pill {
-      display: inline-flex;
+    .contact-box {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.60);
+      display: none;
       align-items: center;
-      gap: 8px;
-      padding: 10px 14px;
-      border-radius: 999px;
-      background: rgba(255, 93, 108, 0.12);
-      color: #ffd8dc;
-      border: 1px solid rgba(255, 93, 108, 0.28);
+      justify-content: center;
+      z-index: 9999;
+      padding: 16px;
+    }
+
+    .contact-content {
+      width: 100%;
+      max-width: 340px;
+      border-radius: 20px;
+      background: #111827;
+      border: 1px solid rgba(255,255,255,0.10);
+      box-shadow: 0 22px 60px rgba(0,0,0,0.45);
+      padding: 22px;
+      text-align: center;
+    }
+
+    .contact-content h3 {
+      margin: 0 0 16px;
+      font-size: 24px;
+    }
+
+    .contact-btn {
+      display: block;
+      margin: 10px 0;
+      padding: 13px 14px;
+      border-radius: 14px;
+      text-decoration: none;
+      font-weight: 900;
+      color: #111827;
+      background: linear-gradient(135deg, var(--gold-1), var(--gold-2));
+    }
+
+    .close-btn {
+      margin-top: 8px;
+      width: 100%;
+      border: 0;
+      cursor: pointer;
+      padding: 12px 14px;
+      border-radius: 14px;
+      background: rgba(255,255,255,0.08);
+      color: var(--text);
       font-weight: 800;
-      font-size: 13px;
-    }
-    .dot {
-      width: 9px;
-      height: 9px;
-      border-radius: 50%;
-      background: var(--danger);
-      box-shadow: 0 0 0 0 rgba(255,93,108,0.8);
-      animation: pulse 1.6s infinite;
-    }
-    @keyframes pulse {
-      0% { box-shadow: 0 0 0 0 rgba(255,93,108,0.8); }
-      70% { box-shadow: 0 0 0 9px rgba(255,93,108,0); }
-      100% { box-shadow: 0 0 0 0 rgba(255,93,108,0); }
     }
 
     .notify {
       position: fixed;
-      left: 18px;
-      bottom: 18px;
-      z-index: 60;
-      max-width: 320px;
-      background: rgba(10, 15, 28, 0.92);
-      border: 1px solid rgba(255,255,255,0.12);
+      left: 16px;
+      bottom: 16px;
+      z-index: 70;
+      max-width: 300px;
+      border-radius: 16px;
+      background: rgba(7,16,31,0.92);
       color: var(--text);
-      border-radius: 18px;
-      padding: 14px 16px;
-      box-shadow: var(--shadow);
+      border: 1px solid rgba(255,255,255,0.10);
+      box-shadow: 0 18px 36px rgba(0,0,0,0.34);
+      padding: 14px 15px;
       transform: translateY(20px);
       opacity: 0;
       pointer-events: none;
       transition: 0.25s ease;
     }
+
     .notify.show {
       transform: translateY(0);
       opacity: 1;
     }
-    .notify strong { display: block; margin-bottom: 3px; }
-    .notify span { color: var(--muted); font-size: 13px; }
 
-    @media (max-width: 1100px) {
-      .hero-grid, .zelle-box, .support-grid, .reviews, .policy-grid { grid-template-columns: 1fr; }
-      .products { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      .faq-grid { grid-template-columns: 1fr; }
+    .notify strong {
+      display: block;
+      margin-bottom: 3px;
     }
+
+    .notify span {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    @media (max-width: 1080px) {
+      .hero-grid,
+      .info-grid,
+      .reviews {
+        grid-template-columns: 1fr;
+      }
+
+      .products {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .logo-card {
+        min-height: 220px;
+      }
+    }
+
     @media (max-width: 720px) {
-      .nav-inner { align-items: flex-start; flex-direction: column; }
-      .hero-card, .panel, .floating-box, .support-card, .review-card, .faq-item, .policy-card, .product-card { padding: 20px; }
-      .products { grid-template-columns: 1fr; }
-      .stat-grid { grid-template-columns: 1fr 1fr; }
-      .hero { padding-top: 38px; }
-      .lead { font-size: 16px; }
-      .btn { width: 100%; }
-      .hero-actions, .support-actions, .nav-links { width: 100%; }
+      .wrap {
+        width: min(var(--max), calc(100% - 18px));
+      }
+
+      .hero-box,
+      .panel,
+      .product-card,
+      .review-card {
+        border-radius: 22px;
+      }
+
+      .hero-box {
+        padding: 18px;
+      }
+
+      .topbar-inner {
+        padding: 10px 0;
+      }
+
+      .home-link {
+        padding: 7px 10px;
+        font-size: 12px;
+      }
+
+      .home-link span {
+        display: none;
+      }
+
+      .contact-toggle {
+        padding: 8px 12px;
+        font-size: 12px;
+      }
+
+      .products {
+        grid-template-columns: 1fr;
+      }
+
+      .trust-row {
+        gap: 10px;
+      }
+
+      .pill {
+        font-size: 13px;
+        padding: 10px 12px;
+      }
+
+      .notify {
+        left: 10px;
+        right: 10px;
+        bottom: 10px;
+        max-width: none;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="notify" id="notify">
-    <strong id="notifyTitle">Mike from Texas</strong>
-    <span id="notifyText">just bought 1T Zynga Poker Chips</span>
+  <div class="contact-box" id="contactBox">
+    <div class="contact-content">
+      <h3>Need help?</h3>
+      <a href="sms:4192999999" class="contact-btn">📲 Text 419-299-9999</a>
+      <a href="https://m.me/hoaidangllc" target="_blank" rel="noopener" class="contact-btn">💬 Message on Facebook</a>
+      <button onclick="closeContact()" class="close-btn">Close</button>
+    </div>
   </div>
 
-  <header class="nav">
-    <div class="wrap nav-inner">
-      <a href="#top" class="brand">
-        <strong>HoaiDang.com</strong>
-        <span>Zynga Poker Chips</span>
+  <div class="notify" id="notify">
+    <strong id="notifyTitle">Mike from Texas</strong>
+    <span id="notifyText">just bought 10T Zynga Poker Chips</span>
+  </div>
+
+  <header class="topbar">
+    <div class="wrap topbar-inner">
+      <a href="/" class="home-link">
+        ← Home
+        <span>HoaiDang.com</span>
       </a>
-      <nav class="nav-links">
-        <a class="btn btn-secondary" href="#packages">Packages</a>
-        <a class="btn btn-secondary" href="#payment">Zelle</a>
-        <a class="btn btn-secondary" href="#support">Support</a>
-        <a class="btn btn-primary" href="#packages">Buy Now</a>
-      </nav>
+
+      <button class="contact-toggle" onclick="openContact()">Contact</button>
     </div>
   </header>
 
-  <main id="top">
+  <main class="wrap">
     <section class="hero">
-      <div class="wrap hero-grid">
-        <div class="hero-card">
-          <div class="eyebrow">Fast Delivery • US Support • Zelle Only</div>
-          <h1>Zynga Poker Chips<br />Fast, Clean, Easy.</h1>
-          <p class="lead">A simple, high-converting chips store for buyers in the US. Clear packages, fast payment, quick support, and no extra clutter.</p>
-          <div class="trust-row">
-            <div class="live-pill"><span class="dot"></span><span id="viewerCount">8</span> people viewing now</div>
-            <div class="trust-pill">⭐ Rated 4.8 by users</div>
-            <div class="trust-pill">⚡ Usually delivered fast</div>
-          </div>
-          <div class="hero-actions">
-            <a class="btn btn-primary" href="#packages">Shop Chips</a>
-            <a class="btn btn-outline" href="#payment">Pay with Zelle</a>
-          </div>
-        </div>
-        <div class="hero-side">
-          <div class="panel">
-            <h3>Quick Store Info</h3>
-            <div class="stat-grid">
-              <div class="stat">
-                <strong>100B</strong>
-                <span>Starter package</span>
-              </div>
-              <div class="stat">
-                <strong>10T</strong>
-                <span>Big volume package</span>
-              </div>
-              <div class="stat">
-                <strong>Zelle</strong>
-                <span>Simple payment method</span>
-              </div>
-              <div class="stat">
-                <strong>Fast</strong>
-                <span>Quick support flow</span>
-              </div>
+      <div class="hero-box">
+        <div class="hero-grid">
+          <div>
+            <div class="eyebrow">Zynga Poker • Fast Delivery • Zelle Only</div>
+            <h1>Zynga Poker Chips<br />Fast, Clean, Easy.</h1>
+            <p>
+              Buy Zynga Poker Chips with clear packages, simple payment, and quick support.
+              The logo below makes it easy for buyers to know exactly which app the chips are for.
+            </p>
+
+            <div class="trust-row">
+              <div class="pill live-pill"><span class="live-dot"></span><span id="viewerCount">15</span> people viewing now</div>
+              <div class="pill">⭐ Rated 4.8 by users</div>
+              <div class="pill">⚡ Usually delivered fast</div>
             </div>
           </div>
-          <div class="panel">
-            <h3>Why this version sells better</h3>
-            <p style="color: var(--muted); line-height: 1.65; margin: 0;">Less text. Bigger packages. Cleaner layout. Stronger trust signals. Better spacing. Easier support buttons. This is designed to convert faster than a crowded game shop layout.</p>
+
+          <div class="logo-card">
+            <img src="zynga-logo.png" alt="Zynga Poker logo" />
           </div>
         </div>
       </div>
     </section>
 
     <section id="packages">
-      <div class="wrap">
-        <div class="section-head">
-          <div>
-            <h2>Zynga Poker Chip Packages</h2>
-            <p>Keep it simple. Offer the packages buyers actually understand. No giant wall of products. No confusion. Just the sizes that move.</p>
-          </div>
+      <div class="section-head">
+        <div>
+          <h2>Packages</h2>
+          <p>Simple packages only. No extra clutter. The pricing below uses discount display to help buyers compare faster.</p>
         </div>
-        <div class="products">
-          <article class="product-card">
-            <div class="product-size">Starter</div>
-            <h3>100B</h3>
-            <p class="price">$3 <small>great for small orders</small></p>
-            <ul class="features">
-              <li>Fast support</li>
-              <li>Simple order flow</li>
-              <li>Zelle payment only</li>
-            </ul>
-            <div class="card-actions">
-              <a class="btn btn-primary" href="#payment">Buy with Zelle</a>
-              <a class="btn btn-secondary" href="#support">Need Help?</a>
-            </div>
-          </article>
+      </div>
 
-          <article class="product-card">
-            <div class="product-size">Popular</div>
-            <h3>500B</h3>
-            <p class="price">$12 <small>easy value package</small></p>
-            <ul class="features">
-              <li>Fast order handling</li>
-              <li>Good mid-size option</li>
-              <li>Trusted support flow</li>
-            </ul>
-            <div class="card-actions">
-              <a class="btn btn-primary" href="#payment">Buy with Zelle</a>
-              <a class="btn btn-secondary" href="#support">Need Help?</a>
-            </div>
-          </article>
-
-          <article class="product-card">
-            <div class="badge hot">Best Seller</div>
-            <div class="product-size">Top Pick</div>
+      <div class="products">
+        <article class="product-card">
+          <div class="product-top">
+            <img src="zynga-logo.png" alt="1T Zynga Poker Chips" class="card-logo" />
+          </div>
+          <div class="product-body">
             <h3>1T</h3>
-            <p class="price">$28 <small>most ordered package</small></p>
-            <ul class="features">
-              <li>Strong value for buyers</li>
-              <li>Easy to understand size</li>
-              <li>Fast support option</li>
-            </ul>
-            <div class="card-actions">
-              <a class="btn btn-primary" href="#payment">Buy with Zelle</a>
-              <a class="btn btn-secondary" href="#support">Need Help?</a>
+            <div class="subline">1T Zynga Poker Chips</div>
+            <div class="price-row">
+              <span class="old-price">$24</span>
+              <span class="new-price">$20</span>
+              <span class="save">Save $4</span>
             </div>
-          </article>
+            <ul class="features">
+              <li>Good starter package</li>
+              <li>Quick support</li>
+              <li>Easy order flow</li>
+            </ul>
+            <a href="#payment" class="buy-btn">Buy Now</a>
+          </div>
+        </article>
 
-          <article class="product-card">
-            <div class="badge value">Best Deal</div>
-            <div class="product-size">Value Pack</div>
+        <article class="product-card">
+          <div class="product-top">
+            <img src="zynga-logo.png" alt="2T Zynga Poker Chips" class="card-logo" />
+          </div>
+          <div class="product-body">
+            <h3>2T</h3>
+            <div class="subline">2T Zynga Poker Chips</div>
+            <div class="price-row">
+              <span class="old-price">$48</span>
+              <span class="new-price">$38</span>
+              <span class="save">Save $10</span>
+            </div>
+            <ul class="features">
+              <li>Better than buying small</li>
+              <li>Fast order handling</li>
+              <li>Clear pricing</li>
+            </ul>
+            <a href="#payment" class="buy-btn">Buy Now</a>
+          </div>
+        </article>
+
+        <article class="product-card">
+          <div class="product-top">
+            <div class="badge">Best Value</div>
+            <img src="zynga-logo.png" alt="5T Zynga Poker Chips" class="card-logo" />
+          </div>
+          <div class="product-body">
             <h3>5T</h3>
-            <p class="price">$130 <small>big discount package</small></p>
-            <ul class="features">
-              <li>Better value per T</li>
-              <li>Great for repeat buyers</li>
-              <li>Fast support after payment</li>
-            </ul>
-            <div class="card-actions">
-              <a class="btn btn-primary" href="#payment">Buy with Zelle</a>
-              <a class="btn btn-secondary" href="#support">Need Help?</a>
+            <div class="subline">5T Zynga Poker Chips</div>
+            <div class="price-row">
+              <span class="old-price">$120</span>
+              <span class="new-price">$90</span>
+              <span class="save">Save $30</span>
             </div>
-          </article>
+            <ul class="features">
+              <li>Strong value package</li>
+              <li>Popular for repeat buyers</li>
+              <li>Fast support</li>
+            </ul>
+            <a href="#payment" class="buy-btn">Buy Now</a>
+          </div>
+        </article>
 
-          <article class="product-card">
-            <div class="product-size">Big Order</div>
+        <article class="product-card">
+          <div class="product-top">
+            <div class="badge">Most Popular</div>
+            <img src="zynga-logo.png" alt="10T Zynga Poker Chips" class="card-logo" />
+          </div>
+          <div class="product-body">
             <h3>10T</h3>
-            <p class="price">$240 <small>high-volume package</small></p>
+            <div class="subline">10T Zynga Poker Chips</div>
+            <div class="price-row">
+              <span class="old-price">$240</span>
+              <span class="new-price">$180</span>
+              <span class="save">Save $60</span>
+            </div>
+            <ul class="features">
+              <li>Clear upgrade option</li>
+              <li>Most attractive discount</li>
+              <li>Zelle only</li>
+            </ul>
+            <a href="#payment" class="buy-btn">Buy Now</a>
+          </div>
+        </article>
+
+        <article class="product-card">
+          <div class="product-top">
+            <img src="zynga-logo.png" alt="50T Zynga Poker Chips" class="card-logo" />
+          </div>
+          <div class="product-body">
+            <h3>50T</h3>
+            <div class="subline">50T Zynga Poker Chips</div>
+            <div class="price-row">
+              <span class="old-price">$1200</span>
+              <span class="new-price">$850</span>
+              <span class="save">Save $350</span>
+            </div>
             <ul class="features">
               <li>For bigger buyers</li>
-              <li>Clear premium option</li>
-              <li>Simple support flow</li>
+              <li>Best large volume option</li>
+              <li>Message first if needed</li>
             </ul>
-            <div class="card-actions">
-              <a class="btn btn-primary" href="#payment">Buy with Zelle</a>
-              <a class="btn btn-secondary" href="#support">Need Help?</a>
-            </div>
-          </article>
-        </div>
+            <a href="#payment" class="buy-btn">Buy Now</a>
+          </div>
+        </article>
       </div>
     </section>
 
     <section id="payment">
-      <div class="wrap zelle-box">
-        <div class="floating-box">
-          <div class="section-head" style="margin-bottom: 12px;">
-            <div>
-              <h2>Zelle Payment</h2>
-              <p>Keep checkout simple. Send payment first, then message with your screenshot and order details.</p>
-            </div>
-          </div>
-          <div class="zelle-phone">419-299-9999</div>
-          <div class="hero-actions">
-            <button class="btn btn-primary" onclick="copyZelle()">Copy Zelle Number</button>
-            <a class="btn btn-secondary" href="#support">Message Support</a>
-          </div>
+      <div class="info-grid">
+        <div class="panel">
+          <h3>Zelle Payment</h3>
+          <p>Send payment to the number below, then message with your screenshot and package amount.</p>
+          <div class="zelle-number">419-299-9999</div>
+          <button class="copy-btn" onclick="copyZelle()">Copy Zelle Number</button>
         </div>
 
-        <div class="floating-box">
-          <h3 style="margin-top:0; font-size: 24px;">How to Buy</h3>
+        <div class="panel">
+          <h3>How to Buy</h3>
           <div class="steps">
             <div class="step">
               <div class="step-num">1</div>
               <div>
-                <strong>Choose your package</strong>
-                <p>Pick the chip amount you want from the package list above.</p>
+                <strong>Choose package</strong>
+                <p>Select 1T, 2T, 5T, 10T, or 50T above.</p>
               </div>
             </div>
+
             <div class="step">
               <div class="step-num">2</div>
               <div>
-                <strong>Send payment by Zelle</strong>
-                <p>Use <strong>419-299-9999</strong>. Double check the amount before sending.</p>
+                <strong>Send Zelle</strong>
+                <p>Use 419-299-9999 and send the correct amount.</p>
               </div>
             </div>
+
             <div class="step">
               <div class="step-num">3</div>
               <div>
-                <strong>Send screenshot + details</strong>
-                <p>Message support with payment proof and your Zynga Poker details.</p>
-              </div>
-            </div>
-            <div class="step">
-              <div class="step-num">4</div>
-              <div>
-                <strong>Receive your order</strong>
-                <p>Support confirms your payment and handles your order as quickly as possible.</p>
+                <strong>Message support</strong>
+                <p>Send screenshot and order details by text or Facebook.</p>
               </div>
             </div>
           </div>
@@ -686,144 +875,48 @@
       </div>
     </section>
 
-    <section id="support">
-      <div class="wrap">
-        <div class="section-head">
-          <div>
-            <h2>Support Options</h2>
-            <p>Give buyers two easy ways to reach you. Fast support closes more sales than long explanations ever will.</p>
-          </div>
+    <section id="reviews">
+      <div class="section-head">
+        <div>
+          <h2>Reviews</h2>
+          <p>Short reviews help build trust without taking too much space.</p>
         </div>
-        <div class="support-grid">
-          <div class="support-card">
-            <h3>Facebook Support</h3>
-            <p>Best for quick questions, payment screenshots, and order follow-up.</p>
-            <div class="support-actions">
-              <a class="btn btn-primary" href="https://m.me/yourfacebookusername" target="_blank" rel="noopener">Message on Facebook</a>
-            </div>
-          </div>
-          <div class="support-card">
-            <h3>Text Support</h3>
-            <p>For buyers who do not use Facebook. Fast and simple backup option.</p>
-            <div class="support-actions">
-              <a class="btn btn-secondary" href="sms:4192999999">Text 419-299-9999</a>
-            </div>
-          </div>
-          <div class="support-card">
-            <h3>Custom Order</h3>
-            <p>Want a different amount? Ask for a custom package before sending payment.</p>
-            <div class="support-actions">
-              <a class="btn btn-outline" href="https://m.me/yourfacebookusername" target="_blank" rel="noopener">Request Custom Amount</a>
-            </div>
-          </div>
+      </div>
+
+      <div class="reviews">
+        <div class="review-card">
+          <div class="stars">★★★★★</div>
+          <p>Easy order. Fast response and simple payment flow.</p>
+          <div class="review-meta">Mike • Texas</div>
+        </div>
+
+        <div class="review-card">
+          <div class="stars">★★★★★</div>
+          <p>Clean page. I knew right away it was for Zynga Poker because of the logo.</p>
+          <div class="review-meta">Anna • California</div>
+        </div>
+
+        <div class="review-card">
+          <div class="stars">★★★★☆</div>
+          <p>Good support and much easier than random places online.</p>
+          <div class="review-meta">David • Florida</div>
         </div>
       </div>
     </section>
 
-    <section>
-      <div class="wrap">
-        <div class="section-head">
-          <div>
-            <h2>User Reviews</h2>
-            <p>These are short, realistic trust boosters. They look better than stiff fake testimonials and fit this kind of product page much better.</p>
-          </div>
-        </div>
-        <div class="reviews">
-          <div class="review-card">
-            <div class="stars">★★★★★</div>
-            <p>Fast reply and easy order. Sent Zelle, messaged support, got everything handled smoothly.</p>
-            <div class="review-meta">Mike • Texas</div>
-          </div>
-          <div class="review-card">
-            <div class="stars">★★★★★</div>
-            <p>Way easier than trying random places. Clean process and support answered fast.</p>
-            <div class="review-meta">Anna • California</div>
-          </div>
-          <div class="review-card">
-            <div class="stars">★★★★☆</div>
-            <p>Good experience overall. I liked that the page was simple and not confusing.</p>
-            <div class="review-meta">David • Florida</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section>
-      <div class="wrap">
-        <div class="section-head">
-          <div>
-            <h2>FAQ</h2>
-            <p>Short answers reduce wasted messages and make the page feel more complete.</p>
-          </div>
-        </div>
-        <div class="faq-grid">
-          <div class="faq-item">
-            <h3>How do I pay?</h3>
-            <p class="faq-answer">Payment is by Zelle only. Send to <strong>419-299-9999</strong>, then message with your screenshot.</p>
-          </div>
-          <div class="faq-item">
-            <h3>How fast is support?</h3>
-            <p class="faq-answer">Support is usually quick. Facebook Messenger is the fastest option. Text is the backup option.</p>
-          </div>
-          <div class="faq-item">
-            <h3>Can I order a custom amount?</h3>
-            <p class="faq-answer">Yes. Message first and ask for a custom package before sending payment.</p>
-          </div>
-          <div class="faq-item">
-            <h3>Do you offer refunds?</h3>
-            <p class="faq-answer">No refund after payment is sent. Please confirm your order first if you are unsure.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section>
-      <div class="wrap">
-        <div class="section-head">
-          <div>
-            <h2>Rules & Policy</h2>
-            <p>This section protects you and makes the store look more serious. Keep it simple and firm.</p>
-          </div>
-        </div>
-        <div class="policy-grid">
-          <div class="policy-card">
-            <h3>Payment Rules</h3>
-            <p>Zelle only. Please double check the number and amount before sending payment.</p>
-            <ul class="policy-list">
-              <li>Zelle: 419-299-9999</li>
-              <li>No refund after payment is sent</li>
-              <li>Message support after payment</li>
-            </ul>
-          </div>
-          <div class="policy-card">
-            <h3>Order Rules</h3>
-            <p>Send the correct Zynga Poker details and order amount to avoid delay.</p>
-            <ul class="policy-list">
-              <li>Choose the right package first</li>
-              <li>Custom amounts must be confirmed first</li>
-              <li>Wrong details may delay support</li>
-            </ul>
-          </div>
-          <div class="policy-card">
-            <h3>Support Rules</h3>
-            <p>Support is available by Facebook or text. Fast, direct, and simple.</p>
-            <ul class="policy-list">
-              <li>Facebook is the fastest support option</li>
-              <li>Text support available if needed</li>
-              <li>All digital sales are final</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
+    <footer class="footer">
+      HoaiDang.com • Zynga Poker Chips • Fast support • Zelle only
+    </footer>
   </main>
 
-  <footer class="footer wrap">
-    <p>© <span id="year"></span> HoaiDang.com • Zynga Poker Chips • Fast support • Zelle only</p>
-  </footer>
-
   <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
+    function openContact() {
+      document.getElementById('contactBox').style.display = 'flex';
+    }
+
+    function closeContact() {
+      document.getElementById('contactBox').style.display = 'none';
+    }
 
     function copyZelle() {
       navigator.clipboard.writeText('419-299-9999').then(() => {
@@ -834,19 +927,20 @@
     }
 
     const viewerEl = document.getElementById('viewerCount');
-    let viewers = 8;
+    let viewers = 15;
+
     setInterval(() => {
       const change = Math.floor(Math.random() * 5) - 2;
-      viewers = Math.max(5, Math.min(19, viewers + change));
+      viewers = Math.max(8, Math.min(23, viewers + change));
       viewerEl.textContent = viewers;
     }, 4500);
 
     const buyers = [
-      ['Mike from Texas', 'just bought 1T Zynga Poker Chips'],
-      ['Anna from California', 'just bought 500B Zynga Poker Chips'],
-      ['David from Florida', 'just bought 5T Zynga Poker Chips'],
-      ['Kevin from Arizona', 'just placed a custom order'],
-      ['Linda from Nevada', 'just bought 100B Zynga Poker Chips']
+      ['Mike from Texas', 'just bought 10T Zynga Poker Chips'],
+      ['Anna from California', 'just bought 5T Zynga Poker Chips'],
+      ['David from Florida', 'just bought 2T Zynga Poker Chips'],
+      ['Kevin from Arizona', 'just bought 50T Zynga Poker Chips'],
+      ['Linda from Nevada', 'just bought 1T Zynga Poker Chips']
     ];
 
     const notify = document.getElementById('notify');
