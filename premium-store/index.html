@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Tài khoản Premium 1 Năm | Hoài Đặng</title>
-  <meta name="description" content="Tài khoản premium 1 năm cho người Việt ở Mỹ. Gói cao cấp nhất, hỗ trợ nhanh, liên hệ trực tiếp qua SMS hoặc Messenger." />
+  <title>Tài khoản Premium | Hoài Đặng</title>
+  <meta name="description" content="Tài khoản premium với giá hợp lý, thao tác đơn giản, hỗ trợ nhanh. Chọn gói phù hợp và liên hệ trực tiếp qua SMS hoặc Messenger." />
   <style>
     :root {
       --bg: #081227;
@@ -128,7 +128,9 @@
     .card:hover,
     .mini-card:hover,
     .policy-card:hover,
-    .faq:hover {
+    .faq:hover,
+    .info-card:hover,
+    .contact-card:hover {
       transform: translateY(-1px);
     }
 
@@ -210,20 +212,27 @@
     }
 
     .mini-card {
-      min-height: 125px;
+      min-height: 140px;
       border-radius: 22px;
       background: rgba(255,255,255,0.05);
       border: 1px solid rgba(255,255,255,0.08);
-      display: grid;
-      place-items: center;
-      padding: 20px;
+      padding: 22px;
       box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 10px;
     }
 
-    .mini-card img {
-      width: 84px;
-      height: 84px;
-      object-fit: contain;
+    .mini-card strong {
+      font-size: 1.05rem;
+      line-height: 1.4;
+    }
+
+    .mini-card span {
+      color: var(--muted);
+      line-height: 1.6;
+      font-size: 0.95rem;
     }
 
     .section {
@@ -433,7 +442,8 @@
       .container { width: min(calc(100% - 18px), var(--max)); }
       .products,
       .policy-grid,
-      .contact-grid { grid-template-columns: 1fr; }
+      .contact-grid,
+      .hero-right { grid-template-columns: 1fr; }
       .hero { padding-top: 34px; }
       .hero-wrap,
       .card,
@@ -444,8 +454,7 @@
       .mini-card { padding: 18px; }
       h1 { font-size: clamp(2rem, 10vw, 3.2rem); }
       .logo-box { min-height: 145px; }
-      .logo-box img,
-      .mini-card img { width: 96px; height: 96px; }
+      .logo-box img { width: 96px; height: 96px; }
       .topbar-inner { min-height: 60px; }
     }
   </style>
@@ -469,50 +478,39 @@
     <section class="hero">
       <div class="container hero-wrap">
         <div>
-          <div class="eyebrow">Tài khoản Premium • Gói 1 năm • Hỗ trợ nhanh</div>
-          <h1>Tài khoản Premium 1 năm<br>cho người Việt ở Mỹ</h1>
-          <p>Chỉ bán gói cao cấp nhất của từng app. Không cần trả tiền mỗi tháng. Không cần tạo tài khoản trên web. Chọn gói rồi nhắn trực tiếp là xong. Gọn, nhanh, dễ mua, dễ hỗ trợ.</p>
+          <div class="eyebrow">Tài khoản Premium • Giá hợp lý • Hỗ trợ nhanh</div>
+          <h1>Tài Khoản Premium Dễ Chọn, Dễ Dùng</h1>
+          <p>Chọn nhanh dịch vụ phù hợp với nhu cầu giải trí và sử dụng hằng ngày. Không cần thao tác rườm rà, chỉ cần chọn gói rồi liên hệ trực tiếp để được hướng dẫn.</p>
 
           <div class="hero-actions">
             <a class="btn btn-primary" href="#san-pham">Xem sản phẩm</a>
-            <a class="btn btn-secondary" href="#lien-he">Liên hệ trước</a>
+            <a class="btn btn-secondary" href="#lien-he">Liên hệ nhanh</a>
           </div>
 
           <div class="hero-points">
-            <div class="hero-point">✔ Chỉ gói cao cấp nhất</div>
-            <div class="hero-point">✔ Tất cả đều 1 năm</div>
-            <div class="hero-point">✔ Hỗ trợ khi có lỗi</div>
+            <div class="hero-point">✔ Giá rõ ràng</div>
+            <div class="hero-point">✔ Chọn gói nhanh</div>
+            <div class="hero-point">✔ Hỗ trợ khi cần</div>
           </div>
         </div>
 
         <div class="hero-right">
-          <div class="mini-card"><img src="Netflix.png" alt="Netflix"></div>
-          <div class="mini-card"><img src="Disney.png" alt="Disney Plus"></div>
-          <div class="mini-card"><img src="Max.png" alt="Max"></div>
-          <div class="mini-card"><img src="Spotify.png" alt="Spotify"></div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="container">
-        <div class="section-head">
-          <h2>Điểm mạnh của web này</h2>
-          <p>Khách Việt ở Mỹ thường thích coi nhanh, quyết nhanh. Nên web này chỉ giữ lại đúng những gì cần để chốt đơn.</p>
-        </div>
-        <div class="info-grid">
-          <article class="info-card">
-            <h3>Không rối nhiều lựa chọn</h3>
-            <p>Mỗi app chỉ có một gói duy nhất là gói cao cấp nhất. Không mất thời gian chọn Basic, Standard hay Premium.</p>
-          </article>
-          <article class="info-card">
-            <h3>Giá kiểu Mỹ</h3>
-            <p>Dùng giá USD rõ ràng như $39.99, $49.99, $59.99 để nhìn tự nhiên với khách tại Mỹ và dễ tạo cảm giác đáng tin hơn.</p>
-          </article>
-          <article class="info-card">
-            <h3>Liên hệ trực tiếp</h3>
-            <p>Không cần login. Không cần checkout dài dòng. Chọn gói xong nhắn SMS hoặc Messenger là xử lý nhanh hơn nhiều.</p>
-          </article>
+          <div class="mini-card">
+            <strong>Gọn gàng, dễ chọn</strong>
+            <span>Chỉ giữ những dịch vụ phổ biến để khách xem nhanh và quyết định dễ hơn.</span>
+          </div>
+          <div class="mini-card">
+            <strong>Giá hiển thị rõ ràng</strong>
+            <span>Mức giá được trình bày trực tiếp để bạn dễ so sánh và chọn ngay.</span>
+          </div>
+          <div class="mini-card">
+            <strong>Liên hệ đơn giản</strong>
+            <span>Không cần tạo tài khoản trên web, chỉ cần nhắn tin để được hỗ trợ.</span>
+          </div>
+          <div class="mini-card">
+            <strong>Phù hợp dùng hằng ngày</strong>
+            <span>Các dịch vụ được chọn theo nhu cầu giải trí và sử dụng phổ biến.</span>
+          </div>
         </div>
       </div>
     </section>
@@ -521,7 +519,7 @@
       <div class="container">
         <div class="section-head">
           <h2>Sản phẩm nổi bật</h2>
-          <p>Tất cả sản phẩm bên dưới đều là gói cao cấp nhất và thời hạn 1 năm. Bạn có thể đổi giá sau này rất nhanh.</p>
+          <p>Chọn nhanh dịch vụ phù hợp. Mỗi sản phẩm đều có thông tin rõ ràng để bạn dễ quyết định.</p>
         </div>
 
         <div class="products">
@@ -533,9 +531,9 @@
             <div class="price">$59.99</div>
             <div class="old-price">Giá thường: <span>$119.99 / năm</span></div>
             <div class="features">
-              <span>• Gói cao cấp nhất</span>
-              <span>• Xem phim và show tiện lợi</span>
-              <span>• Không cần đóng hàng tháng</span>
+              <span>• Trải nghiệm nội dung 4K</span>
+              <span>• Xem phim và series tiện lợi</span>
+              <span>• Không cần thanh toán hàng tháng</span>
             </div>
             <div class="actions">
               <a class="btn btn-primary" href="sms:+14322999999?body=Chào%2C%20tôi%20muốn%20mua%20Netflix%20Premium%201%20năm.">Mua ngay</a>
@@ -550,9 +548,9 @@
             <div class="price">$64.99</div>
             <div class="old-price">Giá thường: <span>$129.99 / năm</span></div>
             <div class="features">
-              <span>• Gói cao cấp nhất</span>
-              <span>• Hợp cho gia đình và giải trí</span>
-              <span>• Dùng một lần cho trọn năm</span>
+              <span>• Nội dung đa dạng cho gia đình</span>
+              <span>• Dễ sử dụng trên nhiều thiết bị</span>
+              <span>• Truy cập ổn định</span>
             </div>
             <div class="actions">
               <a class="btn btn-primary" href="sms:+14322999999?body=Chào%2C%20tôi%20muốn%20mua%20Disney%2B%20Bundle%201%20năm.">Mua ngay</a>
@@ -568,9 +566,9 @@
             <div class="price">$54.99</div>
             <div class="old-price">Giá thường: <span>$109.99 / năm</span></div>
             <div class="features">
-              <span>• Gói cao cấp nhất</span>
-              <span>• Nội dung chọn lọc, dễ bán</span>
-              <span>• Giá đẹp để chốt nhanh</span>
+              <span>• Nội dung phim và series chất lượng cao</span>
+              <span>• Trải nghiệm xem mượt mà</span>
+              <span>• Phù hợp giải trí hằng ngày</span>
             </div>
             <div class="actions">
               <a class="btn btn-primary" href="sms:+14322999999?body=Chào%2C%20tôi%20muốn%20mua%20HBO%20Max%201%20năm.">Mua ngay</a>
@@ -585,9 +583,9 @@
             <div class="price">$39.99</div>
             <div class="old-price">Giá thường: <span>$79.99 / năm</span></div>
             <div class="features">
-              <span>• Gói cao cấp nhất</span>
               <span>• Nghe nhạc không quảng cáo</span>
-              <span>• Dễ dùng mỗi ngày</span>
+              <span>• Chất lượng âm thanh cao</span>
+              <span>• Dùng tiện lợi mỗi ngày</span>
             </div>
             <div class="actions">
               <a class="btn btn-primary" href="sms:+14322999999?body=Chào%2C%20tôi%20muốn%20mua%20Spotify%20Premium%201%20năm.">Mua ngay</a>
@@ -602,9 +600,9 @@
             <div class="price">$44.99</div>
             <div class="old-price">Giá thường: <span>$89.99 / năm</span></div>
             <div class="features">
-              <span>• Gói cao cấp nhất</span>
-              <span>• Xem video tiện hơn</span>
-              <span>• Hợp cho người dùng thường xuyên</span>
+              <span>• Xem video không quảng cáo</span>
+              <span>• Phát nền tiện lợi</span>
+              <span>• Trải nghiệm mượt hơn</span>
             </div>
             <div class="actions">
               <a class="btn btn-primary" href="sms:+14322999999?body=Chào%2C%20tôi%20muốn%20mua%20YouTube%20Premium%201%20năm.">Mua ngay</a>
@@ -619,9 +617,9 @@
             <div class="price">$69.99</div>
             <div class="old-price">Giá thường: <span>$129.99 / năm</span></div>
             <div class="features">
-              <span>• Gói cao cấp nhất</span>
-              <span>• Bảo mật và đổi IP</span>
-              <span>• Hợp cho nội dung quốc tế</span>
+              <span>• Bảo mật kết nối internet</span>
+              <span>• Truy cập nội dung linh hoạt</span>
+              <span>• Ổn định và dễ sử dụng</span>
             </div>
             <div class="actions">
               <a class="btn btn-primary" href="sms:+14322999999?body=Chào%2C%20tôi%20muốn%20mua%20NordVPN%201%20năm.">Mua ngay</a>
@@ -636,9 +634,9 @@
             <div class="price">$74.99</div>
             <div class="old-price">Giá thường: <span>$139.99 / năm</span></div>
             <div class="features">
-              <span>• Gói cao cấp nhất</span>
-              <span>• Kết nối nhanh, dễ dùng</span>
-              <span>• Dễ bán cho người thích đơn giản</span>
+              <span>• Kết nối nhanh và ổn định</span>
+              <span>• Dễ thao tác</span>
+              <span>• Phù hợp sử dụng hằng ngày</span>
             </div>
             <div class="actions">
               <a class="btn btn-primary" href="sms:+14322999999?body=Chào%2C%20tôi%20muốn%20mua%20ExpressVPN%201%20năm.">Mua ngay</a>
@@ -653,9 +651,9 @@
             <div class="price">$49.99</div>
             <div class="old-price">Giá thường: <span>$99.99 / năm</span></div>
             <div class="features">
-              <span>• Gói cao cấp nhất</span>
-              <span>• Hợp làm hình và bài đăng</span>
-              <span>• Dùng lâu dài tiện lợi</span>
+              <span>• Thiết kế hình ảnh nhanh chóng</span>
+              <span>• Phù hợp cho công việc và cá nhân</span>
+              <span>• Dễ sử dụng</span>
             </div>
             <div class="actions">
               <a class="btn btn-primary" href="sms:+14322999999?body=Chào%2C%20tôi%20muốn%20mua%20Canva%20Pro%201%20năm.">Mua ngay</a>
@@ -666,64 +664,85 @@
       </div>
     </section>
 
+    <section class="section">
+      <div class="container">
+        <div class="section-head">
+          <h2>Vì sao nhiều người chọn mua tại đây</h2>
+          <p>Thông tin được trình bày gọn gàng, dễ hiểu và thuận tiện cho người muốn chọn nhanh.</p>
+        </div>
+        <div class="info-grid">
+          <article class="info-card">
+            <h3>Dễ chọn</h3>
+            <p>Sản phẩm được sắp xếp rõ ràng để bạn xem nhanh, so sánh dễ và chọn đúng nhu cầu.</p>
+          </article>
+          <article class="info-card">
+            <h3>Giá rõ ràng</h3>
+            <p>Mức giá hiển thị trực tiếp theo từng dịch vụ để bạn dễ cân nhắc trước khi liên hệ.</p>
+          </article>
+          <article class="info-card">
+            <h3>Hỗ trợ nhanh</h3>
+            <p>Sau khi chọn sản phẩm, bạn có thể nhắn trực tiếp qua SMS hoặc Messenger để được hướng dẫn.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
     <section class="section" id="lien-he">
       <div class="container">
         <div class="section-head">
           <h2>Liên hệ nhanh</h2>
-          <p>Không cần tạo tài khoản trên web. Chỉ cần chọn gói rồi nhắn trực tiếp để xử lý nhanh hơn.</p>
+          <p>Chọn sản phẩm phù hợp, sau đó nhắn tin để được hướng dẫn nhanh.</p>
         </div>
 
         <div class="contact-grid">
           <article class="contact-card">
             <h3>Nhắn tin qua SMS</h3>
-            <p>Đây là cách nhanh nhất. Các nút mua phía trên đã điền sẵn nội dung để bấm là gửi được ngay.</p>
+            <p>Các nút mua phía trên đã có sẵn nội dung để bạn thao tác nhanh hơn.</p>
             <div class="contact-actions">
-              <a class="btn btn-sms" href="sms:+14322999999?body=Chào%2C%20tôi%20muốn%20mua%20tài%20khoản%20premium%201%20năm.">Nhắn SMS</a>
+              <a class="btn btn-sms" href="sms:+14322999999?body=Chào%2C%20tôi%20muốn%20mua%20tài%20khoản%20premium.">Nhắn SMS</a>
               <a class="btn btn-secondary" href="#san-pham">Chọn sản phẩm</a>
             </div>
           </article>
 
           <article class="contact-card">
             <h3>Nhắn qua Messenger</h3>
-            <p>Dùng Messenger nếu tiện hơn. Sau này chỉ cần thay link thật của bạn là xong.</p>
+            <p>Nếu bạn muốn trao đổi trước, có thể liên hệ qua Messenger để được phản hồi thuận tiện hơn.</p>
             <div class="contact-actions">
               <a class="btn btn-msg" href="https://m.me/" target="_blank" rel="noopener">Mở Messenger</a>
               <a class="btn btn-secondary" href="https://hoaidang.com/">Về trang chủ</a>
             </div>
           </article>
         </div>
-
-        <div class="notice"><strong>Lưu ý:</strong> Bản này đang gọi hình trực tiếp theo đúng tên file bạn đang để cùng cấp với <code>index.html</code>: <code>Netflix.png</code>, <code>Disney.png</code>, <code>Max.png</code>, <code>Spotify.png</code>, <code>Youtube.png</code>, <code>nordvpn.png</code>, <code>expressvpn.png</code>, <code>Canva.png</code>.</div>
       </div>
     </section>
 
     <section class="section" id="chinh-sach">
       <div class="container">
         <div class="section-head">
-          <h2>Chính sách bảo hành & sử dụng</h2>
-          <p>Phần này cần rõ ràng để tránh hiểu lầm và đỡ tranh cãi sau khi mua.</p>
+          <h2>Chính sách sử dụng</h2>
+          <p>Vui lòng đọc kỹ trước khi sử dụng để đảm bảo trải nghiệm tốt nhất.</p>
         </div>
 
         <div class="policy-grid">
           <article class="policy-card">
             <h3>1. Thời hạn sử dụng</h3>
-            <p>Tất cả sản phẩm trên web đều là gói 1 năm. Nếu trong quá trình sử dụng có vấn đề, vui lòng liên hệ để được kiểm tra và hỗ trợ.</p>
+            <p>Mỗi sản phẩm đều có thời hạn hiển thị rõ trên từng thẻ. Nếu trong quá trình sử dụng có vấn đề, vui lòng liên hệ để được kiểm tra và hỗ trợ.</p>
           </article>
           <article class="policy-card">
             <h3>2. Không hoàn tiền</h3>
-            <p>Do đặc thù là sản phẩm kỹ thuật số, tất cả đơn hàng sau khi đã giao sẽ không được hoàn tiền. Vui lòng hỏi trước nếu cần tư vấn kỹ hơn trước khi mua.</p>
+            <p>Do đặc thù là sản phẩm kỹ thuật số, đơn hàng sau khi đã giao sẽ không áp dụng hoàn tiền. Nếu cần hỏi kỹ hơn, vui lòng liên hệ trước khi mua.</p>
           </article>
           <article class="policy-card">
-            <h3>3. Không đổi mật khẩu</h3>
-            <p>Tài khoản được cung cấp sẵn để sử dụng. Khách hàng không được tự ý đổi mật khẩu, email hoặc bất kỳ cài đặt bảo mật nào của tài khoản.</p>
+            <h3>3. Không thay đổi thông tin tài khoản</h3>
+            <p>Khách hàng không tự ý đổi mật khẩu, email hoặc bất kỳ cài đặt bảo mật nào liên quan đến tài khoản được cung cấp.</p>
           </article>
           <article class="policy-card">
-            <h3>4. Mất bảo hành nếu tự thay đổi</h3>
-            <p>Nếu khách tự ý thay đổi thông tin tài khoản hoặc quyền truy cập, đơn hàng đó sẽ không còn được bảo hành hoặc hỗ trợ nữa.</p>
+            <h3>4. Ngừng hỗ trợ nếu tự thay đổi</h3>
+            <p>Nếu tài khoản bị thay đổi thông tin hoặc quyền truy cập bởi người dùng, đơn hàng đó sẽ không còn thuộc phạm vi hỗ trợ.</p>
           </article>
         </div>
 
-        <div class="notice"><strong>Điều khoản chốt:</strong> Việc mua hàng đồng nghĩa với việc khách đã đọc, hiểu và đồng ý với các điều khoản trên. Website này không đại diện cho bất kỳ thương hiệu nào được nhắc đến.</div>
+        <div class="notice"><strong>Lưu ý:</strong> Việc mua hàng đồng nghĩa với việc bạn đã đọc, hiểu và đồng ý với các điều khoản trên. Website này không đại diện cho bất kỳ thương hiệu nào được nhắc đến.</div>
       </div>
     </section>
 
@@ -731,20 +750,20 @@
       <div class="container">
         <div class="section-head">
           <h2>Câu hỏi thường gặp</h2>
-          <p>Ngắn gọn, dễ hiểu, đủ để khách chốt nhanh.</p>
+          <p>Ngắn gọn, dễ hiểu, đủ để bạn nắm nhanh trước khi chọn.</p>
         </div>
         <div class="faq-grid">
           <article class="faq">
-            <h3>Tất cả đều là gói cao cấp nhất đúng không?</h3>
-            <p>Đúng. Mỗi app trên web chỉ có một lựa chọn là gói cao cấp nhất để khách không phải so sánh nhiều.</p>
+            <h3>Làm sao để nhận tài khoản?</h3>
+            <p>Sau khi chọn sản phẩm, bạn chỉ cần nhắn SMS hoặc Messenger để được hướng dẫn nhanh.</p>
           </article>
           <article class="faq">
             <h3>Có cần tạo tài khoản trên web không?</h3>
-            <p>Không. Chỉ cần chọn gói rồi nhắn tin trực tiếp để được hỗ trợ và xử lý nhanh hơn.</p>
+            <p>Không cần. Bạn chỉ cần chọn gói phù hợp và liên hệ trực tiếp.</p>
           </article>
           <article class="faq">
             <h3>Nếu có lỗi thì sao?</h3>
-            <p>Liên hệ lại để được kiểm tra và hỗ trợ. Nhưng nếu đã tự đổi mật khẩu hoặc chỉnh thông tin tài khoản thì sẽ không còn bảo hành.</p>
+            <p>Liên hệ lại để được kiểm tra và hỗ trợ. Không áp dụng nếu tài khoản đã bị tự ý thay đổi thông tin.</p>
           </article>
         </div>
       </div>
@@ -753,7 +772,7 @@
 
   <footer>
     <div class="container footer-box">
-      <div>© 2026 Hoài Đặng. Tài khoản premium 1 năm cho người Việt ở Mỹ.</div>
+      <div>© 2026 Hoài Đặng.</div>
       <a class="pill" href="https://hoaidang.com/">Back to Home</a>
     </div>
   </footer>
