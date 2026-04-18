@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Tài khoản Premium | Hoài Đặng</title>
   <meta name="description" content="Tài khoản premium với giá hợp lý, thao tác đơn giản, hỗ trợ nhanh. Chọn gói phù hợp và liên hệ trực tiếp qua SMS hoặc Messenger." />
+  <link rel="canonical" href="https://hoaidang.com/premium-store/" />
+  <meta name="theme-color" content="#081227" />
+
   <style>
     :root {
       --bg: #081227;
@@ -24,6 +27,7 @@
 
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
+
     body {
       margin: 0;
       font-family: Arial, Helvetica, sans-serif;
@@ -36,6 +40,7 @@
 
     a { color: inherit; text-decoration: none; }
     img { display: block; max-width: 100%; }
+    button { font: inherit; }
 
     .container {
       width: min(calc(100% - 28px), var(--max));
@@ -58,6 +63,7 @@
       justify-content: space-between;
       gap: 12px;
       flex-wrap: wrap;
+      padding: 10px 0;
     }
 
     .brand {
@@ -87,7 +93,8 @@
     }
 
     .pill,
-    .btn {
+    .btn,
+    .login-btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -95,7 +102,7 @@
       border-radius: 999px;
       font-weight: 700;
       font-size: 0.95rem;
-      transition: transform 0.18s ease;
+      transition: transform 0.18s ease, background 0.18s ease, border-color 0.18s ease;
     }
 
     .pill {
@@ -123,8 +130,27 @@
       color: #fff;
     }
 
+    .login-btn {
+      min-width: 92px;
+      min-height: 42px;
+      border: 1px solid rgba(255,255,255,0.14);
+      color: var(--text);
+      background: rgba(255,255,255,0.08);
+      cursor: pointer;
+      gap: 8px;
+    }
+
+    .login-btn img {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      object-fit: cover;
+      display: block;
+    }
+
     .pill:hover,
     .btn:hover,
+    .login-btn:hover,
     .card:hover,
     .mini-card:hover,
     .policy-card:hover,
@@ -456,6 +482,8 @@
       .logo-box { min-height: 145px; }
       .logo-box img { width: 96px; height: 96px; }
       .topbar-inner { min-height: 60px; }
+      .nav { gap: 8px; }
+      .pill, .btn, .login-btn { padding: 9px 13px; font-size: 0.88rem; }
     }
   </style>
 </head>
@@ -466,10 +494,12 @@
         <span class="brand-mark">HD</span>
         <span>HoaiDang Home</span>
       </a>
+
       <nav class="nav">
         <a class="pill" href="https://hoaidang.com/">Trang chủ</a>
         <a class="pill" href="#san-pham">Sản phẩm</a>
         <a class="btn btn-secondary" href="#chinh-sach">Chính sách</a>
+        <button id="loginBtn" class="login-btn" type="button">Login</button>
       </nav>
     </div>
   </header>
@@ -523,189 +553,74 @@
         </div>
 
         <div class="products">
+          <article class="card popular">
+            <div class="label">Bán chạy</div>
+            <div class="logo-box"><img src="Netflix.png" alt="Netflix Premium"></div>
+            <div class="title">Netflix Premium</div>
+            <div class="sub">Gói Full – 1 Năm</div>
+            <div class="price">$79.99</div>
+            <div class="old-price">Giá thường: <span>$149.99 / năm</span></div>
+            <div class="features">
+              <span>• Trải nghiệm nội dung 4K</span>
+              <span>• Xem phim và series tiện lợi</span>
+              <span>• Không cần thanh toán hàng tháng</span>
+            </div>
+            <div class="actions">
+              <a class="btn btn-primary" href="sms:+14192999999?body=Chào%2C%20tôi%20muốn%20mua%20Netflix%201%20năm.">Mua ngay</a>
+              <a class="btn btn-secondary" href="#lien-he">Liên hệ</a>
+            </div>
+          </article>
 
-  <!-- Netflix -->
-  <article class="card popular">
-    <div class="label">Bán chạy</div>
-    <div class="logo-box"><img src="Netflix.png"></div>
-    <div class="title">Netflix Premium</div>
-    <div class="sub">Gói Full – 1 Năm</div>
-    <div class="price">$79.99</div>
-    <div class="old-price">Giá thường: <span>$149.99 / năm</span></div>
-    <div class="features">
-      <span>• Trải nghiệm nội dung 4K</span>
-      <span>• Xem phim và series tiện lợi</span>
-      <span>• Không cần thanh toán hàng tháng</span>
-    </div>
-    <div class="actions">
-      <a class="btn btn-primary" href="sms:+14192999999?body=Chào%2C%20tôi%20muốn%20mua%20Netflix%201%20năm.">Mua ngay</a>
-      <a class="btn btn-secondary" href="#lien-he">Liên hệ</a>
-    </div>
-  </article>
-
-  <!-- Disney -->
-  <article class="card">
-    <div class="logo-box"><img src="Disney.png"></div>
-    <div class="title">Disney+ Bundle</div>
-    <div class="sub">Gói Full – 1 Năm</div>
-    <div class="price">$69.99</div>
-    <div class="old-price">Giá thường: <span>$139.99 / năm</span></div>
-    <div class="features">
-      <span>• Nội dung đa dạng cho gia đình</span>
-      <span>• Dễ sử dụng trên nhiều thiết bị</span>
-      <span>• Truy cập ổn định</span>
-    </div>
-    <div class="actions">
-      <a class="btn btn-primary" href="sms:+14192999999?body=Disney%201%20năm">Mua ngay</a>
-      <a class="btn btn-secondary" href="#lien-he">Liên hệ</a>
-    </div>
-  </article>
-
-  <!-- Max -->
-  <article class="card popular">
-    <div class="label">Phổ biến</div>
-    <div class="logo-box"><img src="Max.png"></div>
-    <div class="title">HBO Max</div>
-    <div class="sub">Gói Full – 1 Năm</div>
-    <div class="price">$64.99</div>
-    <div class="old-price">Giá thường: <span>$129.99 / năm</span></div>
-    <div class="features">
-      <span>• Nội dung phim chất lượng cao</span>
-      <span>• Trải nghiệm xem mượt mà</span>
-      <span>• Phù hợp giải trí hằng ngày</span>
-    </div>
-    <div class="actions">
-      <a class="btn btn-primary" href="sms:+14192999999?body=HBO%20Max%201%20năm">Mua ngay</a>
-      <a class="btn btn-secondary" href="#lien-he">Liên hệ</a>
-    </div>
-  </article>
-
-  <!-- Spotify -->
-  <article class="card">
-    <div class="label">Giá tốt</div>
-    <div class="logo-box"><img src="Spotify.png"></div>
-    <div class="title">Spotify Premium</div>
-    <div class="sub">Gói Full – 1 Năm</div>
-    <div class="price">$49.99</div>
-    <div class="old-price">Giá thường: <span>$99.99 / năm</span></div>
-    <div class="features">
-      <span>• Nghe nhạc không quảng cáo</span>
-      <span>• Chất lượng âm thanh cao</span>
-      <span>• Dùng tiện lợi mỗi ngày</span>
-    </div>
-    <div class="actions">
-      <a class="btn btn-primary" href="sms:+14192999999?body=Spotify%201%20năm">Mua ngay</a>
-      <a class="btn btn-secondary" href="#lien-he">Liên hệ</a>
-    </div>
-  </article>
-
-  <!-- YouTube -->
-  <article class="card">
-    <div class="logo-box"><img src="Youtube.png"></div>
-    <div class="title">YouTube Premium</div>
-    <div class="sub">Gói Full – 1 Năm</div>
-    <div class="price">$54.99</div>
-    <div class="old-price">Giá thường: <span>$109.99 / năm</span></div>
-    <div class="features">
-      <span>• Xem video không quảng cáo</span>
-      <span>• Phát nền tiện lợi</span>
-      <span>• Trải nghiệm mượt hơn</span>
-    </div>
-    <div class="actions">
-      <a class="btn btn-primary" href="sms:+14192999999?body=YouTube%201%20năm">Mua ngay</a>
-      <a class="btn btn-secondary" href="#lien-he">Liên hệ</a>
-    </div>
-  </article>
-
-  <!-- NordVPN -->
-  <article class="card">
-    <div class="logo-box"><img src="nordvpn.png"></div>
-    <div class="title">NordVPN</div>
-    <div class="sub">Gói Full – 1 Năm</div>
-    <div class="price">$69.99</div>
-    <div class="old-price">Giá thường: <span>$139.99 / năm</span></div>
-    <div class="features">
-      <span>• Bảo mật kết nối internet</span>
-      <span>• Truy cập nội dung linh hoạt</span>
-      <span>• Ổn định và dễ sử dụng</span>
-    </div>
-    <div class="actions">
-      <a class="btn btn-primary" href="sms:+14192999999?body=NordVPN%201%20năm">Mua ngay</a>
-      <a class="btn btn-secondary" href="#lien-he">Liên hệ</a>
-    </div>
-  </article>
-
-  <!-- ExpressVPN -->
-  <article class="card">
-    <div class="logo-box"><img src="expressvpn.png"></div>
-    <div class="title">ExpressVPN</div>
-    <div class="sub">Mobile – 1 Năm</div>
-    <div class="price">$39.99</div>
-    <div class="old-price">Giá thường: <span>$79.99 / năm</span></div>
-    <div class="features">
-      <span>• Kết nối nhanh và ổn định</span>
-      <span>• Dễ thao tác</span>
-      <span>• Phù hợp dùng mobile</span>
-    </div>
-    <div class="actions">
-      <a class="btn btn-primary" href="sms:+14192999999?body=ExpressVPN%201%20năm">Mua ngay</a>
-      <a class="btn btn-secondary" href="#lien-he">Liên hệ</a>
-    </div>
-  </article>
-
-  <!-- Canva -->
-  <article class="card">
-    <div class="label">Rẻ nhất</div>
-    <div class="logo-box"><img src="Canva.png"></div>
-    <div class="title">Canva Pro</div>
-    <div class="sub">Gói Full – 1 Năm</div>
-    <div class="price">$29.99</div>
-    <div class="old-price">Giá thường: <span>$59.99 / năm</span></div>
-    <div class="features">
-      <span>• Thiết kế hình ảnh nhanh chóng</span>
-      <span>• Phù hợp cho công việc</span>
-      <span>• Dễ sử dụng</span>
-    </div>
-    <div class="actions">
-      <a class="btn btn-primary" href="sms:+14192999999?body=Canva%201%20năm">Mua ngay</a>
-      <a class="btn btn-secondary" href="#lien-he">Liên hệ</a>
-    </div>
-  </article>
-
-</div>
+          <article class="card">
+            <div class="logo-box"><img src="Disney.png" alt="Disney+ Bundle"></div>
+            <div class="title">Disney+ Bundle</div>
+            <div class="sub">Gói Full – 1 Năm</div>
+            <div class="price">$69.99</div>
+            <div class="old-price">Giá thường: <span>$139.99 / năm</span></div>
+            <div class="features">
+              <span>• Nội dung đa dạng cho gia đình</span>
+              <span>• Dễ sử dụng trên nhiều thiết bị</span>
+              <span>• Truy cập ổn định</span>
+            </div>
+            <div class="actions">
+              <a class="btn btn-primary" href="sms:+14192999999?body=Disney%201%20năm">Mua ngay</a>
+              <a class="btn btn-secondary" href="#lien-he">Liên hệ</a>
+            </div>
+          </article>
 
           <article class="card popular">
             <div class="label">Phổ biến</div>
             <div class="logo-box"><img src="Max.png" alt="HBO Max"></div>
             <div class="title">HBO Max</div>
             <div class="sub">Gói Full – 1 Năm</div>
-            <div class="price">$54.99</div>
-            <div class="old-price">Giá thường: <span>$109.99 / năm</span></div>
+            <div class="price">$64.99</div>
+            <div class="old-price">Giá thường: <span>$129.99 / năm</span></div>
             <div class="features">
-              <span>• Nội dung phim và series chất lượng cao</span>
+              <span>• Nội dung phim chất lượng cao</span>
               <span>• Trải nghiệm xem mượt mà</span>
               <span>• Phù hợp giải trí hằng ngày</span>
             </div>
             <div class="actions">
-              <a class="btn btn-primary" href="sms:+14192999999?body=Chào%2C%20tôi%20muốn%20mua%20HBO%20Max%201%20năm.">Mua ngay</a>
-              <a class="btn btn-secondary" href="#lien-he">Liên hệ trước</a>
+              <a class="btn btn-primary" href="sms:+14192999999?body=HBO%20Max%201%20năm">Mua ngay</a>
+              <a class="btn btn-secondary" href="#lien-he">Liên hệ</a>
             </div>
           </article>
 
           <article class="card">
+            <div class="label">Giá tốt</div>
             <div class="logo-box"><img src="Spotify.png" alt="Spotify Premium"></div>
             <div class="title">Spotify Premium</div>
             <div class="sub">Gói Full – 1 Năm</div>
-            <div class="price">$39.99</div>
-            <div class="old-price">Giá thường: <span>$79.99 / năm</span></div>
+            <div class="price">$49.99</div>
+            <div class="old-price">Giá thường: <span>$99.99 / năm</span></div>
             <div class="features">
               <span>• Nghe nhạc không quảng cáo</span>
               <span>• Chất lượng âm thanh cao</span>
               <span>• Dùng tiện lợi mỗi ngày</span>
             </div>
             <div class="actions">
-              <a class="btn btn-primary" href="sms:+14192999999?body=Chào%2C%20tôi%20muốn%20mua%20Spotify%20Premium%201%20năm.">Mua ngay</a>
-              <a class="btn btn-secondary" href="#lien-he">Liên hệ trước</a>
+              <a class="btn btn-primary" href="sms:+14192999999?body=Spotify%201%20năm">Mua ngay</a>
+              <a class="btn btn-secondary" href="#lien-he">Liên hệ</a>
             </div>
           </article>
 
@@ -713,16 +628,16 @@
             <div class="logo-box"><img src="Youtube.png" alt="YouTube Premium"></div>
             <div class="title">YouTube Premium</div>
             <div class="sub">Gói Full – 1 Năm</div>
-            <div class="price">$44.99</div>
-            <div class="old-price">Giá thường: <span>$89.99 / năm</span></div>
+            <div class="price">$54.99</div>
+            <div class="old-price">Giá thường: <span>$109.99 / năm</span></div>
             <div class="features">
               <span>• Xem video không quảng cáo</span>
               <span>• Phát nền tiện lợi</span>
               <span>• Trải nghiệm mượt hơn</span>
             </div>
             <div class="actions">
-              <a class="btn btn-primary" href="sms:++14192999999?body=Chào%2C%20tôi%20muốn%20mua%20YouTube%20Premium%201%20năm.">Mua ngay</a>
-              <a class="btn btn-secondary" href="#lien-he">Liên hệ trước</a>
+              <a class="btn btn-primary" href="sms:+14192999999?body=YouTube%201%20năm">Mua ngay</a>
+              <a class="btn btn-secondary" href="#lien-he">Liên hệ</a>
             </div>
           </article>
 
@@ -731,49 +646,50 @@
             <div class="title">NordVPN</div>
             <div class="sub">Gói Full – 1 Năm</div>
             <div class="price">$69.99</div>
-            <div class="old-price">Giá thường: <span>$129.99 / năm</span></div>
+            <div class="old-price">Giá thường: <span>$139.99 / năm</span></div>
             <div class="features">
               <span>• Bảo mật kết nối internet</span>
               <span>• Truy cập nội dung linh hoạt</span>
               <span>• Ổn định và dễ sử dụng</span>
             </div>
             <div class="actions">
-              <a class="btn btn-primary" href="sms:+14192999999?body=Chào%2C%20tôi%20muốn%20mua%20NordVPN%201%20năm.">Mua ngay</a>
-              <a class="btn btn-secondary" href="#lien-he">Liên hệ trước</a>
+              <a class="btn btn-primary" href="sms:+14192999999?body=NordVPN%201%20năm">Mua ngay</a>
+              <a class="btn btn-secondary" href="#lien-he">Liên hệ</a>
             </div>
           </article>
 
           <article class="card">
             <div class="logo-box"><img src="expressvpn.png" alt="ExpressVPN"></div>
             <div class="title">ExpressVPN</div>
-            <div class="sub">Gói Full – 1 Năm</div>
-            <div class="price">$74.99</div>
-            <div class="old-price">Giá thường: <span>$139.99 / năm</span></div>
+            <div class="sub">Mobile – 1 Năm</div>
+            <div class="price">$39.99</div>
+            <div class="old-price">Giá thường: <span>$79.99 / năm</span></div>
             <div class="features">
               <span>• Kết nối nhanh và ổn định</span>
               <span>• Dễ thao tác</span>
-              <span>• Phù hợp sử dụng hằng ngày</span>
+              <span>• Phù hợp dùng mobile</span>
             </div>
             <div class="actions">
-              <a class="btn btn-primary" href="sms:+14192999999?body=Chào%2C%20tôi%20muốn%20mua%20ExpressVPN%201%20năm.">Mua ngay</a>
-              <a class="btn btn-secondary" href="#lien-he">Liên hệ trước</a>
+              <a class="btn btn-primary" href="sms:+14192999999?body=ExpressVPN%201%20năm">Mua ngay</a>
+              <a class="btn btn-secondary" href="#lien-he">Liên hệ</a>
             </div>
           </article>
 
           <article class="card">
+            <div class="label">Rẻ nhất</div>
             <div class="logo-box"><img src="Canva.png" alt="Canva Pro"></div>
             <div class="title">Canva Pro</div>
             <div class="sub">Gói Full – 1 Năm</div>
-            <div class="price">$49.99</div>
-            <div class="old-price">Giá thường: <span>$99.99 / năm</span></div>
+            <div class="price">$29.99</div>
+            <div class="old-price">Giá thường: <span>$59.99 / năm</span></div>
             <div class="features">
               <span>• Thiết kế hình ảnh nhanh chóng</span>
-              <span>• Phù hợp cho công việc và cá nhân</span>
+              <span>• Phù hợp cho công việc</span>
               <span>• Dễ sử dụng</span>
             </div>
             <div class="actions">
-              <a class="btn btn-primary" href="sms:+14192999999?body=Chào%2C%20tôi%20muốn%20mua%20Canva%20Pro%201%20năm.">Mua ngay</a>
-              <a class="btn btn-secondary" href="#lien-he">Liên hệ trước</a>
+              <a class="btn btn-primary" href="sms:+14192999999?body=Canva%201%20năm">Mua ngay</a>
+              <a class="btn btn-secondary" href="#lien-he">Liên hệ</a>
             </div>
           </article>
         </div>
@@ -824,7 +740,7 @@
             <h3>Nhắn qua Messenger</h3>
             <p>Nếu bạn muốn trao đổi trước, có thể liên hệ qua Messenger để được phản hồi thuận tiện hơn.</p>
             <div class="contact-actions">
-              <a class="btn btn-msg" href="https://m.me/" target="_blank" rel="noopener">Mở Messenger</a>
+              <a class="btn btn-msg" href="https://m.me/hoaidangllc" target="_blank" rel="noopener">Mở Messenger</a>
               <a class="btn btn-secondary" href="https://hoaidang.com/">Về trang chủ</a>
             </div>
           </article>
@@ -892,5 +808,7 @@
       <a class="pill" href="https://hoaidang.com/">Back to Home</a>
     </div>
   </footer>
+
+  <script type="module" src="/assets/js/auth.js"></script>
 </body>
 </html>
