@@ -388,7 +388,7 @@
       position: relative;
       z-index: 1;
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(5, 1fr);
       gap: 12px;
       margin-top: 16px;
     }
@@ -950,90 +950,17 @@
       <footer class="footer">
         <strong>Hoài Đặng · Odessa, Texas</strong>
         <span>
-          <a href="/premium-store/">Dịch vụ Premium</a> ·
-          <a href="/ketban-henho/">Kết bạn hẹn hò</a> ·
-          <a href="/zynga/">Zynga Chips</a> ·
-          <a href="/blog.html">Blog</a> ·
-          hoaidang.com © 2026
-        </span>
+  <a href="/premium-store/">Dịch vụ Premium</a> ·
+  <a href="/ketban-henho/">Kết bạn hẹn hò</a> ·
+  <a href="/zynga/">Zynga Chips</a> ·
+  <a href="/social/">Social Growth</a> ·
+  <a href="/blog.html">Blog</a> ·
+  hoaidang.com © 2026
+</span>
       </footer>
     </section>
   </main>
 
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-    import {
-      getAuth,
-      GoogleAuthProvider,
-      signInWithPopup,
-      signOut,
-      onAuthStateChanged,
-      browserLocalPersistence,
-      setPersistence
-    } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-
-    const firebaseConfig = {
-  apiKey: "AIzaSyDf38B9zvUiekWY3BMvC3FFn2L188d-JxM",
-  authDomain: "hoaidang-auth.firebaseapp.com",
-  projectId: "hoaidang-auth",
-  storageBucket: "hoaidang-auth.firebasestorage.app",
-  messagingSenderId: "880038628212",
-  appId: "1:880038628212:web:c7608e6ef87ce3f4927a21"
-};
-
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-    const provider = new GoogleAuthProvider();
-
-    const loginBtn = document.getElementById("loginBtn");
-    const logoutBtn = document.getElementById("logoutBtn");
-    const authUser = document.getElementById("authUser");
-    const authAvatar = document.getElementById("authAvatar");
-    const authName = document.getElementById("authName");
-
-    function showLoggedOut() {
-      authUser.style.display = "none";
-      logoutBtn.style.display = "none";
-      loginBtn.style.display = "inline-flex";
-    }
-
-    function showLoggedIn(user) {
-      authUser.style.display = "inline-flex";
-      logoutBtn.style.display = "inline-flex";
-      loginBtn.style.display = "none";
-
-      authName.textContent = user.displayName || "Người dùng";
-      authAvatar.src = user.photoURL || "profile.jpeg";
-    }
-
-    async function loginGoogle() {
-      try {
-        await setPersistence(auth, browserLocalPersistence);
-        await signInWithPopup(auth, provider);
-      } catch (error) {
-        console.error("Lỗi đăng nhập:", error);
-        alert("Đăng nhập chưa thành công. Kiểm tra lại Firebase hoặc domain được phép.");
-      }
-    }
-
-    async function logoutGoogle() {
-      try {
-        await signOut(auth);
-      } catch (error) {
-        console.error("Lỗi đăng xuất:", error);
-      }
-    }
-
-    loginBtn.addEventListener("click", loginGoogle);
-    logoutBtn.addEventListener("click", logoutGoogle);
-
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        showLoggedIn(user);
-      } else {
-        showLoggedOut();
-      }
-    });
-  </script>
+  <script type="module" src="/assets/js/auth.js"></script>
 </body>
 </html>
