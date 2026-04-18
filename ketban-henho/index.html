@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kết bạn hẹn hò | HoaiDang.com</title>
+  <meta name="description" content="Kết bạn và hẹn hò dành cho người Việt tại Mỹ. Tìm bạn mới, trò chuyện, và kết nối thật." />
+  <style>
+    body {margin:0;font-family:Arial, sans-serif;background:#0b1020;color:#fff}
+    .container{max-width:1100px;margin:auto;padding:20px}
+    h1,h2{margin:0 0 10px}
+    .card{background:#1a1f3a;padding:15px;border-radius:12px;margin-bottom:15px}
+    .btn{background:#7c3aed;color:#fff;border:none;padding:10px 15px;border-radius:8px;cursor:pointer}
+    input,select,textarea{width:100%;padding:10px;margin-top:5px;border-radius:8px;border:none}
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h1>Kết bạn hẹn hò</h1>
+  <p>Dành cho người Việt tại Mỹ muốn tìm bạn, trò chuyện hoặc mối quan hệ nghiêm túc.</p>
+
+  <h2>Hồ sơ nổi bật</h2>
+
+  <div class="card">
+    <strong>Anna, 31</strong><br>
+    Houston, Texas<br>
+    Tìm mối quan hệ nghiêm túc.
+  </div>
+
+  <div class="card">
+    <strong>Kevin, 35</strong><br>
+    California<br>
+    Tìm bạn và kết nối lâu dài.
+  </div>
+
+  <h2>Đăng hồ sơ</h2>
+
+  <form onsubmit="submitForm(event)">
+    <label>Tên</label>
+    <input required>
+
+    <label>Tuổi</label>
+    <input type="number" required>
+
+    <label>Bang</label>
+    <select>
+      <option>Texas</option>
+      <option>California</option>
+      <option>Florida</option>
+    </select>
+
+    <label>Mục đích</label>
+    <select>
+      <option>Kết bạn</option>
+      <option>Hẹn hò</option>
+      <option>Nghiêm túc</option>
+    </select>
+
+    <label>Liên hệ</label>
+    <input placeholder="Facebook hoặc email">
+
+    <label>Giới thiệu</label>
+    <textarea></textarea>
+
+    <br><br>
+    <button class="btn">Gửi hồ sơ</button>
+  </form>
+
+  <p id="msg" style="display:none;color:#22c55e;margin-top:10px">Đã gửi hồ sơ (demo)</p>
+</div>
+
+<script>
+function submitForm(e){
+  e.preventDefault();
+  document.getElementById('msg').style.display='block';
+}
+</script>
+
+</body>
+</html>
