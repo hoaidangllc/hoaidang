@@ -15,7 +15,7 @@
   <meta property="og:description" content="Buy Zynga Poker Chips with clear pricing, fast support, and easy Zelle payment." />
   <meta property="og:url" content="https://hoaidang.com/zynga/" />
   <meta property="og:site_name" content="HoaiDang.com" />
-  <meta property="og:image" content="https://hoaidang.com/zynga/zzynga-logo.png" />
+  <meta property="og:image" content="https://hoaidang.com/zynga/zynga-logo.png" />
 
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Zynga Poker Chips | HoaiDang.com" />
@@ -106,6 +106,12 @@
       font-weight: 700;
     }
 
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
     .contact-toggle {
       border: 0;
       cursor: pointer;
@@ -116,6 +122,39 @@
       color: #1a1a1a;
       background: linear-gradient(135deg, var(--gold-1), var(--gold-2));
       box-shadow: 0 10px 24px rgba(245,158,11,0.24);
+    }
+
+    .login-btn {
+      border: 1px solid rgba(255,255,255,0.14);
+      cursor: pointer;
+      padding: 9px 14px;
+      min-width: 88px;
+      min-height: 40px;
+      border-radius: 999px;
+      font-weight: 900;
+      font-size: 13px;
+      color: var(--text);
+      background: rgba(255,255,255,0.08);
+      backdrop-filter: blur(12px);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: 0.2s ease;
+    }
+
+    .login-btn:hover {
+      background: rgba(255,255,255,0.14);
+      border-color: rgba(255,255,255,0.22);
+      transform: translateY(-1px);
+    }
+
+    .login-btn img {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      object-fit: cover;
+      display: block;
     }
 
     .hero {
@@ -638,9 +677,15 @@
         display: none;
       }
 
-      .contact-toggle {
+      .header-actions {
+        gap: 8px;
+      }
+
+      .contact-toggle,
+      .login-btn {
         padding: 8px 12px;
         font-size: 12px;
+        min-width: auto;
       }
 
       .products {
@@ -687,7 +732,10 @@
         <span>HoaiDang.com</span>
       </a>
 
-      <button class="contact-toggle" onclick="openContact()">Contact</button>
+      <div class="header-actions">
+        <button class="contact-toggle" onclick="openContact()">Contact</button>
+        <button id="loginBtn" class="login-btn" type="button">Login</button>
+      </div>
     </div>
   </header>
 
@@ -958,5 +1006,7 @@
     setTimeout(showNotify, 2500);
     setInterval(showNotify, 14000);
   </script>
+
+  <script type="module" src="/assets/js/auth.js"></script>
 </body>
 </html>
