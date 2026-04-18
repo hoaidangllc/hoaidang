@@ -72,6 +72,12 @@ async function loginGoogle() {
     await signInWithPopup(auth, provider);
   } catch (error) {
     console.error("Login failed:", error);
+
+    // 👇 thêm đoạn này để tránh alert khi user tự đóng popup
+    if (error.code === "auth/popup-closed-by-user") {
+      return;
+    }
+
     alert("Login failed: " + error.message);
   }
 }
