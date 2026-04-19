@@ -3,79 +3,764 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Kết bạn hẹn hò | HoaiDang.com</title>
-  <meta name="description" content="Kết bạn và hẹn hò dành cho người Việt tại Mỹ. Tìm bạn mới, trò chuyện, và kết nối thật." />
+  <title>Kết Bạn & Hẹn Hò Người Việt</title>
+  <meta name="description" content="Trang kết bạn và hẹn hò người Việt hiện đại tại Mỹ, nơi bạn có thể kết nối, trò chuyện và làm quen qua hồ sơ cá nhân, nhắn tin và live TikTok." />
   <style>
-    body {margin:0;font-family:Arial, sans-serif;background:#0b1020;color:#fff}
-    .container{max-width:1100px;margin:auto;padding:20px}
-    h1,h2{margin:0 0 10px}
-    .card{background:#1a1f3a;padding:15px;border-radius:12px;margin-bottom:15px}
-    .btn{background:#7c3aed;color:#fff;border:none;padding:10px 15px;border-radius:8px;cursor:pointer}
-    input,select,textarea{width:100%;padding:10px;margin-top:5px;border-radius:8px;border:none}
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg-1: #070816;
+      --bg-2: #0f1226;
+      --bg-3: #171a36;
+      --text: #ffffff;
+      --muted: rgba(255,255,255,0.72);
+      --soft: rgba(255,255,255,0.10);
+      --soft-2: rgba(255,255,255,0.16);
+      --border: rgba(255,255,255,0.12);
+      --pink: #ff4fa3;
+      --purple: #7c4dff;
+      --blue: #54a6ff;
+      --shadow: 0 20px 60px rgba(0,0,0,0.35);
+      --radius-xl: 28px;
+      --radius-lg: 22px;
+      --radius-md: 18px;
+      --max: 1220px;
+    }
+
+    body {
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 15% 20%, rgba(124,77,255,0.25), transparent 28%),
+        radial-gradient(circle at 80% 20%, rgba(255,79,163,0.18), transparent 25%),
+        radial-gradient(circle at 50% 80%, rgba(84,166,255,0.12), transparent 28%),
+        linear-gradient(135deg, var(--bg-1), var(--bg-2) 45%, var(--bg-3));
+      min-height: 100vh;
+      line-height: 1.5;
+      overflow-x: hidden;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    .container {
+      width: min(var(--max), calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(16px);
+      background: rgba(8,10,24,0.45);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 0;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      font-size: 1.05rem;
+    }
+
+    .brand-badge {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--pink), var(--purple));
+      display: grid;
+      place-items: center;
+      box-shadow: 0 10px 30px rgba(124,77,255,0.35);
+      font-size: 1.1rem;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 14px 22px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      font-weight: 700;
+      transition: all 0.2s ease;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .btn:hover { transform: translateY(-1px); }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--pink), var(--purple));
+      box-shadow: 0 16px 40px rgba(124,77,255,0.28);
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.06);
+      border-color: rgba(255,255,255,0.12);
+      color: #fff;
+    }
+
+    .hero {
+      padding: 56px 0 34px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 32px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: #f6d7e6;
+      font-size: 0.92rem;
+      margin-bottom: 18px;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.5rem, 5vw, 5rem);
+      line-height: 0.95;
+      letter-spacing: -0.05em;
+      max-width: 720px;
+    }
+
+    .hero h1 span {
+      background: linear-gradient(135deg, #ffffff, #f7a7d5 45%, #8fbfff 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero p {
+      margin-top: 20px;
+      color: var(--muted);
+      font-size: 1.08rem;
+      max-width: 650px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-top: 28px;
+    }
+
+    .hero-meta {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-top: 26px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .hero-meta div {
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .hero-visual {
+      position: relative;
+      min-height: 640px;
+    }
+
+    .card {
+      position: absolute;
+      background: linear-gradient(180deg, rgba(255,255,255,0.11), rgba(255,255,255,0.05));
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      backdrop-filter: blur(18px);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .profile-main {
+      right: 0;
+      top: 24px;
+      width: min(100%, 430px);
+    }
+
+    .profile-photo {
+      height: 420px;
+      background:
+        linear-gradient(to top, rgba(0,0,0,0.35), rgba(0,0,0,0.05)),
+        url('https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=900&q=80') center/cover;
+    }
+
+    .profile-content {
+      padding: 18px 20px 22px;
+    }
+
+    .profile-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: start;
+    }
+
+    .profile-name {
+      font-size: 1.35rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+    }
+
+    .profile-sub {
+      color: var(--muted);
+      font-size: 0.95rem;
+      margin-top: 4px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.1);
+      font-size: 0.87rem;
+    }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .profile-bio {
+      margin-top: 16px;
+      color: rgba(255,255,255,0.82);
+      font-size: 0.98rem;
+    }
+
+    .profile-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .small-btn {
+      padding: 12px;
+      border-radius: 16px;
+      text-align: center;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.08);
+      font-weight: 700;
+      font-size: 0.95rem;
+    }
+
+    .small-btn.like {
+      background: linear-gradient(135deg, rgba(255,79,163,0.24), rgba(124,77,255,0.22));
+      border-color: rgba(255,255,255,0.12);
+    }
+
+    .floating-card {
+      left: 0;
+      top: 100px;
+      width: 240px;
+      padding: 18px;
+    }
+
+    .floating-card h3,
+    .mini-filter h3,
+    .stats-card h3 {
+      font-size: 1rem;
+      margin-bottom: 12px;
+      letter-spacing: -0.02em;
+    }
+
+    .floating-avatars {
+      display: flex;
+      margin-bottom: 14px;
+    }
+
+    .floating-avatars span {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 2px solid rgba(16,18,38,0.9);
+      margin-left: -10px;
+      display: block;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .floating-avatars span:first-child { margin-left: 0; }
+
+    .mini-filter {
+      left: 40px;
+      bottom: 48px;
+      width: 260px;
+      padding: 20px;
+    }
+
+    .filter-row {
+      display: grid;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .filter-item {
+      padding: 12px 14px;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    .stats-card {
+      right: 22px;
+      bottom: -8px;
+      width: 185px;
+      padding: 18px;
+      text-align: center;
+    }
+
+    .stats-number {
+      font-size: 2rem;
+      font-weight: 900;
+      letter-spacing: -0.05em;
+      margin-bottom: 4px;
+    }
+
+    .section {
+      padding: 34px 0;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 18px;
+    }
+
+    .section-header h2 {
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      letter-spacing: -0.04em;
+    }
+
+    .section-header p {
+      color: var(--muted);
+      max-width: 620px;
+    }
+
+    .profiles-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+      margin-top: 18px;
+    }
+
+    .profile-card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.09), rgba(255,255,255,0.045));
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .profile-card .thumb {
+      height: 280px;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .profile-card .body {
+      padding: 16px;
+    }
+
+    .profile-card h3 {
+      font-size: 1.08rem;
+      letter-spacing: -0.03em;
+    }
+
+    .profile-card p,
+    .feature-card p,
+    .cta-box p,
+    .floating-card p,
+    .stats-card p {
+      color: var(--muted);
+    }
+
+    .card-line {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: 10px;
+      font-size: 0.93rem;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .feature-card,
+    .cta-box {
+      background: linear-gradient(180deg, rgba(255,255,255,0.09), rgba(255,255,255,0.045));
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 28px;
+      padding: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .feature-icon {
+      width: 54px;
+      height: 54px;
+      border-radius: 18px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 16px;
+      background: linear-gradient(135deg, rgba(255,79,163,0.22), rgba(84,166,255,0.18));
+      border: 1px solid rgba(255,255,255,0.1);
+      font-size: 1.25rem;
+    }
+
+    .feature-card h3 {
+      font-size: 1.15rem;
+      margin-bottom: 8px;
+      letter-spacing: -0.02em;
+    }
+
+    .cta-box {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      margin-top: 18px;
+      padding: 26px 28px;
+    }
+
+    .cta-box h2 {
+      font-size: clamp(1.8rem, 3vw, 2.7rem);
+      letter-spacing: -0.04em;
+      margin-bottom: 10px;
+    }
+
+    .footer {
+      padding: 26px 0 46px;
+      color: rgba(255,255,255,0.6);
+      font-size: 0.92rem;
+    }
+
+    .footer-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      padding-top: 18px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      margin-top: 28px;
+    }
+
+    @media (max-width: 1100px) {
+      .hero-grid,
+      .features,
+      .profiles-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .hero-visual {
+        min-height: 760px;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .nav-links a:not(.btn) { display: none; }
+
+      .hero {
+        padding-top: 34px;
+      }
+
+      .hero-grid,
+      .features,
+      .profiles-grid,
+      .cta-box {
+        grid-template-columns: 1fr;
+        display: grid;
+      }
+
+      .hero-visual {
+        min-height: 760px;
+      }
+
+      .profile-main {
+        position: relative;
+        width: 100%;
+        top: 0;
+      }
+
+      .floating-card,
+      .mini-filter,
+      .stats-card {
+        position: absolute;
+      }
+
+      .floating-card {
+        top: 16px;
+        left: 8px;
+        width: 190px;
+      }
+
+      .mini-filter {
+        left: 10px;
+        bottom: 20px;
+        width: 220px;
+      }
+
+      .stats-card {
+        right: 10px;
+        bottom: -22px;
+      }
+
+      .profile-actions {
+        grid-template-columns: 1fr;
+      }
+
+      .section-header,
+      .cta-box {
+        display: block;
+      }
+
+      .cta-box .hero-actions {
+        margin-top: 18px;
+      }
+    }
   </style>
 </head>
 <body>
+  <header class="site-header">
+    <div class="container nav">
+      <a href="#" class="brand">
+        <span class="brand-badge">❤</span>
+        <span>Kết Bạn Việt Connect</span>
+      </a>
 
-<div class="container">
-  <h1>Kết bạn hẹn hò</h1>
-  <p>Dành cho người Việt tại Mỹ muốn tìm bạn, trò chuyện hoặc mối quan hệ nghiêm túc.</p>
+      <nav class="nav-links">
+        <a href="#profiles">Hồ sơ</a>
+        <a href="#features">Tính năng</a>
+        <a href="#join">Tham gia</a>
+        <a href="#" class="btn btn-secondary">Đăng nhập</a>
+      </nav>
+    </div>
+  </header>
 
-  <h2>Hồ sơ nổi bật</h2>
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow">✨ Cộng đồng kết bạn và hẹn hò người Việt hiện đại tại Mỹ</div>
+          <h1>Gặp đúng người. <span>Bắt đầu một kết nối thật.</span></h1>
+          <p>
+            Một không gian hiện đại, sạch đẹp dành cho người Việt tại Mỹ muốn kết bạn, làm quen,
+            trò chuyện và tìm kiếm mối quan hệ nghiêm túc mà không mang cảm giác cũ kỹ, lộn xộn như nhiều trang web đời cũ.
+          </p>
 
-  <div class="card">
-    <strong>Anna, 31</strong><br>
-    Houston, Texas<br>
-    Tìm mối quan hệ nghiêm túc.
-  </div>
+          <div class="hero-actions">
+            <a href="#join" class="btn btn-primary">Tham Gia Miễn Phí</a>
+            <a href="#profiles" class="btn btn-secondary">Xem Hồ Sơ</a>
+          </div>
 
-  <div class="card">
-    <strong>Kevin, 35</strong><br>
-    California<br>
-    Tìm bạn và kết nối lâu dài.
-  </div>
+          <div class="hero-meta">
+            <div>✔ Đăng nhập Google nhanh gọn</div>
+            <div>✔ Hồ sơ đẹp, nhìn như app thật</div>
+            <div>✔ Dành riêng cho người Việt tại Mỹ</div>
+          </div>
+        </div>
 
-  <h2>Đăng hồ sơ</h2>
+        <div class="hero-visual">
+          <div class="card floating-card">
+            <h3>Đang hoạt động</h3>
+            <div class="floating-avatars">
+              <span style="background-image:url('https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=300&q=80')"></span>
+              <span style="background-image:url('https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=300&q=80')"></span>
+              <span style="background-image:url('https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?auto=format&fit=crop&w=300&q=80')"></span>
+            </div>
+            <p>Kết nối với người Việt tại Texas, California và nhiều tiểu bang khác.</p>
+          </div>
 
-  <form onsubmit="submitForm(event)">
-    <label>Tên</label>
-    <input required>
+          <div class="card profile-main">
+            <div class="profile-photo"></div>
+            <div class="profile-content">
+              <div class="profile-top">
+                <div>
+                  <div class="profile-name">Linh, 29 tuổi</div>
+                  <div class="profile-sub">Houston, Texas • Tìm mối quan hệ nghiêm túc</div>
+                </div>
+                <div class="pill">● Đang online</div>
+              </div>
 
-    <label>Tuổi</label>
-    <input type="number" required>
+              <div class="tag-row">
+                <div class="pill">Cà phê cuối tuần</div>
+                <div class="pill">Du lịch</div>
+                <div class="pill">Văn hóa Việt</div>
+              </div>
 
-    <label>Bang</label>
-    <select>
-      <option>Texas</option>
-      <option>California</option>
-      <option>Florida</option>
-    </select>
+              <div class="profile-bio">
+                Tìm một người chân thành, trưởng thành để bắt đầu điều gì đó thật sự nghiêm túc. Thích đi chơi cuối tuần,
+                ăn ngon, nói chuyện thẳng thắn và có thể làm quen thêm qua những buổi live TikTok vui vẻ, tự nhiên.
+              </div>
 
-    <label>Mục đích</label>
-    <select>
-      <option>Kết bạn</option>
-      <option>Hẹn hò</option>
-      <option>Nghiêm túc</option>
-    </select>
+              <div class="profile-actions">
+                <div class="small-btn">Bỏ qua</div>
+                <div class="small-btn like">Thích</div>
+                <div class="small-btn">Nhắn tin</div>
+              </div>
+            </div>
+          </div>
 
-    <label>Liên hệ</label>
-    <input placeholder="Facebook hoặc email">
+          <div class="card mini-filter">
+            <h3>Bộ lọc nhanh</h3>
+            <div class="filter-row">
+              <div class="filter-item">📍 Khu vực: Texas</div>
+              <div class="filter-item">🎂 Độ tuổi: 25 - 35</div>
+              <div class="filter-item">💬 Mục tiêu: Kết nối nghiêm túc</div>
+            </div>
+          </div>
 
-    <label>Giới thiệu</label>
-    <textarea></textarea>
+          <div class="card stats-card">
+            <div class="stats-number">2.4K</div>
+            <h3>Lượt xem hồ sơ</h3>
+            <p>Tăng từ lượt xem, làm quen và tương tác giữa các thành viên trong tháng này.</p>
+          </div>
+        </div>
+      </div>
+    </section>
 
-    <br><br>
-    <button class="btn">Gửi hồ sơ</button>
-  </form>
+    <section class="section" id="profiles">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <h2>Hồ sơ nổi bật</h2>
+            <p>Tạo cảm giác chuyên nghiệp ngay từ lần đầu truy cập. Những hồ sơ mẫu này giúp website trông sống động trước cả khi bạn đón người dùng thật.</p>
+          </div>
+        </div>
 
-  <p id="msg" style="display:none;color:#22c55e;margin-top:10px">Đã gửi hồ sơ (demo)</p>
-</div>
+        <div class="profiles-grid">
+          <article class="profile-card">
+            <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1521119989659-a83eee488004?auto=format&fit=crop&w=900&q=80')"></div>
+            <div class="body">
+              <h3>Anna, 27</h3>
+              <div class="card-line"><span>Dallas, TX</span><span>Thân thiện</span></div>
+            </div>
+          </article>
 
-<script>
-function submitForm(e){
-  e.preventDefault();
-  document.getElementById('msg').style.display='block';
-}
-</script>
+          <article class="profile-card">
+            <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=900&q=80')"></div>
+            <div class="body">
+              <h3>David, 31</h3>
+              <div class="card-line"><span>Austin, TX</span><span>Nghiêm túc</span></div>
+            </div>
+          </article>
 
+          <article class="profile-card">
+            <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=900&q=80')"></div>
+            <div class="body">
+              <h3>Tram, 28</h3>
+              <div class="card-line"><span>San Jose, CA</span><span>Cởi mở</span></div>
+            </div>
+          </article>
+
+          <article class="profile-card">
+            <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1504593811423-6dd665756598?auto=format&fit=crop&w=900&q=80')"></div>
+            <div class="body">
+              <h3>Minh, 33</h3>
+              <div class="card-line"><span>Seattle, WA</span><span>Lâu dài</span></div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="features">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <h2>Hiện đại, cuốn hút, không cũ kỹ</h2>
+            <p>Trang chủ phải tạo cảm giác đây là một nền tảng thật sự nghiêm túc, hiện đại và có sức sống, chứ không phải một dự án cũ bị bỏ quên từ nhiều năm trước.</p>
+          </div>
+        </div>
+
+        <div class="features">
+          <div class="feature-card">
+            <div class="feature-icon">💎</div>
+            <h3>Giao diện sang, nhìn có đẳng cấp</h3>
+            <p>Nền tối chuyển màu, hiệu ứng kính mờ, bo góc mềm và bố cục mang cảm giác của một ứng dụng thật thay vì một website bình thường.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">⚡</div>
+            <h3>Ấn tượng mạnh ngay từ đầu</h3>
+            <p>Tiêu đề nổi bật, khoảng trắng thoáng, nút bấm rõ ràng và hồ sơ xem nhanh giúp người dùng hiểu website này dùng để làm gì chỉ trong vài giây.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">🛡</div>
+            <h3>Tăng độ tin tưởng</h3>
+            <p>Cấu trúc gọn gàng để sau này bạn dễ thêm xác minh hồ sơ, quy định an toàn, đăng nhập, báo xấu và kiểm duyệt mà không phải đập đi làm lại.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="join">
+      <div class="container">
+        <div class="cta-box">
+          <div>
+            <h2>Sẵn sàng ra mắt trang kết bạn đầu tiên thật đẹp của bạn chưa?</h2>
+            <p>Bắt đầu bằng giao diện thật cuốn trước, sau đó gắn đăng nhập Google, hệ thống hồ sơ, nhắn tin và cả live TikTok để người dùng dễ làm quen hơn.</p>
+          </div>
+
+          <div class="hero-actions">
+            <a href="#" class="btn btn-primary">Tạo Hồ Sơ</a>
+            <a href="#" class="btn btn-secondary">Đăng nhập bằng Google</a>
+          </div>
+        </div>
+
+        <footer class="footer">
+          <div class="footer-row">
+            <span>© 2026 Kết Bạn Việt Connect</span>
+            <span>Quyền riêng tư • An toàn • Quy định cộng đồng</span>
+          </div>
+        </footer>
+      </div>
+    </section>
+  </main>
 </body>
 </html>
