@@ -1,79 +1,113 @@
+<!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Thành viên | Kết Nối Việt Mỹ</title>
-  <meta name="description" content="Danh sách hồ sơ thành viên trên Kết Nối Việt Mỹ." />
-  <link rel="stylesheet" href="./assets/css/styles.css" />
+  <meta name="description" content="Xem danh sách thành viên người Việt tại Mỹ đang tham gia kết nối và live cuối tuần.">
+  <link rel="stylesheet" href="./assets/css/styles.css">
 </head>
 <body>
-  <header class="main-header">
-    <div class="container header-inner">
-      <div class="logo"><a href="/">Kết Nối Việt Mỹ</a></div>
-      <nav class="nav">
-        <a href="./index.html">Trang chủ</a>
-        <a href="./profiles.html" class="active">Thành viên</a>
-        <a href="./register.html">Tạo hồ sơ</a>
-        <a href="./live.html">Live cuối tuần</a>
-      </nav>
-      <div class="auth-box">
-        <span id="authUser" class="auth-user"></span>
-        <button id="loginBtn" class="btn btn-primary" type="button">Đăng nhập Google</button>
-        <button id="logoutBtn" class="btn btn-outline" type="button" style="display:none;">Đăng xuất</button>
+
+<header class="site-header">
+  <div class="container nav">
+    <a href="/" class="brand">
+      <span class="brand-badge">❤</span>
+      <span>Kết Nối Việt Mỹ</span>
+    </a>
+
+    <nav class="nav-links">
+      <a href="/">Trang chủ</a>
+      <a href="./profiles.html">Thành viên</a>
+      <a href="./register.html">Đăng ký</a>
+      <a href="./live.html">Lịch live</a>
+
+      <span id="authUser" class="auth-user"></span>
+
+      <button id="loginBtn" class="btn btn-secondary" type="button">Đăng nhập Google</button>
+      <button id="logoutBtn" class="btn btn-secondary" type="button" style="display:none;">Đăng xuất</button>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="container">
+      <div class="hero-card">
+        <div class="eyebrow">👥 Danh sách thành viên đang tham gia</div>
+        <h1>Xem hồ sơ. <span>Tìm người phù hợp với bạn.</span></h1>
+        <p>
+          Đây là nơi hiển thị những người đã tạo hồ sơ. Bạn có thể xem nhanh thông tin cơ bản
+          và bấm vào hồ sơ riêng của từng người.
+        </p>
+
+        <div class="hero-actions">
+          <a href="./register.html" class="btn btn-primary">Tạo hồ sơ mới</a>
+          <a href="./live.html" class="btn btn-secondary">Xem lịch live</a>
+        </div>
       </div>
     </div>
-  </header>
+  </section>
 
-  <main class="section">
-    <div class="container section-head">
-      <h1>Danh sách thành viên</h1>
-      <p>Dữ liệu đang dùng localStorage để test nhanh trước khi nối Firebase.</p>
+  <section class="section">
+    <div class="container">
+      <div class="section-title">
+        <h2>Danh sách thành viên</h2>
+        <p>Hồ sơ mới đăng ký sẽ hiện ở đây.</p>
+      </div>
+
+      <div id="list" class="grid"></div>
     </div>
+  </section>
 
-    <div class="container cards-grid" id="profilesList"></div>
-  </main>
-
-  <footer class="site-footer">
-    <div class="container footer-inner">
-      <p>© 2026 Kết Nối Việt Mỹ</p>
+  <section class="footer">
+    <div class="container">
+      © 2026 Kết Nối Việt Mỹ • TikTok: @hoaidangllc
     </div>
-  </footer>
+  </section>
+</main>
 
-  <script>
-    const profilesList = document.getElementById('profilesList');
-    const profiles = JSON.parse(localStorage.getItem('ketnoi_profiles') || '[]');
+<script>
+const list = document.getElementById("list");
+let users = JSON.parse(localStorage.getItem("users") || "[]");
 
-    function renderProfiles() {
-      if (!profiles.length) {
-        profilesList.innerHTML = `
-          <div class="card empty-card">
-            <h3>Chưa có hồ sơ nào</h3>
-            <p>Hãy là người đầu tiên tạo hồ sơ để test hệ thống.</p>
-            <a class="btn btn-primary" href="./register.html">Tạo hồ sơ</a>
-          </div>
-        `;
-        return;
-      }
+if (users.length === 0) {
+  list.innerHTML = `
+    <div class="card">
+      <div class="card-body">
+        <h3>Chưa có ai đăng ký</h3>
+        <p>Hiện chưa có thành viên nào. Bạn có thể là người đầu tiên tạo hồ sơ.</p>
+        <div class="hero-actions" style="margin-top:16px;">
+          <a href="./register.html" class="btn btn-primary">Đăng ký ngay</a>
+        </div>
+      </div>
+    </div>
+  `;
+} else {
+  list.innerHTML = users.slice().reverse().map(u => `
+    <div class="card">
+      <div class="card-body">
+        <h3>${u.name || "Chưa có tên"}${u.age ? `, ${u.age} tuổi` : ""}</h3>
+        <p>${u.city || "Chưa rõ thành phố"}${u.state ? `, ${u.state}` : ""}</p>
+        <p><strong>Công việc:</strong> ${u.job || "Chưa cập nhật"}</p>
+        <p><strong>Mục tiêu:</strong> ${u.goal || "Chưa cập nhật"}</p>
+        <p><strong>Liên hệ chính:</strong> ${u.platform || "Chưa chọn"}</p>
+        <p><strong>Khung giờ live:</strong> ${u.liveSlot || "Chưa chọn"}</p>
 
-      profilesList.innerHTML = profiles.map((p, index) => `
-        <article class="card profile-card">
-          <div class="profile-top">
-            <div class="avatar-circle">${(p.name || '?').trim().charAt(0).toUpperCase()}</div>
-            <div>
-              <h3>${p.name || 'Ẩn danh'}</h3>
-              <p>${p.age || ''} • ${p.state || ''}</p>
-            </div>
-          </div>
-          <p><strong>Nghề nghiệp:</strong> ${p.job || 'Chưa cập nhật'}</p>
-          <p><strong>Mục tiêu:</strong> ${p.goal || 'Kết nối'}</p>
-          <p class="clamp-3">${p.bio || ''}</p>
-          <a class="btn btn-outline" href="./profile.html?id=${index}">Xem chi tiết</a>
-        </article>
-      `).join('');
-    }
+        <div class="hero-actions" style="margin-top:16px;">
+          <a href="./profile.html?id=${u.id}" class="btn btn-primary">Xem hồ sơ</a>
+          ${
+            u.link
+              ? `<a href="${u.link}" target="_blank" class="btn btn-secondary">${u.platform || "Mở liên hệ"}</a>`
+              : `<span class="btn btn-secondary btn-disabled">Chưa có link</span>`
+          }
+        </div>
+      </div>
+    </div>
+  `).join("");
+}
+</script>
 
-    renderProfiles();
-  </script>
-  <script type="module" src="/assets/js/auth.js"></script>
+<script type="module" src="/assets/js/auth.js"></script>
 </body>
 </html>
