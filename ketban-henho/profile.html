@@ -1,87 +1,136 @@
+<!DOCTYPE html>
 <html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hồ sơ thành viên | Kết Nối Việt Mỹ</title>
+  <meta name="description" content="Xem hồ sơ chi tiết của thành viên trên Kết Nối Việt Mỹ.">
+  <link rel="stylesheet" href="./assets/css/styles.css">
+</head>
 <body>
-  <header class="main-header">
-    <div class="container header-inner">
-      <div class="logo"><a href="/">Kết Nối Việt Mỹ</a></div>
-      <nav class="nav">
-        <a href="./index.html">Trang chủ</a>
-        <a href="./profiles.html" class="active">Thành viên</a>
-        <a href="./register.html">Tạo hồ sơ</a>
-        <a href="./live.html">Live cuối tuần</a>
-      </nav>
-      <div class="auth-box">
-        <span id="authUser" class="auth-user"></span>
-        <button id="loginBtn" class="btn btn-primary" type="button">Đăng nhập Google</button>
-        <button id="logoutBtn" class="btn btn-outline" type="button" style="display:none;">Đăng xuất</button>
+
+<header class="site-header">
+  <div class="container nav">
+    <a href="/" class="brand">
+      <span class="brand-badge">❤</span>
+      <span>Kết Nối Việt Mỹ</span>
+    </a>
+
+    <nav class="nav-links">
+      <a href="/">Trang chủ</a>
+      <a href="./profiles.html">Thành viên</a>
+      <a href="./register.html">Đăng ký</a>
+      <a href="./live.html">Lịch live</a>
+
+      <span id="authUser" class="auth-user"></span>
+
+      <button id="loginBtn" class="btn btn-secondary" type="button">Đăng nhập Google</button>
+      <button id="logoutBtn" class="btn btn-secondary" type="button" style="display:none;">Đăng xuất</button>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="container form-wrap">
+      <div class="hero-card">
+        <div class="eyebrow">👤 Hồ sơ thành viên</div>
+        <h1>Xem kỹ hơn. <span>Biết rõ hơn trước khi kết nối.</span></h1>
+        <p>
+          Trang này hiển thị đầy đủ thông tin của từng người, bao gồm tuổi, công việc,
+          nơi đang sống, mục tiêu, nền tảng liên hệ và khung giờ live mong muốn.
+        </p>
       </div>
     </div>
-  </header>
+  </section>
 
-  <main class="section">
-    <div class="container" id="profileDetail"></div>
-  </main>
-
-  <footer class="site-footer">
-    <div class="container footer-inner">
-      <p>© 2026 Kết Nối Việt Mỹ</p>
+  <section class="section">
+    <div class="container form-wrap">
+      <div id="profileBox"></div>
     </div>
-  </footer>
+  </section>
 
-  <script>
-    const profileDetail = document.getElementById('profileDetail');
-    const params = new URLSearchParams(window.location.search);
-    const id = Number(params.get('id'));
-    const profiles = JSON.parse(localStorage.getItem('ketnoi_profiles') || '[]');
-    const p = profiles[id];
+  <section class="footer">
+    <div class="container">
+      © 2026 Kết Nối Việt Mỹ • TikTok: @hoaidangllc
+    </div>
+  </section>
+</main>
 
-    if (!p) {
-      profileDetail.innerHTML = `
-        <div class="card empty-card">
-          <h1>Không tìm thấy hồ sơ</h1>
-          <p>Hồ sơ này không tồn tại hoặc đã bị xóa.</p>
-          <a class="btn btn-primary" href="./profiles.html">Quay lại danh sách</a>
+<script>
+const box = document.getElementById("profileBox");
+const params = new URLSearchParams(window.location.search);
+const id = params.get("id");
+
+let users = JSON.parse(localStorage.getItem("users") || "[]");
+let user = users.find(u => String(u.id) === String(id));
+
+if (!user) {
+  box.innerHTML = `
+    <div class="form-card">
+      <div class="section-title">
+        <h2>Không tìm thấy hồ sơ</h2>
+        <p>Hồ sơ này không tồn tại hoặc đã bị xóa.</p>
+      </div>
+      <div class="hero-actions">
+        <a href="./profiles.html" class="btn btn-primary">Quay lại danh sách</a>
+      </div>
+    </div>
+  `;
+} else {
+  box.innerHTML = `
+    <div class="form-card">
+      <div class="section-title">
+        <h2>${user.name || "Chưa có tên"}${user.age ? `, ${user.age} tuổi` : ""}</h2>
+        <p>${user.city || "Chưa rõ thành phố"}${user.state ? `, ${user.state}` : ""}</p>
+      </div>
+
+      <div class="list">
+        <div class="member-item">
+          <strong>Giới tính</strong>
+          <div class="meta">${user.gender || "Chưa cập nhật"}</div>
         </div>
-      `;
-    } else {
-      profileDetail.innerHTML = `
-        <article class="card detail-card">
-          <div class="profile-top detail-top">
-            <div class="avatar-circle large">${(p.name || '?').trim().charAt(0).toUpperCase()}</div>
-            <div>
-              <h1>${p.name || 'Ẩn danh'}</h1>
-              <p>${p.age || ''} • ${p.state || ''}</p>
-            </div>
-          </div>
 
-          <div class="detail-grid">
-            <div>
-              <h3>Nghề nghiệp</h3>
-              <p>${p.job || 'Chưa cập nhật'}</p>
-            </div>
-            <div>
-              <h3>Mục tiêu</h3>
-              <p>${p.goal || 'Kết nối'}</p>
-            </div>
-            <div>
-              <h3>Sở thích</h3>
-              <p>${p.hobby || 'Chưa cập nhật'}</p>
-            </div>
-            <div>
-              <h3>Liên hệ</h3>
-              <p>${p.contact || 'Chưa cập nhật'}</p>
-            </div>
-          </div>
+        <div class="member-item">
+          <strong>Công việc</strong>
+          <div class="meta">${user.job || "Chưa cập nhật"}</div>
+        </div>
 
-          <div class="detail-bio">
-            <h3>Giới thiệu</h3>
-            <p>${p.bio || 'Chưa có mô tả.'}</p>
-          </div>
+        <div class="member-item">
+          <strong>Mục tiêu</strong>
+          <div class="meta">${user.goal || "Chưa cập nhật"}</div>
+        </div>
 
-          <a class="btn btn-outline" href="./profiles.html">← Quay lại danh sách</a>
-        </article>
-      `;
-    }
-  </script>
-  <script type="module" src="/assets/js/auth.js"></script>
+        <div class="member-item">
+          <strong>Nền tảng liên hệ chính</strong>
+          <div class="meta">${user.platform || "Chưa cập nhật"}</div>
+        </div>
+
+        <div class="member-item">
+          <strong>Khung giờ live mong muốn</strong>
+          <div class="meta">${user.liveSlot || "Chưa chọn"}</div>
+        </div>
+
+        <div class="member-item">
+          <strong>Giới thiệu</strong>
+          <div class="meta">${user.bio || "Chưa có giới thiệu"}</div>
+        </div>
+      </div>
+
+      <div class="hero-actions" style="margin-top:24px;">
+        <a href="./profiles.html" class="btn btn-secondary">Quay lại danh sách</a>
+        <a href="./live.html" class="btn btn-secondary">Xem lịch live</a>
+        ${
+          user.link
+            ? `<a href="${user.link}" target="_blank" class="btn btn-primary">Mở ${user.platform || "liên hệ"}</a>`
+            : `<span class="btn btn-primary btn-disabled">Chưa có link liên hệ</span>`
+        }
+      </div>
+    </div>
+  `;
+}
+</script>
+
+<script type="module" src="/assets/js/auth.js"></script>
 </body>
 </html>
