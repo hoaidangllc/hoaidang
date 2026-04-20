@@ -22,7 +22,7 @@
       <a href="./register.html">Đăng ký</a>
       <a href="./live.html">Lịch live</a>
 
-      <span id="authUser" style="color:rgba(255,255,255,.75);font-size:.95rem;"></span>
+      <span id="authUser" class="auth-name"></span>
 
       <button id="loginBtn" class="btn btn-secondary" type="button">Đăng nhập Google</button>
       <button id="logoutBtn" class="btn btn-secondary" type="button" style="display:none;">Đăng xuất</button>
@@ -37,8 +37,7 @@
         <div class="eyebrow">📝 Tạo hồ sơ để bắt đầu làm quen</div>
         <h1>Điền thông tin rõ ràng. <span>Dễ gặp đúng người hơn.</span></h1>
         <p>
-          Bạn có thể để Facebook hoặc TikTok làm nền tảng liên hệ chính.
-          Sau khi lưu, hồ sơ sẽ hiện trong danh sách thành viên.
+          Bạn cần đăng nhập Google trước khi tạo hồ sơ. Sau khi lưu, hồ sơ sẽ hiện trong danh sách thành viên.
         </p>
       </div>
     </div>
@@ -143,7 +142,7 @@
           </div>
         </form>
 
-        <p id="successMessage" style="display:none; margin-top:16px; color:#fff;">
+        <p id="successMessage" class="notice" style="display:none;">
           Đã lưu hồ sơ, đang chuyển sang danh sách thành viên...
         </p>
       </div>
@@ -211,6 +210,5 @@ window.addEventListener("DOMContentLoaded", () => {
 </script>
 
 <script type="module" src="/assets/js/auth.js"></script>
-
 </body>
 </html>
