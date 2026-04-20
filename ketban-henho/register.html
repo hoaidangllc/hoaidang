@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lịch live cuối tuần | Kết Nối Việt Mỹ</title>
-  <meta name="description" content="Xem lịch live cuối tuần trên TikTok @hoaidangllc để làm quen và kết nối.">
+  <title>Đăng ký hồ sơ | Kết Nối Việt Mỹ</title>
+  <meta name="description" content="Tạo hồ sơ kết bạn và làm quen cho người Việt tại Mỹ.">
   <link rel="stylesheet" href="./assets/css/styles.css">
 </head>
 <body>
@@ -32,33 +32,109 @@
 
 <main>
   <section class="hero">
-    <div class="container">
+    <div class="container form-wrap">
       <div class="hero-card">
-        <div class="eyebrow">🎥 Live cuối tuần trên TikTok</div>
-        <h1>Làm quen thật hơn. <span>Gặp nhau qua lịch live rõ ràng.</span></h1>
+        <div class="eyebrow">📝 Tạo hồ sơ để bắt đầu làm quen</div>
+        <h1>Điền thông tin rõ ràng. <span>Dễ gặp đúng người hơn.</span></h1>
         <p>
-          Mỗi cuối tuần sẽ có các khung giờ live trên TikTok
-          <strong>@hoaidangllc</strong> để thành viên có cơ hội xuất hiện,
-          trò chuyện và tạo kết nối tự nhiên hơn.
+          Bạn có thể để Facebook hoặc TikTok làm nền tảng liên hệ chính.
+          Sau khi lưu, hồ sơ sẽ hiện trong danh sách thành viên.
         </p>
-
-        <div class="hero-actions">
-          <a href="./register.html" class="btn btn-primary">Đăng ký tham gia</a>
-          <a href="./profiles.html" class="btn btn-secondary">Xem thành viên</a>
-          <a href="https://www.tiktok.com/@hoaidangllc" target="_blank" class="btn btn-secondary">Xem TikTok @hoaidangllc</a>
-        </div>
       </div>
     </div>
   </section>
 
   <section class="section">
-    <div class="container">
-      <div class="section-title">
-        <h2>Lịch live cuối tuần</h2>
-        <p>Các hồ sơ đã đăng ký khung giờ sẽ được gom vào đây.</p>
-      </div>
+    <div class="container form-wrap">
+      <div class="form-card">
+        <div class="section-title">
+          <h2>Tạo hồ sơ</h2>
+          <p>Điền càng rõ, người khác càng dễ hiểu và dễ kết nối với bạn hơn.</p>
+        </div>
 
-      <div id="liveList" class="grid"></div>
+        <form id="form">
+          <div class="form-grid">
+            <div class="field">
+              <label for="name">Tên hiển thị</label>
+              <input id="name" name="name" type="text" placeholder="Ví dụ: Mai Nguyễn" required>
+            </div>
+
+            <div class="field">
+              <label for="age">Tuổi</label>
+              <input id="age" name="age" type="number" placeholder="Ví dụ: 29" required>
+            </div>
+
+            <div class="field">
+              <label for="gender">Giới tính</label>
+              <select id="gender" name="gender">
+                <option>Nam</option>
+                <option>Nữ</option>
+                <option>Khác</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="job">Công việc</label>
+              <input id="job" name="job" type="text" placeholder="Ví dụ: Làm nail, kỹ thuật, kinh doanh">
+            </div>
+
+            <div class="field">
+              <label for="state">Bang đang sống</label>
+              <input id="state" name="state" type="text" placeholder="Ví dụ: Texas">
+            </div>
+
+            <div class="field">
+              <label for="city">Thành phố</label>
+              <input id="city" name="city" type="text" placeholder="Ví dụ: Odessa">
+            </div>
+
+            <div class="field">
+              <label for="platform">Nền tảng liên hệ chính</label>
+              <select id="platform" name="platform">
+                <option>TikTok</option>
+                <option>Facebook</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="link">Username hoặc link tài khoản</label>
+              <input id="link" name="link" type="text" placeholder="Ví dụ: hoaidangllc hoặc full link">
+            </div>
+
+            <div class="field">
+              <label for="goal">Mục tiêu</label>
+              <select id="goal" name="goal">
+                <option>Kết bạn</option>
+                <option>Tìm hiểu nghiêm túc</option>
+                <option>Kết nối lâu dài</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="liveSlot">Khung giờ live mong muốn</label>
+              <select id="liveSlot" name="liveSlot">
+                <option>Thứ 7 • 7:30 PM</option>
+                <option>Thứ 7 • 9:00 PM</option>
+                <option>Chủ Nhật • 7:00 PM</option>
+                <option>Chủ Nhật • 8:30 PM</option>
+              </select>
+            </div>
+
+            <div class="field full">
+              <label for="bio">Giới thiệu ngắn</label>
+              <textarea id="bio" name="bio" placeholder="Viết vài dòng về bạn để người khác dễ hiểu hơn"></textarea>
+            </div>
+
+            <div class="field full">
+              <button type="submit" class="btn btn-primary">Lưu hồ sơ</button>
+            </div>
+          </div>
+        </form>
+
+        <p id="successMessage" style="display:none; margin-top:16px; color:#fff;">
+          Đã lưu hồ sơ lên Firebase, đang chuyển sang danh sách thành viên...
+        </p>
+      </div>
     </div>
   </section>
 
@@ -69,79 +145,58 @@
     </div>
   </section>
 </main>
-<script type="module" src="/assets/js/auth.js"></script>
-  
+
 <script type="module">
-import { getProfiles } from "./assets/js/ketnoi-firebase.js";
+import { addProfile } from "./assets/js/ketnoi-firebase.js";
 
-const liveList = document.getElementById("liveList");
+window.addEventListener("DOMContentLoaded", () => {
+  const form = document.getElementById("form");
+  const successMessage = document.getElementById("successMessage");
 
-const slots = [
-  "Thứ 7 • 7:30 PM",
-  "Thứ 7 • 9:00 PM",
-  "Chủ Nhật • 7:00 PM",
-  "Chủ Nhật • 8:30 PM"
-];
+  function normalizeProfileLink(platform, rawLink) {
+    if (!rawLink) return "";
+    let link = rawLink.trim();
+    if (!link) return "";
 
-function renderSlot(slot, matched) {
-  return `
-    <div class="card">
-      <div class="card-body">
-        <h3>${slot}</h3>
-        <p>
-          Live trên TikTok:
-          <a href="https://www.tiktok.com/@hoaidangllc" target="_blank">@hoaidangllc</a>
-        </p>
+    if (link.startsWith("http://") || link.startsWith("https://")) {
+      return link;
+    }
 
-        ${
-          matched.length > 0
-            ? matched.map(u => `
-                <div class="member-item" style="margin-top:12px;">
-                  <strong>${u.name || "Chưa có tên"}${u.age ? `, ${u.age} tuổi` : ""}</strong>
-                  <div class="meta">
-                    ${u.city || "Chưa rõ thành phố"}${u.state ? `, ${u.state}` : ""} • ${u.job || "Chưa cập nhật"}
-                  </div>
+    link = link.replace(/^@+/, "");
 
-                  <div class="hero-actions" style="margin-top:12px;">
-                    <a href="./profile.html?id=${u.id}" class="btn btn-secondary">Xem hồ sơ</a>
-                    ${
-                      u.link
-                        ? `<a href="${u.link}" target="_blank" class="btn btn-primary">${u.platform || "Mở liên hệ"}</a>`
-                        : `<span class="btn btn-secondary btn-disabled">Chưa có link</span>`
-                    }
-                  </div>
-                </div>
-              `).join("")
-            : `<p style="margin-top:12px;">Chưa có ai đăng ký khung giờ này.</p>`
-        }
-      </div>
-    </div>
-  `;
-}
+    if (platform === "TikTok") {
+      return `https://www.tiktok.com/@${link}`;
+    }
 
-async function loadLiveSlots() {
-  try {
-    const users = await getProfiles();
+    if (platform === "Facebook") {
+      return `https://www.facebook.com/${link}`;
+    }
 
-    liveList.innerHTML = slots.map(slot => {
-      const matched = users.filter(u => u.liveSlot === slot);
-      return renderSlot(slot, matched);
-    }).join("");
-  } catch (err) {
-    console.error("Lỗi load live Firebase:", err);
-    liveList.innerHTML = `
-      <div class="card">
-        <div class="card-body">
-          <h3>Không tải được lịch live</h3>
-          <p>Kiểm tra Firestore rules hoặc file ketnoi-firebase.js.</p>
-        </div>
-      </div>
-    `;
+    return link;
   }
-}
 
-loadLiveSlots();
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const data = Object.fromEntries(new FormData(form));
+    data.link = normalizeProfileLink(data.platform, data.link);
+
+    try {
+      const newId = await addProfile(data);
+
+      successMessage.style.display = "block";
+
+      setTimeout(() => {
+        window.location = `profiles.html?created=${newId}`;
+      }, 700);
+    } catch (err) {
+      console.error("Lỗi lưu Firebase:", err);
+      alert("Lưu hồ sơ thất bại. Kiểm tra lại Firebase hoặc quyền Firestore.");
+    }
+  });
+});
 </script>
 
+<script type="module" src="/assets/js/auth.js"></script>
 </body>
 </html>
