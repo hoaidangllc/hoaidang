@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Thành viên</title>
+  <link rel="stylesheet" href="./assets/css/styles.css">
+</head>
+<body>
+
+<div class="container">
+  <h2>Danh sách thành viên</h2>
+  <div id="list"></div>
+</div>
+
+<script>
+const list = document.getElementById("list")
+
+let users = JSON.parse(localStorage.getItem("users") || "[]")
+
+if(users.length === 0){
+  list.innerHTML = "Chưa có ai đăng ký"
+}else{
+  list.innerHTML = users.map(u => `
+    <div style="margin:10px 0;padding:10px;border:1px solid #ccc">
+      <b>${u.name}</b> (${u.age})<br>
+      ${u.city} - ${u.job}<br>
+      <a href="${u.link}" target="_blank">${u.platform}</a>
+    </div>
+  `).join("")
+}
+</script>
+
+</body>
+</html>
