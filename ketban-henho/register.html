@@ -195,7 +195,7 @@ window.addEventListener("DOMContentLoaded", () => {
     if (!isLoggedIn()) {
       loginNotice.style.display = "block";
       loginNotice.scrollIntoView({ behavior: "smooth", block: "center" });
-      if (loginBtn) loginBtn.click();
+      alert("Bạn cần đăng nhập Google ở góc trên bên phải trước khi lưu hồ sơ.");
       return;
     }
 
