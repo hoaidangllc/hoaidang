@@ -2,52 +2,164 @@
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
-  <title>Đăng ký</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Đăng ký hồ sơ | Kết Nối Việt Mỹ</title>
+  <meta name="description" content="Tạo hồ sơ kết bạn và làm quen cho người Việt tại Mỹ.">
   <link rel="stylesheet" href="./assets/css/styles.css">
 </head>
 <body>
 
-<div class="container">
-  <h2>Đăng ký hồ sơ</h2>
+<header class="site-header">
+  <div class="container nav">
+    <a href="./index.html" class="brand">
+      <span class="brand-badge">❤</span>
+      <span>Kết Nối Việt Mỹ</span>
+    </a>
 
-  <form id="form">
-    <input name="name" placeholder="Tên" required>
-    <input name="age" placeholder="Tuổi" required>
+    <nav class="nav-links">
+      <a href="./profiles.html">Thành viên</a>
+      <a href="./register.html">Đăng ký</a>
+      <a href="./live.html">Lịch live</a>
+      <a href="/login/" class="btn btn-secondary">Đăng nhập Google</a>
+    </nav>
+  </div>
+</header>
 
-    <select name="gender">
-      <option>Nam</option>
-      <option>Nữ</option>
-    </select>
+<main>
+  <section class="hero">
+    <div class="container form-wrap">
+      <div class="hero-card">
+        <div class="eyebrow">📝 Tạo hồ sơ để bắt đầu làm quen</div>
+        <h1>Điền thông tin rõ ràng. <span>Dễ gặp đúng người hơn.</span></h1>
+        <p>
+          Bạn có thể để Facebook hoặc TikTok làm nền tảng liên hệ chính.
+          Sau khi lưu, hồ sơ sẽ hiện trong danh sách thành viên.
+        </p>
+      </div>
+    </div>
+  </section>
 
-    <input name="job" placeholder="Công việc">
-    <input name="city" placeholder="Thành phố">
+  <section class="section">
+    <div class="container form-wrap">
+      <div class="form-card">
+        <div class="section-title">
+          <h2>Đăng ký hồ sơ</h2>
+          <p>Điền càng rõ, người khác càng dễ hiểu và dễ kết nối với bạn hơn.</p>
+        </div>
 
-    <select name="platform">
-      <option>TikTok</option>
-      <option>Facebook</option>
-    </select>
+        <form id="form">
+          <div class="form-grid">
+            <div class="field">
+              <label for="name">Tên hiển thị</label>
+              <input id="name" name="name" type="text" placeholder="Ví dụ: Mai Nguyễn" required>
+            </div>
 
-    <input name="link" placeholder="Link tài khoản">
+            <div class="field">
+              <label for="age">Tuổi</label>
+              <input id="age" name="age" type="number" placeholder="Ví dụ: 29" required>
+            </div>
 
-    <button type="submit">Lưu</button>
-  </form>
-</div>
+            <div class="field">
+              <label for="gender">Giới tính</label>
+              <select id="gender" name="gender">
+                <option>Nam</option>
+                <option>Nữ</option>
+                <option>Khác</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="job">Công việc</label>
+              <input id="job" name="job" type="text" placeholder="Ví dụ: Làm nail, kỹ thuật, kinh doanh">
+            </div>
+
+            <div class="field">
+              <label for="state">Bang đang sống</label>
+              <input id="state" name="state" type="text" placeholder="Ví dụ: Texas">
+            </div>
+
+            <div class="field">
+              <label for="city">Thành phố</label>
+              <input id="city" name="city" type="text" placeholder="Ví dụ: Odessa">
+            </div>
+
+            <div class="field">
+              <label for="platform">Nền tảng liên hệ chính</label>
+              <select id="platform" name="platform">
+                <option>TikTok</option>
+                <option>Facebook</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="link">Link tài khoản</label>
+              <input id="link" name="link" type="text" placeholder="Dán link Facebook hoặc TikTok của bạn">
+            </div>
+
+            <div class="field">
+              <label for="goal">Mục tiêu</label>
+              <select id="goal" name="goal">
+                <option>Kết bạn</option>
+                <option>Tìm hiểu nghiêm túc</option>
+                <option>Kết nối lâu dài</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="liveSlot">Khung giờ live mong muốn</label>
+              <select id="liveSlot" name="liveSlot">
+                <option>Thứ 7 • 7:30 PM</option>
+                <option>Thứ 7 • 9:00 PM</option>
+                <option>Chủ Nhật • 7:00 PM</option>
+                <option>Chủ Nhật • 8:30 PM</option>
+              </select>
+            </div>
+
+            <div class="field full">
+              <label for="bio">Giới thiệu ngắn</label>
+              <textarea id="bio" name="bio" placeholder="Viết vài dòng về bạn để người khác dễ hiểu hơn"></textarea>
+            </div>
+
+            <div class="field full">
+              <button type="submit" class="btn btn-primary">Lưu hồ sơ</button>
+            </div>
+          </div>
+        </form>
+
+        <p id="successMessage" style="display:none; margin-top:16px; color:#fff;">
+          Đã lưu hồ sơ, đang chuyển sang danh sách thành viên...
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="footer">
+    <div class="container">
+      © 2026 Kết Nối Việt Mỹ • TikTok: @hoaidangllc
+    </div>
+  </section>
+</main>
 
 <script>
-const form = document.getElementById("form")
+const form = document.getElementById("form");
+const successMessage = document.getElementById("successMessage");
 
 form.onsubmit = (e) => {
-  e.preventDefault()
+  e.preventDefault();
 
-  const data = Object.fromEntries(new FormData(form))
-  data.id = Date.now()
+  const data = Object.fromEntries(new FormData(form));
+  data.id = Date.now();
 
-  let users = JSON.parse(localStorage.getItem("users") || "[]")
-  users.push(data)
-  localStorage.setItem("users", JSON.stringify(users))
+  let users = JSON.parse(localStorage.getItem("users") || "[]");
+  users.push(data);
+  localStorage.setItem("users", JSON.stringify(users));
 
-  window.location = "profiles.html"
-}
+  successMessage.style.display = "block";
+
+  setTimeout(() => {
+    window.location = "profiles.html";
+  }, 700);
+};
 </script>
 
 </body>
