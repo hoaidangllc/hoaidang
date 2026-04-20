@@ -11,49 +11,45 @@ const loginBtn = document.getElementById("loginBtn");
 const logoutBtn = document.getElementById("logoutBtn");
 const authUser = document.getElementById("authUser");
 
+async function loginGoogle() {
+  try {
+    await setPersistence(auth, browserLocalPersistence);
+    await signInWithPopup(auth, provider);
+  } catch (error) {
+    console.error("Login failed:", error);
+  }
+}
+
+async function logoutGoogle() {
+  try {
+    await signOut(auth);
+  } catch (error) {
+    console.error("Logout failed:", error);
+  }
+}
+
 if (loginBtn) {
-  loginBtn.addEventListener("click", async () => {
-    try {
-      await setPersistence(auth, browserLocalPersistence);
-      await signInWithPopup(auth, provider);
-    } catch (error) {
-      console.error("Login failed:", error);
-    }
-  });
+  loginBtn.addEventListener("click", loginGoogle);
 }
 
 if (logoutBtn) {
-  logoutBtn.addEventListener("click", async () => {
-    try {
-      await signOut(auth);
-    } catch (error) {
-      console.error("Logout failed:", error);
-    }
-  });
+  logoutBtn.addEventListener("click", logoutGoogle);
 }
 
 onAuthStateChanged(auth, (user) => {
-  if (user) {
-    if (authUser) {
-      authUser.textContent = user.displayName || user.email || "Đã đăng nhập";
-      authUser.style.display = "inline-flex";
-    }
-    if (loginBtn) loginBtn.style.display = "none";
-    if (logoutBtn) logoutBtn.style.display = "inline-flex";
+  if (authUser) {
+    authUser.textContent = user ? (user.displayName || user.email || "Đã đăng nhập") : "";
+    authUser.style.display = user ? "inline-flex" : "none";
+  }
 
-    if (typeof window.showKetNoiForm === "function") {
-      window.showKetNoiForm(user);
-    }
-  } else {
-    if (authUser) {
-      authUser.textContent = "";
-      authUser.style.display = "none";
-    }
-    if (loginBtn) loginBtn.style.display = "inline-flex";
-    if (logoutBtn) logoutBtn.style.display = "none";
+  if (loginBtn) loginBtn.style.display = user ? "none" : "inline-flex";
+  if (logoutBtn) logoutBtn.style.display = user ? "inline-flex" : "none";
 
-    if (typeof window.hideKetNoiForm === "function") {
-      window.hideKetNoiForm();
-    }
+  if (typeof window.showKetNoiForm === "function") {
+    if (user) window.showKetNoiForm(user);
+  }
+
+  if (typeof window.hideKetNoiForm === "function") {
+    if (!user) window.hideKetNoiForm();
   }
 });
