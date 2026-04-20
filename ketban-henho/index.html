@@ -11,22 +11,22 @@
 
 <header class="site-header">
   <div class="container nav">
-    <a href="./index.html" class="brand">
+    <a href="/" class="brand">
       <span class="brand-badge">❤</span>
       <span>Kết Nối Việt Mỹ</span>
     </a>
 
     <nav class="nav-links">
-  <a href="/">Trang chủ</a>
-  <a href="./profiles.html">Thành viên</a>
-  <a href="./register.html">Đăng ký</a>
-  <a href="./live.html">Lịch live</a>
+      <a href="/">Trang chủ</a>
+      <a href="./profiles.html">Thành viên</a>
+      <a href="./register.html">Đăng ký</a>
+      <a href="./live.html">Lịch live</a>
 
-  <span id="authUser" style="color:rgba(255,255,255,.75);font-size:.95rem;"></span>
+      <span id="authUser" class="auth-name"></span>
 
-  <button id="loginBtn" class="btn btn-secondary" type="button">Đăng nhập Google</button>
-  <button id="logoutBtn" class="btn btn-secondary" type="button" style="display:none;">Đăng xuất</button>
-</nav>
+      <button id="loginBtn" class="btn btn-secondary" type="button">Đăng nhập Google</button>
+      <button id="logoutBtn" class="btn btn-secondary" type="button" style="display:none;">Đăng xuất</button>
+    </nav>
   </div>
 </header>
 
@@ -35,9 +35,7 @@
     <div class="container">
       <div class="hero-card">
         <div class="eyebrow">✨ Người Việt tại Mỹ • Kết bạn • Làm quen • Live cuối tuần</div>
-
         <h1>Kết bạn thật. <span>Làm quen rõ hơn qua live TikTok cuối tuần.</span></h1>
-
         <p>
           Đây là nơi để bạn tạo hồ sơ, xem người phù hợp và đăng ký tham gia các buổi live cuối tuần
           trên TikTok <strong>@hoaidangllc</strong>.
@@ -56,28 +54,28 @@
     <div class="container">
       <div class="section-title">
         <h2>Web này có gì?</h2>
-        <p>Đi từng bước đơn giản để người dùng dễ hiểu và dễ tham gia hơn.</p>
+        <p>Gọn, rõ, không màu mè. Tập trung vào hồ sơ thật, kết nối thật và lịch live cuối tuần.</p>
       </div>
 
       <div class="grid">
         <div class="card">
           <div class="card-body">
             <h3>1. Tạo hồ sơ</h3>
-            <p>Nhập tên, tuổi, công việc, bang đang sống và link Facebook hoặc TikTok.</p>
+            <p>Nhập tên, tuổi, công việc, nơi sống và nền tảng liên hệ chính của bạn.</p>
           </div>
         </div>
 
         <div class="card">
           <div class="card-body">
             <h3>2. Xem thành viên</h3>
-            <p>Xem danh sách người đã đăng ký để tìm người phù hợp với mình.</p>
+            <p>Duyệt danh sách người đã đăng ký để xem ai phù hợp với mình hơn.</p>
           </div>
         </div>
 
         <div class="card">
           <div class="card-body">
             <h3>3. Live cuối tuần</h3>
-            <p>Đăng ký khung giờ để tham gia live làm quen trên TikTok @hoaidangllc.</p>
+            <p>Chọn khung giờ để tham gia live làm quen trên TikTok @hoaidangllc.</p>
           </div>
         </div>
       </div>
@@ -92,42 +90,5 @@
 </main>
 
 <script type="module" src="/assets/js/auth.js"></script>
-
-<script>
-window.addEventListener("DOMContentLoaded", () => {
-  const userBox = document.getElementById("userBox");
-
-  const possibleKeys = [
-    "sharedGoogleUser",
-    "googleUser",
-    "user",
-    "authUser",
-    "currentUser"
-  ];
-
-  let foundUser = null;
-
-  for (const key of possibleKeys) {
-    const raw = localStorage.getItem(key);
-    if (!raw) continue;
-
-    try {
-      const parsed = JSON.parse(raw);
-      if (parsed && (parsed.displayName || parsed.name || parsed.email)) {
-        foundUser = parsed;
-        break;
-      }
-    } catch (e) {
-      // bỏ qua key lỗi
-    }
-  }
-
-  if (userBox && foundUser) {
-    userBox.textContent = `Xin chào, ${foundUser.displayName || foundUser.name || foundUser.email}`;
-  }
-});
-</script>
-  <script type="module" src="/assets/js/auth.js"></script>
-
 </body>
 </html>
