@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hồ sơ thành viên | Kết Nối Việt Mỹ</title>
+  <link rel="stylesheet" href="./assets/css/styles.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container nav">
+    <a href="./index.html" class="brand">
+      <span class="brand-badge">❤</span>
+      <span>Kết Nối Việt Mỹ</span>
+    </a>
+
+    <nav class="nav-links">
+      <a href="./profiles.html">Thành viên</a>
+      <a href="./register.html">Đăng ký</a>
+      <a href="./live.html">Lịch live</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="section">
+    <div class="container">
+      <div id="profileBox"></div>
+    </div>
+  </section>
+</main>
+
+<script>
+const box = document.getElementById("profileBox");
+
+const params = new URLSearchParams(window.location.search);
+const id = params.get("id");
+
+let users = JSON.parse(localStorage.getItem("users") || "[]");
+let user = users.find(u => String(u.id) === String(id));
+
+if (!user) {
+  box.innerHTML = "<h2>Không tìm thấy hồ sơ</h2>";
+} else {
+  box.innerHTML = `
+    <div class="form-card">
+      <h2>${user.name}, ${user.age} tuổi</h2>
+      <p>${user.city}, ${user.state}</p>
+
+      <p><b>Công việc:</b> ${user.job}</p>
+      <p><b>Mục tiêu:</b> ${user.goal}</p>
+      <p><b>Giới tính:</b> ${user.gender}</p>
+      <p><b>Khung giờ live:</b> ${user.liveSlot}</p>
+      <p><b>Giới thiệu:</b> ${user.bio}</p>
+
+      <div class="hero-actions" style="margin-top:20px;">
+        <a href="./profiles.html" class="btn btn-secondary">Quay lại</a>
+        <a href="${user.link}" target="_blank" class="btn btn-primary">
+          Mở ${user.platform}
+        </a>
+      </div>
+    </div>
+  `;
+}
+</script>
+
+</body>
+</html>
