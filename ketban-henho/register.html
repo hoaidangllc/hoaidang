@@ -52,10 +52,6 @@
           <p>Điền càng rõ, người khác càng dễ hiểu và dễ kết nối với bạn hơn.</p>
         </div>
 
-        <div id="loginNotice" class="notice-box" style="margin-bottom:18px; display:none;">
-          Bạn cần đăng nhập Google ở góc trên bên phải trước khi lưu hồ sơ.
-        </div>
-
         <form id="form">
           <div class="form-grid">
             <div class="field">
@@ -153,51 +149,9 @@
 window.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("form");
   const successMessage = document.getElementById("successMessage");
-  const loginNotice = document.getElementById("loginNotice");
-  const loginBtn = document.getElementById("loginBtn");
-  const logoutBtn = document.getElementById("logoutBtn");
-
-  function isLoggedIn() {
-    if (!loginBtn || !logoutBtn) return false;
-
-    const loginHidden =
-      loginBtn.style.display === "none" ||
-      window.getComputedStyle(loginBtn).display === "none";
-
-    const logoutVisible =
-      logoutBtn.style.display !== "none" &&
-      window.getComputedStyle(logoutBtn).display !== "none";
-
-    return loginHidden || logoutVisible;
-  }
-
-  function updateNotice() {
-    if (isLoggedIn()) {
-      loginNotice.style.display = "none";
-    } else {
-      loginNotice.style.display = "block";
-    }
-  }
-
-  updateNotice();
-
-  const observer = new MutationObserver(updateNotice);
-  if (loginBtn) observer.observe(loginBtn, { attributes: true });
-  if (logoutBtn) observer.observe(logoutBtn, { attributes: true });
-
-  setTimeout(updateNotice, 500);
-  setTimeout(updateNotice, 1500);
-  setTimeout(updateNotice, 3000);
 
   form.addEventListener("submit", (e) => {
     e.preventDefault();
-
-    if (!isLoggedIn()) {
-      loginNotice.style.display = "block";
-      loginNotice.scrollIntoView({ behavior: "smooth", block: "center" });
-      alert("Bạn cần đăng nhập Google ở góc trên bên phải trước khi lưu hồ sơ.");
-      return;
-    }
 
     const data = Object.fromEntries(new FormData(form));
     data.id = Date.now();
