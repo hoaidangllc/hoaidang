@@ -1,4 +1,9 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import {
+  initializeApp,
+  getApps,
+  getApp
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
 import {
   getFirestore,
   collection,
@@ -19,12 +24,13 @@ const firebaseConfig = {
   appId: "1:88083628212:web:c7608e6ef87ce3f4927a21"
 };
 
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
+// ✅ Nếu app đã có rồi thì dùng lại, không khởi tạo lần 2
+const app = getApps().length ? getApp() : initializeApp(firebaseConfig);
 
+const db = getFirestore(app);
 const colRef = collection(db, "ketnoi_profiles");
 
-// 👉 thêm hồ sơ
+// thêm hồ sơ
 export async function addProfile(data) {
   const docRef = await addDoc(colRef, {
     ...data,
@@ -33,24 +39,28 @@ export async function addProfile(data) {
   return docRef.id;
 }
 
-// 👉 lấy tất cả hồ sơ
+// lấy tất cả hồ sơ
 export async function getProfiles() {
   const q = query(colRef, orderBy("createdAt", "desc"));
   const snapshot = await getDocs(q);
 
-  return snapshot.docs.map(doc => ({
-    id: doc.id,
-    ...doc.data()
+  return snapshot.docs.map((item) => ({
+    id: item.id,
+    ...item.data()
   }));
 }
 
-// 👉 lấy 1 hồ sơ theo id
+// lấy 1 hồ sơ theo id
 export async function getProfileById(id) {
   const docRef = doc(db, "ketnoi_profiles", id);
   const snap = await getDoc(docRef);
 
   if (snap.exists()) {
-    return { id: snap.id, ...snap.data() };
+    return {
+      id: snap.id,
+      ...snap.data()
+    };
   }
+
   return null;
 }
