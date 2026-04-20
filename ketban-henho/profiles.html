@@ -2,31 +2,102 @@
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
-  <title>Thành viên</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thành viên | Kết Nối Việt Mỹ</title>
+  <meta name="description" content="Xem danh sách thành viên người Việt tại Mỹ đang tham gia kết nối và live cuối tuần.">
   <link rel="stylesheet" href="./assets/css/styles.css">
 </head>
 <body>
 
-<div class="container">
-  <h2>Danh sách thành viên</h2>
-  <div id="list"></div>
-</div>
+<header class="site-header">
+  <div class="container nav">
+    <a href="./index.html" class="brand">
+      <span class="brand-badge">❤</span>
+      <span>Kết Nối Việt Mỹ</span>
+    </a>
+
+    <nav class="nav-links">
+      <a href="./profiles.html">Thành viên</a>
+      <a href="./register.html">Đăng ký</a>
+      <a href="./live.html">Lịch live</a>
+      <a href="/login/" class="btn btn-secondary">Đăng nhập Google</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="container">
+      <div class="hero-card">
+        <div class="eyebrow">👥 Danh sách thành viên đang tham gia</div>
+        <h1>Xem hồ sơ. <span>Tìm người phù hợp với bạn.</span></h1>
+        <p>
+          Đây là nơi hiển thị những người đã tạo hồ sơ. Bạn có thể xem nhanh thông tin cơ bản
+          và sau này mình sẽ nối tiếp sang trang hồ sơ riêng của từng người.
+        </p>
+
+        <div class="hero-actions">
+          <a href="./register.html" class="btn btn-primary">Tạo hồ sơ mới</a>
+          <a href="./live.html" class="btn btn-secondary">Xem lịch live</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-title">
+        <h2>Danh sách thành viên</h2>
+        <p>Hồ sơ mới đăng ký sẽ hiện ở đây. Nếu chưa có ai, trang sẽ báo rõ ràng.</p>
+      </div>
+
+      <div id="list" class="grid"></div>
+    </div>
+  </section>
+
+  <section class="footer">
+    <div class="container">
+      © 2026 Kết Nối Việt Mỹ • TikTok: @hoaidangllc
+    </div>
+  </section>
+</main>
 
 <script>
-const list = document.getElementById("list")
+const list = document.getElementById("list");
+let users = JSON.parse(localStorage.getItem("users") || "[]");
 
-let users = JSON.parse(localStorage.getItem("users") || "[]")
-
-if(users.length === 0){
-  list.innerHTML = "Chưa có ai đăng ký"
-}else{
-  list.innerHTML = users.map(u => `
-    <div style="margin:10px 0;padding:10px;border:1px solid #ccc">
-      <b>${u.name}</b> (${u.age})<br>
-      ${u.city} - ${u.job}<br>
-      <a href="${u.link}" target="_blank">${u.platform}</a>
+if (users.length === 0) {
+  list.innerHTML = `
+    <div class="card">
+      <div class="card-body">
+        <h3>Chưa có ai đăng ký</h3>
+        <p>Hiện chưa có thành viên nào. Bạn có thể là người đầu tiên tạo hồ sơ.</p>
+        <div class="hero-actions" style="margin-top:16px;">
+          <a href="./register.html" class="btn btn-primary">Đăng ký ngay</a>
+        </div>
+      </div>
     </div>
-  `).join("")
+  `;
+} else {
+  list.innerHTML = users.map(u => `
+    <div class="card">
+      <div class="card-body">
+        <h3>${u.name || "Chưa có tên"}${u.age ? `, ${u.age} tuổi` : ""}</h3>
+        <p>${u.city || "Chưa rõ thành phố"}${u.state ? `, ${u.state}` : ""}</p>
+
+        <p><strong>Công việc:</strong> ${u.job || "Chưa cập nhật"}</p>
+        <p><strong>Mục tiêu:</strong> ${u.goal || "Chưa cập nhật"}</p>
+        <p><strong>Liên hệ chính:</strong> ${u.platform || "Chưa chọn"}</p>
+        <p><strong>Khung giờ live:</strong> ${u.liveSlot || "Chưa chọn"}</p>
+
+        <div class="hero-actions" style="margin-top:16px;">
+          <a href="${u.link || '#'}" target="_blank" class="btn btn-secondary">
+            ${u.platform || "Xem liên hệ"}
+          </a>
+        </div>
+      </div>
+    </div>
+  `).reverse().join("");
 }
 </script>
 
