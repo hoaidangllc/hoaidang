@@ -17,15 +17,16 @@
     </a>
 
     <nav class="nav-links">
-      <a href="./index.html">Trang chủ</a>
-      <a href="./profiles.html">Thành viên</a>
-      <a href="./register.html">Đăng ký</a>
-      <a href="./live.html">Lịch live</a>
+  <a href="/">Trang chủ</a>
+  <a href="./profiles.html">Thành viên</a>
+  <a href="./register.html">Đăng ký</a>
+  <a href="./live.html">Lịch live</a>
 
-      <span id="userBox" style="color:rgba(255,255,255,.75);font-size:.95rem;"></span>
+  <span id="authUser" style="color:rgba(255,255,255,.75);font-size:.95rem;"></span>
 
-      <a href="/login/" class="btn btn-secondary">Đăng nhập Google</a>
-    </nav>
+  <button id="loginBtn" class="btn btn-secondary" type="button">Đăng nhập Google</button>
+  <button id="logoutBtn" class="btn btn-secondary" type="button" style="display:none;">Đăng xuất</button>
+</nav>
   </div>
 </header>
 
@@ -126,6 +127,7 @@ window.addEventListener("DOMContentLoaded", () => {
   }
 });
 </script>
+  <script type="module" src="/assets/js/auth.js"></script>
 
 </body>
 </html>
