@@ -62,7 +62,8 @@
 
   <section class="footer">
     <div class="container">
-      © 2026 Kết Nối Việt Mỹ • TikTok: @hoaidangllc
+      © 2026 Kết Nối Việt Mỹ • TikTok:
+      <a href="https://www.tiktok.com/@hoaidangllc" target="_blank">@hoaidangllc</a>
     </div>
   </section>
 </main>
@@ -71,24 +72,28 @@
 const list = document.getElementById("list");
 let users = JSON.parse(localStorage.getItem("users") || "[]");
 
-if (users.length === 0) {
-  list.innerHTML = `
-    <div class="card">
-      <div class="card-body">
-        <h3>Chưa có ai đăng ký</h3>
-        <p>Hiện chưa có thành viên nào. Bạn có thể là người đầu tiên tạo hồ sơ.</p>
-        <div class="hero-actions" style="margin-top:16px;">
-          <a href="./register.html" class="btn btn-primary">Đăng ký ngay</a>
+function renderUsers() {
+  if (users.length === 0) {
+    list.innerHTML = `
+      <div class="card">
+        <div class="card-body">
+          <h3>Chưa có ai đăng ký</h3>
+          <p>Hiện chưa có thành viên nào. Bạn có thể là người đầu tiên tạo hồ sơ.</p>
+          <div class="hero-actions" style="margin-top:16px;">
+            <a href="./register.html" class="btn btn-primary">Đăng ký ngay</a>
+          </div>
         </div>
       </div>
-    </div>
-  `;
-} else {
+    `;
+    return;
+  }
+
   list.innerHTML = users.slice().reverse().map(u => `
     <div class="card">
       <div class="card-body">
         <h3>${u.name || "Chưa có tên"}${u.age ? `, ${u.age} tuổi` : ""}</h3>
         <p>${u.city || "Chưa rõ thành phố"}${u.state ? `, ${u.state}` : ""}</p>
+
         <p><strong>Công việc:</strong> ${u.job || "Chưa cập nhật"}</p>
         <p><strong>Mục tiêu:</strong> ${u.goal || "Chưa cập nhật"}</p>
         <p><strong>Liên hệ chính:</strong> ${u.platform || "Chưa chọn"}</p>
@@ -106,6 +111,8 @@ if (users.length === 0) {
     </div>
   `).join("");
 }
+
+renderUsers();
 </script>
 
 <script type="module" src="/assets/js/auth.js"></script>
