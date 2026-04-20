@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Đăng ký</title>
+  <link rel="stylesheet" href="./assets/css/styles.css">
+</head>
+<body>
+
+<div class="container">
+  <h2>Đăng ký hồ sơ</h2>
+
+  <form id="form">
+    <input name="name" placeholder="Tên" required>
+    <input name="age" placeholder="Tuổi" required>
+
+    <select name="gender">
+      <option>Nam</option>
+      <option>Nữ</option>
+    </select>
+
+    <input name="job" placeholder="Công việc">
+    <input name="city" placeholder="Thành phố">
+
+    <select name="platform">
+      <option>TikTok</option>
+      <option>Facebook</option>
+    </select>
+
+    <input name="link" placeholder="Link tài khoản">
+
+    <button type="submit">Lưu</button>
+  </form>
+</div>
+
+<script>
+const form = document.getElementById("form")
+
+form.onsubmit = (e) => {
+  e.preventDefault()
+
+  const data = Object.fromEntries(new FormData(form))
+  data.id = Date.now()
+
+  let users = JSON.parse(localStorage.getItem("users") || "[]")
+  users.push(data)
+  localStorage.setItem("users", JSON.stringify(users))
+
+  window.location = "profiles.html"
+}
+</script>
+
+</body>
+</html>
