@@ -52,13 +52,14 @@
 
   <section class="footer">
     <div class="container">
-      © 2026 Kết Nối Việt Mỹ • TikTok: @hoaidangllc
+      © 2026 Kết Nối Việt Mỹ • TikTok:
+      <a href="https://www.tiktok.com/@hoaidangllc" target="_blank">@hoaidangllc</a>
     </div>
   </section>
 </main>
 
 <script>
-const box = document.getElementById("profileBox");
+const profileBox = document.getElementById("profileBox");
 const params = new URLSearchParams(window.location.search);
 const id = params.get("id");
 
@@ -66,19 +67,20 @@ let users = JSON.parse(localStorage.getItem("users") || "[]");
 let user = users.find(u => String(u.id) === String(id));
 
 if (!user) {
-  box.innerHTML = `
+  profileBox.innerHTML = `
     <div class="form-card">
       <div class="section-title">
         <h2>Không tìm thấy hồ sơ</h2>
         <p>Hồ sơ này không tồn tại hoặc đã bị xóa.</p>
       </div>
+
       <div class="hero-actions">
         <a href="./profiles.html" class="btn btn-primary">Quay lại danh sách</a>
       </div>
     </div>
   `;
 } else {
-  box.innerHTML = `
+  profileBox.innerHTML = `
     <div class="form-card">
       <div class="section-title">
         <h2>${user.name || "Chưa có tên"}${user.age ? `, ${user.age} tuổi` : ""}</h2>
@@ -104,6 +106,17 @@ if (!user) {
         <div class="member-item">
           <strong>Nền tảng liên hệ chính</strong>
           <div class="meta">${user.platform || "Chưa cập nhật"}</div>
+        </div>
+
+        <div class="member-item">
+          <strong>Link liên hệ</strong>
+          <div class="meta">
+            ${
+              user.link
+                ? `<a href="${user.link}" target="_blank">${user.link}</a>`
+                : "Chưa có link liên hệ"
+            }
+          </div>
         </div>
 
         <div class="member-item">
