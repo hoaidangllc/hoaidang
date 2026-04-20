@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Hồ sơ thành viên | Kết Nối Việt Mỹ</title>
+  <meta name="description" content="Xem hồ sơ chi tiết của thành viên trên Kết Nối Việt Mỹ.">
   <link rel="stylesheet" href="./assets/css/styles.css">
 </head>
 <body>
@@ -19,21 +20,40 @@
       <a href="./profiles.html">Thành viên</a>
       <a href="./register.html">Đăng ký</a>
       <a href="./live.html">Lịch live</a>
+      <a href="/login/" class="btn btn-secondary">Đăng nhập Google</a>
     </nav>
   </div>
 </header>
 
 <main>
+  <section class="hero">
+    <div class="container form-wrap">
+      <div class="hero-card">
+        <div class="eyebrow">👤 Hồ sơ thành viên</div>
+        <h1>Xem kỹ hơn. <span>Biết rõ hơn trước khi kết nối.</span></h1>
+        <p>
+          Trang này hiển thị đầy đủ thông tin của từng người, bao gồm tuổi, công việc,
+          nơi đang sống, mục tiêu, nền tảng liên hệ và khung giờ live mong muốn.
+        </p>
+      </div>
+    </div>
+  </section>
+
   <section class="section">
-    <div class="container">
+    <div class="container form-wrap">
       <div id="profileBox"></div>
+    </div>
+  </section>
+
+  <section class="footer">
+    <div class="container">
+      © 2026 Kết Nối Việt Mỹ • TikTok: @hoaidangllc
     </div>
   </section>
 </main>
 
 <script>
 const box = document.getElementById("profileBox");
-
 const params = new URLSearchParams(window.location.search);
 const id = params.get("id");
 
@@ -41,24 +61,65 @@ let users = JSON.parse(localStorage.getItem("users") || "[]");
 let user = users.find(u => String(u.id) === String(id));
 
 if (!user) {
-  box.innerHTML = "<h2>Không tìm thấy hồ sơ</h2>";
+  box.innerHTML = `
+    <div class="form-card">
+      <div class="section-title">
+        <h2>Không tìm thấy hồ sơ</h2>
+        <p>Hồ sơ này không tồn tại hoặc đã bị xóa.</p>
+      </div>
+      <div class="hero-actions">
+        <a href="./profiles.html" class="btn btn-primary">Quay lại danh sách</a>
+      </div>
+    </div>
+  `;
 } else {
   box.innerHTML = `
     <div class="form-card">
-      <h2>${user.name}, ${user.age} tuổi</h2>
-      <p>${user.city}, ${user.state}</p>
+      <div class="section-title">
+        <h2>${user.name || "Chưa có tên"}${user.age ? `, ${user.age} tuổi` : ""}</h2>
+        <p>${user.city || "Chưa rõ thành phố"}${user.state ? `, ${user.state}` : ""}</p>
+      </div>
 
-      <p><b>Công việc:</b> ${user.job}</p>
-      <p><b>Mục tiêu:</b> ${user.goal}</p>
-      <p><b>Giới tính:</b> ${user.gender}</p>
-      <p><b>Khung giờ live:</b> ${user.liveSlot}</p>
-      <p><b>Giới thiệu:</b> ${user.bio}</p>
+      <div class="list">
+        <div class="member-item">
+          <strong>Giới tính</strong>
+          <div class="meta">${user.gender || "Chưa cập nhật"}</div>
+        </div>
 
-      <div class="hero-actions" style="margin-top:20px;">
-        <a href="./profiles.html" class="btn btn-secondary">Quay lại</a>
-        <a href="${user.link}" target="_blank" class="btn btn-primary">
-          Mở ${user.platform}
-        </a>
+        <div class="member-item">
+          <strong>Công việc</strong>
+          <div class="meta">${user.job || "Chưa cập nhật"}</div>
+        </div>
+
+        <div class="member-item">
+          <strong>Mục tiêu</strong>
+          <div class="meta">${user.goal || "Chưa cập nhật"}</div>
+        </div>
+
+        <div class="member-item">
+          <strong>Nền tảng liên hệ chính</strong>
+          <div class="meta">${user.platform || "Chưa cập nhật"}</div>
+        </div>
+
+        <div class="member-item">
+          <strong>Khung giờ live mong muốn</strong>
+          <div class="meta">${user.liveSlot || "Chưa chọn"}</div>
+        </div>
+
+        <div class="member-item">
+          <strong>Giới thiệu</strong>
+          <div class="meta">${user.bio || "Chưa có giới thiệu"}</div>
+        </div>
+      </div>
+
+      <div class="hero-actions" style="margin-top:24px;">
+        <a href="./profiles.html" class="btn btn-secondary">Quay lại danh sách</a>
+        <a href="./live.html" class="btn btn-secondary">Xem lịch live</a>
+        ${
+          user.link
+            ? `<a href="${user.link}" target="_blank" class="btn btn-primary">Mở ${user.platform || "liên hệ"}</a>`
+            : `<span class="btn btn-primary" style="opacity:.5;pointer-events:none;">Chưa có link liên hệ</span>`
+        }
       </div>
     </div>
   `;
