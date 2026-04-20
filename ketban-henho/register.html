@@ -11,16 +11,21 @@
 
 <header class="site-header">
   <div class="container nav">
-    <a href="./index.html" class="brand">
+    <a href="/" class="brand">
       <span class="brand-badge">❤</span>
       <span>Kết Nối Việt Mỹ</span>
     </a>
 
     <nav class="nav-links">
+      <a href="/">Trang chủ</a>
       <a href="./profiles.html">Thành viên</a>
       <a href="./register.html">Đăng ký</a>
       <a href="./live.html">Lịch live</a>
-      <a href="/login/" class="btn btn-secondary">Đăng nhập Google</a>
+
+      <span id="authUser" style="color:rgba(255,255,255,.75);font-size:.95rem;"></span>
+
+      <button id="loginBtn" class="btn btn-secondary" type="button">Đăng nhập Google</button>
+      <button id="logoutBtn" class="btn btn-secondary" type="button" style="display:none;">Đăng xuất</button>
     </nav>
   </div>
 </header>
@@ -41,6 +46,18 @@
 
   <section class="section">
     <div class="container form-wrap">
+
+      <div id="loginRequiredBox" class="form-card" style="display:none; margin-bottom:20px;">
+        <div class="section-title">
+          <h2>Bạn cần đăng nhập trước</h2>
+          <p>Vui lòng đăng nhập Google bằng tài khoản trên hoaidang.com trước khi tạo hồ sơ.</p>
+        </div>
+
+        <div class="hero-actions">
+          <button id="loginBtnInline" class="btn btn-primary" type="button">Đăng nhập Google</button>
+        </div>
+      </div>
+
       <div class="form-card">
         <div class="section-title">
           <h2>Đăng ký hồ sơ</h2>
@@ -141,26 +158,59 @@
 </main>
 
 <script>
-const form = document.getElementById("form");
-const successMessage = document.getElementById("successMessage");
+window.addEventListener("DOMContentLoaded", () => {
+  const form = document.getElementById("form");
+  const successMessage = document.getElementById("successMessage");
+  const loginRequiredBox = document.getElementById("loginRequiredBox");
+  const authUser = document.getElementById("authUser");
+  const loginBtnInline = document.getElementById("loginBtnInline");
+  const loginBtn = document.getElementById("loginBtn");
 
-form.onsubmit = (e) => {
-  e.preventDefault();
+  if (loginBtnInline && loginBtn) {
+    loginBtnInline.addEventListener("click", () => loginBtn.click());
+  }
 
-  const data = Object.fromEntries(new FormData(form));
-  data.id = Date.now();
+  const checkLogin = () => {
+    const hasUser = authUser && authUser.textContent.trim() !== "";
 
-  let users = JSON.parse(localStorage.getItem("users") || "[]");
-  users.push(data);
-  localStorage.setItem("users", JSON.stringify(users));
+    if (!hasUser) {
+      form.style.display = "none";
+      loginRequiredBox.style.display = "block";
+    } else {
+      form.style.display = "block";
+      loginRequiredBox.style.display = "none";
+    }
+  };
 
-  successMessage.style.display = "block";
+  setTimeout(checkLogin, 700);
 
-  setTimeout(() => {
-    window.location = "profiles.html";
-  }, 700);
-};
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    const hasUser = authUser && authUser.textContent.trim() !== "";
+    if (!hasUser) {
+      form.style.display = "none";
+      loginRequiredBox.style.display = "block";
+      return;
+    }
+
+    const data = Object.fromEntries(new FormData(form));
+    data.id = Date.now();
+
+    let users = JSON.parse(localStorage.getItem("users") || "[]");
+    users.push(data);
+    localStorage.setItem("users", JSON.stringify(users));
+
+    successMessage.style.display = "block";
+
+    setTimeout(() => {
+      window.location = "profiles.html";
+    }, 700);
+  });
+});
 </script>
+
+<script type="module" src="/assets/js/auth.js"></script>
 
 </body>
 </html>
