@@ -17,7 +17,7 @@
     </a>
 
     <nav class="nav-links">
-      <a href="/">Trang chủ</a>
+      <a href="/">Về hoaidang.com</a>
       <a href="./profiles.html">Thành viên</a>
       <a href="./register.html">Đăng ký</a>
       <a href="./live.html">Lịch live</a>
@@ -58,20 +58,19 @@
   </section>
 </main>
 
-<script>
+<script type="module">
+import { getProfileById } from "./assets/js/ketnoi-firebase.js";
+
 const profileBox = document.getElementById("profileBox");
 const params = new URLSearchParams(window.location.search);
 const id = params.get("id");
 
-let users = JSON.parse(localStorage.getItem("users") || "[]");
-let user = users.find(u => String(u.id) === String(id));
-
-if (!user) {
+function renderNotFound() {
   profileBox.innerHTML = `
     <div class="form-card">
       <div class="section-title">
         <h2>Không tìm thấy hồ sơ</h2>
-        <p>Hồ sơ này không tồn tại hoặc đã bị xóa.</p>
+        <p>Hồ sơ này không tồn tại, đã bị xóa, hoặc link không đúng.</p>
       </div>
 
       <div class="hero-actions">
@@ -79,7 +78,9 @@ if (!user) {
       </div>
     </div>
   `;
-} else {
+}
+
+function renderProfile(user) {
   profileBox.innerHTML = `
     <div class="form-card">
       <div class="section-title">
@@ -142,6 +143,39 @@ if (!user) {
     </div>
   `;
 }
+
+async function loadProfile() {
+  if (!id) {
+    renderNotFound();
+    return;
+  }
+
+  try {
+    const user = await getProfileById(id);
+
+    if (!user) {
+      renderNotFound();
+      return;
+    }
+
+    renderProfile(user);
+  } catch (err) {
+    console.error("Lỗi load profile Firebase:", err);
+    profileBox.innerHTML = `
+      <div class="form-card">
+        <div class="section-title">
+          <h2>Không tải được hồ sơ</h2>
+          <p>Kiểm tra Firestore rules hoặc file ketnoi-firebase.js.</p>
+        </div>
+        <div class="hero-actions">
+          <a href="./profiles.html" class="btn btn-primary">Quay lại danh sách</a>
+        </div>
+      </div>
+    `;
+  }
+}
+
+loadProfile();
 </script>
 
 <script type="module" src="/assets/js/auth.js"></script>
