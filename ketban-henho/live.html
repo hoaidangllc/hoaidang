@@ -1,72 +1,113 @@
+<!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Live cuối tuần | Kết Nối Việt Mỹ</title>
-  <meta name="description" content="Thông tin live giới thiệu cuối tuần của Kết Nối Việt Mỹ." />
-  <link rel="stylesheet" href="./assets/css/styles.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lịch live cuối tuần | Kết Nối Việt Mỹ</title>
+  <meta name="description" content="Xem lịch live cuối tuần trên TikTok @hoaidangllc để làm quen và kết nối.">
+  <link rel="stylesheet" href="./assets/css/styles.css">
 </head>
 <body>
-  <header class="main-header">
-    <div class="container header-inner">
-      <div class="logo"><a href="/">Kết Nối Việt Mỹ</a></div>
-      <nav class="nav">
-        <a href="./index.html">Trang chủ</a>
-        <a href="./profiles.html">Thành viên</a>
-        <a href="./register.html">Tạo hồ sơ</a>
-        <a href="./live.html" class="active">Live cuối tuần</a>
-      </nav>
-      <div class="auth-box">
-        <span id="authUser" class="auth-user"></span>
-        <button id="loginBtn" class="btn btn-primary" type="button">Đăng nhập Google</button>
-        <button id="logoutBtn" class="btn btn-outline" type="button" style="display:none;">Đăng xuất</button>
-      </div>
-    </div>
-  </header>
 
-  <main class="section">
-    <div class="container narrow-wrap">
-      <div class="section-head left">
-        <h1>Live giới thiệu cuối tuần</h1>
-        <p>Thông tin mẫu để chạy trước. Sau này có thể nối Firebase hoặc Google Calendar.</p>
-      </div>
+<header class="site-header">
+  <div class="container nav">
+    <a href="/" class="brand">
+      <span class="brand-badge">❤</span>
+      <span>Kết Nối Việt Mỹ</span>
+    </a>
 
-      <div class="card live-card">
-        <p class="badge">TikTok Live</p>
-        <h2>@hoaidangllc</h2>
-        <p>Mỗi cuối tuần sẽ có buổi live để giới thiệu thành viên, giao lưu và kết nối cộng đồng người Việt tại Mỹ.</p>
-        <div class="detail-grid">
-          <div>
-            <h3>Thời gian</h3>
-            <p>Tối Thứ Bảy hoặc Chủ Nhật</p>
-          </div>
-          <div>
-            <h3>Nội dung</h3>
-            <p>Giới thiệu hồ sơ, trò chuyện, kết nối</p>
-          </div>
-          <div>
-            <h3>Điều kiện</h3>
-            <p>Nên có hồ sơ trước khi xin lên live</p>
-          </div>
-          <div>
-            <h3>Tham gia</h3>
-            <p>Theo dõi TikTok và chờ lịch thông báo</p>
-          </div>
-        </div>
-        <div class="form-actions">
-          <a class="btn btn-primary" href="./register.html">Tạo hồ sơ trước</a>
-          <a class="btn btn-outline" href="./profiles.html">Xem thành viên</a>
+    <nav class="nav-links">
+      <a href="/">Trang chủ</a>
+      <a href="./profiles.html">Thành viên</a>
+      <a href="./register.html">Đăng ký</a>
+      <a href="./live.html">Lịch live</a>
+
+      <span id="authUser" class="auth-user"></span>
+
+      <button id="loginBtn" class="btn btn-secondary" type="button">Đăng nhập Google</button>
+      <button id="logoutBtn" class="btn btn-secondary" type="button" style="display:none;">Đăng xuất</button>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="container">
+      <div class="hero-card">
+        <div class="eyebrow">🎥 Live cuối tuần trên TikTok</div>
+        <h1>Làm quen thật hơn. <span>Gặp nhau qua lịch live rõ ràng.</span></h1>
+        <p>
+          Mỗi cuối tuần sẽ có các khung giờ live trên TikTok
+          <strong>@hoaidangllc</strong> để thành viên có cơ hội xuất hiện,
+          trò chuyện và tạo kết nối tự nhiên hơn.
+        </p>
+
+        <div class="hero-actions">
+          <a href="./register.html" class="btn btn-primary">Đăng ký tham gia</a>
+          <a href="./profiles.html" class="btn btn-secondary">Xem thành viên</a>
         </div>
       </div>
     </div>
-  </main>
+  </section>
 
-  <footer class="site-footer">
-    <div class="container footer-inner">
-      <p>© 2026 Kết Nối Việt Mỹ</p>
+  <section class="section">
+    <div class="container">
+      <div class="section-title">
+        <h2>Lịch live cuối tuần</h2>
+        <p>Các hồ sơ đã đăng ký khung giờ sẽ được gom vào đây.</p>
+      </div>
+
+      <div id="liveList" class="grid"></div>
     </div>
-  </footer>
+  </section>
 
-  <script type="module" src="/assets/js/auth.js"></script>
+  <section class="footer">
+    <div class="container">
+      © 2026 Kết Nối Việt Mỹ • TikTok: @hoaidangllc
+    </div>
+  </section>
+</main>
+
+<script>
+const liveList = document.getElementById("liveList");
+let users = JSON.parse(localStorage.getItem("users") || "[]");
+
+const slots = [
+  "Thứ 7 • 7:30 PM",
+  "Thứ 7 • 9:00 PM",
+  "Chủ Nhật • 7:00 PM",
+  "Chủ Nhật • 8:30 PM"
+];
+
+liveList.innerHTML = slots.map(slot => {
+  const matched = users.filter(u => u.liveSlot === slot);
+
+  return `
+    <div class="card">
+      <div class="card-body">
+        <h3>${slot}</h3>
+        <p>Live trên TikTok: <strong>@hoaidangllc</strong></p>
+        ${
+          matched.length > 0
+            ? matched.map(u => `
+                <div class="member-item" style="margin-top:12px;">
+                  <strong>${u.name || "Chưa có tên"}${u.age ? `, ${u.age} tuổi` : ""}</strong>
+                  <div class="meta">
+                    ${u.city || "Chưa rõ thành phố"}${u.state ? `, ${u.state}` : ""} • ${u.job || "Chưa cập nhật"}
+                  </div>
+                  <div class="hero-actions" style="margin-top:12px;">
+                    <a href="./profile.html?id=${u.id}" class="btn btn-secondary">Xem hồ sơ</a>
+                  </div>
+                </div>
+              `).join("")
+            : `<p style="margin-top:12px;">Chưa có ai đăng ký khung giờ này.</p>`
+        }
+      </div>
+    </div>
+  `;
+}).join("");
+</script>
+
+<script type="module" src="/assets/js/auth.js"></script>
 </body>
 </html>
