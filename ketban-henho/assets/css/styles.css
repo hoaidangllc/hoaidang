@@ -10,6 +10,7 @@
   --bg-3:#171a36;
   --text:#ffffff;
   --muted:rgba(255,255,255,.72);
+  --muted-2:rgba(255,255,255,.55);
   --border:rgba(255,255,255,.10);
   --pink:#ff4fa3;
   --purple:#7c4dff;
@@ -19,7 +20,7 @@
   --radius-xl:28px;
   --radius-lg:22px;
   --radius-md:16px;
-  --max:1200px;
+  --max:1180px;
 }
 
 html{
@@ -42,6 +43,13 @@ body{
 a{
   color:inherit;
   text-decoration:none;
+}
+
+button,
+input,
+select,
+textarea{
+  font:inherit;
 }
 
 .container{
@@ -93,7 +101,8 @@ a{
   flex-wrap:wrap;
 }
 
-.nav-links a{
+.nav-links a,
+.nav-links span{
   color:var(--muted);
   font-size:.95rem;
 }
@@ -142,7 +151,7 @@ a{
   margin-top:18px;
   color:var(--muted);
   font-size:1.08rem;
-  max-width:680px;
+  max-width:720px;
 }
 
 .hero-actions{
@@ -173,6 +182,7 @@ a{
 .btn-primary{
   background:linear-gradient(135deg,var(--pink),var(--purple));
   box-shadow:0 16px 40px rgba(124,77,255,.28);
+  color:#fff;
 }
 
 .btn-secondary{
@@ -197,7 +207,7 @@ a{
 .section-title p{
   margin-top:8px;
   color:var(--muted);
-  max-width:700px;
+  max-width:760px;
 }
 
 .grid{
@@ -229,7 +239,7 @@ a{
 }
 
 .form-wrap{
-  max-width:760px;
+  max-width:780px;
 }
 
 .form-card{
@@ -284,6 +294,11 @@ textarea::placeholder{
   color:rgba(255,255,255,.38);
 }
 
+option{
+  background:#111827;
+  color:#fff;
+}
+
 .list{
   display:grid;
   gap:14px;
@@ -306,10 +321,20 @@ textarea::placeholder{
   margin-top:8px;
 }
 
+.notice{
+  color:var(--muted);
+  margin-top:14px;
+}
+
 .footer{
   padding:34px 0 50px;
   color:rgba(255,255,255,.6);
   font-size:.92rem;
+}
+
+.auth-name{
+  color:rgba(255,255,255,.78);
+  font-size:.95rem;
 }
 
 @media (max-width:900px){
@@ -323,7 +348,8 @@ textarea::placeholder{
 }
 
 @media (max-width:760px){
-  .nav-links a:not(.btn){
+  .nav-links a:not(.btn),
+  .nav-links span:not(.auth-name){
     display:none;
   }
 
