@@ -97,8 +97,8 @@
             </div>
 
             <div class="field">
-              <label for="link">Link tài khoản</label>
-              <input id="link" name="link" type="text" placeholder="Dán link Facebook hoặc TikTok của bạn">
+              <label for="link">Username hoặc link tài khoản</label>
+              <input id="link" name="link" type="text" placeholder="Ví dụ: hoaidangllc hoặc full link">
             </div>
 
             <div class="field">
@@ -140,7 +140,8 @@
 
   <section class="footer">
     <div class="container">
-      © 2026 Kết Nối Việt Mỹ • TikTok: @hoaidangllc
+      © 2026 Kết Nối Việt Mỹ • TikTok:
+      <a href="https://www.tiktok.com/@hoaidangllc" target="_blank">@hoaidangllc</a>
     </div>
   </section>
 </main>
@@ -150,11 +151,36 @@ window.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("form");
   const successMessage = document.getElementById("successMessage");
 
+  function normalizeProfileLink(platform, rawLink) {
+    if (!rawLink) return "";
+
+    let link = rawLink.trim();
+
+    if (!link) return "";
+
+    if (link.startsWith("http://") || link.startsWith("https://")) {
+      return link;
+    }
+
+    link = link.replace(/^@+/, "");
+
+    if (platform === "TikTok") {
+      return `https://www.tiktok.com/@${link}`;
+    }
+
+    if (platform === "Facebook") {
+      return `https://www.facebook.com/${link}`;
+    }
+
+    return link;
+  }
+
   form.addEventListener("submit", (e) => {
     e.preventDefault();
 
     const data = Object.fromEntries(new FormData(form));
     data.id = Date.now();
+    data.link = normalizeProfileLink(data.platform, data.link);
 
     let users = JSON.parse(localStorage.getItem("users") || "[]");
     users.push(data);
