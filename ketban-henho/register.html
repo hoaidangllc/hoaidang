@@ -17,7 +17,7 @@
     </a>
 
     <nav class="nav-links">
-      <a href="/">Trang chủ</a>
+      <a href="/">Về hoaidang.com</a>
       <a href="./profiles.html">Thành viên</a>
       <a href="./register.html">Đăng ký</a>
       <a href="./live.html">Lịch live</a>
@@ -132,7 +132,7 @@
         </form>
 
         <p id="successMessage" style="display:none; margin-top:16px; color:#fff;">
-          Đã lưu hồ sơ, đang chuyển sang danh sách thành viên...
+          Đã lưu hồ sơ lên Firebase, đang chuyển sang danh sách thành viên...
         </p>
       </div>
     </div>
@@ -146,16 +146,16 @@
   </section>
 </main>
 
-<script>
+<script type="module">
+import { addProfile } from "./assets/js/ketnoi-firebase.js";
+
 window.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("form");
   const successMessage = document.getElementById("successMessage");
 
   function normalizeProfileLink(platform, rawLink) {
     if (!rawLink) return "";
-
     let link = rawLink.trim();
-
     if (!link) return "";
 
     if (link.startsWith("http://") || link.startsWith("https://")) {
@@ -175,22 +175,24 @@ window.addEventListener("DOMContentLoaded", () => {
     return link;
   }
 
-  form.addEventListener("submit", (e) => {
+  form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
     const data = Object.fromEntries(new FormData(form));
-    data.id = Date.now();
     data.link = normalizeProfileLink(data.platform, data.link);
 
-    let users = JSON.parse(localStorage.getItem("users") || "[]");
-    users.push(data);
-    localStorage.setItem("users", JSON.stringify(users));
+    try {
+      const newId = await addProfile(data);
 
-    successMessage.style.display = "block";
+      successMessage.style.display = "block";
 
-    setTimeout(() => {
-      window.location = "profiles.html";
-    }, 700);
+      setTimeout(() => {
+        window.location = `profiles.html?created=${newId}`;
+      }, 700);
+    } catch (err) {
+      console.error("Lỗi lưu Firebase:", err);
+      alert("Lưu hồ sơ thất bại. Kiểm tra lại Firebase hoặc quyền Firestore.");
+    }
   });
 });
 </script>
