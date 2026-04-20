@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Thành viên | Kết Nối Việt Mỹ</title>
-  <meta name="description" content="Xem danh sách thành viên người Việt tại Mỹ đang tham gia kết nối và live cuối tuần.">
+  <title>Hồ sơ thành viên | Kết Nối Việt Mỹ</title>
+  <meta name="description" content="Xem hồ sơ chi tiết của thành viên trên Kết Nối Việt Mỹ.">
   <link rel="stylesheet" href="./assets/css/styles.css">
 </head>
 <body>
@@ -27,31 +27,21 @@
 
 <main>
   <section class="hero">
-    <div class="container">
+    <div class="container form-wrap">
       <div class="hero-card">
-        <div class="eyebrow">👥 Danh sách thành viên đang tham gia</div>
-        <h1>Xem hồ sơ. <span>Tìm người phù hợp với bạn.</span></h1>
+        <div class="eyebrow">👤 Hồ sơ thành viên</div>
+        <h1>Xem kỹ hơn. <span>Biết rõ hơn trước khi kết nối.</span></h1>
         <p>
-          Đây là nơi hiển thị những người đã tạo hồ sơ. Bạn có thể xem nhanh thông tin cơ bản
-          và sau này mình sẽ nối tiếp sang trang hồ sơ riêng của từng người.
+          Trang này hiển thị đầy đủ thông tin của từng người, bao gồm tuổi, công việc,
+          nơi đang sống, mục tiêu, nền tảng liên hệ và khung giờ live mong muốn.
         </p>
-
-        <div class="hero-actions">
-          <a href="./register.html" class="btn btn-primary">Tạo hồ sơ mới</a>
-          <a href="./live.html" class="btn btn-secondary">Xem lịch live</a>
-        </div>
       </div>
     </div>
   </section>
 
   <section class="section">
-    <div class="container">
-      <div class="section-title">
-        <h2>Danh sách thành viên</h2>
-        <p>Hồ sơ mới đăng ký sẽ hiện ở đây. Nếu chưa có ai, trang sẽ báo rõ ràng.</p>
-      </div>
-
-      <div id="list" class="grid"></div>
+    <div class="container form-wrap">
+      <div id="profileBox" class="form-card"></div>
     </div>
   </section>
 
@@ -63,41 +53,70 @@
 </main>
 
 <script>
-const list = document.getElementById("list");
-let users = JSON.parse(localStorage.getItem("users") || "[]");
+const profileBox = document.getElementById("profileBox");
+const params = new URLSearchParams(window.location.search);
+const id = params.get("id");
 
-if (users.length === 0) {
-  list.innerHTML = `
-    <div class="card">
-      <div class="card-body">
-        <h3>Chưa có ai đăng ký</h3>
-        <p>Hiện chưa có thành viên nào. Bạn có thể là người đầu tiên tạo hồ sơ.</p>
-        <div class="hero-actions" style="margin-top:16px;">
-          <a href="./register.html" class="btn btn-primary">Đăng ký ngay</a>
-        </div>
-      </div>
+let users = JSON.parse(localStorage.getItem("users") || "[]");
+let user = users.find(u => String(u.id) === String(id));
+
+if (!user) {
+  profileBox.innerHTML = `
+    <div class="section-title">
+      <h2>Không tìm thấy hồ sơ</h2>
+      <p>Hồ sơ này không tồn tại hoặc đã bị xóa.</p>
+    </div>
+
+    <div class="hero-actions">
+      <a href="./profiles.html" class="btn btn-primary">Quay lại danh sách</a>
     </div>
   `;
 } else {
-  list.innerHTML = users.map(u => `
-    <div class="card">
-      <div class="card-body">
-        <h3>${u.name || "Chưa có tên"}${u.age ? `, ${u.age} tuổi` : ""}</h3>
-        <p>${u.city || "Chưa rõ thành phố"}${u.state ? `, ${u.state}` : ""}</p>
+  profileBox.innerHTML = `
+    <div class="section-title">
+      <h2>${user.name || "Chưa có tên"}${user.age ? `, ${user.age} tuổi` : ""}</h2>
+      <p>${user.city || "Chưa rõ thành phố"}${user.state ? `, ${user.state}` : ""}</p>
+    </div>
 
-        <p><strong>Công việc:</strong> ${u.job || "Chưa cập nhật"}</p>
-        <p><strong>Mục tiêu:</strong> ${u.goal || "Chưa cập nhật"}</p>
-        <p><strong>Liên hệ chính:</strong> ${u.platform || "Chưa chọn"}</p>
-        <p><strong>Khung giờ live:</strong> ${u.liveSlot || "Chưa chọn"}</p>
+    <div class="list">
+      <div class="member-item">
+        <strong>Giới tính</strong>
+        <div class="meta">${user.gender || "Chưa cập nhật"}</div>
+      </div>
 
-        <div class="hero-actions" style="margin-top:16px;">
-          <a href="${u.link || '#'}" target="_blank" class="btn btn-secondary">
-            ${u.platform || "Xem liên hệ"}
-          </a>
-        </div>
+      <div class="member-item">
+        <strong>Công việc</strong>
+        <div class="meta">${user.job || "Chưa cập nhật"}</div>
+      </div>
+
+      <div class="member-item">
+        <strong>Mục tiêu</strong>
+        <div class="meta">${user.goal || "Chưa cập nhật"}</div>
+      </div>
+
+      <div class="member-item">
+        <strong>Nền tảng liên hệ chính</strong>
+        <div class="meta">${user.platform || "Chưa cập nhật"}</div>
+      </div>
+
+      <div class="member-item">
+        <strong>Khung giờ live mong muốn</strong>
+        <div class="meta">${user.liveSlot || "Chưa chọn"}</div>
+      </div>
+
+      <div class="member-item">
+        <strong>Giới thiệu</strong>
+        <div class="meta">${user.bio || "Chưa có giới thiệu"}</div>
       </div>
     </div>
-  `).reverse().join("");
+
+    <div class="hero-actions" style="margin-top:24px;">
+      <a href="./profiles.html" class="btn btn-secondary">Quay lại danh sách</a>
+      <a href="${user.link || '#'}" target="_blank" class="btn btn-primary">
+        Mở ${user.platform || "liên hệ"}
+      </a>
+    </div>
+  `;
 }
 </script>
 
