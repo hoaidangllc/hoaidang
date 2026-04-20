@@ -5,6 +5,11 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
 import {
+  getAuth,
+  onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+import {
   getFirestore,
   collection,
   addDoc,
@@ -12,7 +17,11 @@ import {
   getDoc,
   doc,
   query,
-  orderBy
+  orderBy,
+  where,
+  limit,
+  updateDoc,
+  deleteDoc
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 const firebaseConfig = {
@@ -24,22 +33,35 @@ const firebaseConfig = {
   appId: "1:88083628212:web:c7608e6ef87ce3f4927a21"
 };
 
-// ✅ Nếu app đã có rồi thì dùng lại, không khởi tạo lần 2
 const app = getApps().length ? getApp() : initializeApp(firebaseConfig);
-
+const auth = getAuth(app);
 const db = getFirestore(app);
 const colRef = collection(db, "ketnoi_profiles");
 
-// thêm hồ sơ
-export async function addProfile(data) {
-  const docRef = await addDoc(colRef, {
-    ...data,
-    createdAt: Date.now()
+export function waitForAuthUser() {
+  return new Promise((resolve) => {
+    const unsub = onAuthStateChanged(auth, (user) => {
+      unsub();
+      resolve(user || null);
+    });
   });
+}
+
+export async function addProfile(data) {
+  const user = await waitForAuthUser();
+
+  const payload = {
+    ...data,
+    createdAt: Date.now(),
+    uid: user?.uid || "",
+    email: user?.email || "",
+    googleName: user?.displayName || ""
+  };
+
+  const docRef = await addDoc(colRef, payload);
   return docRef.id;
 }
 
-// lấy tất cả hồ sơ
 export async function getProfiles() {
   const q = query(colRef, orderBy("createdAt", "desc"));
   const snapshot = await getDocs(q);
@@ -50,7 +72,6 @@ export async function getProfiles() {
   }));
 }
 
-// lấy 1 hồ sơ theo id
 export async function getProfileById(id) {
   const docRef = doc(db, "ketnoi_profiles", id);
   const snap = await getDoc(docRef);
@@ -63,4 +84,52 @@ export async function getProfileById(id) {
   }
 
   return null;
+}
+
+export async function getMyProfile() {
+  const user = await waitForAuthUser();
+  if (!user) return null;
+
+  const q = query(
+    colRef,
+    where("uid", "==", user.uid),
+    limit(1)
+  );
+
+  const snapshot = await getDocs(q);
+
+  if (snapshot.empty) return null;
+
+  const first = snapshot.docs[0];
+  return {
+    id: first.id,
+    ...first.data()
+  };
+}
+
+export async function updateMyProfile(data) {
+  const myProfile = await getMyProfile();
+  if (!myProfile) {
+    throw new Error("Không tìm thấy hồ sơ của user hiện tại.");
+  }
+
+  const ref = doc(db, "ketnoi_profiles", myProfile.id);
+  await updateDoc(ref, {
+    ...data,
+    updatedAt: Date.now()
+  });
+
+  return myProfile.id;
+}
+
+export async function deleteMyProfile() {
+  const myProfile = await getMyProfile();
+  if (!myProfile) {
+    throw new Error("Không tìm thấy hồ sơ để xóa.");
+  }
+
+  const ref = doc(db, "ketnoi_profiles", myProfile.id);
+  await deleteDoc(ref);
+
+  return true;
 }
