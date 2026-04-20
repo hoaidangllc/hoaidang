@@ -110,12 +110,10 @@ if (!user) {
       </div>
     </div>
 
-    <div class="hero-actions" style="margin-top:24px;">
-      <a href="./profiles.html" class="btn btn-secondary">Quay lại danh sách</a>
-      <a href="${user.link || '#'}" target="_blank" class="btn btn-primary">
-        Mở ${user.platform || "liên hệ"}
-      </a>
-    </div>
+    <div class="hero-actions" style="margin-top:16px;">
+  <a href="./profile.html?id=${u.id}" class="btn btn-primary">Xem hồ sơ</a>
+  <a href="${u.link || '#'}" target="_blank" class="btn btn-secondary">${u.platform || "Mở liên hệ"}</a>
+</div>
   `;
 }
 </script>
