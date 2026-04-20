@@ -112,15 +112,14 @@ if (!user) {
         </div>
       </div>
 
-      <div class="hero-actions" style="margin-top:24px;">
-        <a href="./profiles.html" class="btn btn-secondary">Quay lại danh sách</a>
-        <a href="./live.html" class="btn btn-secondary">Xem lịch live</a>
-        ${
-          user.link
-            ? `<a href="${user.link}" target="_blank" class="btn btn-primary">Mở ${user.platform || "liên hệ"}</a>`
-            : `<span class="btn btn-primary" style="opacity:.5;pointer-events:none;">Chưa có link liên hệ</span>`
-        }
-      </div>
+      <div class="hero-actions" style="margin-top:16px;">
+  <a href="./profile.html?id=${u.id}" class="btn btn-primary">Xem hồ sơ</a>
+  ${
+    u.link
+      ? `<a href="${u.link}" target="_blank" class="btn btn-secondary">${u.platform || "Mở liên hệ"}</a>`
+      : `<span class="btn btn-secondary" style="opacity:.5;pointer-events:none;">Chưa có link</span>`
+  }
+</div>
     </div>
   `;
 }
