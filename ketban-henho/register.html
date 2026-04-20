@@ -18,6 +18,7 @@
 
     <nav class="nav-links">
       <a href="/">Về hoaidang.com</a>
+      <a href="./index.html">Trang ketnoi</a>
       <a href="./profiles.html">Thành viên</a>
       <a href="./register.html">Đăng ký</a>
       <a href="./live.html">Lịch live</a>
@@ -47,7 +48,20 @@
 
   <section class="section">
     <div class="container form-wrap">
-      <div class="form-card">
+
+      <div id="alreadyExistsBox" class="form-card" style="display:none; margin-bottom:20px;">
+        <div class="section-title">
+          <h2>Bạn đã có hồ sơ rồi</h2>
+          <p>Tài khoản Google hiện tại đã có một hồ sơ trong hệ thống. Bạn có thể vào Hồ sơ của tôi để sửa thay vì tạo hồ sơ mới.</p>
+        </div>
+
+        <div class="hero-actions">
+          <a href="./my-profile.html" class="btn btn-primary">Hồ sơ của tôi</a>
+          <a href="./profiles.html" class="btn btn-secondary">Xem thành viên</a>
+        </div>
+      </div>
+
+      <div class="form-card" id="registerCard">
         <div class="section-title">
           <h2>Tạo hồ sơ</h2>
           <p>Điền càng rõ, người khác càng dễ hiểu và dễ kết nối với bạn hơn.</p>
@@ -146,13 +160,17 @@
     </div>
   </section>
 </main>
-<script type="module" src="/assets/js/auth.js"></script>
-<script type="module">
-import { addProfile } from "./assets/js/ketnoi-firebase.js";
 
-window.addEventListener("DOMContentLoaded", () => {
+<script type="module" src="/assets/js/auth.js"></script>
+
+<script type="module">
+import { addProfile, getMyProfile } from "./assets/js/ketnoi-firebase.js";
+
+window.addEventListener("DOMContentLoaded", async () => {
   const form = document.getElementById("form");
   const successMessage = document.getElementById("successMessage");
+  const alreadyExistsBox = document.getElementById("alreadyExistsBox");
+  const registerCard = document.getElementById("registerCard");
 
   function normalizeProfileLink(platform, rawLink) {
     if (!rawLink) return "";
@@ -176,6 +194,18 @@ window.addEventListener("DOMContentLoaded", () => {
     return link;
   }
 
+  try {
+    const myProfile = await getMyProfile();
+
+    if (myProfile) {
+      registerCard.style.display = "none";
+      alreadyExistsBox.style.display = "block";
+      return;
+    }
+  } catch (err) {
+    console.error("Lỗi kiểm tra hồ sơ trùng:", err);
+  }
+
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
@@ -183,21 +213,26 @@ window.addEventListener("DOMContentLoaded", () => {
     data.link = normalizeProfileLink(data.platform, data.link);
 
     try {
-      const newId = await addProfile(data);
+      const checkAgain = await getMyProfile();
+      if (checkAgain) {
+        registerCard.style.display = "none";
+        alreadyExistsBox.style.display = "block";
+        return;
+      }
 
+      const newId = await addProfile(data);
       successMessage.style.display = "block";
 
       setTimeout(() => {
-        window.location = `profiles.html?created=${newId}`;
+        window.location = `./my-profile.html?created=${newId}`;
       }, 700);
     } catch (err) {
       console.error("Lỗi lưu Firebase:", err);
-      alert("Lưu hồ sơ thất bại. Kiểm tra lại Firebase hoặc quyền Firestore.");
+      alert("Lưu hồ sơ thất bại. Kiểm tra Firestore rules hoặc file ketnoi-firebase.js.");
     }
   });
 });
 </script>
-
 
 </body>
 </html>
