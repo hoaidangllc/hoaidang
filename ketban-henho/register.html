@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Đăng ký hồ sơ | Kết Nối Việt Mỹ</title>
+  <meta name="description" content="Tạo hồ sơ kết bạn và làm quen cho người Việt tại Mỹ.">
   <link rel="stylesheet" href="./assets/css/styles.css">
 </head>
 <body>
@@ -23,106 +24,178 @@
 
       <span id="authUser" class="auth-user"></span>
 
-      <button id="loginBtn" class="btn btn-secondary">Đăng nhập Google</button>
-      <button id="logoutBtn" class="btn btn-secondary" style="display:none;">Đăng xuất</button>
+      <button id="loginBtn" class="btn btn-secondary" type="button">Đăng nhập Google</button>
+      <button id="logoutBtn" class="btn btn-secondary" type="button" style="display:none;">Đăng xuất</button>
     </nav>
   </div>
 </header>
 
 <main>
+  <section class="hero">
+    <div class="container form-wrap">
+      <div class="hero-card">
+        <div class="eyebrow">📝 Tạo hồ sơ để bắt đầu làm quen</div>
+        <h1>Điền thông tin rõ ràng. <span>Dễ gặp đúng người hơn.</span></h1>
+        <p>
+          Bạn có thể để Facebook hoặc TikTok làm nền tảng liên hệ chính.
+          Sau khi lưu, hồ sơ sẽ hiện trong danh sách thành viên.
+        </p>
+      </div>
+    </div>
+  </section>
+
   <section class="section">
     <div class="container form-wrap">
-
-      <!-- 🔴 CHƯA LOGIN -->
-      <div id="loginRequiredBox" class="form-card" style="display:none; margin-bottom:20px;">
-        <h2>Bạn cần đăng nhập trước</h2>
-        <p>Vui lòng đăng nhập Google để tạo hồ sơ.</p>
-
-        <div class="hero-actions">
-          <button id="loginBtnInline" class="btn btn-primary">Đăng nhập Google</button>
-        </div>
-      </div>
-
-      <!-- 🟢 FORM -->
       <div class="form-card">
-        <h2>Tạo hồ sơ</h2>
+        <div class="section-title">
+          <h2>Tạo hồ sơ</h2>
+          <p>Điền càng rõ, người khác càng dễ hiểu và dễ kết nối với bạn hơn.</p>
+        </div>
+
+        <div id="loginNotice" class="notice-box" style="margin-bottom:18px; display:none;">
+          Bạn cần đăng nhập Google ở góc trên bên phải trước khi lưu hồ sơ.
+        </div>
 
         <form id="form">
-          <input name="name" placeholder="Tên" required><br><br>
-          <input name="age" placeholder="Tuổi" required><br><br>
-          <input name="job" placeholder="Công việc"><br><br>
-          <input name="city" placeholder="Thành phố"><br><br>
-          <input name="state" placeholder="Bang"><br><br>
-          <input name="link" placeholder="Link Facebook / TikTok"><br><br>
+          <div class="form-grid">
+            <div class="field">
+              <label for="name">Tên hiển thị</label>
+              <input id="name" name="name" type="text" placeholder="Ví dụ: Mai Nguyễn" required>
+            </div>
 
-          <select name="liveSlot">
-            <option>Thứ 7 • 7:30 PM</option>
-            <option>Thứ 7 • 9:00 PM</option>
-          </select><br><br>
+            <div class="field">
+              <label for="age">Tuổi</label>
+              <input id="age" name="age" type="number" placeholder="Ví dụ: 29" required>
+            </div>
 
-          <button type="submit" class="btn btn-primary">Lưu hồ sơ</button>
+            <div class="field">
+              <label for="gender">Giới tính</label>
+              <select id="gender" name="gender">
+                <option>Nam</option>
+                <option>Nữ</option>
+                <option>Khác</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="job">Công việc</label>
+              <input id="job" name="job" type="text" placeholder="Ví dụ: Làm nail, kỹ thuật, kinh doanh">
+            </div>
+
+            <div class="field">
+              <label for="state">Bang đang sống</label>
+              <input id="state" name="state" type="text" placeholder="Ví dụ: Texas">
+            </div>
+
+            <div class="field">
+              <label for="city">Thành phố</label>
+              <input id="city" name="city" type="text" placeholder="Ví dụ: Odessa">
+            </div>
+
+            <div class="field">
+              <label for="platform">Nền tảng liên hệ chính</label>
+              <select id="platform" name="platform">
+                <option>TikTok</option>
+                <option>Facebook</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="link">Link tài khoản</label>
+              <input id="link" name="link" type="text" placeholder="Dán link Facebook hoặc TikTok của bạn">
+            </div>
+
+            <div class="field">
+              <label for="goal">Mục tiêu</label>
+              <select id="goal" name="goal">
+                <option>Kết bạn</option>
+                <option>Tìm hiểu nghiêm túc</option>
+                <option>Kết nối lâu dài</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="liveSlot">Khung giờ live mong muốn</label>
+              <select id="liveSlot" name="liveSlot">
+                <option>Thứ 7 • 7:30 PM</option>
+                <option>Thứ 7 • 9:00 PM</option>
+                <option>Chủ Nhật • 7:00 PM</option>
+                <option>Chủ Nhật • 8:30 PM</option>
+              </select>
+            </div>
+
+            <div class="field full">
+              <label for="bio">Giới thiệu ngắn</label>
+              <textarea id="bio" name="bio" placeholder="Viết vài dòng về bạn để người khác dễ hiểu hơn"></textarea>
+            </div>
+
+            <div class="field full">
+              <button type="submit" class="btn btn-primary">Lưu hồ sơ</button>
+            </div>
+          </div>
         </form>
 
-        <p id="successMessage" style="display:none;">Đã lưu, đang chuyển...</p>
+        <p id="successMessage" style="display:none; margin-top:16px; color:#fff;">
+          Đã lưu hồ sơ, đang chuyển sang danh sách thành viên...
+        </p>
       </div>
+    </div>
+  </section>
 
+  <section class="footer">
+    <div class="container">
+      © 2026 Kết Nối Việt Mỹ • TikTok: @hoaidangllc
     </div>
   </section>
 </main>
 
-<!-- 🔥 SCRIPT CHUẨN -->
 <script>
 window.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("form");
-  const loginRequiredBox = document.getElementById("loginRequiredBox");
   const successMessage = document.getElementById("successMessage");
-
+  const loginNotice = document.getElementById("loginNotice");
   const loginBtn = document.getElementById("loginBtn");
   const logoutBtn = document.getElementById("logoutBtn");
-  const loginBtnInline = document.getElementById("loginBtnInline");
-
-  if (loginBtnInline) {
-    loginBtnInline.onclick = () => loginBtn.click();
-  }
 
   function isLoggedIn() {
     if (!loginBtn || !logoutBtn) return false;
 
-    const loginHidden = window.getComputedStyle(loginBtn).display === "none";
-    const logoutVisible = window.getComputedStyle(logoutBtn).display !== "none";
+    const loginHidden =
+      loginBtn.style.display === "none" ||
+      window.getComputedStyle(loginBtn).display === "none";
+
+    const logoutVisible =
+      logoutBtn.style.display !== "none" &&
+      window.getComputedStyle(logoutBtn).display !== "none";
 
     return loginHidden || logoutVisible;
   }
 
-  function updateUI() {
+  function updateNotice() {
     if (isLoggedIn()) {
-      form.style.display = "block";
-      loginRequiredBox.style.display = "none";
+      loginNotice.style.display = "none";
     } else {
-      form.style.display = "none";
-      loginRequiredBox.style.display = "block";
+      loginNotice.style.display = "block";
     }
   }
 
-  updateUI();
+  updateNotice();
 
-  // 🔥 theo dõi thay đổi login realtime
-  const observer = new MutationObserver(updateUI);
+  const observer = new MutationObserver(updateNotice);
+  if (loginBtn) observer.observe(loginBtn, { attributes: true });
+  if (logoutBtn) observer.observe(logoutBtn, { attributes: true });
 
-  observer.observe(loginBtn, { attributes: true });
-  observer.observe(logoutBtn, { attributes: true });
+  setTimeout(updateNotice, 500);
+  setTimeout(updateNotice, 1500);
+  setTimeout(updateNotice, 3000);
 
-  // fallback
-  setTimeout(updateUI, 500);
-  setTimeout(updateUI, 1500);
-  setTimeout(updateUI, 3000);
-
-  // submit
   form.addEventListener("submit", (e) => {
     e.preventDefault();
 
     if (!isLoggedIn()) {
-      updateUI();
+      loginNotice.style.display = "block";
+      loginNotice.scrollIntoView({ behavior: "smooth", block: "center" });
+      if (loginBtn) loginBtn.click();
       return;
     }
 
@@ -137,13 +210,11 @@ window.addEventListener("DOMContentLoaded", () => {
 
     setTimeout(() => {
       window.location = "profiles.html";
-    }, 800);
+    }, 700);
   });
 });
 </script>
 
-<!-- 🔥 LOGIN CHUNG -->
 <script type="module" src="/assets/js/auth.js"></script>
-
 </body>
 </html>
