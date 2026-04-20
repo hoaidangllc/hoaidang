@@ -1,34 +1,101 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Đăng ký hồ sơ | Kết Nối Việt Mỹ</title>
+  <link rel="stylesheet" href="./assets/css/styles.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container nav">
+    <a href="/" class="brand">
+      <span class="brand-badge">❤</span>
+      <span>Kết Nối Việt Mỹ</span>
+    </a>
+
+    <nav class="nav-links">
+      <a href="/">Trang chủ</a>
+      <a href="./profiles.html">Thành viên</a>
+      <a href="./register.html">Đăng ký</a>
+      <a href="./live.html">Lịch live</a>
+
+      <span id="authUser" class="auth-user"></span>
+
+      <button id="loginBtn" class="btn btn-secondary">Đăng nhập Google</button>
+      <button id="logoutBtn" class="btn btn-secondary" style="display:none;">Đăng xuất</button>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="section">
+    <div class="container form-wrap">
+
+      <!-- 🔴 CHƯA LOGIN -->
+      <div id="loginRequiredBox" class="form-card" style="display:none; margin-bottom:20px;">
+        <h2>Bạn cần đăng nhập trước</h2>
+        <p>Vui lòng đăng nhập Google để tạo hồ sơ.</p>
+
+        <div class="hero-actions">
+          <button id="loginBtnInline" class="btn btn-primary">Đăng nhập Google</button>
+        </div>
+      </div>
+
+      <!-- 🟢 FORM -->
+      <div class="form-card">
+        <h2>Tạo hồ sơ</h2>
+
+        <form id="form">
+          <input name="name" placeholder="Tên" required><br><br>
+          <input name="age" placeholder="Tuổi" required><br><br>
+          <input name="job" placeholder="Công việc"><br><br>
+          <input name="city" placeholder="Thành phố"><br><br>
+          <input name="state" placeholder="Bang"><br><br>
+          <input name="link" placeholder="Link Facebook / TikTok"><br><br>
+
+          <select name="liveSlot">
+            <option>Thứ 7 • 7:30 PM</option>
+            <option>Thứ 7 • 9:00 PM</option>
+          </select><br><br>
+
+          <button type="submit" class="btn btn-primary">Lưu hồ sơ</button>
+        </form>
+
+        <p id="successMessage" style="display:none;">Đã lưu, đang chuyển...</p>
+      </div>
+
+    </div>
+  </section>
+</main>
+
+<!-- 🔥 SCRIPT CHUẨN -->
 <script>
 window.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("form");
-  const successMessage = document.getElementById("successMessage");
   const loginRequiredBox = document.getElementById("loginRequiredBox");
-  const loginBtnInline = document.getElementById("loginBtnInline");
+  const successMessage = document.getElementById("successMessage");
+
   const loginBtn = document.getElementById("loginBtn");
   const logoutBtn = document.getElementById("logoutBtn");
+  const loginBtnInline = document.getElementById("loginBtnInline");
 
-  if (loginBtnInline && loginBtn) {
-    loginBtnInline.addEventListener("click", () => loginBtn.click());
+  if (loginBtnInline) {
+    loginBtnInline.onclick = () => loginBtn.click();
   }
 
   function isLoggedIn() {
     if (!loginBtn || !logoutBtn) return false;
 
-    const loginBtnHidden =
-      loginBtn.style.display === "none" ||
-      window.getComputedStyle(loginBtn).display === "none";
+    const loginHidden = window.getComputedStyle(loginBtn).display === "none";
+    const logoutVisible = window.getComputedStyle(logoutBtn).display !== "none";
 
-    const logoutBtnVisible =
-      logoutBtn.style.display !== "none" &&
-      window.getComputedStyle(logoutBtn).display !== "none";
-
-    return loginBtnHidden || logoutBtnVisible;
+    return loginHidden || logoutVisible;
   }
 
-  function updateRegisterUI() {
-    const loggedIn = isLoggedIn();
-
-    if (loggedIn) {
+  function updateUI() {
+    if (isLoggedIn()) {
       form.style.display = "block";
       loginRequiredBox.style.display = "none";
     } else {
@@ -37,39 +104,25 @@ window.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  updateRegisterUI();
+  updateUI();
 
-  setTimeout(updateRegisterUI, 500);
-  setTimeout(updateRegisterUI, 1200);
-  setTimeout(updateRegisterUI, 2000);
-  setTimeout(updateRegisterUI, 3500);
+  // 🔥 theo dõi thay đổi login realtime
+  const observer = new MutationObserver(updateUI);
 
-  const observer = new MutationObserver(() => {
-    updateRegisterUI();
-  });
+  observer.observe(loginBtn, { attributes: true });
+  observer.observe(logoutBtn, { attributes: true });
 
-  if (logoutBtn) {
-    observer.observe(logoutBtn, {
-      attributes: true,
-      attributeFilter: ["style", "class"]
-    });
-  }
+  // fallback
+  setTimeout(updateUI, 500);
+  setTimeout(updateUI, 1500);
+  setTimeout(updateUI, 3000);
 
-  if (loginBtn) {
-    observer.observe(loginBtn, {
-      attributes: true,
-      attributeFilter: ["style", "class"]
-    });
-  }
-
-  window.addEventListener("focus", updateRegisterUI);
-  document.addEventListener("visibilitychange", updateRegisterUI);
-
+  // submit
   form.addEventListener("submit", (e) => {
     e.preventDefault();
 
     if (!isLoggedIn()) {
-      updateRegisterUI();
+      updateUI();
       return;
     }
 
@@ -84,7 +137,13 @@ window.addEventListener("DOMContentLoaded", () => {
 
     setTimeout(() => {
       window.location = "profiles.html";
-    }, 700);
+    }, 800);
   });
 });
 </script>
+
+<!-- 🔥 LOGIN CHUNG -->
+<script type="module" src="/assets/js/auth.js"></script>
+
+</body>
+</html>
