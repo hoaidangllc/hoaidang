@@ -17,7 +17,7 @@
     </a>
 
     <nav class="nav-links">
-      <a href="/">Trang chủ</a>
+      <a href="/">Về hoaidang.com</a>
       <a href="./profiles.html">Thành viên</a>
       <a href="./register.html">Đăng ký</a>
       <a href="./live.html">Lịch live</a>
@@ -45,9 +45,7 @@
         <div class="hero-actions">
           <a href="./register.html" class="btn btn-primary">Đăng ký tham gia</a>
           <a href="./profiles.html" class="btn btn-secondary">Xem thành viên</a>
-          <a href="https://www.tiktok.com/@hoaidangllc" target="_blank" class="btn btn-secondary">
-            Xem TikTok @hoaidangllc
-          </a>
+          <a href="https://www.tiktok.com/@hoaidangllc" target="_blank" class="btn btn-secondary">Xem TikTok @hoaidangllc</a>
         </div>
       </div>
     </div>
@@ -72,9 +70,10 @@
   </section>
 </main>
 
-<script>
+<script type="module">
+import { getProfiles } from "./assets/js/ketnoi-firebase.js";
+
 const liveList = document.getElementById("liveList");
-let users = JSON.parse(localStorage.getItem("users") || "[]");
 
 const slots = [
   "Thứ 7 • 7:30 PM",
@@ -83,18 +82,14 @@ const slots = [
   "Chủ Nhật • 8:30 PM"
 ];
 
-liveList.innerHTML = slots.map(slot => {
-  const matched = users.filter(u => u.liveSlot === slot);
-
+function renderSlot(slot, matched) {
   return `
     <div class="card">
       <div class="card-body">
         <h3>${slot}</h3>
         <p>
           Live trên TikTok:
-          <a href="https://www.tiktok.com/@hoaidangllc" target="_blank">
-            @hoaidangllc
-          </a>
+          <a href="https://www.tiktok.com/@hoaidangllc" target="_blank">@hoaidangllc</a>
         </p>
 
         ${
@@ -121,7 +116,30 @@ liveList.innerHTML = slots.map(slot => {
       </div>
     </div>
   `;
-}).join("");
+}
+
+async function loadLiveSlots() {
+  try {
+    const users = await getProfiles();
+
+    liveList.innerHTML = slots.map(slot => {
+      const matched = users.filter(u => u.liveSlot === slot);
+      return renderSlot(slot, matched);
+    }).join("");
+  } catch (err) {
+    console.error("Lỗi load live Firebase:", err);
+    liveList.innerHTML = `
+      <div class="card">
+        <div class="card-body">
+          <h3>Không tải được lịch live</h3>
+          <p>Kiểm tra Firestore rules hoặc file ketnoi-firebase.js.</p>
+        </div>
+      </div>
+    `;
+  }
+}
+
+loadLiveSlots();
 </script>
 
 <script type="module" src="/assets/js/auth.js"></script>
