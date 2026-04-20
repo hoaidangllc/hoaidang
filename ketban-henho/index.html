@@ -1,94 +1,79 @@
-<!DOCTYPE html>
 <html lang="vi">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kết Nối Việt Mỹ</title>
-  <meta name="description" content="Nơi người Việt tại Mỹ có thể kết bạn, làm quen và tham gia live cuối tuần trên TikTok @hoaidangllc.">
-  <link rel="stylesheet" href="./assets/css/styles.css">
-</head>
-<body>
-
-<header class="site-header">
-  <div class="container nav">
-    <a href="/" class="brand">
-      <span class="brand-badge">❤</span>
-      <span>Kết Nối Việt Mỹ</span>
-    </a>
-
-    <nav class="nav-links">
-      <a href="/">Trang chủ</a>
-      <a href="./profiles.html">Thành viên</a>
-      <a href="./register.html">Đăng ký</a>
-      <a href="./live.html">Lịch live</a>
-
-      <span id="authUser" class="auth-name"></span>
-
-      <button id="loginBtn" class="btn btn-secondary" type="button">Đăng nhập Google</button>
-      <button id="logoutBtn" class="btn btn-secondary" type="button" style="display:none;">Đăng xuất</button>
-    </nav>
-  </div>
-</header>
-
-<main>
-  <section class="hero">
-    <div class="container">
-      <div class="hero-card">
-        <div class="eyebrow">✨ Người Việt tại Mỹ • Kết bạn • Làm quen • Live cuối tuần</div>
-        <h1>Kết bạn thật. <span>Làm quen rõ hơn qua live TikTok cuối tuần.</span></h1>
-        <p>
-          Đây là nơi để bạn tạo hồ sơ, xem người phù hợp và đăng ký tham gia các buổi live cuối tuần
-          trên TikTok <strong>@hoaidangllc</strong>.
-        </p>
-
-        <div class="hero-actions">
-          <a href="./register.html" class="btn btn-primary">Tạo hồ sơ ngay</a>
-          <a href="./profiles.html" class="btn btn-secondary">Xem thành viên</a>
-          <a href="./live.html" class="btn btn-secondary">Xem lịch live</a>
-        </div>
+  <header class="main-header">
+    <div class="container header-inner">
+      <div class="logo"><a href="/">Kết Nối Việt Mỹ</a></div>
+      <nav class="nav">
+        <a href="./index.html" class="active">Trang chủ</a>
+        <a href="./profiles.html">Thành viên</a>
+        <a href="./register.html">Tạo hồ sơ</a>
+        <a href="./live.html">Live cuối tuần</a>
+      </nav>
+      <div class="auth-box">
+        <span id="authUser" class="auth-user"></span>
+        <button id="loginBtn" class="btn btn-primary" type="button">Đăng nhập Google</button>
+        <button id="logoutBtn" class="btn btn-outline" type="button" style="display:none;">Đăng xuất</button>
       </div>
     </div>
-  </section>
+  </header>
 
-  <section class="section">
-    <div class="container">
-      <div class="section-title">
-        <h2>Web này có gì?</h2>
-        <p>Gọn, rõ, không màu mè. Tập trung vào hồ sơ thật, kết nối thật và lịch live cuối tuần.</p>
-      </div>
-
-      <div class="grid">
-        <div class="card">
-          <div class="card-body">
-            <h3>1. Tạo hồ sơ</h3>
-            <p>Nhập tên, tuổi, công việc, nơi sống và nền tảng liên hệ chính của bạn.</p>
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <p class="eyebrow">Vietnamese friendship & dating</p>
+          <h1>Kết nối người Việt tại Mỹ theo cách gọn, sạch và nghiêm túc.</h1>
+          <p class="lead">
+            Tạo hồ sơ, xem thành viên, và tham gia buổi live cuối tuần trên TikTok để giới thiệu bản thân.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="./register.html">Tạo hồ sơ ngay</a>
+            <a class="btn btn-outline" href="./profiles.html">Xem thành viên</a>
           </div>
         </div>
-
-        <div class="card">
-          <div class="card-body">
-            <h3>2. Xem thành viên</h3>
-            <p>Duyệt danh sách người đã đăng ký để xem ai phù hợp với mình hơn.</p>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="card-body">
-            <h3>3. Live cuối tuần</h3>
-            <p>Chọn khung giờ để tham gia live làm quen trên TikTok @hoaidangllc.</p>
-          </div>
+        <div class="card hero-card">
+          <h3>Hoạt động chính</h3>
+          <ul class="feature-list">
+            <li>Tạo hồ sơ cá nhân nhanh</li>
+            <li>Xem danh sách thành viên</li>
+            <li>Trang chi tiết từng hồ sơ</li>
+            <li>Thông báo lịch live cuối tuần</li>
+            <li>Dùng chung Google login từ hoaidang.com</li>
+          </ul>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section class="footer">
-    <div class="container">
-      © 2026 Kết Nối Việt Mỹ • TikTok: @hoaidangllc
-    </div>
-  </section>
-</main>
+    <section class="section">
+      <div class="container section-head">
+        <h2>Bắt đầu rất đơn giản</h2>
+        <p>Đăng nhập Google, tạo hồ sơ, rồi chờ lên live giới thiệu nếu muốn.</p>
+      </div>
+      <div class="container grid-3">
+        <div class="card step-card">
+          <span class="step-no">01</span>
+          <h3>Đăng nhập</h3>
+          <p>Dùng tài khoản Google để xác minh nhanh và đồng bộ trên toàn bộ website.</p>
+        </div>
+        <div class="card step-card">
+          <span class="step-no">02</span>
+          <h3>Tạo hồ sơ</h3>
+          <p>Nhập thông tin cơ bản như tên hiển thị, tuổi, tiểu bang, nghề nghiệp, mô tả và mục tiêu kết nối.</p>
+        </div>
+        <div class="card step-card">
+          <span class="step-no">03</span>
+          <h3>Tham gia cộng đồng</h3>
+          <p>Xem thành viên khác và tham gia các buổi live giới thiệu cuối tuần trên @hoaidangllc.</p>
+        </div>
+      </div>
+    </section>
+  </main>
 
-<script type="module" src="/assets/js/auth.js"></script>
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>© 2026 Kết Nối Việt Mỹ • Thuộc hệ thống hoaidang.com</p>
+    </div>
+  </footer>
+
+  <script type="module" src="/assets/js/auth.js"></script>
 </body>
 </html>
