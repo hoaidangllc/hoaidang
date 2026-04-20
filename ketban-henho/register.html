@@ -162,51 +162,68 @@ window.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("form");
   const successMessage = document.getElementById("successMessage");
   const loginRequiredBox = document.getElementById("loginRequiredBox");
-  const authUser = document.getElementById("authUser");
   const loginBtnInline = document.getElementById("loginBtnInline");
   const loginBtn = document.getElementById("loginBtn");
+  const logoutBtn = document.getElementById("logoutBtn");
 
   if (loginBtnInline && loginBtn) {
     loginBtnInline.addEventListener("click", () => loginBtn.click());
   }
 
-  const checkLogin = () => {
-    const hasUser = authUser && authUser.textContent.trim() !== "";
+  function isLoggedIn() {
+    if (!loginBtn || !logoutBtn) return false;
 
-    if (!hasUser) {
-      form.style.display = "none";
-      loginRequiredBox.style.display = "block";
+    const loginBtnHidden =
+      loginBtn.style.display === "none" ||
+      window.getComputedStyle(loginBtn).display === "none";
+
+    const logoutBtnVisible =
+      logoutBtn.style.display !== "none" &&
+      window.getComputedStyle(logoutBtn).display !== "none";
+
+    return loginBtnHidden || logoutBtnVisible;
+  }
+
+  function checkLogin() {
+    const loggedIn = isLoggedIn();
+
+    if (!loggedIn) {
+      if (form) form.style.display = "none";
+      if (loginRequiredBox) loginRequiredBox.style.display = "block";
     } else {
-      form.style.display = "block";
-      loginRequiredBox.style.display = "none";
+      if (form) form.style.display = "block";
+      if (loginRequiredBox) loginRequiredBox.style.display = "none";
     }
-  };
+  }
 
-  setTimeout(checkLogin, 700);
+  setTimeout(checkLogin, 500);
+  setTimeout(checkLogin, 1200);
+  setTimeout(checkLogin, 2000);
 
-  form.addEventListener("submit", (e) => {
-    e.preventDefault();
+  if (form) {
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
 
-    const hasUser = authUser && authUser.textContent.trim() !== "";
-    if (!hasUser) {
-      form.style.display = "none";
-      loginRequiredBox.style.display = "block";
-      return;
-    }
+      if (!isLoggedIn()) {
+        if (form) form.style.display = "none";
+        if (loginRequiredBox) loginRequiredBox.style.display = "block";
+        return;
+      }
 
-    const data = Object.fromEntries(new FormData(form));
-    data.id = Date.now();
+      const data = Object.fromEntries(new FormData(form));
+      data.id = Date.now();
 
-    let users = JSON.parse(localStorage.getItem("users") || "[]");
-    users.push(data);
-    localStorage.setItem("users", JSON.stringify(users));
+      let users = JSON.parse(localStorage.getItem("users") || "[]");
+      users.push(data);
+      localStorage.setItem("users", JSON.stringify(users));
 
-    successMessage.style.display = "block";
+      if (successMessage) successMessage.style.display = "block";
 
-    setTimeout(() => {
-      window.location = "profiles.html";
-    }, 700);
-  });
+      setTimeout(() => {
+        window.location = "profiles.html";
+      }, 700);
+    });
+  }
 });
 </script>
 
