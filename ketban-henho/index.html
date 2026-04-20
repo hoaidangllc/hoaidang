@@ -20,6 +20,9 @@
       <a href="./profiles.html">Thành viên</a>
       <a href="./register.html">Đăng ký</a>
       <a href="./live.html">Lịch live</a>
+
+      <span id="userBox" style="color:rgba(255,255,255,.75);font-size:.95rem;"></span>
+
       <a href="/login/" class="btn btn-secondary">Đăng nhập Google</a>
     </nav>
   </div>
@@ -30,7 +33,9 @@
     <div class="container">
       <div class="hero-card">
         <div class="eyebrow">✨ Người Việt tại Mỹ • Kết bạn • Làm quen • Live cuối tuần</div>
+
         <h1>Kết bạn thật. <span>Làm quen rõ hơn qua live TikTok cuối tuần.</span></h1>
+
         <p>
           Đây là nơi để bạn tạo hồ sơ, xem người phù hợp và đăng ký tham gia các buổi live cuối tuần
           trên TikTok <strong>@hoaidangllc</strong>.
@@ -39,6 +44,7 @@
         <div class="hero-actions">
           <a href="./register.html" class="btn btn-primary">Tạo hồ sơ ngay</a>
           <a href="./profiles.html" class="btn btn-secondary">Xem thành viên</a>
+          <a href="./live.html" class="btn btn-secondary">Xem lịch live</a>
         </div>
       </div>
     </div>
@@ -82,6 +88,43 @@
     </div>
   </section>
 </main>
+
+<script type="module" src="/assets/js/auth.js"></script>
+
+<script>
+window.addEventListener("DOMContentLoaded", () => {
+  const userBox = document.getElementById("userBox");
+
+  const possibleKeys = [
+    "sharedGoogleUser",
+    "googleUser",
+    "user",
+    "authUser",
+    "currentUser"
+  ];
+
+  let foundUser = null;
+
+  for (const key of possibleKeys) {
+    const raw = localStorage.getItem(key);
+    if (!raw) continue;
+
+    try {
+      const parsed = JSON.parse(raw);
+      if (parsed && (parsed.displayName || parsed.name || parsed.email)) {
+        foundUser = parsed;
+        break;
+      }
+    } catch (e) {
+      // bỏ qua key lỗi
+    }
+  }
+
+  if (userBox && foundUser) {
+    userBox.textContent = `Xin chào, ${foundUser.displayName || foundUser.name || foundUser.email}`;
+  }
+});
+</script>
 
 </body>
 </html>
