@@ -45,6 +45,9 @@
         <div class="hero-actions">
           <a href="./register.html" class="btn btn-primary">Đăng ký tham gia</a>
           <a href="./profiles.html" class="btn btn-secondary">Xem thành viên</a>
+          <a href="https://www.tiktok.com/@hoaidangllc" target="_blank" class="btn btn-secondary">
+            Xem TikTok @hoaidangllc
+          </a>
         </div>
       </div>
     </div>
@@ -63,7 +66,8 @@
 
   <section class="footer">
     <div class="container">
-      © 2026 Kết Nối Việt Mỹ • TikTok: @hoaidangllc
+      © 2026 Kết Nối Việt Mỹ • TikTok:
+      <a href="https://www.tiktok.com/@hoaidangllc" target="_blank">@hoaidangllc</a>
     </div>
   </section>
 </main>
@@ -86,7 +90,13 @@ liveList.innerHTML = slots.map(slot => {
     <div class="card">
       <div class="card-body">
         <h3>${slot}</h3>
-        <p>Live trên TikTok: <strong>@hoaidangllc</strong></p>
+        <p>
+          Live trên TikTok:
+          <a href="https://www.tiktok.com/@hoaidangllc" target="_blank">
+            @hoaidangllc
+          </a>
+        </p>
+
         ${
           matched.length > 0
             ? matched.map(u => `
@@ -95,8 +105,14 @@ liveList.innerHTML = slots.map(slot => {
                   <div class="meta">
                     ${u.city || "Chưa rõ thành phố"}${u.state ? `, ${u.state}` : ""} • ${u.job || "Chưa cập nhật"}
                   </div>
+
                   <div class="hero-actions" style="margin-top:12px;">
                     <a href="./profile.html?id=${u.id}" class="btn btn-secondary">Xem hồ sơ</a>
+                    ${
+                      u.link
+                        ? `<a href="${u.link}" target="_blank" class="btn btn-primary">${u.platform || "Mở liên hệ"}</a>`
+                        : `<span class="btn btn-secondary btn-disabled">Chưa có link</span>`
+                    }
                   </div>
                 </div>
               `).join("")
