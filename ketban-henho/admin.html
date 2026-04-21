@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin | Kết Nối Việt Mỹ</title>
+  <meta name="description" content="Trang quản trị hồ sơ thành viên cho Kết Nối Việt Mỹ.">
+  <link rel="stylesheet" href="./assets/css/styles.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container nav">
+    <a href="./index.html" class="brand">
+      <span class="brand-badge">❤</span>
+      <span>Kết Nối Việt Mỹ</span>
+    </a>
+
+    <nav class="nav-links">
+      <a href="/">Về hoaidang.com</a>
+      <a href="./index.html">Trang ketnoi</a>
+      <a href="./profiles.html">Thành viên</a>
+      <a href="./register.html">Đăng ký</a>
+      <a href="./live.html">Lịch live</a>
+      <a href="./my-profile.html">Hồ sơ của tôi</a>
+      <a href="./admin.html">Admin</a>
+
+      <span id="authUser" class="auth-user"></span>
+
+      <button id="loginBtn" class="btn btn-secondary" type="button">Đăng nhập Google</button>
+      <button id="logoutBtn" class="btn btn-secondary" type="button" style="display:none;">Đăng xuất</button>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="container">
+      <div class="hero-card">
+        <div class="eyebrow">🛠️ Quản trị hệ thống</div>
+        <h1>Admin quản lý hồ sơ. <span>Xóa hồ sơ rác và kiểm tra dữ liệu.</span></h1>
+        <p>
+          Trang này chỉ dành cho tài khoản admin. Bạn có thể xem toàn bộ hồ sơ,
+          mở nhanh hồ sơ chi tiết và xóa hồ sơ nếu cần.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div id="adminBox" class="form-card">
+        <p>Đang kiểm tra quyền admin...</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="footer">
+    <div class="container">
+      © 2026 Kết Nối Việt Mỹ • Admin panel
+    </div>
+  </section>
+</main>
+
+<script type="module" src="/assets/js/auth.js"></script>
+
+<script type="module">
+import {
+  waitForAuthUser,
+  getProfiles
+} from "./assets/js/ketnoi-firebase.js";
+
+import {
+  initializeApp,
+  getApps,
+  getApp
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import {
+  getFirestore,
+  doc,
+  deleteDoc
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCF38B9ZVLiekJY3RMvC3FEn2L188dJxM",
+  authDomain: "hoaidang-auth.firebaseapp.com",
+  projectId: "hoaidang-auth",
+  storageBucket: "hoaidang-auth.appspot.com",
+  messagingSenderId: "88083628212",
+  appId: "1:88083628212:web:c7608e6ef87ce3f4927a21"
+};
+
+const ADMIN_EMAIL = "ddh2755@gmail.com";
+
+const app = getApps().length ? getApp() : initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+const adminBox = document.getElementById("adminBox");
+
+function renderNoLogin() {
+  adminBox.innerHTML = `
+    <div class="section-title">
+      <h2>Bạn chưa đăng nhập</h2>
+      <p>Hãy đăng nhập Google bằng tài khoản admin để vào trang này.</p>
+    </div>
+  `;
+}
+
+function renderNoAccess(email) {
+  adminBox.innerHTML = `
+    <div class="section-title">
+      <h2>Không có quyền truy cập</h2>
+      <p>Tài khoản hiện tại ${email ? `(${email})` : ""} không phải admin.</p>
+    </div>
+
+    <div class="hero-actions">
+      <a href="./index.html" class="btn btn-primary">Quay về trang ketnoi</a>
+    </div>
+  `;
+}
+
+function renderEmpty() {
+  adminBox.innerHTML = `
+    <div class="section-title">
+      <h2>Chưa có hồ sơ nào</h2>
+      <p>Hiện chưa có dữ liệu để quản lý.</p>
+    </div>
+  `;
+}
+
+function renderAdmin(users) {
+  adminBox.innerHTML = `
+    <div class="section-title">
+      <h2>Quản lý hồ sơ thành viên</h2>
+      <p>Tổng số hồ sơ hiện có: <strong>${users.length}</strong></p>
+    </div>
+
+    <div class="list">
+      ${users.map(user => `
+        <div class="member-item" data-id="${user.id}">
+          <strong>${user.name || "Chưa có tên"}${user.age ? `, ${user.age} tuổi` : ""}</strong>
+          <div class="meta">
+            ${user.city || "Chưa rõ thành phố"}${user.state ? `, ${user.state}` : ""} • ${user.job || "Chưa cập nhật"}
+          </div>
+          <div class="meta" style="margin-top:6px;">
+            <strong>Email:</strong> ${user.email || "Chưa có"}<br>
+            <strong>UID:</strong> ${user.uid || "Chưa có"}<br>
+            <strong>Mục tiêu:</strong> ${user.goal || "Chưa cập nhật"}<br>
+            <strong>Khung giờ live:</strong> ${user.liveSlot || "Chưa chọn"}
+          </div>
+
+          <div class="hero-actions" style="margin-top:14px;">
+            <a href="./profile.html?id=${user.id}" class="btn btn-secondary">Xem hồ sơ</a>
+            ${
+              user.link
+                ? `<a href="${user.link}" target="_blank" class="btn btn-secondary">${user.platform || "Mở liên hệ"}</a>`
+                : `<span class="btn btn-secondary btn-disabled">Chưa có link</span>`
+            }
+            <button class="btn btn-primary delete-btn" data-id="${user.id}" data-name="${(user.name || "Hồ sơ này").replace(/"/g, '&quot;')}">
+              Xóa hồ sơ
+            </button>
+          </div>
+        </div>
+      `).join("")}
+    </div>
+  `;
+
+  const deleteButtons = document.querySelectorAll(".delete-btn");
+
+  deleteButtons.forEach(btn => {
+    btn.addEventListener("click", async () => {
+      const id = btn.getAttribute("data-id");
+      const name = btn.getAttribute("data-name") || "Hồ sơ này";
+
+      const ok = confirm(`Bạn chắc chắn muốn xóa hồ sơ của ${name}?`);
+      if (!ok) return;
+
+      try {
+        await deleteDoc(doc(db, "ketnoi_profiles", id));
+        btn.closest(".member-item")?.remove();
+        alert("Đã xóa hồ sơ.");
+      } catch (err) {
+        console.error("Lỗi xóa hồ sơ:", err);
+        alert("Xóa hồ sơ thất bại.");
+      }
+    });
+  });
+}
+
+async function initAdmin() {
+  try {
+    const user = await waitForAuthUser();
+
+    if (!user) {
+      renderNoLogin();
+      return;
+    }
+
+    if ((user.email || "").toLowerCase() !== ADMIN_EMAIL.toLowerCase()) {
+      renderNoAccess(user.email || "");
+      return;
+    }
+
+    const users = await getProfiles();
+
+    if (!users || users.length === 0) {
+      renderEmpty();
+      return;
+    }
+
+    renderAdmin(users);
+  } catch (err) {
+    console.error("Lỗi admin:", err);
+    adminBox.innerHTML = `
+      <div class="section-title">
+        <h2>Không tải được trang admin</h2>
+        <p>Kiểm tra auth, Firestore hoặc file ketnoi-firebase.js.</p>
+      </div>
+    `;
+  }
+}
+
+initAdmin();
+</script>
+
+</body>
+</html>
