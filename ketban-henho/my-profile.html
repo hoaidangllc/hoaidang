@@ -6,6 +6,186 @@
   <title>Hồ sơ của tôi | Kết Nối Việt Mỹ</title>
   <meta name="description" content="Xem, sửa hoặc xóa hồ sơ của tôi trên Kết Nối Việt Mỹ.">
   <link rel="stylesheet" href="./assets/css/styles.css">
+
+  <style>
+    body {
+      background:
+        radial-gradient(circle at top left, rgba(255,45,120,.08), transparent 28%),
+        radial-gradient(circle at top right, rgba(0,234,255,.07), transparent 24%),
+        linear-gradient(135deg,#0c0c14,#141428);
+      color:#fff;
+    }
+
+    .glass-card {
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.1);
+      backdrop-filter: blur(14px);
+      border-radius: 26px;
+      box-shadow: 0 25px 60px rgba(0,0,0,.35);
+    }
+
+    .my-shell {
+      display:grid;
+      grid-template-columns: 340px 1fr;
+      gap:20px;
+    }
+
+    .profile-panel,
+    .form-panel {
+      padding:22px;
+    }
+
+    .avatar-wrap {
+      position:relative;
+      width:180px;
+      height:180px;
+      margin:0 auto 18px;
+    }
+
+    .avatar-ring {
+      position:absolute;
+      inset:-3px;
+      border-radius:50%;
+      background: linear-gradient(135deg, rgba(255,45,120,.95), rgba(0,234,255,.9));
+    }
+
+    .profile-avatar {
+      position:relative;
+      width:100%;
+      height:100%;
+      border-radius:50%;
+      object-fit:cover;
+      border:4px solid rgba(16,16,24,.95);
+      background:rgba(255,255,255,.05);
+      z-index:1;
+      display:block;
+    }
+
+    .panel-name {
+      margin:0;
+      text-align:center;
+      font-size:1.45rem;
+      color:#fff;
+      letter-spacing:-.02em;
+    }
+
+    .panel-sub {
+      margin-top:8px;
+      text-align:center;
+      color:#bbb;
+    }
+
+    .panel-badges {
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:center;
+      gap:8px;
+      margin-top:16px;
+    }
+
+    .panel-badge {
+      display:inline-flex;
+      align-items:center;
+      padding:8px 12px;
+      border-radius:999px;
+      font-size:.86rem;
+      font-weight:700;
+      color:#fff;
+      background:rgba(255,255,255,.07);
+      border:1px solid rgba(255,255,255,.09);
+    }
+
+    .panel-note {
+      margin-top:18px;
+      padding:14px 16px;
+      border-radius:18px;
+      background:rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.08);
+      color:#c9c9c9;
+      line-height:1.6;
+    }
+
+    .avatar-upload-box {
+      margin-top:18px;
+      padding:14px;
+      border-radius:18px;
+      background:rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.08);
+    }
+
+    .avatar-upload-box label {
+      display:block;
+      margin-bottom:10px;
+      font-weight:700;
+      color:#fff;
+    }
+
+    .avatar-upload-box input[type="file"] {
+      width:100%;
+    }
+
+    .avatar-help {
+      margin-top:8px;
+      color:#aaa;
+      font-size:.9rem;
+    }
+
+    .form-panel .section-title {
+      text-align:left;
+      margin-bottom:16px;
+    }
+
+    .field input,
+    .field select,
+    .field textarea {
+      background:rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.12);
+      color:#fff;
+    }
+
+    .field input::placeholder,
+    .field textarea::placeholder {
+      color:#aaa;
+    }
+
+    .field textarea {
+      min-height:120px;
+    }
+
+    .action-row {
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+
+    .helper-line {
+      margin-top:14px;
+      color:#bbb;
+      font-size:.95rem;
+      line-height:1.5;
+    }
+
+    .btn-danger-soft {
+      background:rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.12);
+      color:#fff;
+    }
+
+    .status-message {
+      margin-top:16px;
+      padding:12px 14px;
+      border-radius:14px;
+      background:rgba(0,255,180,.08);
+      border:1px solid rgba(0,255,180,.15);
+      color:#d7fff1;
+    }
+
+    @media (max-width: 900px) {
+      .my-shell {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
 <body>
 
@@ -35,7 +215,7 @@
 <main>
   <section class="hero">
     <div class="container form-wrap">
-      <div class="hero-card">
+      <div class="hero-card glass-card">
         <div class="eyebrow">👤 Hồ sơ của tôi</div>
         <h1>Xem, sửa hoặc xóa. <span>Chủ động quản lý hồ sơ của bạn.</span></h1>
         <p>
@@ -47,7 +227,7 @@
 
   <section class="section">
     <div class="container form-wrap">
-      <div id="myProfileBox" class="form-card">
+      <div id="myProfileBox" class="glass-card" style="padding:22px;">
         <p>Đang tải hồ sơ của bạn...</p>
       </div>
     </div>
@@ -68,10 +248,21 @@ import {
   waitForAuthUser,
   getMyProfile,
   updateMyProfile,
-  deleteMyProfile
+  deleteMyProfile,
+  uploadAvatar
 } from "./assets/js/ketnoi-firebase.js";
 
 const box = document.getElementById("myProfileBox");
+const DEFAULT_AVATAR = "./image/default-avatar.png";
+
+function escapeHtml(value) {
+  return String(value ?? "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+}
 
 function normalizeProfileLink(platform, rawLink) {
   if (!rawLink) return "";
@@ -93,6 +284,21 @@ function normalizeProfileLink(platform, rawLink) {
   }
 
   return link;
+}
+
+function validateAvatar(file) {
+  if (!file) return { ok: true };
+
+  if (!file.type.startsWith("image/")) {
+    return { ok: false, message: "Vui lòng chọn file hình ảnh." };
+  }
+
+  const maxSize = 3 * 1024 * 1024;
+  if (file.size > maxSize) {
+    return { ok: false, message: "Ảnh phải nhỏ hơn hoặc bằng 3MB." };
+  }
+
+  return { ok: true };
 }
 
 function renderNoLogin() {
@@ -117,118 +323,205 @@ function renderNoProfile() {
 }
 
 function renderForm(profile) {
+  const avatar = profile.avatarUrl || DEFAULT_AVATAR;
+  const safeName = escapeHtml(profile.name || "Chưa có tên");
+  const safeCity = escapeHtml(profile.city || "Chưa rõ thành phố");
+  const safeState = escapeHtml(profile.state || "");
+  const safeBio = escapeHtml(profile.bio || "");
+  const safeJob = escapeHtml(profile.job || "");
+  const safeLink = escapeHtml(profile.link || "");
+
   box.innerHTML = `
-    <div class="section-title">
-      <h2>Hồ sơ của tôi</h2>
-      <p>Bạn có thể sửa thông tin và lưu lại ngay tại đây.</p>
-    </div>
-
-    <form id="editForm">
-      <div class="form-grid">
-        <div class="field">
-          <label for="name">Tên hiển thị</label>
-          <input id="name" name="name" type="text" value="${profile.name || ""}" required>
+    <div class="my-shell">
+      <div class="glass-card profile-panel">
+        <div class="avatar-wrap">
+          <div class="avatar-ring"></div>
+          <img
+            id="currentAvatar"
+            src="${avatar}"
+            alt="${safeName}"
+            class="profile-avatar"
+            onerror="this.onerror=null;this.src='${DEFAULT_AVATAR}'"
+          >
         </div>
 
-        <div class="field">
-          <label for="age">Tuổi</label>
-          <input id="age" name="age" type="number" value="${profile.age || ""}" required>
+        <h2 class="panel-name">${safeName}</h2>
+        <div class="panel-sub">${safeCity}${safeState ? `, ${safeState}` : ""}</div>
+
+        <div class="panel-badges">
+          <span class="panel-badge">${escapeHtml(profile.platform || "Chưa chọn nền tảng")}</span>
+          <span class="panel-badge">${escapeHtml(profile.goal || "Chưa chọn mục tiêu")}</span>
         </div>
 
-        <div class="field">
-          <label for="gender">Giới tính</label>
-          <select id="gender" name="gender">
-            <option ${profile.gender === "Nam" ? "selected" : ""}>Nam</option>
-            <option ${profile.gender === "Nữ" ? "selected" : ""}>Nữ</option>
-            <option ${profile.gender === "Khác" ? "selected" : ""}>Khác</option>
-          </select>
+        <div class="panel-note">
+          Hồ sơ này đang gắn với tài khoản Google hiện tại của bạn. Bạn có thể đổi ảnh, sửa nội dung hoặc xóa hồ sơ bất cứ lúc nào.
         </div>
 
-        <div class="field">
-          <label for="job">Công việc</label>
-          <input id="job" name="job" type="text" value="${profile.job || ""}">
-        </div>
-
-        <div class="field">
-          <label for="state">Bang đang sống</label>
-          <input id="state" name="state" type="text" value="${profile.state || ""}">
-        </div>
-
-        <div class="field">
-          <label for="city">Thành phố</label>
-          <input id="city" name="city" type="text" value="${profile.city || ""}">
-        </div>
-
-        <div class="field">
-          <label for="platform">Nền tảng liên hệ chính</label>
-          <select id="platform" name="platform">
-            <option ${profile.platform === "TikTok" ? "selected" : ""}>TikTok</option>
-            <option ${profile.platform === "Facebook" ? "selected" : ""}>Facebook</option>
-          </select>
-        </div>
-
-        <div class="field">
-          <label for="link">Username hoặc link tài khoản</label>
-          <input id="link" name="link" type="text" value="${profile.link || ""}">
-        </div>
-
-        <div class="field">
-          <label for="goal">Mục tiêu</label>
-          <select id="goal" name="goal">
-            <option ${profile.goal === "Kết bạn" ? "selected" : ""}>Kết bạn</option>
-            <option ${profile.goal === "Tìm hiểu nghiêm túc" ? "selected" : ""}>Tìm hiểu nghiêm túc</option>
-            <option ${profile.goal === "Kết nối lâu dài" ? "selected" : ""}>Kết nối lâu dài</option>
-          </select>
-        </div>
-
-        <div class="field">
-          <label for="liveSlot">Khung giờ live mong muốn</label>
-          <select id="liveSlot" name="liveSlot">
-            <option ${profile.liveSlot === "Thứ 7 • 7:30 PM" ? "selected" : ""}>Thứ 7 • 7:30 PM</option>
-            <option ${profile.liveSlot === "Thứ 7 • 9:00 PM" ? "selected" : ""}>Thứ 7 • 9:00 PM</option>
-            <option ${profile.liveSlot === "Chủ Nhật • 7:00 PM" ? "selected" : ""}>Chủ Nhật • 7:00 PM</option>
-            <option ${profile.liveSlot === "Chủ Nhật • 8:30 PM" ? "selected" : ""}>Chủ Nhật • 8:30 PM</option>
-          </select>
-        </div>
-
-        <div class="field full">
-          <label for="bio">Giới thiệu ngắn</label>
-          <textarea id="bio" name="bio">${profile.bio || ""}</textarea>
-        </div>
-
-        <div class="field full">
-          <div class="hero-actions">
-            <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
-            <button type="button" id="deleteBtn" class="btn btn-secondary">Xóa hồ sơ</button>
-          </div>
+        <div class="avatar-upload-box">
+          <label for="avatarFile">Đổi ảnh đại diện</label>
+          <input id="avatarFile" name="avatarFile" type="file" accept="image/*">
+          <div class="avatar-help">Chọn JPG, PNG hoặc WEBP. Tối đa 3MB.</div>
         </div>
       </div>
-    </form>
 
-    <p id="editMessage" style="display:none; margin-top:16px; color:#fff;">
-      Đã cập nhật hồ sơ thành công.
-    </p>
+      <div class="glass-card form-panel">
+        <div class="section-title">
+          <h2>Chỉnh sửa hồ sơ</h2>
+          <p>Bạn có thể sửa thông tin và lưu lại ngay tại đây.</p>
+        </div>
+
+        <form id="editForm">
+          <div class="form-grid">
+            <div class="field">
+              <label for="name">Tên hiển thị</label>
+              <input id="name" name="name" type="text" value="${safeName}" required>
+            </div>
+
+            <div class="field">
+              <label for="age">Tuổi</label>
+              <input id="age" name="age" type="number" value="${profile.age || ""}" required>
+            </div>
+
+            <div class="field">
+              <label for="gender">Giới tính</label>
+              <select id="gender" name="gender">
+                <option ${profile.gender === "Nam" ? "selected" : ""}>Nam</option>
+                <option ${profile.gender === "Nữ" ? "selected" : ""}>Nữ</option>
+                <option ${profile.gender === "Khác" ? "selected" : ""}>Khác</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="job">Công việc</label>
+              <input id="job" name="job" type="text" value="${safeJob}">
+            </div>
+
+            <div class="field">
+              <label for="state">Bang đang sống</label>
+              <input id="state" name="state" type="text" value="${escapeHtml(profile.state || "")}">
+            </div>
+
+            <div class="field">
+              <label for="city">Thành phố</label>
+              <input id="city" name="city" type="text" value="${escapeHtml(profile.city || "")}">
+            </div>
+
+            <div class="field">
+              <label for="platform">Nền tảng liên hệ chính</label>
+              <select id="platform" name="platform">
+                <option ${profile.platform === "TikTok" ? "selected" : ""}>TikTok</option>
+                <option ${profile.platform === "Facebook" ? "selected" : ""}>Facebook</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="link">Username hoặc link tài khoản</label>
+              <input id="link" name="link" type="text" value="${safeLink}">
+            </div>
+
+            <div class="field">
+              <label for="goal">Mục tiêu</label>
+              <select id="goal" name="goal">
+                <option ${profile.goal === "Kết bạn" ? "selected" : ""}>Kết bạn</option>
+                <option ${profile.goal === "Tìm hiểu nghiêm túc" ? "selected" : ""}>Tìm hiểu nghiêm túc</option>
+                <option ${profile.goal === "Kết nối lâu dài" ? "selected" : ""}>Kết nối lâu dài</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="liveSlot">Khung giờ live mong muốn</label>
+              <select id="liveSlot" name="liveSlot">
+                <option ${profile.liveSlot === "Thứ 7 • 7:30 PM" ? "selected" : ""}>Thứ 7 • 7:30 PM</option>
+                <option ${profile.liveSlot === "Thứ 7 • 9:00 PM" ? "selected" : ""}>Thứ 7 • 9:00 PM</option>
+                <option ${profile.liveSlot === "Chủ Nhật • 7:00 PM" ? "selected" : ""}>Chủ Nhật • 7:00 PM</option>
+                <option ${profile.liveSlot === "Chủ Nhật • 8:30 PM" ? "selected" : ""}>Chủ Nhật • 8:30 PM</option>
+              </select>
+            </div>
+
+            <div class="field full">
+              <label for="bio">Giới thiệu ngắn</label>
+              <textarea id="bio" name="bio">${safeBio}</textarea>
+            </div>
+
+            <div class="field full">
+              <div class="action-row">
+                <button type="submit" id="saveBtn" class="btn btn-primary">Lưu thay đổi</button>
+                <button type="button" id="deleteBtn" class="btn btn-danger-soft">Xóa hồ sơ</button>
+              </div>
+            </div>
+          </div>
+        </form>
+
+        <div class="helper-line">
+          Mẹo nhỏ: dùng ảnh rõ mặt, bio ngắn gọn, và chọn đúng nền tảng liên hệ để người khác dễ kết nối hơn.
+        </div>
+
+        <p id="editMessage" class="status-message" style="display:none;">
+          Đã cập nhật hồ sơ thành công.
+        </p>
+      </div>
+    </div>
   `;
 
   const form = document.getElementById("editForm");
   const deleteBtn = document.getElementById("deleteBtn");
   const editMessage = document.getElementById("editMessage");
+  const avatarFileInput = document.getElementById("avatarFile");
+  const currentAvatar = document.getElementById("currentAvatar");
+  const saveBtn = document.getElementById("saveBtn");
+
+  avatarFileInput?.addEventListener("change", () => {
+    const file = avatarFileInput.files?.[0];
+    if (!file) return;
+
+    const check = validateAvatar(file);
+    if (!check.ok) {
+      alert(check.message);
+      avatarFileInput.value = "";
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      currentAvatar.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  });
 
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
+
+    const avatarFile = avatarFileInput?.files?.[0] || null;
+    const avatarCheck = validateAvatar(avatarFile);
+    if (!avatarCheck.ok) {
+      alert(avatarCheck.message);
+      return;
+    }
+
+    saveBtn.disabled = true;
+    saveBtn.textContent = "Đang lưu...";
 
     const data = Object.fromEntries(new FormData(form));
     data.link = normalizeProfileLink(data.platform, data.link);
 
     try {
+      if (avatarFile) {
+        const avatarUrl = await uploadAvatar(avatarFile);
+        data.avatarUrl = avatarUrl;
+      }
+
       await updateMyProfile(data);
       editMessage.style.display = "block";
+
       setTimeout(() => {
         editMessage.style.display = "none";
       }, 2000);
     } catch (err) {
       console.error(err);
       alert("Cập nhật hồ sơ thất bại.");
+    } finally {
+      saveBtn.disabled = false;
+      saveBtn.textContent = "Lưu thay đổi";
     }
   });
 
@@ -248,19 +541,29 @@ function renderForm(profile) {
 }
 
 async function initMyProfile() {
-  const user = await waitForAuthUser();
-  if (!user) {
-    renderNoLogin();
-    return;
-  }
+  try {
+    const user = await waitForAuthUser();
+    if (!user) {
+      renderNoLogin();
+      return;
+    }
 
-  const myProfile = await getMyProfile();
-  if (!myProfile) {
-    renderNoProfile();
-    return;
-  }
+    const myProfile = await getMyProfile();
+    if (!myProfile) {
+      renderNoProfile();
+      return;
+    }
 
-  renderForm(myProfile);
+    renderForm(myProfile);
+  } catch (err) {
+    console.error(err);
+    box.innerHTML = `
+      <div class="section-title">
+        <h2>Không tải được hồ sơ</h2>
+        <p>Kiểm tra Firestore rules, Storage rules hoặc file ketnoi-firebase.js.</p>
+      </div>
+    `;
+  }
 }
 
 initMyProfile();
