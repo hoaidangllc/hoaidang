@@ -6,6 +6,185 @@
   <title>Đăng ký hồ sơ | Kết Nối Việt Mỹ</title>
   <meta name="description" content="Tạo hồ sơ kết bạn và làm quen cho người Việt tại Mỹ.">
   <link rel="stylesheet" href="./assets/css/styles.css">
+
+  <style>
+    body {
+      background:
+        radial-gradient(circle at top left, rgba(255,45,120,.08), transparent 28%),
+        radial-gradient(circle at top right, rgba(0,234,255,.07), transparent 24%),
+        linear-gradient(135deg,#0c0c14,#141428);
+      color:#fff;
+    }
+
+    .glass-card {
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.1);
+      backdrop-filter: blur(14px);
+      border-radius: 26px;
+      box-shadow: 0 25px 60px rgba(0,0,0,.35);
+    }
+
+    .hero-card.glass-card {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-card.glass-card::before {
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        linear-gradient(120deg, rgba(255,45,120,.08), transparent 35%),
+        linear-gradient(300deg, rgba(0,234,255,.06), transparent 35%);
+      pointer-events:none;
+    }
+
+    .register-shell {
+      display:grid;
+      grid-template-columns: 340px 1fr;
+      gap:20px;
+    }
+
+    .side-panel,
+    .form-panel {
+      padding:22px;
+    }
+
+    .avatar-wrap {
+      position:relative;
+      width:180px;
+      height:180px;
+      margin:0 auto 18px;
+    }
+
+    .avatar-ring {
+      position:absolute;
+      inset:-3px;
+      border-radius:50%;
+      background: linear-gradient(135deg, rgba(255,45,120,.95), rgba(0,234,255,.9));
+    }
+
+    .avatar-preview {
+      position:relative;
+      width:100%;
+      height:100%;
+      border-radius:50%;
+      object-fit:cover;
+      border:4px solid rgba(16,16,24,.95);
+      background:rgba(255,255,255,.05);
+      display:block;
+      z-index:1;
+    }
+
+    .side-title {
+      margin:0;
+      text-align:center;
+      font-size:1.4rem;
+      color:#fff;
+      letter-spacing:-.02em;
+    }
+
+    .side-sub {
+      margin-top:8px;
+      text-align:center;
+      color:#bbb;
+    }
+
+    .side-badges {
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:center;
+      gap:8px;
+      margin-top:16px;
+    }
+
+    .side-badge {
+      display:inline-flex;
+      align-items:center;
+      padding:8px 12px;
+      border-radius:999px;
+      font-size:.86rem;
+      font-weight:700;
+      color:#fff;
+      background:rgba(255,255,255,.07);
+      border:1px solid rgba(255,255,255,.09);
+    }
+
+    .upload-box,
+    .tip-box {
+      margin-top:18px;
+      padding:14px 16px;
+      border-radius:18px;
+      background:rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.08);
+    }
+
+    .upload-box label {
+      display:block;
+      margin-bottom:10px;
+      font-weight:700;
+      color:#fff;
+    }
+
+    .upload-box input[type="file"] {
+      width:100%;
+    }
+
+    .upload-help,
+    .tip-box {
+      color:#c9c9c9;
+      line-height:1.6;
+    }
+
+    .form-panel .section-title {
+      text-align:left;
+      margin-bottom:16px;
+    }
+
+    .field input,
+    .field select,
+    .field textarea {
+      background:rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.12);
+      color:#fff;
+    }
+
+    .field input::placeholder,
+    .field textarea::placeholder {
+      color:#aaa;
+    }
+
+    .field textarea {
+      min-height:120px;
+    }
+
+    .submit-wrap {
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+
+    .status-message {
+      margin-top:16px;
+      padding:12px 14px;
+      border-radius:14px;
+      background:rgba(0,255,180,.08);
+      border:1px solid rgba(0,255,180,.15);
+      color:#d7fff1;
+    }
+
+    .exists-box {
+      padding:22px;
+      margin-bottom:20px;
+    }
+
+    @media (max-width: 900px) {
+      .register-shell {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
 <body>
 
@@ -35,7 +214,7 @@
 <main>
   <section class="hero">
     <div class="container form-wrap">
-      <div class="hero-card">
+      <div class="hero-card glass-card">
         <div class="eyebrow">📝 Tạo hồ sơ để bắt đầu làm quen</div>
         <h1>Điền thông tin rõ ràng. <span>Dễ gặp đúng người hơn.</span></h1>
         <p>
@@ -49,7 +228,7 @@
   <section class="section">
     <div class="container form-wrap">
 
-      <div id="alreadyExistsBox" class="form-card" style="display:none; margin-bottom:20px;">
+      <div id="alreadyExistsBox" class="glass-card exists-box" style="display:none;">
         <div class="section-title">
           <h2>Bạn đã có hồ sơ rồi</h2>
           <p>Tài khoản Google hiện tại đã có một hồ sơ trong hệ thống. Bạn có thể vào Hồ sơ của tôi để sửa thay vì tạo hồ sơ mới.</p>
@@ -61,111 +240,132 @@
         </div>
       </div>
 
-      <div class="form-card" id="registerCard">
-        <div class="section-title">
-          <h2>Tạo hồ sơ</h2>
-          <p>Điền càng rõ, người khác càng dễ hiểu và dễ kết nối với bạn hơn.</p>
-        </div>
+      <div class="glass-card" id="registerCard">
+        <div class="register-shell">
+          <div class="side-panel">
+            <div class="avatar-wrap">
+              <div class="avatar-ring"></div>
+              <img
+                id="avatarPreview"
+                src="./image/default-avatar.png"
+                alt="Xem trước ảnh đại diện"
+                class="avatar-preview"
+                onerror="this.onerror=null;this.src='./image/hoaidangllc.jpeg'"
+              >
+            </div>
 
-        <form id="form">
-          <div class="form-grid">
-            <div class="field full">
+            <h2 class="side-title">Hồ sơ mới của bạn</h2>
+            <div class="side-sub">Ảnh rõ + bio ngắn + link chuẩn = dễ kết nối hơn.</div>
+
+            <div class="side-badges">
+              <span class="side-badge">TikTok</span>
+              <span class="side-badge">Facebook</span>
+              <span class="side-badge">Live cuối tuần</span>
+            </div>
+
+            <div class="upload-box">
               <label for="avatarFile">Ảnh đại diện</label>
               <input id="avatarFile" name="avatarFile" type="file" accept="image/*">
-              <small style="display:block;margin-top:8px;color:var(--muted,#999);">
-                Chọn ảnh rõ mặt. Hỗ trợ JPG, PNG, WEBP. Tối đa 3MB.
-              </small>
-
-              <div id="avatarPreviewWrap" style="display:none; margin-top:14px;">
-                <img
-                  id="avatarPreview"
-                  src=""
-                  alt="Xem trước ảnh đại diện"
-                  style="width:110px;height:110px;border-radius:50%;object-fit:cover;border:2px solid rgba(255,255,255,.12);display:block;"
-                >
-              </div>
+              <div class="upload-help">Chọn ảnh rõ mặt. Hỗ trợ JPG, PNG, WEBP. Tối đa 3MB.</div>
             </div>
 
-            <div class="field">
-              <label for="name">Tên hiển thị</label>
-              <input id="name" name="name" type="text" placeholder="Ví dụ: Mai Nguyễn" required>
-            </div>
-
-            <div class="field">
-              <label for="age">Tuổi</label>
-              <input id="age" name="age" type="number" placeholder="Ví dụ: 29" required>
-            </div>
-
-            <div class="field">
-              <label for="gender">Giới tính</label>
-              <select id="gender" name="gender">
-                <option>Nam</option>
-                <option>Nữ</option>
-                <option>Khác</option>
-              </select>
-            </div>
-
-            <div class="field">
-              <label for="job">Công việc</label>
-              <input id="job" name="job" type="text" placeholder="Ví dụ: Làm nail, kỹ thuật, kinh doanh">
-            </div>
-
-            <div class="field">
-              <label for="state">Bang đang sống</label>
-              <input id="state" name="state" type="text" placeholder="Ví dụ: Texas">
-            </div>
-
-            <div class="field">
-              <label for="city">Thành phố</label>
-              <input id="city" name="city" type="text" placeholder="Ví dụ: Odessa">
-            </div>
-
-            <div class="field">
-              <label for="platform">Nền tảng liên hệ chính</label>
-              <select id="platform" name="platform">
-                <option>TikTok</option>
-                <option>Facebook</option>
-              </select>
-            </div>
-
-            <div class="field">
-              <label for="link">Username hoặc link tài khoản</label>
-              <input id="link" name="link" type="text" placeholder="Ví dụ: hoaidangllc hoặc full link">
-            </div>
-
-            <div class="field">
-              <label for="goal">Mục tiêu</label>
-              <select id="goal" name="goal">
-                <option>Kết bạn</option>
-                <option>Tìm hiểu nghiêm túc</option>
-                <option>Kết nối lâu dài</option>
-              </select>
-            </div>
-
-            <div class="field">
-              <label for="liveSlot">Khung giờ live mong muốn</label>
-              <select id="liveSlot" name="liveSlot">
-                <option>Thứ 7 • 7:30 PM</option>
-                <option>Thứ 7 • 9:00 PM</option>
-                <option>Chủ Nhật • 7:00 PM</option>
-                <option>Chủ Nhật • 8:30 PM</option>
-              </select>
-            </div>
-
-            <div class="field full">
-              <label for="bio">Giới thiệu ngắn</label>
-              <textarea id="bio" name="bio" placeholder="Viết vài dòng về bạn để người khác dễ hiểu hơn"></textarea>
-            </div>
-
-            <div class="field full">
-              <button id="submitBtn" type="submit" class="btn btn-primary">Lưu hồ sơ</button>
+            <div class="tip-box">
+              Mẹo nhỏ: dùng tên hiển thị dễ nhớ, bio ngắn gọn, và chọn đúng nền tảng liên hệ để hồ sơ nhìn chuyên nghiệp hơn.
             </div>
           </div>
-        </form>
 
-        <p id="successMessage" style="display:none; margin-top:16px; color:#fff;">
-          Đã lưu hồ sơ lên Firebase, đang chuyển sang Hồ sơ của tôi...
-        </p>
+          <div class="form-panel">
+            <div class="section-title">
+              <h2>Tạo hồ sơ</h2>
+              <p>Điền càng rõ, người khác càng dễ hiểu và dễ kết nối với bạn hơn.</p>
+            </div>
+
+            <form id="form">
+              <div class="form-grid">
+                <div class="field">
+                  <label for="name">Tên hiển thị</label>
+                  <input id="name" name="name" type="text" placeholder="Ví dụ: Mai Nguyễn" required>
+                </div>
+
+                <div class="field">
+                  <label for="age">Tuổi</label>
+                  <input id="age" name="age" type="number" placeholder="Ví dụ: 29" required>
+                </div>
+
+                <div class="field">
+                  <label for="gender">Giới tính</label>
+                  <select id="gender" name="gender">
+                    <option>Nam</option>
+                    <option>Nữ</option>
+                    <option>Khác</option>
+                  </select>
+                </div>
+
+                <div class="field">
+                  <label for="job">Công việc</label>
+                  <input id="job" name="job" type="text" placeholder="Ví dụ: Làm nail, kỹ thuật, kinh doanh">
+                </div>
+
+                <div class="field">
+                  <label for="state">Bang đang sống</label>
+                  <input id="state" name="state" type="text" placeholder="Ví dụ: Texas">
+                </div>
+
+                <div class="field">
+                  <label for="city">Thành phố</label>
+                  <input id="city" name="city" type="text" placeholder="Ví dụ: Odessa">
+                </div>
+
+                <div class="field">
+                  <label for="platform">Nền tảng liên hệ chính</label>
+                  <select id="platform" name="platform">
+                    <option>TikTok</option>
+                    <option>Facebook</option>
+                  </select>
+                </div>
+
+                <div class="field">
+                  <label for="link">Username hoặc link tài khoản</label>
+                  <input id="link" name="link" type="text" placeholder="Ví dụ: hoaidangllc hoặc full link">
+                </div>
+
+                <div class="field">
+                  <label for="goal">Mục tiêu</label>
+                  <select id="goal" name="goal">
+                    <option>Kết bạn</option>
+                    <option>Tìm hiểu nghiêm túc</option>
+                    <option>Kết nối lâu dài</option>
+                  </select>
+                </div>
+
+                <div class="field">
+                  <label for="liveSlot">Khung giờ live mong muốn</label>
+                  <select id="liveSlot" name="liveSlot">
+                    <option>Thứ 7 • 7:30 PM</option>
+                    <option>Thứ 7 • 9:00 PM</option>
+                    <option>Chủ Nhật • 7:00 PM</option>
+                    <option>Chủ Nhật • 8:30 PM</option>
+                  </select>
+                </div>
+
+                <div class="field full">
+                  <label for="bio">Giới thiệu ngắn</label>
+                  <textarea id="bio" name="bio" placeholder="Viết vài dòng về bạn để người khác dễ hiểu hơn"></textarea>
+                </div>
+
+                <div class="field full">
+                  <div class="submit-wrap">
+                    <button id="submitBtn" type="submit" class="btn btn-primary">Lưu hồ sơ</button>
+                  </div>
+                </div>
+              </div>
+            </form>
+
+            <p id="successMessage" class="status-message" style="display:none;">
+              Đã lưu hồ sơ lên Firebase, đang chuyển sang Hồ sơ của tôi...
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -190,8 +390,8 @@ window.addEventListener("DOMContentLoaded", async () => {
   const registerCard = document.getElementById("registerCard");
   const avatarFileInput = document.getElementById("avatarFile");
   const avatarPreview = document.getElementById("avatarPreview");
-  const avatarPreviewWrap = document.getElementById("avatarPreviewWrap");
   const submitBtn = document.getElementById("submitBtn");
+  const DEFAULT_AVATAR = "./image/default-avatar.png";
 
   function normalizeProfileLink(platform, rawLink) {
     if (!rawLink) return "";
@@ -234,8 +434,7 @@ window.addEventListener("DOMContentLoaded", async () => {
     const file = avatarFileInput.files?.[0];
 
     if (!file) {
-      avatarPreview.src = "";
-      avatarPreviewWrap.style.display = "none";
+      avatarPreview.src = DEFAULT_AVATAR;
       return;
     }
 
@@ -243,15 +442,13 @@ window.addEventListener("DOMContentLoaded", async () => {
     if (!check.ok) {
       alert(check.message);
       avatarFileInput.value = "";
-      avatarPreview.src = "";
-      avatarPreviewWrap.style.display = "none";
+      avatarPreview.src = DEFAULT_AVATAR;
       return;
     }
 
     const reader = new FileReader();
     reader.onload = (e) => {
       avatarPreview.src = e.target.result;
-      avatarPreviewWrap.style.display = "block";
     };
     reader.readAsDataURL(file);
   });
