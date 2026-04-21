@@ -24,6 +24,13 @@ import {
   deleteDoc
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
+import {
+  getStorage,
+  ref,
+  uploadBytes,
+  getDownloadURL
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js";
+
 const firebaseConfig = {
   apiKey: "AIzaSyCF38B9ZVLiekJY3RMvC3FEn2L188dJxM",
   authDomain: "hoaidang-auth.firebaseapp.com",
@@ -36,6 +43,8 @@ const firebaseConfig = {
 const app = getApps().length ? getApp() : initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
+const storage = getStorage(app);
+
 const colRef = collection(db, "ketnoi_profiles");
 
 export function waitForAuthUser() {
@@ -47,15 +56,35 @@ export function waitForAuthUser() {
   });
 }
 
+export async function uploadAvatar(file) {
+  const user = await waitForAuthUser();
+
+  if (!user) {
+    throw new Error("User chưa đăng nhập Google.");
+  }
+
+  if (!file) return "";
+
+  const safeName = file.name.replace(/[^\w.\-]/g, "_");
+  const fileRef = ref(storage, `avatars/${user.uid}/${Date.now()}-${safeName}`);
+
+  await uploadBytes(fileRef, file);
+  const downloadURL = await getDownloadURL(fileRef);
+
+  return downloadURL;
+}
+
 export async function addProfile(data) {
   const user = await waitForAuthUser();
 
   const payload = {
     ...data,
     createdAt: Date.now(),
+    updatedAt: Date.now(),
     uid: user?.uid || "",
     email: user?.email || "",
-    googleName: user?.displayName || ""
+    googleName: user?.displayName || "",
+    avatarUrl: data.avatarUrl || ""
   };
 
   const docRef = await addDoc(colRef, payload);
@@ -113,8 +142,8 @@ export async function updateMyProfile(data) {
     throw new Error("Không tìm thấy hồ sơ của user hiện tại.");
   }
 
-  const ref = doc(db, "ketnoi_profiles", myProfile.id);
-  await updateDoc(ref, {
+  const refDoc = doc(db, "ketnoi_profiles", myProfile.id);
+  await updateDoc(refDoc, {
     ...data,
     updatedAt: Date.now()
   });
@@ -128,8 +157,8 @@ export async function deleteMyProfile() {
     throw new Error("Không tìm thấy hồ sơ để xóa.");
   }
 
-  const ref = doc(db, "ketnoi_profiles", myProfile.id);
-  await deleteDoc(ref);
+  const refDoc = doc(db, "ketnoi_profiles", myProfile.id);
+  await deleteDoc(refDoc);
 
   return true;
 }
