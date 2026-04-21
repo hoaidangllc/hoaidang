@@ -6,6 +6,62 @@
   <title>Thành viên | Kết Nối Việt Mỹ</title>
   <meta name="description" content="Xem danh sách thành viên người Việt tại Mỹ đang tham gia kết nối và live cuối tuần.">
   <link rel="stylesheet" href="./assets/css/styles.css">
+
+  <style>
+    .member-card {
+      height: 100%;
+    }
+
+    .member-top {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 14px;
+    }
+
+    .member-avatar {
+      width: 68px;
+      height: 68px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid rgba(255,255,255,.12);
+      flex: 0 0 68px;
+      background: rgba(255,255,255,.06);
+    }
+
+    .member-name {
+      margin: 0;
+      font-size: 1.12rem;
+      line-height: 1.2;
+    }
+
+    .member-location {
+      margin-top: 6px;
+      color: var(--muted, #999);
+      font-size: .95rem;
+    }
+
+    .member-meta {
+      display: grid;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .member-meta p {
+      margin: 0;
+    }
+
+    .member-bio {
+      margin-top: 12px;
+      color: var(--muted, #999);
+      line-height: 1.55;
+    }
+
+    .btn-disabled {
+      opacity: .6;
+      pointer-events: none;
+    }
+  </style>
 </head>
 <body>
 
@@ -68,11 +124,23 @@
     </div>
   </section>
 </main>
+
 <script type="module" src="/assets/js/auth.js"></script>
+
 <script type="module">
 import { getProfiles } from "./assets/js/ketnoi-firebase.js";
 
 const list = document.getElementById("list");
+const DEFAULT_AVATAR = "./image/default-avatar.png";
+
+function escapeHtml(value) {
+  return String(value ?? "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+}
 
 function renderEmpty() {
   list.innerHTML = `
@@ -89,28 +157,55 @@ function renderEmpty() {
 }
 
 function renderUsers(users) {
-  list.innerHTML = users.map(u => `
-    <div class="card">
-      <div class="card-body">
-        <h3>${u.name || "Chưa có tên"}${u.age ? `, ${u.age} tuổi` : ""}</h3>
-        <p>${u.city || "Chưa rõ thành phố"}${u.state ? `, ${u.state}` : ""}</p>
+  list.innerHTML = users.map(u => {
+    const avatar = u.avatarUrl || DEFAULT_AVATAR;
+    const name = escapeHtml(u.name || "Chưa có tên");
+    const age = u.age ? `, ${escapeHtml(u.age)} tuổi` : "";
+    const city = escapeHtml(u.city || "Chưa rõ thành phố");
+    const state = u.state ? `, ${escapeHtml(u.state)}` : "";
+    const job = escapeHtml(u.job || "Chưa cập nhật");
+    const goal = escapeHtml(u.goal || "Chưa cập nhật");
+    const platform = escapeHtml(u.platform || "Chưa chọn");
+    const liveSlot = escapeHtml(u.liveSlot || "Chưa chọn");
+    const bio = escapeHtml(u.bio || "");
+    const contactBtn = u.link
+      ? `<a href="${u.link}" target="_blank" rel="noopener" class="btn btn-secondary">${platform || "Mở liên hệ"}</a>`
+      : `<span class="btn btn-secondary btn-disabled">Chưa có link</span>`;
 
-        <p><strong>Công việc:</strong> ${u.job || "Chưa cập nhật"}</p>
-        <p><strong>Mục tiêu:</strong> ${u.goal || "Chưa cập nhật"}</p>
-        <p><strong>Liên hệ chính:</strong> ${u.platform || "Chưa chọn"}</p>
-        <p><strong>Khung giờ live:</strong> ${u.liveSlot || "Chưa chọn"}</p>
+    return `
+      <div class="card member-card">
+        <div class="card-body">
+          <div class="member-top">
+            <img
+              src="${avatar}"
+              alt="${name}"
+              class="member-avatar"
+              onerror="this.onerror=null;this.src='${DEFAULT_AVATAR}'"
+            >
 
-        <div class="hero-actions" style="margin-top:16px;">
-          <a href="./profile.html?id=${u.id}" class="btn btn-primary">Xem hồ sơ</a>
-          ${
-            u.link
-              ? `<a href="${u.link}" target="_blank" class="btn btn-secondary">${u.platform || "Mở liên hệ"}</a>`
-              : `<span class="btn btn-secondary btn-disabled">Chưa có link</span>`
-          }
+            <div>
+              <h3 class="member-name">${name}${age}</h3>
+              <div class="member-location">${city}${state}</div>
+            </div>
+          </div>
+
+          <div class="member-meta">
+            <p><strong>Công việc:</strong> ${job}</p>
+            <p><strong>Mục tiêu:</strong> ${goal}</p>
+            <p><strong>Liên hệ chính:</strong> ${platform}</p>
+            <p><strong>Khung giờ live:</strong> ${liveSlot}</p>
+          </div>
+
+          ${bio ? `<p class="member-bio">${bio}</p>` : ""}
+
+          <div class="hero-actions" style="margin-top:16px;">
+            <a href="./profile.html?id=${u.id}" class="btn btn-primary">Xem hồ sơ</a>
+            ${contactBtn}
+          </div>
         </div>
       </div>
-    </div>
-  `).join("");
+    `;
+  }).join("");
 }
 
 async function loadProfiles() {
@@ -138,7 +233,6 @@ async function loadProfiles() {
 
 loadProfiles();
 </script>
-
 
 </body>
 </html>
