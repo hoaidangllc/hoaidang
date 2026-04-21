@@ -8,58 +8,196 @@
   <link rel="stylesheet" href="./assets/css/styles.css">
 
   <style>
+    body {
+      background:
+        radial-gradient(circle at top left, rgba(255,45,120,.08), transparent 28%),
+        radial-gradient(circle at top right, rgba(0,234,255,.07), transparent 24%),
+        linear-gradient(135deg,#0c0c14,#141428);
+      color:#fff;
+    }
+
+    .premium-hero-card,
+    .premium-card {
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.1);
+      backdrop-filter: blur(14px);
+      border-radius: 26px;
+      box-shadow: 0 25px 60px rgba(0,0,0,.35);
+    }
+
+    .premium-hero-card {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .premium-hero-card::before {
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        linear-gradient(120deg, rgba(255,45,120,.08), transparent 35%),
+        linear-gradient(300deg, rgba(0,234,255,.06), transparent 35%);
+      pointer-events:none;
+    }
+
+    .stats-row {
+      display:grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap:14px;
+      margin-top:22px;
+    }
+
+    .stat-chip {
+      padding:14px 16px;
+      border-radius:18px;
+      background:rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.08);
+    }
+
+    .stat-chip strong {
+      display:block;
+      font-size:1.2rem;
+      color:#fff;
+    }
+
+    .stat-chip span {
+      color:#bbb;
+      font-size:.92rem;
+    }
+
+    .members-grid {
+      display:grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap:18px;
+    }
+
     .member-card {
-      height: 100%;
+      position:relative;
+      overflow:hidden;
+      transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+      height:100%;
+    }
+
+    .member-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(255,255,255,.16);
+      box-shadow: 0 30px 70px rgba(0,0,0,.42);
+    }
+
+    .member-card .card-body {
+      padding:20px;
     }
 
     .member-top {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      margin-bottom: 14px;
+      display:flex;
+      align-items:center;
+      gap:14px;
+      margin-bottom:14px;
+    }
+
+    .member-avatar-wrap {
+      position:relative;
+      flex:0 0 74px;
+    }
+
+    .member-avatar-ring {
+      position:absolute;
+      inset:-2px;
+      border-radius:50%;
+      background: linear-gradient(135deg, rgba(255,45,120,.85), rgba(0,234,255,.8));
+      opacity:.9;
+      filter: blur(.2px);
     }
 
     .member-avatar {
-      width: 68px;
-      height: 68px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 2px solid rgba(255,255,255,.12);
-      flex: 0 0 68px;
-      background: rgba(255,255,255,.06);
+      position:relative;
+      width:74px;
+      height:74px;
+      border-radius:50%;
+      object-fit:cover;
+      display:block;
+      border:3px solid rgba(16,16,24,.95);
+      background:rgba(255,255,255,.05);
+      z-index:1;
     }
 
     .member-name {
-      margin: 0;
-      font-size: 1.12rem;
-      line-height: 1.2;
+      margin:0;
+      font-size:1.1rem;
+      line-height:1.2;
+      color:#fff;
     }
 
     .member-location {
-      margin-top: 6px;
-      color: var(--muted, #999);
-      font-size: .95rem;
+      margin-top:6px;
+      color:#bbb;
+      font-size:.94rem;
+    }
+
+    .badges {
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin-top:12px;
+    }
+
+    .badge {
+      display:inline-flex;
+      align-items:center;
+      padding:7px 11px;
+      border-radius:999px;
+      font-size:.84rem;
+      font-weight:700;
+      background:rgba(255,255,255,.07);
+      border:1px solid rgba(255,255,255,.08);
+      color:#fff;
     }
 
     .member-meta {
-      display: grid;
-      gap: 8px;
-      margin-top: 10px;
+      display:grid;
+      gap:9px;
+      margin-top:14px;
     }
 
     .member-meta p {
-      margin: 0;
+      margin:0;
+      color:#ddd;
     }
 
     .member-bio {
-      margin-top: 12px;
-      color: var(--muted, #999);
-      line-height: 1.55;
+      margin-top:14px;
+      color:#bfbfbf;
+      line-height:1.6;
+      min-height:48px;
+    }
+
+    .contact-row {
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:18px;
     }
 
     .btn-disabled {
-      opacity: .6;
-      pointer-events: none;
+      opacity:.55;
+      pointer-events:none;
+    }
+
+    .empty-card {
+      grid-column:1 / -1;
+    }
+
+    @media (max-width: 1100px) {
+      .members-grid {
+        grid-template-columns: repeat(2, minmax(0,1fr));
+      }
+    }
+
+    @media (max-width: 760px) {
+      .stats-row,
+      .members-grid {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
@@ -80,7 +218,6 @@
       <a href="./my-profile.html">Hồ sơ của tôi</a>
 
       <span id="authUser" class="auth-user"></span>
-
       <button id="loginBtn" class="btn btn-secondary" type="button">Đăng nhập Google</button>
       <button id="logoutBtn" class="btn btn-secondary" type="button" style="display:none;">Đăng xuất</button>
     </nav>
@@ -90,7 +227,7 @@
 <main>
   <section class="hero">
     <div class="container">
-      <div class="hero-card">
+      <div class="hero-card premium-hero-card">
         <div class="eyebrow">👥 Danh sách thành viên đang tham gia</div>
         <h1>Xem hồ sơ. <span>Tìm người phù hợp với bạn.</span></h1>
         <p>
@@ -101,6 +238,21 @@
         <div class="hero-actions">
           <a href="./register.html" class="btn btn-primary">Tạo hồ sơ mới</a>
           <a href="./live.html" class="btn btn-secondary">Xem lịch live</a>
+        </div>
+
+        <div class="stats-row" id="statsRow">
+          <div class="stat-chip">
+            <strong id="statMembers">--</strong>
+            <span>Thành viên</span>
+          </div>
+          <div class="stat-chip">
+            <strong id="statLive">--</strong>
+            <span>Đã chọn khung live</span>
+          </div>
+          <div class="stat-chip">
+            <strong id="statPlatforms">TikTok / Facebook</strong>
+            <span>Nền tảng kết nối</span>
+          </div>
         </div>
       </div>
     </div>
@@ -113,7 +265,7 @@
         <p>Hồ sơ mới đăng ký sẽ hiện ở đây.</p>
       </div>
 
-      <div id="list" class="grid"></div>
+      <div id="list" class="members-grid"></div>
     </div>
   </section>
 
@@ -144,7 +296,7 @@ function escapeHtml(value) {
 
 function renderEmpty() {
   list.innerHTML = `
-    <div class="card">
+    <div class="premium-card empty-card">
       <div class="card-body">
         <h3>Chưa có ai đăng ký</h3>
         <p>Hiện chưa có thành viên nào. Bạn có thể là người đầu tiên tạo hồ sơ.</p>
@@ -154,6 +306,14 @@ function renderEmpty() {
       </div>
     </div>
   `;
+}
+
+function renderStats(users) {
+  const totalMembers = users.length;
+  const liveMembers = users.filter(u => u.liveSlot).length;
+
+  document.getElementById("statMembers").textContent = totalMembers;
+  document.getElementById("statLive").textContent = liveMembers;
 }
 
 function renderUsers(users) {
@@ -173,32 +333,38 @@ function renderUsers(users) {
       : `<span class="btn btn-secondary btn-disabled">Chưa có link</span>`;
 
     return `
-      <div class="card member-card">
+      <div class="premium-card member-card">
         <div class="card-body">
           <div class="member-top">
-            <img
-              src="${avatar}"
-              alt="${name}"
-              class="member-avatar"
-              onerror="this.onerror=null;this.src='${DEFAULT_AVATAR}'"
-            >
+            <div class="member-avatar-wrap">
+              <div class="member-avatar-ring"></div>
+              <img
+                src="${avatar}"
+                alt="${name}"
+                class="member-avatar"
+                onerror="this.onerror=null;this.src='${DEFAULT_AVATAR}'"
+              >
+            </div>
 
             <div>
               <h3 class="member-name">${name}${age}</h3>
               <div class="member-location">${city}${state}</div>
+
+              <div class="badges">
+                <span class="badge">${platform}</span>
+                <span class="badge">${goal}</span>
+              </div>
             </div>
           </div>
 
           <div class="member-meta">
             <p><strong>Công việc:</strong> ${job}</p>
-            <p><strong>Mục tiêu:</strong> ${goal}</p>
-            <p><strong>Liên hệ chính:</strong> ${platform}</p>
             <p><strong>Khung giờ live:</strong> ${liveSlot}</p>
           </div>
 
-          ${bio ? `<p class="member-bio">${bio}</p>` : ""}
+          ${bio ? `<p class="member-bio">${bio}</p>` : `<p class="member-bio">Chưa có giới thiệu.</p>`}
 
-          <div class="hero-actions" style="margin-top:16px;">
+          <div class="contact-row">
             <a href="./profile.html?id=${u.id}" class="btn btn-primary">Xem hồ sơ</a>
             ${contactBtn}
           </div>
@@ -213,15 +379,17 @@ async function loadProfiles() {
     const users = await getProfiles();
 
     if (!users || users.length === 0) {
+      renderStats([]);
       renderEmpty();
       return;
     }
 
+    renderStats(users);
     renderUsers(users);
   } catch (err) {
     console.error("Lỗi load Firebase:", err);
     list.innerHTML = `
-      <div class="card">
+      <div class="premium-card empty-card">
         <div class="card-body">
           <h3>Không tải được dữ liệu</h3>
           <p>Kiểm tra Firestore rules hoặc file ketnoi-firebase.js.</p>
