@@ -1,863 +1,324 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Lịch live cuối tuần | Kết Nối Việt Mỹ</title>
-  <meta
-    name="description"
-    content="Xem lịch live cuối tuần và giao lưu làm quen trên TikTok cùng host @hello_ba_gia_90 và @hoaidangllc."
-  />
-  <link rel="stylesheet" href="./assets/css/styles.css" />
-
-  <style>
-    :root {
-      --live-bg-1: #0f0f16;
-      --live-bg-2: #171726;
-      --live-card: rgba(255,255,255,.08);
-      --live-border: rgba(255,255,255,.14);
-      --live-text: #ffffff;
-      --live-muted: rgba(255,255,255,.72);
-      --live-soft: rgba(255,255,255,.06);
-      --live-pink: #ff2d78;
-      --live-cyan: #29f0ff;
-      --live-gold: #ffd47a;
-      --live-shadow: 0 24px 60px rgba(0,0,0,.32);
-    }
-
-    .live-premium {
-      background:
-        radial-gradient(circle at top left, rgba(255,45,120,.18), transparent 28%),
-        radial-gradient(circle at top right, rgba(41,240,255,.14), transparent 24%),
-        linear-gradient(135deg, var(--live-bg-1), var(--live-bg-2));
-      color: var(--live-text);
-    }
-
-    .hero.live-hero {
-      position: relative;
-      overflow: hidden;
-      padding-top: 42px;
-      padding-bottom: 36px;
-    }
-
-    .live-hero::before,
-    .live-hero::after {
-      content: "";
-      position: absolute;
-      border-radius: 999px;
-      filter: blur(30px);
-      pointer-events: none;
-    }
-
-    .live-hero::before {
-      width: 260px;
-      height: 260px;
-      background: rgba(255,45,120,.18);
-      top: -60px;
-      left: -70px;
-    }
-
-    .live-hero::after {
-      width: 220px;
-      height: 220px;
-      background: rgba(41,240,255,.15);
-      right: -50px;
-      top: 20px;
-    }
-
-    .live-hero-card {
-      position: relative;
-      z-index: 1;
-      background: linear-gradient(180deg, rgba(255,255,255,.12), rgba(255,255,255,.05));
-      border: 1px solid var(--live-border);
-      border-radius: 32px;
-      box-shadow: var(--live-shadow);
-      padding: 34px;
-      backdrop-filter: blur(16px);
-      overflow: hidden;
-    }
-
-    .live-hero-card::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background:
-        linear-gradient(120deg, rgba(255,45,120,.08), transparent 30%),
-        linear-gradient(300deg, rgba(41,240,255,.06), transparent 30%);
-      pointer-events: none;
-    }
-
-    .live-topbar {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 8px 14px;
-      border-radius: 999px;
-      background: rgba(255,255,255,.08);
-      border: 1px solid rgba(255,255,255,.12);
-      font-weight: 700;
-      font-size: .92rem;
-      color: #fff;
-      margin-bottom: 18px;
-    }
-
-    .live-dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: #ff385c;
-      box-shadow: 0 0 0 6px rgba(255,56,92,.15);
-      animation: livePulse 1.8s infinite ease-in-out;
-    }
-
-    @keyframes livePulse {
-      0%, 100% { transform: scale(1); opacity: 1; }
-      50% { transform: scale(1.15); opacity: .75; }
-    }
-
-    .live-hero-grid {
-      display: grid;
-      grid-template-columns: 1.2fr .9fr;
-      gap: 26px;
-      align-items: center;
-    }
-
-    .live-title {
-      font-size: clamp(2.1rem, 5vw, 4.25rem);
-      line-height: .98;
-      letter-spacing: -.05em;
-      margin: 0;
-      color: #fff;
-      max-width: 760px;
-    }
-
-    .live-title span {
-      display: block;
-      background: linear-gradient(90deg, #fff, #ffd5e4 40%, #b5fbff 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .live-subtext {
-      margin-top: 18px;
-      color: var(--live-muted);
-      font-size: 1.04rem;
-      max-width: 760px;
-    }
-
-    .live-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 24px;
-    }
-
-    .live-btn-primary {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 13px 20px;
-      border-radius: 999px;
-      font-weight: 800;
-      text-decoration: none;
-      color: #fff;
-      background: linear-gradient(90deg, var(--live-pink), #ff5c97);
-      box-shadow: 0 18px 34px rgba(255,45,120,.24);
-      transition: transform .18s ease, box-shadow .18s ease, opacity .18s ease;
-    }
-
-    .live-btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 24px 40px rgba(255,45,120,.3);
-    }
-
-    .live-btn-ghost {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 13px 18px;
-      border-radius: 999px;
-      text-decoration: none;
-      font-weight: 700;
-      color: #fff;
-      border: 1px solid rgba(255,255,255,.14);
-      background: rgba(255,255,255,.06);
-      transition: transform .18s ease, opacity .18s ease;
-    }
-
-    .live-btn-ghost:hover {
-      transform: translateY(-2px);
-      opacity: .95;
-    }
-
-    .tiktok-btn-premium {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 52px;
-      height: 52px;
-      border-radius: 50%;
-      border: 1px solid rgba(255,255,255,.15);
-      background:
-        linear-gradient(135deg, rgba(255,255,255,.12), rgba(255,255,255,.05)),
-        #111;
-      color: #fff;
-      text-decoration: none;
-      box-shadow: 0 12px 28px rgba(0,0,0,.25);
-      transition: transform .18s ease, box-shadow .18s ease, opacity .18s ease;
-    }
-
-    .tiktok-btn-premium:hover {
-      transform: translateY(-3px) scale(1.03);
-      box-shadow: 0 20px 34px rgba(0,0,0,.32);
-      opacity: .98;
-    }
-
-    .tiktok-icon {
-      width: 19px;
-      height: 19px;
-      display: block;
-      flex: 0 0 19px;
-    }
-
-    .live-side-panel {
-      display: grid;
-      gap: 14px;
-    }
-
-    .side-metric {
-      background: rgba(255,255,255,.07);
-      border: 1px solid rgba(255,255,255,.1);
-      border-radius: 22px;
-      padding: 18px 20px;
-      backdrop-filter: blur(12px);
-    }
-
-    .side-metric-label {
-      color: var(--live-muted);
-      font-size: .92rem;
-      margin-bottom: 6px;
-    }
-
-    .side-metric-value {
-      font-size: 1.35rem;
-      font-weight: 800;
-      color: #fff;
-    }
-
-    .host-section {
-      padding-top: 18px;
-      padding-bottom: 10px;
-    }
-
-    .section-title-premium {
-      text-align: center;
-      margin-bottom: 26px;
-    }
-
-    .section-title-premium h2 {
-      margin: 0;
-      font-size: clamp(1.9rem, 3.5vw, 3rem);
-      letter-spacing: -.04em;
-      color: #fff;
-    }
-
-    .section-title-premium p {
-      margin-top: 10px;
-      color: var(--live-muted);
-    }
-
-    .hosts-grid-premium {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 24px;
-    }
-
-    .host-card-premium {
-      position: relative;
-      border-radius: 30px;
-      overflow: hidden;
-      background: linear-gradient(180deg, rgba(255,255,255,.11), rgba(255,255,255,.05));
-      border: 1px solid rgba(255,255,255,.14);
-      box-shadow: var(--live-shadow);
-      backdrop-filter: blur(14px);
-    }
-
-    .host-card-premium::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background:
-        linear-gradient(180deg, transparent 35%, rgba(8,8,16,.7) 100%);
-      pointer-events: none;
-      z-index: 1;
-    }
-
-    .host-img-premium {
-      width: 100%;
-      height: 480px;
-      object-fit: cover;
-      display: block;
-    }
-
-    .host-badge {
-      position: absolute;
-      top: 18px;
-      left: 18px;
-      z-index: 2;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 9px 13px;
-      border-radius: 999px;
-      font-weight: 800;
-      font-size: .85rem;
-      color: #fff;
-      background: rgba(10,10,18,.56);
-      border: 1px solid rgba(255,255,255,.14);
-      backdrop-filter: blur(10px);
-    }
-
-    .host-content-premium {
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      z-index: 2;
-      padding: 26px 22px 22px;
-    }
-
-    .host-name-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 14px;
-    }
-
-    .host-name-premium {
-      margin: 0;
-      font-size: clamp(1.35rem, 2.2vw, 1.8rem);
-      color: #fff;
-      letter-spacing: -.03em;
-    }
-
-    .host-handle-premium {
-      margin-top: 6px;
-      color: rgba(255,255,255,.8);
-      font-weight: 600;
-    }
-
-    .host-desc-premium {
-      margin-top: 14px;
-      color: rgba(255,255,255,.84);
-      line-height: 1.6;
-      max-width: 95%;
-    }
-
-    .host-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 16px;
-    }
-
-    .host-tag {
-      display: inline-flex;
-      align-items: center;
-      padding: 8px 12px;
-      border-radius: 999px;
-      background: rgba(255,255,255,.1);
-      border: 1px solid rgba(255,255,255,.12);
-      color: #fff;
-      font-size: .9rem;
-      font-weight: 700;
-    }
-
-    .host-actions-premium {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 18px;
-    }
-
-    .live-list-wrap {
-      padding-top: 8px;
-      padding-bottom: 20px;
-    }
-
-    .slot-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 20px;
-    }
-
-    .slot-card-premium {
-      background: linear-gradient(180deg, rgba(255,255,255,.11), rgba(255,255,255,.05));
-      border: 1px solid rgba(255,255,255,.12);
-      border-radius: 26px;
-      overflow: hidden;
-      box-shadow: var(--live-shadow);
-    }
-
-    .slot-card-head {
-      padding: 18px 20px 14px;
-      border-bottom: 1px solid rgba(255,255,255,.08);
-      background: rgba(255,255,255,.03);
-    }
-
-    .slot-card-head h3 {
-      margin: 0;
-      font-size: 1.2rem;
-      color: #fff;
-      letter-spacing: -.02em;
-    }
-
-    .slot-card-sub {
-      margin-top: 8px;
-      color: var(--live-muted);
-      font-size: .95rem;
-    }
-
-    .slot-card-body {
-      padding: 18px 20px 20px;
-    }
-
-    .mini-hosts {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-bottom: 10px;
-    }
-
-    .mini-host-chip {
-      display: inline-flex;
-      align-items: center;
-      gap: 9px;
-      padding: 8px 12px;
-      border-radius: 999px;
-      background: rgba(255,255,255,.08);
-      border: 1px solid rgba(255,255,255,.1);
-      color: #fff;
-      text-decoration: none;
-      font-weight: 700;
-      font-size: .92rem;
-    }
-
-    .mini-host-chip img {
-      width: 28px;
-      height: 28px;
-      border-radius: 50%;
-      object-fit: cover;
-    }
-
-    .member-item-premium {
-      margin-top: 14px;
-      padding: 14px;
-      border-radius: 20px;
-      background: rgba(255,255,255,.05);
-      border: 1px solid rgba(255,255,255,.08);
-    }
-
-    .member-item-premium strong {
-      color: #fff;
-      font-size: 1.02rem;
-    }
-
-    .member-meta-premium {
-      margin-top: 6px;
-      color: var(--live-muted);
-    }
-
-    .member-actions-premium {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 12px;
-    }
-
-    .empty-slot {
-      margin-top: 12px;
-      padding: 14px;
-      border-radius: 18px;
-      background: rgba(255,255,255,.05);
-      border: 1px dashed rgba(255,255,255,.12);
-      color: var(--live-muted);
-    }
-
-    .premium-footer {
-      padding: 24px 0 36px;
-      text-align: center;
-      color: rgba(255,255,255,.64);
-      font-size: .95rem;
-    }
-
-    @media (max-width: 980px) {
-      .live-hero-grid,
-      .hosts-grid-premium,
-      .slot-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .host-img-premium {
-        height: 420px;
-      }
-    }
-
-    @media (max-width: 640px) {
-      .live-hero-card {
-        padding: 22px;
-        border-radius: 24px;
-      }
-
-      .host-img-premium {
-        height: 360px;
-      }
-
-      .host-content-premium {
-        padding: 22px 18px 18px;
-      }
-
-      .host-name-row {
-        align-items: flex-start;
-        flex-direction: column;
-      }
-
-      .mini-hosts {
-        flex-direction: column;
-        align-items: stretch;
-      }
-
-      .mini-host-chip {
-        justify-content: flex-start;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Live cuối tuần | Kết Nối Việt Mỹ</title>
+
+<link rel="stylesheet" href="./assets/css/styles.css">
+
+<style>
+/* ===== GLOBAL ===== */
+body {
+  background: linear-gradient(135deg,#0c0c14,#141428);
+  color:#fff;
+}
+
+.live-glow {
+  position:absolute;
+  width:300px;height:300px;
+  filter:blur(60px);
+  opacity:.25;
+}
+.glow1 {background:#ff2d78; top:-80px; left:-60px;}
+.glow2 {background:#00eaff; top:50px; right:-80px;}
+
+.live-card {
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.1);
+  backdrop-filter:blur(14px);
+  border-radius:26px;
+  box-shadow:0 25px 60px rgba(0,0,0,.4);
+}
+
+/* ===== HERO ===== */
+.hero-wrap {
+  position:relative;
+  padding:40px 0;
+}
+
+.hero-box {
+  padding:30px;
+  position:relative;
+  overflow:hidden;
+}
+
+.badge-live {
+  display:inline-flex;
+  gap:8px;
+  background:rgba(255,255,255,.1);
+  padding:6px 12px;
+  border-radius:999px;
+  font-size:13px;
+  font-weight:700;
+}
+
+.dot {
+  width:8px;height:8px;
+  border-radius:50%;
+  background:#ff3b5c;
+  animation:pulse 1.5s infinite;
+}
+@keyframes pulse {
+  0%{transform:scale(1);}
+  50%{transform:scale(1.3);}
+  100%{transform:scale(1);}
+}
+
+.hero-title {
+  font-size:40px;
+  margin:16px 0;
+  line-height:1.1;
+}
+
+.hero-sub {
+  color:#ccc;
+  max-width:600px;
+}
+
+.hero-actions {
+  margin-top:20px;
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+.btn-main {
+  background:#ff2d78;
+  padding:12px 20px;
+  border-radius:999px;
+  font-weight:700;
+  text-decoration:none;
+  color:#fff;
+}
+
+.btn-sub {
+  border:1px solid rgba(255,255,255,.2);
+  padding:12px 20px;
+  border-radius:999px;
+  text-decoration:none;
+  color:#fff;
+}
+
+.tiktok-btn {
+  width:48px;height:48px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#111;
+  border:1px solid rgba(255,255,255,.2);
+}
+
+/* ===== HOST ===== */
+.host-grid {
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:20px;
+  margin-top:30px;
+}
+
+.host-card {
+  position:relative;
+  overflow:hidden;
+  border-radius:24px;
+}
+
+.host-card img {
+  width:100%;
+  height:420px;
+  object-fit:cover;
+}
+
+.host-info {
+  position:absolute;
+  bottom:0;
+  padding:20px;
+  background:linear-gradient(transparent,rgba(0,0,0,.8));
+  width:100%;
+}
+
+.host-tag {
+  font-size:12px;
+  background:#ff2d78;
+  padding:4px 10px;
+  border-radius:999px;
+}
+
+/* ===== SLOT ===== */
+.slot-grid {
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:16px;
+  margin-top:20px;
+}
+
+.slot {
+  padding:18px;
+}
+
+.slot h3 {
+  margin:0;
+}
+
+.status {
+  margin-top:6px;
+  font-size:13px;
+  color:#00ffcc;
+}
+
+.empty {
+  margin-top:10px;
+  color:#aaa;
+}
+
+/* ===== CTA ===== */
+.cta-box {
+  margin-top:40px;
+  text-align:center;
+  padding:30px;
+}
+
+.cta-title {
+  font-size:26px;
+}
+
+.cta-sub {
+  color:#bbb;
+  margin-top:10px;
+}
+
+/* ===== MOBILE ===== */
+@media(max-width:900px){
+  .host-grid,.slot-grid {
+    grid-template-columns:1fr;
+  }
+}
+</style>
 </head>
-<body class="live-premium">
+
+<body>
 
 <header class="site-header">
-  <div class="container nav">
-    <a href="./index.html" class="brand">
-      <span class="brand-badge">❤</span>
-      <span>Kết Nối Việt Mỹ</span>
-    </a>
-
-    <nav class="nav-links">
-      <a href="/">Về hoaidang.com</a>
-      <a href="./index.html">Trang ketnoi</a>
-      <a href="./profiles.html">Thành viên</a>
-      <a href="./register.html">Đăng ký</a>
-      <a href="./live.html">Lịch live</a>
-      <a href="./my-profile.html">Hồ sơ của tôi</a>
-
-      <span id="authUser" class="auth-user"></span>
-      <button id="loginBtn" class="btn btn-secondary" type="button">Đăng nhập Google</button>
-      <button id="logoutBtn" class="btn btn-secondary" type="button" style="display:none;">Đăng xuất</button>
-    </nav>
-  </div>
+<div class="container nav">
+<a href="/" class="brand">❤ Kết Nối Việt Mỹ</a>
+</div>
 </header>
 
 <main>
-  <section class="hero live-hero">
-    <div class="container">
-      <div class="live-hero-card">
-        <div class="live-hero-grid">
-          <div>
-            <div class="live-topbar">
-              <span class="live-dot"></span>
-              LIVE CUỐI TUẦN • TIKTOK HOST
-            </div>
 
-            <h1 class="live-title">
-              Làm quen vui hơn.
-              <span>Gặp nhau qua live thật, nói chuyện thật.</span>
-            </h1>
+<section class="hero-wrap">
+<div class="live-glow glow1"></div>
+<div class="live-glow glow2"></div>
 
-            <p class="live-subtext">
-              Mỗi cuối tuần, Kết Nối Việt Mỹ mở lịch live để thành viên có cơ hội xuất hiện,
-              trò chuyện tự nhiên hơn và kết nối dễ hơn cùng 2 host của chương trình:
-              <strong>@hello_ba_gia_90</strong> và <strong>@hoaidangllc</strong>.
-            </p>
+<div class="container">
+<div class="live-card hero-box">
 
-            <div class="live-actions">
-              <a href="./register.html" class="live-btn-primary">Đăng ký để lên live</a>
-              <a href="./profiles.html" class="live-btn-ghost">Xem hồ sơ thành viên</a>
+<div class="badge-live">
+<span class="dot"></span> WEEKEND LIVE EVENT
+</div>
 
-              <a
-                href="https://www.tiktok.com/@hello_ba_gia_90"
-                target="_blank"
-                rel="noopener"
-                class="tiktok-btn-premium"
-                title="TikTok @hello_ba_gia_90"
-                aria-label="TikTok @hello_ba_gia_90"
-              >
-                <svg class="tiktok-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                  <path d="M19.589 6.686a4.793 4.793 0 0 1-3.77-4.216V2h-3.178v12.235c0 1.725-1.379 3.123-3.078 3.123a3.082 3.082 0 0 1-3.08-3.123 3.082 3.082 0 0 1 3.08-3.123c.34 0 .666.056.971.158V8.055a6.21 6.21 0 0 0-.97-.077C6.06 7.978 3 11.082 3 14.87 3 18.657 6.06 21.76 9.564 21.76c3.504 0 6.563-3.103 6.563-6.89V8.742a7.895 7.895 0 0 0 4.873 1.688V7.25a4.79 4.79 0 0 1-1.411-.564z"/>
-                </svg>
-              </a>
+<h1 class="hero-title">
+Live thật – nói chuyện thật – kết nối thật
+</h1>
 
-              <a
-                href="https://www.tiktok.com/@hoaidangllc"
-                target="_blank"
-                rel="noopener"
-                class="tiktok-btn-premium"
-                title="TikTok @hoaidangllc"
-                aria-label="TikTok @hoaidangllc"
-              >
-                <svg class="tiktok-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                  <path d="M19.589 6.686a4.793 4.793 0 0 1-3.77-4.216V2h-3.178v12.235c0 1.725-1.379 3.123-3.078 3.123a3.082 3.082 0 0 1-3.08-3.123 3.082 3.082 0 0 1 3.08-3.123c.34 0 .666.056.971.158V8.055a6.21 6.21 0 0 0-.97-.077C6.06 7.978 3 11.082 3 14.87 3 18.657 6.06 21.76 9.564 21.76c3.504 0 6.563-3.103 6.563-6.89V8.742a7.895 7.895 0 0 0 4.873 1.688V7.25a4.79 4.79 0 0 1-1.411-.564z"/>
-                </svg>
-              </a>
-            </div>
-          </div>
+<p class="hero-sub">
+Tham gia live cuối tuần cùng 2 host để giao lưu, làm quen và tạo kết nối tự nhiên hơn.
+</p>
 
-          <div class="live-side-panel">
-            <div class="side-metric">
-              <div class="side-metric-label">Host chính</div>
-              <div class="side-metric-value">@hello_ba_gia_90</div>
-            </div>
+<div class="hero-actions">
+<a href="./register.html" class="btn-main">Đăng ký lên live</a>
+<a href="./profiles.html" class="btn-sub">Xem thành viên</a>
 
-            <div class="side-metric">
-              <div class="side-metric-label">Host đồng hành</div>
-              <div class="side-metric-value">@hoaidangllc</div>
-            </div>
+<a href="https://www.tiktok.com/@hello_ba_gia_90" target="_blank" class="tiktok-btn">🎵</a>
+<a href="https://www.tiktok.com/@hoaidangllc" target="_blank" class="tiktok-btn">🎵</a>
+</div>
 
-            <div class="side-metric">
-              <div class="side-metric-label">Phong cách live</div>
-              <div class="side-metric-value">Vui vẻ • Tự nhiên • Dễ kết nối</div>
-            </div>
+</div>
+</div>
+</section>
 
-            <div class="side-metric">
-              <div class="side-metric-label">Thời gian</div>
-              <div class="side-metric-value">Tối Thứ 7 & Chủ Nhật (Texas time)</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+<!-- HOST -->
+<section class="container">
+<div class="host-grid">
 
-  <section class="section host-section">
-    <div class="container">
-      <div class="section-title-premium">
-        <h2>2 host đồng hành trên sóng live</h2>
-        <p>Không chỉ lên hình cho có. Phần này làm ra để nhìn chuyên nghiệp, dễ bấm, dễ nhớ và đẹp mắt hơn.</p>
-      </div>
+<div class="host-card live-card">
+<img src="./image/HOT-GIRL-HEIDI.jpeg">
+<div class="host-info">
+<span class="host-tag">MAIN HOST</span>
+<h3>@hello_ba_gia_90</h3>
+<p>Giữ nhịp, dẫn dắt và tạo không khí.</p>
+</div>
+</div>
 
-      <div class="hosts-grid-premium">
-        <article class="host-card-premium">
-          <span class="host-badge">
-            <span class="live-dot" style="width:8px;height:8px;box-shadow:none;"></span>
-            MAIN HOST
-          </span>
+<div class="host-card live-card">
+<img src="./image/hoaidangllc.jpeg">
+<div class="host-info">
+<span class="host-tag">CO-HOST</span>
+<h3>@hoaidangllc</h3>
+<p>Tăng tương tác và giữ flow live.</p>
+</div>
+</div>
 
-          <img
-            src="./image/HOT-GIRL-HEIDI.jpeg"
-            alt="TikTok host hello_ba_gia_90"
-            class="host-img-premium"
-          />
+</div>
+</section>
 
-          <div class="host-content-premium">
-            <div class="host-name-row">
-              <div>
-                <h3 class="host-name-premium">Host giao lưu cuối tuần</h3>
-                <div class="host-handle-premium">@hello_ba_gia_90</div>
-              </div>
+<!-- CTA -->
+<section class="container">
+<div class="live-card cta-box">
+<div class="cta-title">Muốn xuất hiện trên live?</div>
+<div class="cta-sub">
+Đăng ký hồ sơ trước để được chọn khung giờ phù hợp
+</div>
+<br>
+<a href="./register.html" class="btn-main">Đăng ký ngay</a>
+</div>
+</section>
 
-              <a
-                href="https://www.tiktok.com/@hello_ba_gia_90"
-                target="_blank"
-                rel="noopener"
-                class="tiktok-btn-premium"
-                title="TikTok @hello_ba_gia_90"
-                aria-label="TikTok @hello_ba_gia_90"
-              >
-                <svg class="tiktok-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                  <path d="M19.589 6.686a4.793 4.793 0 0 1-3.77-4.216V2h-3.178v12.235c0 1.725-1.379 3.123-3.078 3.123a3.082 3.082 0 0 1-3.08-3.123 3.082 3.082 0 0 1 3.08-3.123c.34 0 .666.056.971.158V8.055a6.21 6.21 0 0 0-.97-.077C6.06 7.978 3 11.082 3 14.87 3 18.657 6.06 21.76 9.564 21.76c3.504 0 6.563-3.103 6.563-6.89V8.742a7.895 7.895 0 0 0 4.873 1.688V7.25a4.79 4.79 0 0 1-1.411-.564z"/>
-                </svg>
-              </a>
-            </div>
+<!-- SLOT -->
+<section class="container">
+<div class="slot-grid" id="liveList"></div>
+</section>
 
-            <p class="host-desc-premium">
-              Giữ nhịp chương trình, dẫn câu chuyện tự nhiên, làm không khí live bớt ngại và dễ mở lời hơn cho mọi người.
-            </p>
-
-            <div class="host-tags">
-              <span class="host-tag">Giao lưu tự nhiên</span>
-              <span class="host-tag">Kết nối cuối tuần</span>
-              <span class="host-tag">Không khí vui vẻ</span>
-            </div>
-
-            <div class="host-actions-premium">
-              <a href="./register.html" class="live-btn-primary">Đăng ký để xuất hiện trên live</a>
-            </div>
-          </div>
-        </article>
-
-        <article class="host-card-premium">
-          <span class="host-badge">
-            <span class="live-dot" style="width:8px;height:8px;box-shadow:none;"></span>
-            CO-HOST
-          </span>
-
-          <img
-            src="./image/hoaidangllc.jpeg"
-            alt="TikTok host hoaidangllc"
-            class="host-img-premium"
-          />
-
-          <div class="host-content-premium">
-            <div class="host-name-row">
-              <div>
-                <h3 class="host-name-premium">Live host đồng hành</h3>
-                <div class="host-handle-premium">@hoaidangllc</div>
-              </div>
-
-              <a
-                href="https://www.tiktok.com/@hoaidangllc"
-                target="_blank"
-                rel="noopener"
-                class="tiktok-btn-premium"
-                title="TikTok @hoaidangllc"
-                aria-label="TikTok @hoaidangllc"
-              >
-                <svg class="tiktok-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                  <path d="M19.589 6.686a4.793 4.793 0 0 1-3.77-4.216V2h-3.178v12.235c0 1.725-1.379 3.123-3.078 3.123a3.082 3.082 0 0 1-3.08-3.123 3.082 3.082 0 0 1 3.08-3.123c.34 0 .666.056.971.158V8.055a6.21 6.21 0 0 0-.97-.077C6.06 7.978 3 11.082 3 14.87 3 18.657 6.06 21.76 9.564 21.76c3.504 0 6.563-3.103 6.563-6.89V8.742a7.895 7.895 0 0 0 4.873 1.688V7.25a4.79 4.79 0 0 1-1.411-.564z"/>
-                </svg>
-              </a>
-            </div>
-
-            <p class="host-desc-premium">
-              Đồng hành cùng chương trình để tăng tương tác, giữ cuộc trò chuyện mượt hơn và làm tổng thể buổi live nhìn có chất hơn.
-            </p>
-
-            <div class="host-tags">
-              <span class="host-tag">Co-host nổi bật</span>
-              <span class="host-tag">Tăng tương tác</span>
-              <span class="host-tag">Giữ nhịp chương trình</span>
-            </div>
-
-            <div class="host-actions-premium">
-              <a href="./register.html" class="live-btn-primary">Đăng ký để tham gia live</a>
-            </div>
-          </div>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <section class="section live-list-wrap">
-    <div class="container">
-      <div class="section-title-premium">
-        <h2>Lịch live cuối tuần</h2>
-        <p>Các hồ sơ đã chọn khung giờ sẽ tự động hiển thị tại đây.</p>
-      </div>
-
-      <div id="liveList" class="slot-grid"></div>
-    </div>
-  </section>
-
-  <section class="premium-footer">
-    <div class="container">
-      © 2026 Kết Nối Việt Mỹ • TikTok live cùng @hello_ba_gia_90 và @hoaidangllc
-    </div>
-  </section>
 </main>
 
-<script type="module" src="/assets/js/auth.js"></script>
-
 <script type="module">
-  import { getProfiles } from "./assets/js/ketnoi-firebase.js";
+import { getProfiles } from "./assets/js/ketnoi-firebase.js";
 
-  const liveList = document.getElementById("liveList");
+const slots = [
+"Thứ 7 • 9PM",
+"Thứ 7 • 10:30PM",
+"Chủ Nhật • 7:30PM",
+"Chủ Nhật • 9:30PM"
+];
 
-  const slots = [
-    "Thứ 7 • 9:00 PM Texas time",
-    "Thứ 7 • 10:30 PM Texas time",
-    "Chủ Nhật • 7:30 PM Texas time",
-    "Chủ Nhật • 9:30 PM Texas time"
-  ];
+async function load(){
+const users = await getProfiles();
 
-  function tiktokIcon() {
-    return `
-      <svg class="tiktok-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-        <path d="M19.589 6.686a4.793 4.793 0 0 1-3.77-4.216V2h-3.178v12.235c0 1.725-1.379 3.123-3.078 3.123a3.082 3.082 0 0 1-3.08-3.123 3.082 3.082 0 0 1 3.08-3.123c.34 0 .666.056.971.158V8.055a6.21 6.21 0 0 0-.97-.077C6.06 7.978 3 11.082 3 14.87 3 18.657 6.06 21.76 9.564 21.76c3.504 0 6.563-3.103 6.563-6.89V8.742a7.895 7.895 0 0 0 4.873 1.688V7.25a4.79 4.79 0 0 1-1.411-.564z"/>
-      </svg>
-    `;
-  }
+document.getElementById("liveList").innerHTML =
+slots.map(s=>{
+const list = users.filter(u=>u.liveSlot===s);
 
-  function renderSlot(slot, matched) {
-    return `
-      <div class="slot-card-premium">
-        <div class="slot-card-head">
-          <h3>${slot}</h3>
-          <div class="slot-card-sub">Live cùng 2 host trên TikTok</div>
-        </div>
+return `
+<div class="slot live-card">
+<h3>${s}</h3>
+<div class="status">${list.length}/4 người</div>
 
-        <div class="slot-card-body">
-          <div class="mini-hosts">
-            <a href="https://www.tiktok.com/@hello_ba_gia_90" target="_blank" rel="noopener" class="mini-host-chip">
-              <img src="./image/HOT-GIRL-HEIDI.jpeg" alt="Host hello_ba_gia_90" />
-              <span>@hello_ba_gia_90</span>
-              ${tiktokIcon()}
-            </a>
+${
+list.length
+? list.map(u=>`
+<div style="margin-top:10px">
+<strong>${u.name||"Ẩn danh"}</strong>
+</div>
+`).join("")
+: `<div class="empty">Chưa có ai</div>`
+}
 
-            <a href="https://www.tiktok.com/@hoaidangllc" target="_blank" rel="noopener" class="mini-host-chip">
-              <img src="./image/hoaidangllc.jpeg" alt="Host hoaidangllc" />
-              <span>@hoaidangllc</span>
-              ${tiktokIcon()}
-            </a>
-          </div>
+</div>`;
+}).join("");
+}
 
-          ${
-            matched.length > 0
-              ? matched.map(u => `
-                  <div class="member-item-premium">
-                    <strong>${u.name || "Chưa có tên"}${u.age ? `, ${u.age} tuổi` : ""}</strong>
-                    <div class="member-meta-premium">
-                      ${u.city || "Chưa rõ thành phố"}${u.state ? `, ${u.state}` : ""} • ${u.job || "Chưa cập nhật"}
-                    </div>
-
-                    <div class="member-actions-premium">
-                      <a href="./profile.html?id=${u.id}" class="live-btn-ghost">Xem hồ sơ</a>
-                      ${
-                        u.link
-                          ? `<a href="${u.link}" target="_blank" class="live-btn-primary">${u.platform || "Mở liên hệ"}</a>`
-                          : `<span class="live-btn-ghost" style="opacity:.6;pointer-events:none;">Chưa có link</span>`
-                      }
-                    </div>
-                  </div>
-                `).join("")
-              : `<div class="empty-slot">Chưa có ai đăng ký khung giờ này.</div>`
-          }
-        </div>
-      </div>
-    `;
-  }
-
-  async function loadLiveSlots() {
-    try {
-      const users = await getProfiles();
-
-      liveList.innerHTML = slots.map(slot => {
-        const matched = users.filter(u => u.liveSlot === slot);
-        return renderSlot(slot, matched);
-      }).join("");
-    } catch (err) {
-      console.error("Lỗi load live Firebase:", err);
-      liveList.innerHTML = `
-        <div class="slot-card-premium" style="grid-column:1/-1;">
-          <div class="slot-card-head">
-            <h3>Không tải được lịch live</h3>
-            <div class="slot-card-sub">Kiểm tra Firestore rules hoặc file ketnoi-firebase.js</div>
-          </div>
-        </div>
-      `;
-    }
-  }
-
-  loadLiveSlots();
+load();
 </script>
 
 </body>
