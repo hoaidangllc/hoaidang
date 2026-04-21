@@ -364,7 +364,24 @@
 
 <header class="site-header">
   <div class="container nav">
-    <a href="/" class="brand">❤ Kết Nối Việt Mỹ</a>
+    <a href="./index.html" class="brand">
+      <span class="brand-badge">❤</span>
+      <span>Kết Nối Việt Mỹ</span>
+    </a>
+
+    <nav class="nav-links">
+      <a href="/">Về hoaidang.com</a>
+      <a href="./index.html">Trang ketnoi</a>
+      <a href="./profiles.html">Thành viên</a>
+      <a href="./register.html">Đăng ký</a>
+      <a href="./live.html">Lịch live</a>
+      <a href="./my-profile.html">Hồ sơ của tôi</a>
+
+      <span id="authUser" class="auth-user"></span>
+
+      <button id="loginBtn" class="btn btn-secondary" type="button">Đăng nhập Google</button>
+      <button id="logoutBtn" class="btn btn-secondary" type="button" style="display:none;">Đăng xuất</button>
+    </nav>
   </div>
 </header>
 
@@ -576,6 +593,6 @@ async function load(){
 
 load();
 </script>
-
+<script type="module" src="/assets/js/auth.js"></script>
 </body>
 </html>
