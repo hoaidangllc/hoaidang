@@ -69,6 +69,23 @@
 
         <form id="form">
           <div class="form-grid">
+            <div class="field full">
+              <label for="avatarFile">Ảnh đại diện</label>
+              <input id="avatarFile" name="avatarFile" type="file" accept="image/*">
+              <small style="display:block;margin-top:8px;color:var(--muted,#999);">
+                Chọn ảnh rõ mặt. Hỗ trợ JPG, PNG, WEBP. Tối đa 3MB.
+              </small>
+
+              <div id="avatarPreviewWrap" style="display:none; margin-top:14px;">
+                <img
+                  id="avatarPreview"
+                  src=""
+                  alt="Xem trước ảnh đại diện"
+                  style="width:110px;height:110px;border-radius:50%;object-fit:cover;border:2px solid rgba(255,255,255,.12);display:block;"
+                >
+              </div>
+            </div>
+
             <div class="field">
               <label for="name">Tên hiển thị</label>
               <input id="name" name="name" type="text" placeholder="Ví dụ: Mai Nguyễn" required>
@@ -141,13 +158,13 @@
             </div>
 
             <div class="field full">
-              <button type="submit" class="btn btn-primary">Lưu hồ sơ</button>
+              <button id="submitBtn" type="submit" class="btn btn-primary">Lưu hồ sơ</button>
             </div>
           </div>
         </form>
 
         <p id="successMessage" style="display:none; margin-top:16px; color:#fff;">
-          Đã lưu hồ sơ lên Firebase, đang chuyển sang danh sách thành viên...
+          Đã lưu hồ sơ lên Firebase, đang chuyển sang Hồ sơ của tôi...
         </p>
       </div>
     </div>
@@ -164,13 +181,17 @@
 <script type="module" src="/assets/js/auth.js"></script>
 
 <script type="module">
-import { addProfile, getMyProfile } from "./assets/js/ketnoi-firebase.js";
+import { addProfile, getMyProfile, uploadAvatar } from "./assets/js/ketnoi-firebase.js";
 
 window.addEventListener("DOMContentLoaded", async () => {
   const form = document.getElementById("form");
   const successMessage = document.getElementById("successMessage");
   const alreadyExistsBox = document.getElementById("alreadyExistsBox");
   const registerCard = document.getElementById("registerCard");
+  const avatarFileInput = document.getElementById("avatarFile");
+  const avatarPreview = document.getElementById("avatarPreview");
+  const avatarPreviewWrap = document.getElementById("avatarPreviewWrap");
+  const submitBtn = document.getElementById("submitBtn");
 
   function normalizeProfileLink(platform, rawLink) {
     if (!rawLink) return "";
@@ -194,6 +215,47 @@ window.addEventListener("DOMContentLoaded", async () => {
     return link;
   }
 
+  function validateAvatar(file) {
+    if (!file) return { ok: true };
+
+    if (!file.type.startsWith("image/")) {
+      return { ok: false, message: "Vui lòng chọn file hình ảnh." };
+    }
+
+    const maxSize = 3 * 1024 * 1024;
+    if (file.size > maxSize) {
+      return { ok: false, message: "Ảnh phải nhỏ hơn hoặc bằng 3MB." };
+    }
+
+    return { ok: true };
+  }
+
+  avatarFileInput?.addEventListener("change", () => {
+    const file = avatarFileInput.files?.[0];
+
+    if (!file) {
+      avatarPreview.src = "";
+      avatarPreviewWrap.style.display = "none";
+      return;
+    }
+
+    const check = validateAvatar(file);
+    if (!check.ok) {
+      alert(check.message);
+      avatarFileInput.value = "";
+      avatarPreview.src = "";
+      avatarPreviewWrap.style.display = "none";
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      avatarPreview.src = e.target.result;
+      avatarPreviewWrap.style.display = "block";
+    };
+    reader.readAsDataURL(file);
+  });
+
   try {
     const myProfile = await getMyProfile();
 
@@ -209,6 +271,17 @@ window.addEventListener("DOMContentLoaded", async () => {
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
+    const avatarFile = avatarFileInput?.files?.[0] || null;
+    const avatarCheck = validateAvatar(avatarFile);
+
+    if (!avatarCheck.ok) {
+      alert(avatarCheck.message);
+      return;
+    }
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = "Đang lưu...";
+
     const data = Object.fromEntries(new FormData(form));
     data.link = normalizeProfileLink(data.platform, data.link);
 
@@ -217,10 +290,23 @@ window.addEventListener("DOMContentLoaded", async () => {
       if (checkAgain) {
         registerCard.style.display = "none";
         alreadyExistsBox.style.display = "block";
+        submitBtn.disabled = false;
+        submitBtn.textContent = "Lưu hồ sơ";
         return;
       }
 
+      let avatarUrl = "";
+
+      if (avatarFile) {
+        avatarUrl = await uploadAvatar(avatarFile);
+      }
+
+      data.avatarUrl = avatarUrl;
+      data.createdAt = Date.now();
+      data.updatedAt = Date.now();
+
       const newId = await addProfile(data);
+
       successMessage.style.display = "block";
 
       setTimeout(() => {
@@ -228,7 +314,9 @@ window.addEventListener("DOMContentLoaded", async () => {
       }, 700);
     } catch (err) {
       console.error("Lỗi lưu Firebase:", err);
-      alert("Lưu hồ sơ thất bại. Kiểm tra Firestore rules hoặc file ketnoi-firebase.js.");
+      alert("Lưu hồ sơ thất bại. Kiểm tra Firestore rules, Storage rules hoặc file ketnoi-firebase.js.");
+      submitBtn.disabled = false;
+      submitBtn.textContent = "Lưu hồ sơ";
     }
   });
 });
