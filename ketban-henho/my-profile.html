@@ -323,7 +323,7 @@ function renderNoProfile() {
 }
 
 function renderForm(profile) {
-  const avatar = profile.avatarUrl || DEFAULT_AVATAR;
+  const avatar = profile.avatarUrl || "./image/default-avatar.png";
   const safeName = escapeHtml(profile.name || "Chưa có tên");
   const safeCity = escapeHtml(profile.city || "Chưa rõ thành phố");
   const safeState = escapeHtml(profile.state || "");
