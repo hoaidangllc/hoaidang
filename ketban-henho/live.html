@@ -6,134 +6,535 @@
   <title>Lịch live cuối tuần | Kết Nối Việt Mỹ</title>
   <meta
     name="description"
-    content="Xem lịch live cuối tuần và giao lưu làm quen trên TikTok cùng các host của Kết Nối Việt Mỹ."
+    content="Xem lịch live cuối tuần và giao lưu làm quen trên TikTok cùng host @hello_ba_gia_90 và @hoaidangllc."
   />
   <link rel="stylesheet" href="./assets/css/styles.css" />
 
   <style>
-    .tiktok-btn {
+    :root {
+      --live-bg-1: #0f0f16;
+      --live-bg-2: #171726;
+      --live-card: rgba(255,255,255,.08);
+      --live-border: rgba(255,255,255,.14);
+      --live-text: #ffffff;
+      --live-muted: rgba(255,255,255,.72);
+      --live-soft: rgba(255,255,255,.06);
+      --live-pink: #ff2d78;
+      --live-cyan: #29f0ff;
+      --live-gold: #ffd47a;
+      --live-shadow: 0 24px 60px rgba(0,0,0,.32);
+    }
+
+    .live-premium {
+      background:
+        radial-gradient(circle at top left, rgba(255,45,120,.18), transparent 28%),
+        radial-gradient(circle at top right, rgba(41,240,255,.14), transparent 24%),
+        linear-gradient(135deg, var(--live-bg-1), var(--live-bg-2));
+      color: var(--live-text);
+    }
+
+    .hero.live-hero {
+      position: relative;
+      overflow: hidden;
+      padding-top: 42px;
+      padding-bottom: 36px;
+    }
+
+    .live-hero::before,
+    .live-hero::after {
+      content: "";
+      position: absolute;
+      border-radius: 999px;
+      filter: blur(30px);
+      pointer-events: none;
+    }
+
+    .live-hero::before {
+      width: 260px;
+      height: 260px;
+      background: rgba(255,45,120,.18);
+      top: -60px;
+      left: -70px;
+    }
+
+    .live-hero::after {
+      width: 220px;
+      height: 220px;
+      background: rgba(41,240,255,.15);
+      right: -50px;
+      top: 20px;
+    }
+
+    .live-hero-card {
+      position: relative;
+      z-index: 1;
+      background: linear-gradient(180deg, rgba(255,255,255,.12), rgba(255,255,255,.05));
+      border: 1px solid var(--live-border);
+      border-radius: 32px;
+      box-shadow: var(--live-shadow);
+      padding: 34px;
+      backdrop-filter: blur(16px);
+      overflow: hidden;
+    }
+
+    .live-hero-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(120deg, rgba(255,45,120,.08), transparent 30%),
+        linear-gradient(300deg, rgba(41,240,255,.06), transparent 30%);
+      pointer-events: none;
+    }
+
+    .live-topbar {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.12);
+      font-weight: 700;
+      font-size: .92rem;
+      color: #fff;
+      margin-bottom: 18px;
+    }
+
+    .live-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #ff385c;
+      box-shadow: 0 0 0 6px rgba(255,56,92,.15);
+      animation: livePulse 1.8s infinite ease-in-out;
+    }
+
+    @keyframes livePulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.15); opacity: .75; }
+    }
+
+    .live-hero-grid {
+      display: grid;
+      grid-template-columns: 1.2fr .9fr;
+      gap: 26px;
+      align-items: center;
+    }
+
+    .live-title {
+      font-size: clamp(2.1rem, 5vw, 4.25rem);
+      line-height: .98;
+      letter-spacing: -.05em;
+      margin: 0;
+      color: #fff;
+      max-width: 760px;
+    }
+
+    .live-title span {
+      display: block;
+      background: linear-gradient(90deg, #fff, #ffd5e4 40%, #b5fbff 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .live-subtext {
+      margin-top: 18px;
+      color: var(--live-muted);
+      font-size: 1.04rem;
+      max-width: 760px;
+    }
+
+    .live-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .live-btn-primary {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
-      min-width: 52px;
-      padding: 12px 16px;
+      padding: 13px 20px;
+      border-radius: 999px;
+      font-weight: 800;
+      text-decoration: none;
+      color: #fff;
+      background: linear-gradient(90deg, var(--live-pink), #ff5c97);
+      box-shadow: 0 18px 34px rgba(255,45,120,.24);
+      transition: transform .18s ease, box-shadow .18s ease, opacity .18s ease;
+    }
+
+    .live-btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 24px 40px rgba(255,45,120,.3);
+    }
+
+    .live-btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 13px 18px;
       border-radius: 999px;
       text-decoration: none;
       font-weight: 700;
-      border: 1px solid rgba(255,255,255,.12);
-      background: #111;
       color: #fff;
-      box-shadow: var(--shadow);
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
       transition: transform .18s ease, opacity .18s ease;
     }
 
-    .tiktok-btn:hover {
+    .live-btn-ghost:hover {
       transform: translateY(-2px);
       opacity: .95;
     }
 
-    .tiktok-icon {
-      width: 18px;
-      height: 18px;
-      display: inline-block;
-      flex: 0 0 18px;
+    .tiktok-btn-premium {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,.15);
+      background:
+        linear-gradient(135deg, rgba(255,255,255,.12), rgba(255,255,255,.05)),
+        #111;
+      color: #fff;
+      text-decoration: none;
+      box-shadow: 0 12px 28px rgba(0,0,0,.25);
+      transition: transform .18s ease, box-shadow .18s ease, opacity .18s ease;
     }
 
-    .hosts-grid {
+    .tiktok-btn-premium:hover {
+      transform: translateY(-3px) scale(1.03);
+      box-shadow: 0 20px 34px rgba(0,0,0,.32);
+      opacity: .98;
+    }
+
+    .tiktok-icon {
+      width: 19px;
+      height: 19px;
+      display: block;
+      flex: 0 0 19px;
+    }
+
+    .live-side-panel {
+      display: grid;
+      gap: 14px;
+    }
+
+    .side-metric {
+      background: rgba(255,255,255,.07);
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 22px;
+      padding: 18px 20px;
+      backdrop-filter: blur(12px);
+    }
+
+    .side-metric-label {
+      color: var(--live-muted);
+      font-size: .92rem;
+      margin-bottom: 6px;
+    }
+
+    .side-metric-value {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: #fff;
+    }
+
+    .host-section {
+      padding-top: 18px;
+      padding-bottom: 10px;
+    }
+
+    .section-title-premium {
+      text-align: center;
+      margin-bottom: 26px;
+    }
+
+    .section-title-premium h2 {
+      margin: 0;
+      font-size: clamp(1.9rem, 3.5vw, 3rem);
+      letter-spacing: -.04em;
+      color: #fff;
+    }
+
+    .section-title-premium p {
+      margin-top: 10px;
+      color: var(--live-muted);
+    }
+
+    .hosts-grid-premium {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 22px;
+      gap: 24px;
     }
 
-    .host-card {
-      background: var(--card, #fff);
-      border-radius: 24px;
-      box-shadow: var(--shadow);
+    .host-card-premium {
+      position: relative;
+      border-radius: 30px;
       overflow: hidden;
-      border: 1px solid rgba(0,0,0,.05);
+      background: linear-gradient(180deg, rgba(255,255,255,.11), rgba(255,255,255,.05));
+      border: 1px solid rgba(255,255,255,.14);
+      box-shadow: var(--live-shadow);
+      backdrop-filter: blur(14px);
     }
 
-    .host-cover {
+    .host-card-premium::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, transparent 35%, rgba(8,8,16,.7) 100%);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .host-img-premium {
       width: 100%;
-      height: 360px;
+      height: 480px;
       object-fit: cover;
       display: block;
     }
 
-    .host-body {
-      padding: 22px;
-    }
-
-    .host-topline {
-      display: flex;
+    .host-badge {
+      position: absolute;
+      top: 18px;
+      left: 18px;
+      z-index: 2;
+      display: inline-flex;
       align-items: center;
+      gap: 8px;
+      padding: 9px 13px;
+      border-radius: 999px;
+      font-weight: 800;
+      font-size: .85rem;
+      color: #fff;
+      background: rgba(10,10,18,.56);
+      border: 1px solid rgba(255,255,255,.14);
+      backdrop-filter: blur(10px);
+    }
+
+    .host-content-premium {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 2;
+      padding: 26px 22px 22px;
+    }
+
+    .host-name-row {
+      display: flex;
       justify-content: space-between;
-      gap: 12px;
-      margin-bottom: 10px;
+      align-items: center;
+      gap: 14px;
     }
 
-    .host-role {
-      font-size: .95rem;
-      color: var(--muted);
-    }
-
-    .host-name {
-      font-size: clamp(1.25rem, 2vw, 1.7rem);
+    .host-name-premium {
       margin: 0;
+      font-size: clamp(1.35rem, 2.2vw, 1.8rem);
+      color: #fff;
       letter-spacing: -.03em;
     }
 
-    .host-desc {
-      margin-top: 10px;
-      color: var(--muted);
+    .host-handle-premium {
+      margin-top: 6px;
+      color: rgba(255,255,255,.8);
+      font-weight: 600;
     }
 
-    .host-actions {
+    .host-desc-premium {
+      margin-top: 14px;
+      color: rgba(255,255,255,.84);
+      line-height: 1.6;
+      max-width: 95%;
+    }
+
+    .host-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .host-tag {
+      display: inline-flex;
+      align-items: center;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.1);
+      border: 1px solid rgba(255,255,255,.12);
+      color: #fff;
+      font-size: .9rem;
+      font-weight: 700;
+    }
+
+    .host-actions-premium {
       display: flex;
       flex-wrap: wrap;
       gap: 12px;
       margin-top: 18px;
     }
 
+    .live-list-wrap {
+      padding-top: 8px;
+      padding-bottom: 20px;
+    }
+
+    .slot-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .slot-card-premium {
+      background: linear-gradient(180deg, rgba(255,255,255,.11), rgba(255,255,255,.05));
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 26px;
+      overflow: hidden;
+      box-shadow: var(--live-shadow);
+    }
+
+    .slot-card-head {
+      padding: 18px 20px 14px;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      background: rgba(255,255,255,.03);
+    }
+
+    .slot-card-head h3 {
+      margin: 0;
+      font-size: 1.2rem;
+      color: #fff;
+      letter-spacing: -.02em;
+    }
+
+    .slot-card-sub {
+      margin-top: 8px;
+      color: var(--live-muted);
+      font-size: .95rem;
+    }
+
+    .slot-card-body {
+      padding: 18px 20px 20px;
+    }
+
     .mini-hosts {
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
-      margin-top: 10px;
+      margin-bottom: 10px;
     }
 
     .mini-host-chip {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
+      gap: 9px;
       padding: 8px 12px;
       border-radius: 999px;
-      background: rgba(0,0,0,.04);
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.1);
+      color: #fff;
       text-decoration: none;
-      color: inherit;
-      font-weight: 600;
+      font-weight: 700;
+      font-size: .92rem;
     }
 
     .mini-host-chip img {
-      width: 26px;
-      height: 26px;
+      width: 28px;
+      height: 28px;
       border-radius: 50%;
       object-fit: cover;
     }
 
-    @media (max-width: 900px) {
-      .hosts-grid {
+    .member-item-premium {
+      margin-top: 14px;
+      padding: 14px;
+      border-radius: 20px;
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.08);
+    }
+
+    .member-item-premium strong {
+      color: #fff;
+      font-size: 1.02rem;
+    }
+
+    .member-meta-premium {
+      margin-top: 6px;
+      color: var(--live-muted);
+    }
+
+    .member-actions-premium {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .empty-slot {
+      margin-top: 12px;
+      padding: 14px;
+      border-radius: 18px;
+      background: rgba(255,255,255,.05);
+      border: 1px dashed rgba(255,255,255,.12);
+      color: var(--live-muted);
+    }
+
+    .premium-footer {
+      padding: 24px 0 36px;
+      text-align: center;
+      color: rgba(255,255,255,.64);
+      font-size: .95rem;
+    }
+
+    @media (max-width: 980px) {
+      .live-hero-grid,
+      .hosts-grid-premium,
+      .slot-grid {
         grid-template-columns: 1fr;
       }
 
-      .host-cover {
-        height: 300px;
+      .host-img-premium {
+        height: 420px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .live-hero-card {
+        padding: 22px;
+        border-radius: 24px;
+      }
+
+      .host-img-premium {
+        height: 360px;
+      }
+
+      .host-content-premium {
+        padding: 22px 18px 18px;
+      }
+
+      .host-name-row {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .mini-hosts {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .mini-host-chip {
+        justify-content: flex-start;
       }
     }
   </style>
 </head>
-<body>
+<body class="live-premium">
 
 <header class="site-header">
   <div class="container nav">
@@ -158,78 +559,119 @@
 </header>
 
 <main>
-  <section class="hero">
+  <section class="hero live-hero">
     <div class="container">
-      <div class="hero-card">
-        <div class="eyebrow">🎥 Live cuối tuần trên TikTok</div>
-        <h1>Làm quen thật hơn. <span>Gặp nhau qua lịch live rõ ràng.</span></h1>
-        <p>
-          Mỗi cuối tuần sẽ có các khung giờ live để thành viên có cơ hội xuất hiện,
-          trò chuyện và tạo kết nối tự nhiên hơn cùng 2 host của chương trình.
-        </p>
+      <div class="live-hero-card">
+        <div class="live-hero-grid">
+          <div>
+            <div class="live-topbar">
+              <span class="live-dot"></span>
+              LIVE CUỐI TUẦN • TIKTOK HOST
+            </div>
 
-        <div class="hero-actions">
-          <a href="./register.html" class="btn btn-primary">Đăng ký tham gia</a>
-          <a href="./profiles.html" class="btn btn-secondary">Xem thành viên</a>
+            <h1 class="live-title">
+              Làm quen vui hơn.
+              <span>Gặp nhau qua live thật, nói chuyện thật.</span>
+            </h1>
 
-          <a
-            href="https://www.tiktok.com/@hello_ba_gia_90"
-            target="_blank"
-            rel="noopener"
-            class="tiktok-btn"
-            aria-label="Mở TikTok host ba_gia_90"
-            title="TikTok host ba_gia_90"
-          >
-            <svg class="tiktok-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-              <path d="M19.589 6.686a4.793 4.793 0 0 1-3.77-4.216V2h-3.178v12.235c0 1.725-1.379 3.123-3.078 3.123a3.082 3.082 0 0 1-3.08-3.123 3.082 3.082 0 0 1 3.08-3.123c.34 0 .666.056.971.158V8.055a6.21 6.21 0 0 0-.97-.077C6.06 7.978 3 11.082 3 14.87 3 18.657 6.06 21.76 9.564 21.76c3.504 0 6.563-3.103 6.563-6.89V8.742a7.895 7.895 0 0 0 4.873 1.688V7.25a4.79 4.79 0 0 1-1.411-.564z"/>
-            </svg>
-          </a>
+            <p class="live-subtext">
+              Mỗi cuối tuần, Kết Nối Việt Mỹ mở lịch live để thành viên có cơ hội xuất hiện,
+              trò chuyện tự nhiên hơn và kết nối dễ hơn cùng 2 host của chương trình:
+              <strong>@hello_ba_gia_90</strong> và <strong>@hoaidangllc</strong>.
+            </p>
 
-          <a
-            href="https://www.tiktok.com/@hoaidangllc"
-            target="_blank"
-            rel="noopener"
-            class="tiktok-btn"
-            aria-label="Mở TikTok host hoaidangllc"
-            title="TikTok host hoaidangllc"
-          >
-            <svg class="tiktok-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-              <path d="M19.589 6.686a4.793 4.793 0 0 1-3.77-4.216V2h-3.178v12.235c0 1.725-1.379 3.123-3.078 3.123a3.082 3.082 0 0 1-3.08-3.123 3.082 3.082 0 0 1 3.08-3.123c.34 0 .666.056.971.158V8.055a6.21 6.21 0 0 0-.97-.077C6.06 7.978 3 11.082 3 14.87 3 18.657 6.06 21.76 9.564 21.76c3.504 0 6.563-3.103 6.563-6.89V8.742a7.895 7.895 0 0 0 4.873 1.688V7.25a4.79 4.79 0 0 1-1.411-.564z"/>
-            </svg>
-          </a>
+            <div class="live-actions">
+              <a href="./register.html" class="live-btn-primary">Đăng ký để lên live</a>
+              <a href="./profiles.html" class="live-btn-ghost">Xem hồ sơ thành viên</a>
+
+              <a
+                href="https://www.tiktok.com/@hello_ba_gia_90"
+                target="_blank"
+                rel="noopener"
+                class="tiktok-btn-premium"
+                title="TikTok @hello_ba_gia_90"
+                aria-label="TikTok @hello_ba_gia_90"
+              >
+                <svg class="tiktok-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M19.589 6.686a4.793 4.793 0 0 1-3.77-4.216V2h-3.178v12.235c0 1.725-1.379 3.123-3.078 3.123a3.082 3.082 0 0 1-3.08-3.123 3.082 3.082 0 0 1 3.08-3.123c.34 0 .666.056.971.158V8.055a6.21 6.21 0 0 0-.97-.077C6.06 7.978 3 11.082 3 14.87 3 18.657 6.06 21.76 9.564 21.76c3.504 0 6.563-3.103 6.563-6.89V8.742a7.895 7.895 0 0 0 4.873 1.688V7.25a4.79 4.79 0 0 1-1.411-.564z"/>
+                </svg>
+              </a>
+
+              <a
+                href="https://www.tiktok.com/@hoaidangllc"
+                target="_blank"
+                rel="noopener"
+                class="tiktok-btn-premium"
+                title="TikTok @hoaidangllc"
+                aria-label="TikTok @hoaidangllc"
+              >
+                <svg class="tiktok-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M19.589 6.686a4.793 4.793 0 0 1-3.77-4.216V2h-3.178v12.235c0 1.725-1.379 3.123-3.078 3.123a3.082 3.082 0 0 1-3.08-3.123 3.082 3.082 0 0 1 3.08-3.123c.34 0 .666.056.971.158V8.055a6.21 6.21 0 0 0-.97-.077C6.06 7.978 3 11.082 3 14.87 3 18.657 6.06 21.76 9.564 21.76c3.504 0 6.563-3.103 6.563-6.89V8.742a7.895 7.895 0 0 0 4.873 1.688V7.25a4.79 4.79 0 0 1-1.411-.564z"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          <div class="live-side-panel">
+            <div class="side-metric">
+              <div class="side-metric-label">Host chính</div>
+              <div class="side-metric-value">@hello_ba_gia_90</div>
+            </div>
+
+            <div class="side-metric">
+              <div class="side-metric-label">Host đồng hành</div>
+              <div class="side-metric-value">@hoaidangllc</div>
+            </div>
+
+            <div class="side-metric">
+              <div class="side-metric-label">Phong cách live</div>
+              <div class="side-metric-value">Vui vẻ • Tự nhiên • Dễ kết nối</div>
+            </div>
+
+            <div class="side-metric">
+              <div class="side-metric-label">Thời gian</div>
+              <div class="side-metric-value">Tối Thứ 7 & Chủ Nhật (Texas time)</div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="section">
+  <section class="section host-section">
     <div class="container">
-      <div class="section-title">
-        <h2>2 host live cuối tuần</h2>
-        <p>Hai host cùng hỗ trợ tạo không khí vui vẻ, dễ nói chuyện và kết nối tự nhiên hơn.</p>
+      <div class="section-title-premium">
+        <h2>2 host đồng hành trên sóng live</h2>
+        <p>Không chỉ lên hình cho có. Phần này làm ra để nhìn chuyên nghiệp, dễ bấm, dễ nhớ và đẹp mắt hơn.</p>
       </div>
 
-      <div class="hosts-grid">
-        <div class="host-card">
+      <div class="hosts-grid-premium">
+        <article class="host-card-premium">
+          <span class="host-badge">
+            <span class="live-dot" style="width:8px;height:8px;box-shadow:none;"></span>
+            MAIN HOST
+          </span>
+
           <img
             src="./image/HOT-GIRL-HEIDI.jpeg"
-            alt="Host TikTok ba_gia_90"
-            class="host-cover"
+            alt="TikTok host hello_ba_gia_90"
+            class="host-img-premium"
           />
-          <div class="host-body">
-            <div class="host-topline">
+
+          <div class="host-content-premium">
+            <div class="host-name-row">
               <div>
-                <div class="host-role">🌸 Host live giao lưu</div>
-                <h3 class="host-name">TikTok Host 1</h3>
+                <h3 class="host-name-premium">Host giao lưu cuối tuần</h3>
+                <div class="host-handle-premium">@hello_ba_gia_90</div>
               </div>
 
               <a
                 href="https://www.tiktok.com/@hello_ba_gia_90"
                 target="_blank"
                 rel="noopener"
-                class="tiktok-btn"
-                aria-label="TikTok ba_gia_90"
-                title="TikTok ba_gia_90"
+                class="tiktok-btn-premium"
+                title="TikTok @hello_ba_gia_90"
+                aria-label="TikTok @hello_ba_gia_90"
               >
                 <svg class="tiktok-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                   <path d="M19.589 6.686a4.793 4.793 0 0 1-3.77-4.216V2h-3.178v12.235c0 1.725-1.379 3.123-3.078 3.123a3.082 3.082 0 0 1-3.08-3.123 3.082 3.082 0 0 1 3.08-3.123c.34 0 .666.056.971.158V8.055a6.21 6.21 0 0 0-.97-.077C6.06 7.978 3 11.082 3 14.87 3 18.657 6.06 21.76 9.564 21.76c3.504 0 6.563-3.103 6.563-6.89V8.742a7.895 7.895 0 0 0 4.873 1.688V7.25a4.79 4.79 0 0 1-1.411-.564z"/>
@@ -237,36 +679,48 @@
               </a>
             </div>
 
-            <p class="host-desc">
-              Host hỗ trợ trò chuyện, dẫn dắt live và giúp buổi giao lưu cuối tuần tự nhiên, vui và đỡ ngại hơn.
+            <p class="host-desc-premium">
+              Giữ nhịp chương trình, dẫn câu chuyện tự nhiên, làm không khí live bớt ngại và dễ mở lời hơn cho mọi người.
             </p>
 
-            <div class="host-actions">
-              <a href="./register.html" class="btn btn-primary">Đăng ký để lên live</a>
+            <div class="host-tags">
+              <span class="host-tag">Giao lưu tự nhiên</span>
+              <span class="host-tag">Kết nối cuối tuần</span>
+              <span class="host-tag">Không khí vui vẻ</span>
+            </div>
+
+            <div class="host-actions-premium">
+              <a href="./register.html" class="live-btn-primary">Đăng ký để xuất hiện trên live</a>
             </div>
           </div>
-        </div>
+        </article>
 
-        <div class="host-card">
+        <article class="host-card-premium">
+          <span class="host-badge">
+            <span class="live-dot" style="width:8px;height:8px;box-shadow:none;"></span>
+            CO-HOST
+          </span>
+
           <img
-            src="./image/hoaidangllc.jpg"
-            alt="Host TikTok hoaidangllc"
-            class="host-cover"
+            src="/image/hoaidangllc.jpeg"
+            alt="TikTok host hoaidangllc"
+            class="host-img-premium"
           />
-          <div class="host-body">
-            <div class="host-topline">
+
+          <div class="host-content-premium">
+            <div class="host-name-row">
               <div>
-                <div class="host-role">🔥 Live host @hoaidangllc</div>
-                <h3 class="host-name">TikTok Host 2</h3>
+                <h3 class="host-name-premium">Live host đồng hành</h3>
+                <div class="host-handle-premium">@hoaidangllc</div>
               </div>
 
               <a
                 href="https://www.tiktok.com/@hoaidangllc"
                 target="_blank"
                 rel="noopener"
-                class="tiktok-btn"
-                aria-label="TikTok hoaidangllc"
-                title="TikTok hoaidangllc"
+                class="tiktok-btn-premium"
+                title="TikTok @hoaidangllc"
+                aria-label="TikTok @hoaidangllc"
               >
                 <svg class="tiktok-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                   <path d="M19.589 6.686a4.793 4.793 0 0 1-3.77-4.216V2h-3.178v12.235c0 1.725-1.379 3.123-3.078 3.123a3.082 3.082 0 0 1-3.08-3.123 3.082 3.082 0 0 1 3.08-3.123c.34 0 .666.056.971.158V8.055a6.21 6.21 0 0 0-.97-.077C6.06 7.978 3 11.082 3 14.87 3 18.657 6.06 21.76 9.564 21.76c3.504 0 6.563-3.103 6.563-6.89V8.742a7.895 7.895 0 0 0 4.873 1.688V7.25a4.79 4.79 0 0 1-1.411-.564z"/>
@@ -274,33 +728,39 @@
               </a>
             </div>
 
-            <p class="host-desc">
-              Bổ sung thêm host @hoaidangllc để live nhìn chuyên nghiệp hơn, có thêm tương tác và dễ giữ nhịp chương trình.
+            <p class="host-desc-premium">
+              Đồng hành cùng chương trình để tăng tương tác, giữ cuộc trò chuyện mượt hơn và làm tổng thể buổi live nhìn có chất hơn.
             </p>
 
-            <div class="host-actions">
-              <a href="./register.html" class="btn btn-primary">Đăng ký để lên live</a>
+            <div class="host-tags">
+              <span class="host-tag">Co-host nổi bật</span>
+              <span class="host-tag">Tăng tương tác</span>
+              <span class="host-tag">Giữ nhịp chương trình</span>
+            </div>
+
+            <div class="host-actions-premium">
+              <a href="./register.html" class="live-btn-primary">Đăng ký để tham gia live</a>
             </div>
           </div>
-        </div>
+        </article>
       </div>
     </div>
   </section>
 
-  <section class="section">
+  <section class="section live-list-wrap">
     <div class="container">
-      <div class="section-title">
+      <div class="section-title-premium">
         <h2>Lịch live cuối tuần</h2>
-        <p>Các hồ sơ đã đăng ký khung giờ sẽ được gom vào đây.</p>
+        <p>Các hồ sơ đã chọn khung giờ sẽ tự động hiển thị tại đây.</p>
       </div>
 
-      <div id="liveList" class="grid"></div>
+      <div id="liveList" class="slot-grid"></div>
     </div>
   </section>
 
-  <section class="footer">
+  <section class="premium-footer">
     <div class="container">
-      © 2026 Kết Nối Việt Mỹ • Live cùng 2 host trên TikTok
+      © 2026 Kết Nối Việt Mỹ • TikTok live cùng @hello_ba_gia_90 và @hoaidangllc
     </div>
   </section>
 </main>
@@ -329,20 +789,23 @@
 
   function renderSlot(slot, matched) {
     return `
-      <div class="card">
-        <div class="card-body">
+      <div class="slot-card-premium">
+        <div class="slot-card-head">
           <h3>${slot}</h3>
+          <div class="slot-card-sub">Live cùng 2 host trên TikTok</div>
+        </div>
 
+        <div class="slot-card-body">
           <div class="mini-hosts">
             <a href="https://www.tiktok.com/@hello_ba_gia_90" target="_blank" rel="noopener" class="mini-host-chip">
-              <img src="./image/HOT-GIRL-HEIDI.jpeg" alt="Host ba_gia_90">
-              <span>Host 1</span>
+              <img src="./image/HOT-GIRL-HEIDI.jpeg" alt="Host hello_ba_gia_90" />
+              <span>@hello_ba_gia_90</span>
               ${tiktokIcon()}
             </a>
 
             <a href="https://www.tiktok.com/@hoaidangllc" target="_blank" rel="noopener" class="mini-host-chip">
-              <img src="./image/hoaidangllc.jpg" alt="Host hoaidangllc">
-              <span>Host 2</span>
+              <img src="/image/hoaidangllc.jpeg" alt="Host hoaidangllc" />
+              <span>@hoaidangllc</span>
               ${tiktokIcon()}
             </a>
           </div>
@@ -350,23 +813,23 @@
           ${
             matched.length > 0
               ? matched.map(u => `
-                  <div class="member-item" style="margin-top:14px;">
+                  <div class="member-item-premium">
                     <strong>${u.name || "Chưa có tên"}${u.age ? `, ${u.age} tuổi` : ""}</strong>
-                    <div class="meta">
+                    <div class="member-meta-premium">
                       ${u.city || "Chưa rõ thành phố"}${u.state ? `, ${u.state}` : ""} • ${u.job || "Chưa cập nhật"}
                     </div>
 
-                    <div class="hero-actions" style="margin-top:12px;">
-                      <a href="./profile.html?id=${u.id}" class="btn btn-secondary">Xem hồ sơ</a>
+                    <div class="member-actions-premium">
+                      <a href="./profile.html?id=${u.id}" class="live-btn-ghost">Xem hồ sơ</a>
                       ${
                         u.link
-                          ? `<a href="${u.link}" target="_blank" class="btn btn-primary">${u.platform || "Mở liên hệ"}</a>`
-                          : `<span class="btn btn-secondary btn-disabled">Chưa có link</span>`
+                          ? `<a href="${u.link}" target="_blank" class="live-btn-primary">${u.platform || "Mở liên hệ"}</a>`
+                          : `<span class="live-btn-ghost" style="opacity:.6;pointer-events:none;">Chưa có link</span>`
                       }
                     </div>
                   </div>
                 `).join("")
-              : `<p style="margin-top:14px;">Chưa có ai đăng ký khung giờ này.</p>`
+              : `<div class="empty-slot">Chưa có ai đăng ký khung giờ này.</div>`
           }
         </div>
       </div>
@@ -384,10 +847,10 @@
     } catch (err) {
       console.error("Lỗi load live Firebase:", err);
       liveList.innerHTML = `
-        <div class="card">
-          <div class="card-body">
+        <div class="slot-card-premium" style="grid-column:1/-1;">
+          <div class="slot-card-head">
             <h3>Không tải được lịch live</h3>
-            <p>Kiểm tra Firestore rules hoặc file ketnoi-firebase.js.</p>
+            <div class="slot-card-sub">Kiểm tra Firestore rules hoặc file ketnoi-firebase.js</div>
           </div>
         </div>
       `;
