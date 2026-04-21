@@ -1,0 +1,649 @@
+html = r'''<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PickZone — Sports Picks Platform</title>
+  <meta name="description" content="Private sports picks platform with live-style board, clean odds display, point-based gameplay, and expandable leagues." />
+  <style>
+    :root{
+      --bg:#06101d;
+      --bg2:#09172b;
+      --panel:#0f1c31;
+      --panel2:#13213b;
+      --panel3:#172848;
+      --line:#24385c;
+      --text:#eef4ff;
+      --muted:#9aafd3;
+      --blue:#57a8ff;
+      --blue2:#2b73da;
+      --green:#2ecc71;
+      --orange:#ffb84d;
+      --red:#ff6b6b;
+      --gold:#ffd166;
+      --shadow:0 16px 40px rgba(0,0,0,.35);
+      --radius:24px;
+      --max:1200px;
+    }
+
+    *{box-sizing:border-box}
+    html,body{
+      margin:0;padding:0;min-height:100%;
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(87,168,255,.14), transparent 28%),
+        radial-gradient(circle at top right, rgba(43,115,218,.18), transparent 24%),
+        linear-gradient(180deg,var(--bg2),var(--bg));
+      color:var(--text);
+      scroll-behavior:smooth;
+    }
+    body{padding-bottom:60px}
+    a{text-decoration:none;color:inherit}
+    .shell{width:min(var(--max),100%);margin:0 auto;padding:14px}
+    .topbar{
+      position:sticky;top:10px;z-index:100;
+      background:rgba(7,14,27,.82);
+      backdrop-filter:blur(12px);
+      border:1px solid rgba(255,255,255,.07);
+      border-radius:24px;padding:14px 16px;
+      box-shadow:var(--shadow);
+    }
+    .topbar-row{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
+    .brand{display:flex;align-items:center;gap:12px}
+    .brand-icon{
+      width:48px;height:48px;border-radius:15px;
+      display:grid;place-items:center;font-weight:900;
+      background:linear-gradient(135deg,#59b1ff,#2b73da);
+      box-shadow:0 10px 24px rgba(43,115,218,.35)
+    }
+    .brand-copy h1{margin:0;font-size:24px;line-height:1}
+    .brand-copy p{margin:4px 0 0;color:var(--muted);font-size:13px}
+    .nav{display:flex;gap:10px;flex-wrap:wrap}
+    .nav a{
+      padding:10px 14px;border-radius:14px;
+      color:var(--muted);font-weight:800;font-size:14px;
+      border:1px solid rgba(255,255,255,.06);background:rgba(255,255,255,.03)
+    }
+    .nav a.cta{
+      color:#fff;border:none;background:linear-gradient(180deg,#53a8ff,#2a70d3)
+    }
+
+    .hero{
+      display:grid;grid-template-columns:1.15fr .85fr;gap:16px;
+      margin-top:16px;align-items:stretch;
+    }
+    .hero-card,.hero-preview,.section-card{
+      border-radius:28px;
+      background:linear-gradient(180deg,rgba(18,32,58,.96),rgba(8,16,31,.96));
+      border:1px solid rgba(255,255,255,.06);
+      box-shadow:var(--shadow);
+    }
+    .hero-card{padding:26px;position:relative;overflow:hidden}
+    .hero-card::after{
+      content:"";position:absolute;right:-50px;top:-60px;width:220px;height:220px;border-radius:50%;
+      background:radial-gradient(circle,rgba(87,168,255,.22),transparent 70%);
+    }
+    .eyebrow{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:9px 12px;border-radius:999px;
+      background:rgba(87,168,255,.1);border:1px solid rgba(87,168,255,.18);
+      color:#a7d1ff;font-size:12px;font-weight:900;letter-spacing:.7px;text-transform:uppercase
+    }
+    .hero h2{
+      margin:14px 0 10px;font-size:54px;line-height:.96;letter-spacing:-1.4px
+    }
+    .hero p{
+      margin:0;color:var(--muted);font-size:17px;line-height:1.6;max-width:720px
+    }
+    .hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:20px}
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;
+      padding:14px 18px;border-radius:16px;font-weight:900;font-size:15px
+    }
+    .btn.primary{background:linear-gradient(180deg,#57a8ff,#2b73da);color:#fff}
+    .btn.secondary{border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.03);color:var(--text)}
+    .hero-stats{
+      display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:22px
+    }
+    .stat{
+      border-radius:18px;padding:14px;
+      background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06)
+    }
+    .stat strong{display:block;font-size:22px;margin-bottom:6px}
+    .stat span{color:var(--muted);font-size:13px}
+
+    .hero-preview{padding:18px}
+    .preview-top{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:12px}
+    .preview-top h3{margin:0;font-size:18px}
+    .mini-chip{
+      font-size:12px;font-weight:900;color:#9ecbff;
+      padding:8px 10px;border-radius:999px;
+      background:rgba(87,168,255,.1);border:1px solid rgba(87,168,255,.16)
+    }
+    .board-card{
+      border-radius:22px;padding:14px;
+      background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.015));
+      border:1px solid rgba(255,255,255,.06)
+    }
+    .board-meta{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:12px}
+    .status{
+      display:inline-flex;align-items:center;gap:8px;padding:8px 11px;border-radius:999px;
+      font-size:12px;font-weight:900;letter-spacing:.6px
+    }
+    .status.live{background:rgba(255,184,77,.12);border:1px solid rgba(255,184,77,.22);color:#ffc77d}
+    .meta{color:var(--muted);font-size:12px;text-align:right}
+    .teams{
+      display:grid;grid-template-columns:1fr auto 1fr;gap:10px;align-items:center;margin-bottom:12px
+    }
+    .team{
+      border-radius:18px;padding:12px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.05);
+      display:flex;align-items:center;gap:10px
+    }
+    .team.right{justify-content:flex-end;text-align:right}
+    .logo{
+      width:42px;height:42px;border-radius:13px;display:grid;place-items:center;font-size:13px;font-weight:900;
+      background:linear-gradient(135deg,#13284a,#1d3a69);border:1px solid rgba(255,255,255,.07)
+    }
+    .team-name{font-size:17px;font-weight:900}
+    .team-sub{font-size:12px;color:var(--muted);margin-top:4px}
+    .score-wrap{text-align:center;min-width:110px}
+    .score{font-size:34px;font-weight:900;letter-spacing:1px}
+    .period{font-size:12px;color:var(--muted);margin-top:5px}
+    .market-title{
+      font-size:12px;text-transform:uppercase;letter-spacing:.8px;color:var(--muted);font-weight:900;margin-bottom:10px
+    }
+    .odds-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    .odd-box{
+      border-radius:18px;padding:13px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06)
+    }
+    .odd-line{font-size:17px;font-weight:900}
+    .odd-price{font-size:28px;font-weight:900;margin-top:4px}
+    .odd-row{display:flex;gap:8px;margin-top:10px}
+    .odd-row input{
+      flex:1;min-width:0;border:none;outline:none;border-radius:12px;
+      background:#081325;border:1px solid rgba(255,255,255,.07);color:#fff;
+      padding:11px 12px;font-weight:800;font-size:15px
+    }
+    .odd-row button{
+      border:none;border-radius:12px;padding:11px 14px;font-weight:900;color:#fff;
+      background:linear-gradient(180deg,#4ea2ff,#2b72d8)
+    }
+
+    .section{margin-top:16px}
+    .section-grid{display:grid;grid-template-columns:1fr 340px;gap:16px}
+    .section-card{padding:18px}
+    .section-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:14px}
+    .section-head h3{margin:0;font-size:21px}
+    .section-head p{margin:4px 0 0;color:var(--muted);font-size:13px}
+    .tabs{display:flex;gap:10px;overflow:auto;padding-bottom:4px}
+    .tab{
+      white-space:nowrap;padding:10px 14px;border-radius:14px;font-size:14px;font-weight:900;
+      border:1px solid rgba(255,255,255,.06);background:rgba(255,255,255,.03);color:var(--text)
+    }
+    .tab.active{background:linear-gradient(180deg,#53a8ff,#2b73da);border:none}
+    .games-list{display:flex;flex-direction:column;gap:14px}
+    .game{
+      border-radius:22px;padding:14px;background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.05)
+    }
+    .game-top{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:12px}
+    .tag{
+      padding:8px 10px;border-radius:999px;font-size:12px;font-weight:900;letter-spacing:.6px
+    }
+    .tag.upcoming{background:rgba(87,168,255,.12);color:#a7d1ff;border:1px solid rgba(87,168,255,.18)}
+    .tag.final{background:rgba(46,204,113,.12);color:#8ff0b8;border:1px solid rgba(46,204,113,.18)}
+    .game-meta{color:var(--muted);font-size:12px;text-align:right}
+    .game-odds{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+    .pick-card{
+      border-radius:18px;padding:14px;background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.015));
+      border:1px solid rgba(255,255,255,.06)
+    }
+    .pick-card strong{font-size:18px}
+    .price{font-size:28px;font-weight:900;margin-top:4px}
+    .hint{font-size:12px;color:var(--muted);margin-top:4px}
+    .pick-row{display:flex;gap:8px;margin-top:10px}
+    .pick-row input{
+      flex:1;min-width:0;border:none;outline:none;border-radius:12px;background:#081325;
+      border:1px solid rgba(255,255,255,.07);color:#fff;padding:11px 12px;font-weight:800;font-size:15px
+    }
+    .pick-row button{
+      border:none;border-radius:12px;padding:11px 14px;background:linear-gradient(180deg,#57a8ff,#2b73da);color:#fff;font-weight:900
+    }
+
+    .side-stack{display:flex;flex-direction:column;gap:14px}
+    .list{display:flex;flex-direction:column;gap:10px}
+    .item{
+      border-radius:16px;padding:12px;background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.05)
+    }
+    .leader{display:flex;justify-content:space-between;align-items:center;gap:10px}
+    .leader-left{display:flex;align-items:center;gap:10px}
+    .rank{
+      width:32px;height:32px;border-radius:10px;display:grid;place-items:center;font-weight:900;color:#9fcbff;
+      background:#0a1730;border:1px solid rgba(255,255,255,.07)
+    }
+    .muted{color:var(--muted)}
+    .feature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+    .feature{
+      border-radius:20px;padding:16px;background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.05)
+    }
+    .feature h4{margin:0 0 8px;font-size:17px}
+    .feature p{margin:0;color:var(--muted);line-height:1.5;font-size:14px}
+    .sports-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+    .sport{
+      border-radius:20px;padding:16px;text-align:center;background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.05)
+    }
+    .sport-icon{
+      width:52px;height:52px;margin:0 auto 10px;border-radius:16px;display:grid;place-items:center;font-weight:900;
+      background:linear-gradient(135deg,#14305b,#1f4b89)
+    }
+    .sport strong{display:block;font-size:17px}
+    .sport span{display:block;margin-top:6px;color:var(--muted);font-size:13px}
+    .cta-band{
+      margin-top:16px;border-radius:28px;padding:22px;
+      background:linear-gradient(180deg,rgba(24,44,80,.98),rgba(11,20,36,.98));
+      border:1px solid rgba(255,255,255,.06);box-shadow:var(--shadow);
+      display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap
+    }
+    .cta-band h3{margin:0;font-size:28px}
+    .cta-band p{margin:6px 0 0;color:var(--muted)}
+    .footer{margin-top:14px;text-align:center;color:var(--muted);font-size:13px}
+
+    @media (max-width: 1024px){
+      .hero,.section-grid{grid-template-columns:1fr}
+      .hero h2{font-size:46px}
+    }
+    @media (max-width: 760px){
+      .hero-stats,.feature-grid,.sports-grid{grid-template-columns:1fr 1fr}
+      .teams{grid-template-columns:1fr}
+      .score-wrap{order:-1}
+      .team,.team.right{justify-content:flex-start;text-align:left}
+      .odds-grid,.game-odds{grid-template-columns:1fr}
+      .hero h2{font-size:38px}
+      .nav{width:100%}
+    }
+    @media (max-width: 520px){
+      .hero-stats,.feature-grid,.sports-grid{grid-template-columns:1fr}
+      .cta-band h3{font-size:24px}
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <div class="topbar">
+      <div class="topbar-row">
+        <div class="brand">
+          <div class="brand-icon">PZ</div>
+          <div class="brand-copy">
+            <h1>PickZone</h1>
+            <p>Professional sports picks platform</p>
+          </div>
+        </div>
+        <div class="nav">
+          <a href="#board">Board</a>
+          <a href="#features">Features</a>
+          <a href="#sports">Sports</a>
+          <a href="#future">Future</a>
+          <a href="#launch" class="cta">Get Started</a>
+        </div>
+      </div>
+    </div>
+
+    <section class="hero">
+      <div class="hero-card">
+        <div class="eyebrow">Live-style • points only • private-ready</div>
+        <h2>Make it feel real. Keep it clean.</h2>
+        <p>
+          PickZone is designed to look and feel like a real sports board, but stay organized, modern, and easy to use. Clean odds layout, fast picks, live-style score updates, and a structure ready for NBA now and soccer later.
+        </p>
+        <div class="hero-actions">
+          <a href="#board" class="btn primary">View Live Board</a>
+          <a href="#features" class="btn secondary">See Product Features</a>
+        </div>
+        <div class="hero-stats">
+          <div class="stat"><strong>NBA First</strong><span>Start focused and polished</span></div>
+          <div class="stat"><strong>Soccer Ready</strong><span>Easy expansion later</span></div>
+          <div class="stat"><strong>Realtime Structure</strong><span>Prepared for live data sync</span></div>
+          <div class="stat"><strong>Professional UI</strong><span>Clean, modern, mobile-first</span></div>
+        </div>
+      </div>
+
+      <div class="hero-preview">
+        <div class="preview-top">
+          <h3>Live Board Preview</h3>
+          <div class="mini-chip">Realtime-ready</div>
+        </div>
+
+        <div class="board-card">
+          <div class="board-meta">
+            <div class="status live">● LIVE</div>
+            <div class="meta">
+              <div>Apr 21 • 7:00 PM</div>
+              <div>Crypto.com Arena</div>
+            </div>
+          </div>
+
+          <div class="teams">
+            <div class="team">
+              <div class="logo">LAL</div>
+              <div>
+                <div class="team-name">Lakers</div>
+                <div class="team-sub">Home Team</div>
+              </div>
+            </div>
+
+            <div class="score-wrap">
+              <div class="score">108 - 101</div>
+              <div class="period">Q4 • 01:42</div>
+            </div>
+
+            <div class="team right">
+              <div>
+                <div class="team-name">Rockets</div>
+                <div class="team-sub">Away Team</div>
+              </div>
+              <div class="logo">HOU</div>
+            </div>
+          </div>
+
+          <div class="market-title">Main pick market</div>
+          <div class="odds-grid">
+            <div class="odd-box">
+              <div class="odd-line">Lakers -3.5</div>
+              <div class="odd-price">-110</div>
+              <div class="odd-row">
+                <input type="number" placeholder="10 pts" />
+                <button>Pick</button>
+              </div>
+            </div>
+            <div class="odd-box">
+              <div class="odd-line">Rockets +3.5</div>
+              <div class="odd-price">-105</div>
+              <div class="odd-row">
+                <input type="number" placeholder="10 pts" />
+                <button>Pick</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="board">
+      <div class="section-grid">
+        <div class="section-card">
+          <div class="section-head">
+            <div>
+              <h3>Main Board</h3>
+              <p>Clean, structured, and easy to scan quickly</p>
+            </div>
+            <div class="tabs">
+              <div class="tab active">All Games</div>
+              <div class="tab">Upcoming</div>
+              <div class="tab">Live</div>
+              <div class="tab">Final</div>
+            </div>
+          </div>
+
+          <div class="games-list">
+            <div class="game">
+              <div class="game-top">
+                <div class="tag upcoming">UPCOMING</div>
+                <div class="game-meta">
+                  <div>Apr 21 • 6:00 PM</div>
+                  <div>TD Garden</div>
+                </div>
+              </div>
+
+              <div class="teams">
+                <div class="team">
+                  <div class="logo">BOS</div>
+                  <div>
+                    <div class="team-name">Celtics</div>
+                    <div class="team-sub">Home Team</div>
+                  </div>
+                </div>
+
+                <div class="score-wrap">
+                  <div class="score">0 - 0</div>
+                  <div class="period">Pregame</div>
+                </div>
+
+                <div class="team right">
+                  <div>
+                    <div class="team-name">76ers</div>
+                    <div class="team-sub">Away Team</div>
+                  </div>
+                  <div class="logo">PHI</div>
+                </div>
+              </div>
+
+              <div class="game-odds">
+                <div class="pick-card">
+                  <strong>Celtics -6.5</strong>
+                  <div class="price">-110</div>
+                  <div class="hint">Home favorite</div>
+                  <div class="pick-row">
+                    <input type="number" placeholder="10 pts" />
+                    <button>Pick</button>
+                  </div>
+                </div>
+                <div class="pick-card">
+                  <strong>76ers +6.5</strong>
+                  <div class="price">-105</div>
+                  <div class="hint">Away cover</div>
+                  <div class="pick-row">
+                    <input type="number" placeholder="10 pts" />
+                    <button>Pick</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="game">
+              <div class="game-top">
+                <div class="tag upcoming">UPCOMING</div>
+                <div class="game-meta">
+                  <div>Apr 21 • 8:30 PM</div>
+                  <div>Madison Square Garden</div>
+                </div>
+              </div>
+
+              <div class="teams">
+                <div class="team">
+                  <div class="logo">NYK</div>
+                  <div>
+                    <div class="team-name">Knicks</div>
+                    <div class="team-sub">Home Team</div>
+                  </div>
+                </div>
+
+                <div class="score-wrap">
+                  <div class="score">0 - 0</div>
+                  <div class="period">Pregame</div>
+                </div>
+
+                <div class="team right">
+                  <div>
+                    <div class="team-name">Bulls</div>
+                    <div class="team-sub">Away Team</div>
+                  </div>
+                  <div class="logo">CHI</div>
+                </div>
+              </div>
+
+              <div class="game-odds">
+                <div class="pick-card">
+                  <strong>Knicks -4.5</strong>
+                  <div class="price">-108</div>
+                  <div class="hint">Balanced market</div>
+                  <div class="pick-row">
+                    <input type="number" placeholder="10 pts" />
+                    <button>Pick</button>
+                  </div>
+                </div>
+                <div class="pick-card">
+                  <strong>Bulls +4.5</strong>
+                  <div class="price">-104</div>
+                  <div class="hint">Away cover</div>
+                  <div class="pick-row">
+                    <input type="number" placeholder="10 pts" />
+                    <button>Pick</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="side-stack">
+          <div class="section-card">
+            <div class="section-head">
+              <div>
+                <h3>My Picks</h3>
+                <p>Fast access to active positions</p>
+              </div>
+            </div>
+            <div class="list">
+              <div class="item">
+                <strong>Lakers -3.5</strong>
+                <div class="muted" style="margin-top:6px;">Rockets @ Lakers • 25 pts</div>
+              </div>
+              <div class="item">
+                <strong>Celtics -6.5</strong>
+                <div class="muted" style="margin-top:6px;">76ers @ Celtics • 10 pts</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="section-card">
+            <div class="section-head">
+              <div>
+                <h3>Leaderboard</h3>
+                <p>Simple, clean, competitive</p>
+              </div>
+            </div>
+            <div class="list">
+              <div class="item leader">
+                <div class="leader-left"><div class="rank">1</div><div><strong>Tommy</strong><div class="muted">18 pts</div></div></div>
+                <strong>Hot</strong>
+              </div>
+              <div class="item leader">
+                <div class="leader-left"><div class="rank">2</div><div><strong>Nick</strong><div class="muted">14 pts</div></div></div>
+                <strong>You</strong>
+              </div>
+              <div class="item leader">
+                <div class="leader-left"><div class="rank">3</div><div><strong>Chloe</strong><div class="muted">11 pts</div></div></div>
+                <strong>Steady</strong>
+              </div>
+            </div>
+          </div>
+
+          <div class="section-card">
+            <div class="section-head">
+              <div>
+                <h3>Activity</h3>
+                <p>Realtime feed later</p>
+              </div>
+            </div>
+            <div class="list">
+              <div class="item muted"><strong style="color:var(--text)">Tommy</strong> locked in Celtics -6.5 with 25 pts</div>
+              <div class="item muted"><strong style="color:var(--text)">Nick</strong> is watching Lakers line movement</div>
+              <div class="item muted"><strong style="color:var(--text)">System</strong> synced new game data</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="features">
+      <div class="section-card">
+        <div class="section-head">
+          <div>
+            <h3>Why this front page works</h3>
+            <p>Built to look professional first, then scale later</p>
+          </div>
+        </div>
+
+        <div class="feature-grid">
+          <div class="feature">
+            <h4>Fast to scan</h4>
+            <p>Big odds, clear team layout, and clean spacing make it easy to understand the board in seconds.</p>
+          </div>
+          <div class="feature">
+            <h4>Feels real</h4>
+            <p>The structure feels close to a real sports board: markets, prices, status, picks, leaderboard, and activity.</p>
+          </div>
+          <div class="feature">
+            <h4>Mobile-first</h4>
+            <p>Everything is designed to look good on a phone first, because that is where most users will open it.</p>
+          </div>
+          <div class="feature">
+            <h4>Expandable</h4>
+            <p>NBA now, soccer later. The front page already has the right structure to add more sports without looking messy.</p>
+          </div>
+          <div class="feature">
+            <h4>Professional feel</h4>
+            <p>Dark premium palette, strong contrast, and clean cards create a more serious product vibe instead of a demo vibe.</p>
+          </div>
+          <div class="feature">
+            <h4>Realtime-ready</h4>
+            <p>This layout is easy to connect to live data later so scores, status, and lines can update automatically.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="sports">
+      <div class="section-card">
+        <div class="section-head">
+          <div>
+            <h3>Multi-sport direction</h3>
+            <p>Start focused with NBA, then open up step by step</p>
+          </div>
+        </div>
+
+        <div class="sports-grid">
+          <div class="sport">
+            <div class="sport-icon">NBA</div>
+            <strong>Basketball</strong>
+            <span>Main launch sport</span>
+          </div>
+          <div class="sport">
+            <div class="sport-icon">⚽</div>
+            <strong>Soccer</strong>
+            <span>Next big option</span>
+          </div>
+          <div class="sport">
+            <div class="sport-icon">NFL</div>
+            <strong>Football</strong>
+            <span>Season-based expansion</span>
+          </div>
+          <div class="sport">
+            <div class="sport-icon">MLB</div>
+            <strong>Baseball</strong>
+            <span>Optional later</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="future">
+      <div class="cta-band">
+        <div>
+          <h3>Built for the long run</h3>
+          <p>Good front page first. Strong system behind it later. That is how this becomes a real product.</p>
+        </div>
+        <div class="hero-actions" id="launch">
+          <a href="#board" class="btn primary">Launch Board Style</a>
+          <a href="#sports" class="btn secondary">Plan Soccer Expansion</a>
+        </div>
+      </div>
+      <div class="footer">PickZone • professional sports picks platform concept</div>
+    </section>
+  </div>
+</body>
+</html>
+'''
+path = "/mnt/data/pickzone_index_pro.html"
+with open(path, "w", encoding="utf-8") as f:
+    f.write(html)
+print(path)
