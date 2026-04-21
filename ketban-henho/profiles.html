@@ -318,7 +318,7 @@ function renderStats(users) {
 
 function renderUsers(users) {
   list.innerHTML = users.map(u => {
-    const avatar = u.avatarUrl || DEFAULT_AVATAR;
+    const avatar = u.avatarUrl || "./image/default-avatar.png";
     const name = escapeHtml(u.name || "Chưa có tên");
     const age = u.age ? `, ${escapeHtml(u.age)} tuổi` : "";
     const city = escapeHtml(u.city || "Chưa rõ thành phố");
