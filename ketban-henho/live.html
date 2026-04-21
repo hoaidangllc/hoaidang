@@ -506,7 +506,7 @@ function slotStatusWidth(count) {
 }
 
 function renderUser(u) {
-  const avatar = u.avatarUrl || DEFAULT_AVATAR;
+  const avatar = u.avatarUrl || "./image/default-avatar.png";
   const name = escapeHtml(u.name || "Ẩn danh");
   const age = u.age ? `, ${escapeHtml(u.age)}` : "";
   const city = escapeHtml(u.city || "");
