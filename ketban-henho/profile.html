@@ -6,6 +6,46 @@
   <title>Hồ sơ thành viên | Kết Nối Việt Mỹ</title>
   <meta name="description" content="Xem hồ sơ chi tiết của thành viên trên Kết Nối Việt Mỹ.">
   <link rel="stylesheet" href="./assets/css/styles.css">
+
+  <style>
+    .profile-top {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .profile-avatar {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid rgba(255,255,255,.15);
+      background: rgba(255,255,255,.05);
+    }
+
+    .profile-name {
+      margin: 0;
+      font-size: 1.5rem;
+    }
+
+    .profile-location {
+      margin-top: 6px;
+      color: var(--muted, #999);
+    }
+
+    .profile-bio {
+      margin-top: 14px;
+      line-height: 1.6;
+      color: var(--muted, #bbb);
+    }
+
+    .btn-disabled {
+      opacity: .6;
+      pointer-events: none;
+    }
+  </style>
 </head>
 <body>
 
@@ -37,10 +77,6 @@
       <div class="hero-card">
         <div class="eyebrow">👤 Hồ sơ thành viên</div>
         <h1>Xem kỹ hơn. <span>Biết rõ hơn trước khi kết nối.</span></h1>
-        <p>
-          Trang này hiển thị đầy đủ thông tin của từng người, bao gồm tuổi, công việc,
-          nơi đang sống, mục tiêu, nền tảng liên hệ và khung giờ live mong muốn.
-        </p>
       </div>
     </div>
   </section>
@@ -58,7 +94,9 @@
     </div>
   </section>
 </main>
+
 <script type="module" src="/assets/js/auth.js"></script>
+
 <script type="module">
 import { getProfileById } from "./assets/js/ketnoi-firebase.js";
 
@@ -66,30 +104,48 @@ const profileBox = document.getElementById("profileBox");
 const params = new URLSearchParams(window.location.search);
 const id = params.get("id");
 
+const DEFAULT_AVATAR = "./image/default-avatar.png";
+
 function renderNotFound() {
   profileBox.innerHTML = `
     <div class="form-card">
-      <div class="section-title">
-        <h2>Không tìm thấy hồ sơ</h2>
-        <p>Hồ sơ này không tồn tại, đã bị xóa, hoặc link không đúng.</p>
-      </div>
-
-      <div class="hero-actions">
-        <a href="./profiles.html" class="btn btn-primary">Quay lại danh sách</a>
-      </div>
+      <h2>Không tìm thấy hồ sơ</h2>
+      <p>Hồ sơ này không tồn tại hoặc đã bị xóa.</p>
+      <a href="./profiles.html" class="btn btn-primary">Quay lại</a>
     </div>
   `;
 }
 
 function renderProfile(user) {
+  const avatar = user.avatarUrl || DEFAULT_AVATAR;
+
   profileBox.innerHTML = `
     <div class="form-card">
-      <div class="section-title">
-        <h2>${user.name || "Chưa có tên"}${user.age ? `, ${user.age} tuổi` : ""}</h2>
-        <p>${user.city || "Chưa rõ thành phố"}${user.state ? `, ${user.state}` : ""}</p>
+
+      <div class="profile-top">
+        <img 
+          src="${avatar}" 
+          class="profile-avatar"
+          onerror="this.src='${DEFAULT_AVATAR}'"
+        >
+
+        <div>
+          <h2 class="profile-name">
+            ${user.name || "Chưa có tên"}
+            ${user.age ? `, ${user.age} tuổi` : ""}
+          </h2>
+
+          <div class="profile-location">
+            ${user.city || "Chưa rõ thành phố"}
+            ${user.state ? `, ${user.state}` : ""}
+          </div>
+        </div>
       </div>
 
+      ${user.bio ? `<div class="profile-bio">${user.bio}</div>` : ""}
+
       <div class="list">
+
         <div class="member-item">
           <strong>Giới tính</strong>
           <div class="meta">${user.gender || "Chưa cập nhật"}</div>
@@ -106,79 +162,46 @@ function renderProfile(user) {
         </div>
 
         <div class="member-item">
-          <strong>Nền tảng liên hệ chính</strong>
+          <strong>Nền tảng liên hệ</strong>
           <div class="meta">${user.platform || "Chưa cập nhật"}</div>
         </div>
 
         <div class="member-item">
-          <strong>Link liên hệ</strong>
-          <div class="meta">
-            ${
-              user.link
-                ? `<a href="${user.link}" target="_blank">${user.link}</a>`
-                : "Chưa có link liên hệ"
-            }
-          </div>
-        </div>
-
-        <div class="member-item">
-          <strong>Khung giờ live mong muốn</strong>
+          <strong>Khung giờ live</strong>
           <div class="meta">${user.liveSlot || "Chưa chọn"}</div>
         </div>
 
-        <div class="member-item">
-          <strong>Giới thiệu</strong>
-          <div class="meta">${user.bio || "Chưa có giới thiệu"}</div>
-        </div>
       </div>
 
       <div class="hero-actions" style="margin-top:24px;">
-        <a href="./profiles.html" class="btn btn-secondary">Quay lại danh sách</a>
-        <a href="./live.html" class="btn btn-secondary">Xem lịch live</a>
+        <a href="./profiles.html" class="btn btn-secondary">Quay lại</a>
+
         ${
           user.link
-            ? `<a href="${user.link}" target="_blank" class="btn btn-primary">Mở ${user.platform || "liên hệ"}</a>`
-            : `<span class="btn btn-primary btn-disabled">Chưa có link liên hệ</span>`
+            ? `<a href="${user.link}" target="_blank" class="btn btn-primary">Mở ${user.platform}</a>`
+            : `<span class="btn btn-primary btn-disabled">Chưa có link</span>`
         }
       </div>
+
     </div>
   `;
 }
 
 async function loadProfile() {
-  if (!id) {
-    renderNotFound();
-    return;
-  }
+  if (!id) return renderNotFound();
 
   try {
     const user = await getProfileById(id);
-
-    if (!user) {
-      renderNotFound();
-      return;
-    }
-
+    if (!user) return renderNotFound();
     renderProfile(user);
   } catch (err) {
-    console.error("Lỗi load profile Firebase:", err);
-    profileBox.innerHTML = `
-      <div class="form-card">
-        <div class="section-title">
-          <h2>Không tải được hồ sơ</h2>
-          <p>Kiểm tra Firestore rules hoặc file ketnoi-firebase.js.</p>
-        </div>
-        <div class="hero-actions">
-          <a href="./profiles.html" class="btn btn-primary">Quay lại danh sách</a>
-        </div>
-      </div>
-    `;
+    console.error(err);
+    renderNotFound();
   }
 }
 
 loadProfile();
 </script>
-
 
 </body>
 </html>
