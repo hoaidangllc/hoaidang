@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Lịch live cuối tuần | Kết Nối Việt Mỹ</title>
-  <meta name="description" content="Xem lịch live cuối tuần trên TikTok @hoaidangllc để làm quen và kết nối.">
+  <meta name="description" content="Xem lịch live cuối tuần và giao lưu làm quen trên TikTok cùng host @hello_ba_gia_90.">
   <link rel="stylesheet" href="./assets/css/styles.css">
 </head>
 <body>
@@ -18,6 +18,7 @@
 
     <nav class="nav-links">
       <a href="/">Về hoaidang.com</a>
+      <a href="./index.html">Trang ketnoi</a>
       <a href="./profiles.html">Thành viên</a>
       <a href="./register.html">Đăng ký</a>
       <a href="./live.html">Lịch live</a>
@@ -38,15 +39,60 @@
         <div class="eyebrow">🎥 Live cuối tuần trên TikTok</div>
         <h1>Làm quen thật hơn. <span>Gặp nhau qua lịch live rõ ràng.</span></h1>
         <p>
-          Mỗi cuối tuần sẽ có các khung giờ live trên TikTok
-          <strong>@hoaidangllc</strong> để thành viên có cơ hội xuất hiện,
+          Mỗi cuối tuần sẽ có các khung giờ live để thành viên có cơ hội xuất hiện,
           trò chuyện và tạo kết nối tự nhiên hơn.
         </p>
 
         <div class="hero-actions">
           <a href="./register.html" class="btn btn-primary">Đăng ký tham gia</a>
           <a href="./profiles.html" class="btn btn-secondary">Xem thành viên</a>
-          <a href="https://www.tiktok.com/@hoaidangllc" target="_blank" class="btn btn-secondary">Xem TikTok @hoaidangllc</a>
+          <a href="https://www.tiktok.com/@hello_ba_gia_90" target="_blank" class="btn btn-secondary">
+            Xem TikTok host
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="form-card" style="display:grid;grid-template-columns:280px 1fr;gap:22px;align-items:center;">
+        <div>
+          <img
+            src="./image/HOT-GIRL-HEIDI.jpeg"
+            alt="Host live TikTok"
+            style="width:100%;max-width:280px;border-radius:24px;display:block;object-fit:cover;box-shadow:var(--shadow);"
+          >
+        </div>
+
+        <div>
+          <div class="eyebrow">🌸 Host live cuối tuần</div>
+          <h2 style="font-size:clamp(1.8rem,3vw,2.8rem);letter-spacing:-.04em;">Host giao lưu làm quen</h2>
+          <p style="margin-top:12px;color:var(--muted);max-width:720px;">
+            Các buổi live làm quen cuối tuần sẽ do host phụ trách dẫn chương trình, kết nối thành viên,
+            tạo không khí thoải mái và giúp mọi người dễ bắt chuyện hơn.
+          </p>
+
+          <div class="list" style="margin-top:18px;">
+            <div class="member-item">
+              <strong>Vai trò</strong>
+              <div class="meta">Host live TikTok của chương trình kết nối</div>
+            </div>
+
+            <div class="member-item">
+              <strong>TikTok host</strong>
+              <div class="meta">
+                <a href="https://www.tiktok.com/@hello_ba_gia_90" target="_blank">@hello_ba_gia_90</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="hero-actions" style="margin-top:20px;">
+            <a href="https://www.tiktok.com/@hello_ba_gia_90" target="_blank" class="btn btn-primary">
+              Mở TikTok host
+            </a>
+            <a href="./register.html" class="btn btn-secondary">Đăng ký để lên live</a>
+          </div>
         </div>
       </div>
     </div>
@@ -65,12 +111,14 @@
 
   <section class="footer">
     <div class="container">
-      © 2026 Kết Nối Việt Mỹ • TikTok:
-      <a href="https://www.tiktok.com/@hoaidangllc" target="_blank">@hoaidangllc</a>
+      © 2026 Kết Nối Việt Mỹ • Host TikTok:
+      <a href="https://www.tiktok.com/@hello_ba_gia_90" target="_blank">@hello_ba_gia_90</a>
     </div>
   </section>
 </main>
+
 <script type="module" src="/assets/js/auth.js"></script>
+
 <script type="module">
 import { getProfiles } from "./assets/js/ketnoi-firebase.js";
 
@@ -89,8 +137,8 @@ function renderSlot(slot, matched) {
       <div class="card-body">
         <h3>${slot}</h3>
         <p>
-          Live trên TikTok:
-          <a href="https://www.tiktok.com/@hoaidangllc" target="_blank">@hoaidangllc</a>
+          Host live:
+          <a href="https://www.tiktok.com/@hello_ba_gia_90" target="_blank">@hello_ba_gia_90</a>
         </p>
 
         ${
@@ -142,7 +190,6 @@ async function loadLiveSlots() {
 
 loadLiveSlots();
 </script>
-
 
 </body>
 </html>
