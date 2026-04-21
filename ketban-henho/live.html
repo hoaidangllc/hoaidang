@@ -1,11 +1,137 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Lịch live cuối tuần | Kết Nối Việt Mỹ</title>
-  <meta name="description" content="Xem lịch live cuối tuần và giao lưu làm quen trên TikTok cùng host @hello_ba_gia_90.">
-  <link rel="stylesheet" href="./assets/css/styles.css">
+  <meta
+    name="description"
+    content="Xem lịch live cuối tuần và giao lưu làm quen trên TikTok cùng các host của Kết Nối Việt Mỹ."
+  />
+  <link rel="stylesheet" href="./assets/css/styles.css" />
+
+  <style>
+    .tiktok-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-width: 52px;
+      padding: 12px 16px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 700;
+      border: 1px solid rgba(255,255,255,.12);
+      background: #111;
+      color: #fff;
+      box-shadow: var(--shadow);
+      transition: transform .18s ease, opacity .18s ease;
+    }
+
+    .tiktok-btn:hover {
+      transform: translateY(-2px);
+      opacity: .95;
+    }
+
+    .tiktok-icon {
+      width: 18px;
+      height: 18px;
+      display: inline-block;
+      flex: 0 0 18px;
+    }
+
+    .hosts-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 22px;
+    }
+
+    .host-card {
+      background: var(--card, #fff);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      border: 1px solid rgba(0,0,0,.05);
+    }
+
+    .host-cover {
+      width: 100%;
+      height: 360px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .host-body {
+      padding: 22px;
+    }
+
+    .host-topline {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+
+    .host-role {
+      font-size: .95rem;
+      color: var(--muted);
+    }
+
+    .host-name {
+      font-size: clamp(1.25rem, 2vw, 1.7rem);
+      margin: 0;
+      letter-spacing: -.03em;
+    }
+
+    .host-desc {
+      margin-top: 10px;
+      color: var(--muted);
+    }
+
+    .host-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .mini-hosts {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .mini-host-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(0,0,0,.04);
+      text-decoration: none;
+      color: inherit;
+      font-weight: 600;
+    }
+
+    .mini-host-chip img {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    @media (max-width: 900px) {
+      .hosts-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .host-cover {
+        height: 300px;
+      }
+    }
+  </style>
 </head>
 <body>
 
@@ -25,7 +151,6 @@
       <a href="./my-profile.html">Hồ sơ của tôi</a>
 
       <span id="authUser" class="auth-user"></span>
-
       <button id="loginBtn" class="btn btn-secondary" type="button">Đăng nhập Google</button>
       <button id="logoutBtn" class="btn btn-secondary" type="button" style="display:none;">Đăng xuất</button>
     </nav>
@@ -40,16 +165,37 @@
         <h1>Làm quen thật hơn. <span>Gặp nhau qua lịch live rõ ràng.</span></h1>
         <p>
           Mỗi cuối tuần sẽ có các khung giờ live để thành viên có cơ hội xuất hiện,
-          trò chuyện và tạo kết nối tự nhiên hơn.
+          trò chuyện và tạo kết nối tự nhiên hơn cùng 2 host của chương trình.
         </p>
 
         <div class="hero-actions">
           <a href="./register.html" class="btn btn-primary">Đăng ký tham gia</a>
           <a href="./profiles.html" class="btn btn-secondary">Xem thành viên</a>
-          <a href="https://www.tiktok.com/@hello_ba_gia_90" target="_blank" class="btn btn-secondary">
-            Xem TikTok host
-            <a href="https://www.tiktok.com/@hoaidangllc" target="_blank" class="btn btn-secondary">
-            Xem TikTok host
+
+          <a
+            href="https://www.tiktok.com/@hello_ba_gia_90"
+            target="_blank"
+            rel="noopener"
+            class="tiktok-btn"
+            aria-label="Mở TikTok host ba_gia_90"
+            title="TikTok host ba_gia_90"
+          >
+            <svg class="tiktok-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M19.589 6.686a4.793 4.793 0 0 1-3.77-4.216V2h-3.178v12.235c0 1.725-1.379 3.123-3.078 3.123a3.082 3.082 0 0 1-3.08-3.123 3.082 3.082 0 0 1 3.08-3.123c.34 0 .666.056.971.158V8.055a6.21 6.21 0 0 0-.97-.077C6.06 7.978 3 11.082 3 14.87 3 18.657 6.06 21.76 9.564 21.76c3.504 0 6.563-3.103 6.563-6.89V8.742a7.895 7.895 0 0 0 4.873 1.688V7.25a4.79 4.79 0 0 1-1.411-.564z"/>
+            </svg>
+          </a>
+
+          <a
+            href="https://www.tiktok.com/@hoaidangllc"
+            target="_blank"
+            rel="noopener"
+            class="tiktok-btn"
+            aria-label="Mở TikTok host hoaidangllc"
+            title="TikTok host hoaidangllc"
+          >
+            <svg class="tiktok-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M19.589 6.686a4.793 4.793 0 0 1-3.77-4.216V2h-3.178v12.235c0 1.725-1.379 3.123-3.078 3.123a3.082 3.082 0 0 1-3.08-3.123 3.082 3.082 0 0 1 3.08-3.123c.34 0 .666.056.971.158V8.055a6.21 6.21 0 0 0-.97-.077C6.06 7.978 3 11.082 3 14.87 3 18.657 6.06 21.76 9.564 21.76c3.504 0 6.563-3.103 6.563-6.89V8.742a7.895 7.895 0 0 0 4.873 1.688V7.25a4.79 4.79 0 0 1-1.411-.564z"/>
+            </svg>
           </a>
         </div>
       </div>
@@ -58,52 +204,83 @@
 
   <section class="section">
     <div class="container">
-      <div class="form-card" style="display:grid;grid-template-columns:280px 1fr;gap:22px;align-items:center;">
-        <div>
+      <div class="section-title">
+        <h2>2 host live cuối tuần</h2>
+        <p>Hai host cùng hỗ trợ tạo không khí vui vẻ, dễ nói chuyện và kết nối tự nhiên hơn.</p>
+      </div>
+
+      <div class="hosts-grid">
+        <div class="host-card">
           <img
             src="./image/HOT-GIRL-HEIDI.jpeg"
-            alt="Host live TikTok"
-            style="width:100%;max-width:280px;border-radius:24px;display:block;object-fit:cover;box-shadow:var(--shadow);"
-          >
-        </div>
-         <div>
-          <img
-            src="./image/hoaidangllc.jpeg"
-            alt="Host live TikTok"
-            style="width:100%;max-width:280px;border-radius:24px;display:block;object-fit:cover;box-shadow:var(--shadow);"
-          >
-        </div>
+            alt="Host TikTok ba_gia_90"
+            class="host-cover"
+          />
+          <div class="host-body">
+            <div class="host-topline">
+              <div>
+                <div class="host-role">🌸 Host live giao lưu</div>
+                <h3 class="host-name">TikTok Host 1</h3>
+              </div>
 
-        <div>
-          <div class="eyebrow">🌸 Host live cuối tuần</div>
-          <h2 style="font-size:clamp(1.8rem,3vw,2.8rem);letter-spacing:-.04em;">Host giao lưu làm quen</h2>
-          <p style="margin-top:12px;color:var(--muted);max-width:720px;">
-            Các buổi live làm quen cuối tuần sẽ do host phụ trách dẫn chương trình, kết nối thành viên,
-            tạo không khí thoải mái và giúp mọi người dễ bắt chuyện hơn.
-          </p>
-
-          <div class="list" style="margin-top:18px;">
-            <div class="member-item">
-              <strong>Vai trò</strong>
-              <div class="meta">Host live TikTok của chương trình kết nối</div>
+              <a
+                href="https://www.tiktok.com/@hello_ba_gia_90"
+                target="_blank"
+                rel="noopener"
+                class="tiktok-btn"
+                aria-label="TikTok ba_gia_90"
+                title="TikTok ba_gia_90"
+              >
+                <svg class="tiktok-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M19.589 6.686a4.793 4.793 0 0 1-3.77-4.216V2h-3.178v12.235c0 1.725-1.379 3.123-3.078 3.123a3.082 3.082 0 0 1-3.08-3.123 3.082 3.082 0 0 1 3.08-3.123c.34 0 .666.056.971.158V8.055a6.21 6.21 0 0 0-.97-.077C6.06 7.978 3 11.082 3 14.87 3 18.657 6.06 21.76 9.564 21.76c3.504 0 6.563-3.103 6.563-6.89V8.742a7.895 7.895 0 0 0 4.873 1.688V7.25a4.79 4.79 0 0 1-1.411-.564z"/>
+                </svg>
+              </a>
             </div>
 
-            <div class="member-item">
-              <strong>TikTok host</strong>
-              <div class="meta">
-                <a href="https://www.tiktok.com/@hello_ba_gia_90" target="_blank">@hello_ba_gia_90</a>
-                <a href="https://www.tiktok.com/@hoaidangllc" target="_blank">@hoaidangllc</a>
-              </div>
+            <p class="host-desc">
+              Host hỗ trợ trò chuyện, dẫn dắt live và giúp buổi giao lưu cuối tuần tự nhiên, vui và đỡ ngại hơn.
+            </p>
+
+            <div class="host-actions">
+              <a href="./register.html" class="btn btn-primary">Đăng ký để lên live</a>
             </div>
           </div>
+        </div>
 
-          <div class="hero-actions" style="margin-top:20px;">
-            <a href="https://www.tiktok.com/@hello_ba_gia_90" target="_blank" class="btn btn-primary">
-              Mở TikTok host
-              <a href="https://www.tiktok.com/@hoaidangllc" target="_blank" class="btn btn-primary">
-              Mở TikTok host
-            </a>
-            <a href="./register.html" class="btn btn-secondary">Đăng ký để lên live</a>
+        <div class="host-card">
+          <img
+            src="./image/hoaidangllc.jpg"
+            alt="Host TikTok hoaidangllc"
+            class="host-cover"
+          />
+          <div class="host-body">
+            <div class="host-topline">
+              <div>
+                <div class="host-role">🔥 Live host @hoaidangllc</div>
+                <h3 class="host-name">TikTok Host 2</h3>
+              </div>
+
+              <a
+                href="https://www.tiktok.com/@hoaidangllc"
+                target="_blank"
+                rel="noopener"
+                class="tiktok-btn"
+                aria-label="TikTok hoaidangllc"
+                title="TikTok hoaidangllc"
+              >
+                <svg class="tiktok-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M19.589 6.686a4.793 4.793 0 0 1-3.77-4.216V2h-3.178v12.235c0 1.725-1.379 3.123-3.078 3.123a3.082 3.082 0 0 1-3.08-3.123 3.082 3.082 0 0 1 3.08-3.123c.34 0 .666.056.971.158V8.055a6.21 6.21 0 0 0-.97-.077C6.06 7.978 3 11.082 3 14.87 3 18.657 6.06 21.76 9.564 21.76c3.504 0 6.563-3.103 6.563-6.89V8.742a7.895 7.895 0 0 0 4.873 1.688V7.25a4.79 4.79 0 0 1-1.411-.564z"/>
+                </svg>
+              </a>
+            </div>
+
+            <p class="host-desc">
+              Bổ sung thêm host @hoaidangllc để live nhìn chuyên nghiệp hơn, có thêm tương tác và dễ giữ nhịp chương trình.
+            </p>
+
+            <div class="host-actions">
+              <a href="./register.html" class="btn btn-primary">Đăng ký để lên live</a>
+            </div>
           </div>
         </div>
       </div>
@@ -123,9 +300,7 @@
 
   <section class="footer">
     <div class="container">
-      © 2026 Kết Nối Việt Mỹ • Host TikTok:
-      <a href="https://www.tiktok.com/@hello_ba_gia_90" target="_blank">@hello_ba_gia_90</a>
-      <a href="https://www.tiktok.com/@hoaidangllc" target="_blank">@hoaidangllc</a>
+      © 2026 Kết Nối Việt Mỹ • Live cùng 2 host trên TikTok
     </div>
   </section>
 </main>
@@ -133,76 +308,93 @@
 <script type="module" src="/assets/js/auth.js"></script>
 
 <script type="module">
-import { getProfiles } from "./assets/js/ketnoi-firebase.js";
+  import { getProfiles } from "./assets/js/ketnoi-firebase.js";
 
-const liveList = document.getElementById("liveList");
+  const liveList = document.getElementById("liveList");
 
-const slots = [
-  "Thứ 7 • 9:00 PM Texas time",
-  "Thứ 7 • 10:30 PM Texas time",
-  "Chủ Nhật • 7:30 PM Texas time",
-  "Chủ Nhật • 9:30 PM Texas time"
-];
+  const slots = [
+    "Thứ 7 • 9:00 PM Texas time",
+    "Thứ 7 • 10:30 PM Texas time",
+    "Chủ Nhật • 7:30 PM Texas time",
+    "Chủ Nhật • 9:30 PM Texas time"
+  ];
 
-function renderSlot(slot, matched) {
-  return `
-    <div class="card">
-      <div class="card-body">
-        <h3>${slot}</h3>
-        <p>
-          Host live:
-          <a href="https://www.tiktok.com/@hello_ba_gia_90" target="_blank">@hello_ba_gia_90</a>
-          <a href="https://www.tiktok.com/@hoaidangllc" target="_blank">@hoaidangllc</a>
-        </p>
+  function tiktokIcon() {
+    return `
+      <svg class="tiktok-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path d="M19.589 6.686a4.793 4.793 0 0 1-3.77-4.216V2h-3.178v12.235c0 1.725-1.379 3.123-3.078 3.123a3.082 3.082 0 0 1-3.08-3.123 3.082 3.082 0 0 1 3.08-3.123c.34 0 .666.056.971.158V8.055a6.21 6.21 0 0 0-.97-.077C6.06 7.978 3 11.082 3 14.87 3 18.657 6.06 21.76 9.564 21.76c3.504 0 6.563-3.103 6.563-6.89V8.742a7.895 7.895 0 0 0 4.873 1.688V7.25a4.79 4.79 0 0 1-1.411-.564z"/>
+      </svg>
+    `;
+  }
 
-        ${
-          matched.length > 0
-            ? matched.map(u => `
-                <div class="member-item" style="margin-top:12px;">
-                  <strong>${u.name || "Chưa có tên"}${u.age ? `, ${u.age} tuổi` : ""}</strong>
-                  <div class="meta">
-                    ${u.city || "Chưa rõ thành phố"}${u.state ? `, ${u.state}` : ""} • ${u.job || "Chưa cập nhật"}
-                  </div>
-
-                  <div class="hero-actions" style="margin-top:12px;">
-                    <a href="./profile.html?id=${u.id}" class="btn btn-secondary">Xem hồ sơ</a>
-                    ${
-                      u.link
-                        ? `<a href="${u.link}" target="_blank" class="btn btn-primary">${u.platform || "Mở liên hệ"}</a>`
-                        : `<span class="btn btn-secondary btn-disabled">Chưa có link</span>`
-                    }
-                  </div>
-                </div>
-              `).join("")
-            : `<p style="margin-top:12px;">Chưa có ai đăng ký khung giờ này.</p>`
-        }
-      </div>
-    </div>
-  `;
-}
-
-async function loadLiveSlots() {
-  try {
-    const users = await getProfiles();
-
-    liveList.innerHTML = slots.map(slot => {
-      const matched = users.filter(u => u.liveSlot === slot);
-      return renderSlot(slot, matched);
-    }).join("");
-  } catch (err) {
-    console.error("Lỗi load live Firebase:", err);
-    liveList.innerHTML = `
+  function renderSlot(slot, matched) {
+    return `
       <div class="card">
         <div class="card-body">
-          <h3>Không tải được lịch live</h3>
-          <p>Kiểm tra Firestore rules hoặc file ketnoi-firebase.js.</p>
+          <h3>${slot}</h3>
+
+          <div class="mini-hosts">
+            <a href="https://www.tiktok.com/@hello_ba_gia_90" target="_blank" rel="noopener" class="mini-host-chip">
+              <img src="./image/HOT-GIRL-HEIDI.jpeg" alt="Host ba_gia_90">
+              <span>Host 1</span>
+              ${tiktokIcon()}
+            </a>
+
+            <a href="https://www.tiktok.com/@hoaidangllc" target="_blank" rel="noopener" class="mini-host-chip">
+              <img src="./image/hoaidangllc.jpg" alt="Host hoaidangllc">
+              <span>Host 2</span>
+              ${tiktokIcon()}
+            </a>
+          </div>
+
+          ${
+            matched.length > 0
+              ? matched.map(u => `
+                  <div class="member-item" style="margin-top:14px;">
+                    <strong>${u.name || "Chưa có tên"}${u.age ? `, ${u.age} tuổi` : ""}</strong>
+                    <div class="meta">
+                      ${u.city || "Chưa rõ thành phố"}${u.state ? `, ${u.state}` : ""} • ${u.job || "Chưa cập nhật"}
+                    </div>
+
+                    <div class="hero-actions" style="margin-top:12px;">
+                      <a href="./profile.html?id=${u.id}" class="btn btn-secondary">Xem hồ sơ</a>
+                      ${
+                        u.link
+                          ? `<a href="${u.link}" target="_blank" class="btn btn-primary">${u.platform || "Mở liên hệ"}</a>`
+                          : `<span class="btn btn-secondary btn-disabled">Chưa có link</span>`
+                      }
+                    </div>
+                  </div>
+                `).join("")
+              : `<p style="margin-top:14px;">Chưa có ai đăng ký khung giờ này.</p>`
+          }
         </div>
       </div>
     `;
   }
-}
 
-loadLiveSlots();
+  async function loadLiveSlots() {
+    try {
+      const users = await getProfiles();
+
+      liveList.innerHTML = slots.map(slot => {
+        const matched = users.filter(u => u.liveSlot === slot);
+        return renderSlot(slot, matched);
+      }).join("");
+    } catch (err) {
+      console.error("Lỗi load live Firebase:", err);
+      liveList.innerHTML = `
+        <div class="card">
+          <div class="card-body">
+            <h3>Không tải được lịch live</h3>
+            <p>Kiểm tra Firestore rules hoặc file ketnoi-firebase.js.</p>
+          </div>
+        </div>
+      `;
+    }
+  }
+
+  loadLiveSlots();
 </script>
 
 </body>
