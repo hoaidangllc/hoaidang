@@ -2,143 +2,1113 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>NBA Picks Demo</title>
-
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PickZone</title>
   <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #0b1019;
-      color: #fff;
+    :root{
+      --bg:#050b16;
+      --bg2:#091225;
+      --card:#0f1b33;
+      --card2:#13213d;
+      --soft:#1b2b4b;
+      --line:#26385f;
+      --text:#eef4ff;
+      --muted:#9cb0d4;
+      --blue:#4da3ff;
+      --blue2:#2e7de0;
+      --green:#2ecc71;
+      --red:#ff6b6b;
+      --orange:#ffb44d;
+      --gold:#ffd166;
+      --shadow:0 10px 30px rgba(0,0,0,.35);
+      --radius:20px;
     }
 
-    .header {
-      padding: 15px;
-      background: #111827;
-      text-align: center;
-      font-size: 20px;
-      font-weight: bold;
+    * { box-sizing:border-box; }
+    html,body{
+      margin:0;
+      padding:0;
+      background:
+        radial-gradient(circle at top left, #0d1d3e 0%, transparent 32%),
+        radial-gradient(circle at top right, #102850 0%, transparent 26%),
+        linear-gradient(180deg, var(--bg2), var(--bg));
+      color:var(--text);
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+      min-height:100%;
     }
 
-    .game {
-      background: #151d30;
-      margin: 15px;
-      padding: 15px;
-      border-radius: 10px;
+    body{
+      padding-bottom:100px;
     }
 
-    .teams {
-      display: flex;
-      justify-content: space-between;
-      font-size: 18px;
-      margin-bottom: 10px;
+    .shell{
+      width:min(1200px, 100%);
+      margin:0 auto;
+      padding:14px 14px 28px;
     }
 
-    .score {
-      font-size: 20px;
-      font-weight: bold;
+    .topbar{
+      background:rgba(10,18,35,.82);
+      backdrop-filter: blur(12px);
+      border:1px solid rgba(100,140,220,.12);
+      box-shadow:var(--shadow);
+      border-radius:24px;
+      padding:14px;
+      position:sticky;
+      top:10px;
+      z-index:50;
     }
 
-    .status {
-      font-size: 14px;
-      margin-bottom: 10px;
-      color: #aaa;
+    .brand-row{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
     }
 
-    .buttons {
-      display: flex;
-      gap: 10px;
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
     }
 
-    .btn {
-      flex: 1;
-      padding: 10px;
-      border-radius: 8px;
-      text-align: center;
-      cursor: pointer;
-      background: #1f2937;
+    .brand-badge{
+      width:46px;
+      height:46px;
+      border-radius:14px;
+      display:grid;
+      place-items:center;
+      font-weight:800;
+      color:#fff;
+      background:linear-gradient(135deg, #53a8ff, #215fca);
+      box-shadow:0 8px 24px rgba(33,95,202,.35);
     }
 
-    .btn:hover {
-      background: #374151;
+    .brand-text h1{
+      margin:0;
+      font-size:24px;
+      letter-spacing:.2px;
     }
 
-    .locked {
-      background: #333;
-      opacity: 0.5;
-      pointer-events: none;
+    .brand-text p{
+      margin:3px 0 0;
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    .wallet{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+
+    .pill{
+      background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01));
+      border:1px solid rgba(255,255,255,.08);
+      color:var(--text);
+      border-radius:16px;
+      padding:10px 12px;
+      min-width:92px;
+      text-align:center;
+    }
+
+    .pill .label{
+      display:block;
+      font-size:11px;
+      text-transform:uppercase;
+      letter-spacing:.8px;
+      color:var(--muted);
+      margin-bottom:4px;
+    }
+
+    .pill .value{
+      font-size:16px;
+      font-weight:800;
+    }
+
+    .hero{
+      display:grid;
+      grid-template-columns:1.2fr .8fr;
+      gap:14px;
+      margin-top:14px;
+    }
+
+    .hero-card,
+    .hero-side{
+      background:linear-gradient(180deg, rgba(20,34,65,.95), rgba(10,18,35,.95));
+      border:1px solid rgba(100,140,220,.12);
+      border-radius:24px;
+      box-shadow:var(--shadow);
+    }
+
+    .hero-card{
+      padding:18px;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .hero-card:before{
+      content:"";
+      position:absolute;
+      right:-40px;
+      top:-40px;
+      width:180px;
+      height:180px;
+      border-radius:50%;
+      background:radial-gradient(circle, rgba(77,163,255,.2), transparent 70%);
+    }
+
+    .hero-card h2{
+      margin:0 0 6px;
+      font-size:30px;
+      line-height:1.05;
+    }
+
+    .hero-card p{
+      margin:0;
+      color:var(--muted);
+      max-width:680px;
+      line-height:1.45;
+    }
+
+    .hero-stats{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:16px;
+    }
+
+    .hero-stat{
+      padding:10px 12px;
+      border-radius:16px;
+      background:rgba(255,255,255,.03);
+      border:1px solid rgba(255,255,255,.08);
+      font-size:13px;
+      color:var(--muted);
+    }
+
+    .hero-stat strong{
+      display:block;
+      color:var(--text);
+      font-size:16px;
+      margin-bottom:4px;
+    }
+
+    .hero-side{
+      padding:16px;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      gap:14px;
+    }
+
+    .bonus-box{
+      background:linear-gradient(180deg, rgba(255,209,102,.12), rgba(255,209,102,.04));
+      border:1px solid rgba(255,209,102,.22);
+      border-radius:18px;
+      padding:14px;
+    }
+
+    .bonus-box h3{
+      margin:0 0 6px;
+      font-size:18px;
+    }
+
+    .bonus-box p{
+      margin:0;
+      color:#d9cda9;
+      font-size:13px;
+      line-height:1.45;
+    }
+
+    .bonus-btn{
+      margin-top:12px;
+      width:100%;
+      border:none;
+      border-radius:14px;
+      padding:12px 14px;
+      font-size:15px;
+      font-weight:800;
+      color:#0b1220;
+      background:linear-gradient(180deg, #ffd166, #ffbb33);
+    }
+
+    .side-mini{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:10px;
+    }
+
+    .mini-card{
+      background:rgba(255,255,255,.03);
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:16px;
+      padding:12px;
+    }
+
+    .mini-card .title{
+      color:var(--muted);
+      font-size:12px;
+      margin-bottom:8px;
+    }
+
+    .mini-card .big{
+      font-size:20px;
+      font-weight:800;
+    }
+
+    .tabs{
+      display:flex;
+      gap:10px;
+      margin:16px 0 14px;
+      overflow:auto;
+      padding-bottom:4px;
+    }
+
+    .tab{
+      white-space:nowrap;
+      border:1px solid rgba(255,255,255,.08);
+      background:rgba(255,255,255,.03);
+      color:var(--text);
+      padding:11px 14px;
+      border-radius:14px;
+      font-weight:700;
+      font-size:14px;
+      cursor:pointer;
+    }
+
+    .tab.active{
+      background:linear-gradient(180deg, #3c92ff, #206dd1);
+      border-color:transparent;
+    }
+
+    .layout{
+      display:grid;
+      grid-template-columns:1fr 350px;
+      gap:14px;
+      align-items:start;
+    }
+
+    .games{
+      display:flex;
+      flex-direction:column;
+      gap:14px;
+    }
+
+    .game-card{
+      background:linear-gradient(180deg, rgba(16,28,53,.96), rgba(10,18,35,.96));
+      border:1px solid rgba(100,140,220,.12);
+      border-radius:24px;
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+
+    .game-top{
+      padding:14px 16px 10px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+    }
+
+    .status-badge{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      font-size:12px;
+      font-weight:800;
+      border-radius:999px;
+      padding:8px 12px;
+      letter-spacing:.6px;
+    }
+
+    .status-upcoming{
+      background:rgba(77,163,255,.14);
+      color:#9fcbff;
+      border:1px solid rgba(77,163,255,.22);
+    }
+
+    .status-live{
+      background:rgba(255,180,77,.12);
+      color:#ffc77c;
+      border:1px solid rgba(255,180,77,.22);
+    }
+
+    .status-final{
+      background:rgba(46,204,113,.12);
+      color:#8ef0b7;
+      border:1px solid rgba(46,204,113,.22);
+    }
+
+    .game-meta{
+      color:var(--muted);
+      font-size:13px;
+      text-align:right;
+    }
+
+    .teams{
+      padding:0 16px 12px;
+      display:grid;
+      grid-template-columns:1fr auto 1fr;
+      align-items:center;
+      gap:12px;
+    }
+
+    .team{
+      background:rgba(255,255,255,.025);
+      border:1px solid rgba(255,255,255,.05);
+      border-radius:18px;
+      padding:14px;
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
+
+    .team.right{
+      justify-content:flex-end;
+      text-align:right;
+    }
+
+    .logo{
+      width:46px;
+      height:46px;
+      border-radius:14px;
+      display:grid;
+      place-items:center;
+      background:linear-gradient(135deg, #13274a, #1e3768);
+      border:1px solid rgba(255,255,255,.08);
+      font-weight:800;
+      color:#dce9ff;
+      flex-shrink:0;
+    }
+
+    .team-name{
+      font-size:20px;
+      font-weight:800;
+      line-height:1.1;
+    }
+
+    .team-sub{
+      margin-top:4px;
+      color:var(--muted);
+      font-size:12px;
+    }
+
+    .score-wrap{
+      text-align:center;
+      min-width:124px;
+    }
+
+    .score{
+      font-size:38px;
+      font-weight:900;
+      letter-spacing:1px;
+    }
+
+    .period{
+      margin-top:6px;
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    .market-head{
+      padding:0 16px 10px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+    }
+
+    .market-title{
+      font-size:14px;
+      color:var(--muted);
+      text-transform:uppercase;
+      letter-spacing:.9px;
+      font-weight:800;
+    }
+
+    .market-lock{
+      font-size:12px;
+      color:var(--orange);
+      font-weight:700;
+    }
+
+    .odds-grid{
+      padding:0 16px 16px;
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+    }
+
+    .bet-box{
+      background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.015));
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:20px;
+      padding:14px;
+      transition:.18s ease;
+    }
+
+    .bet-box:hover{
+      transform:translateY(-2px);
+      border-color:rgba(77,163,255,.28);
+    }
+
+    .bet-line{
+      font-size:19px;
+      font-weight:800;
+    }
+
+    .bet-odds{
+      font-size:28px;
+      font-weight:900;
+      margin-top:6px;
+    }
+
+    .bet-hint{
+      color:var(--muted);
+      font-size:12px;
+      margin-top:6px;
+      min-height:16px;
+    }
+
+    .stake-row{
+      display:flex;
+      gap:10px;
+      margin-top:12px;
+    }
+
+    .stake-input{
+      flex:1;
+      min-width:0;
+      border:none;
+      outline:none;
+      border-radius:14px;
+      padding:12px 12px;
+      font-size:16px;
+      font-weight:700;
+      color:var(--text);
+      background:#081224;
+      border:1px solid rgba(255,255,255,.07);
+    }
+
+    .pick-btn{
+      border:none;
+      outline:none;
+      border-radius:14px;
+      padding:12px 14px;
+      min-width:92px;
+      font-weight:900;
+      font-size:15px;
+      color:#fff;
+      cursor:pointer;
+      background:linear-gradient(180deg, #3d99ff, #246bd3);
+      box-shadow:0 8px 20px rgba(36,107,211,.3);
+    }
+
+    .pick-btn:disabled{
+      opacity:.45;
+      cursor:not-allowed;
+      box-shadow:none;
+    }
+
+    .locked{
+      opacity:.7;
+    }
+
+    .sidebar{
+      display:flex;
+      flex-direction:column;
+      gap:14px;
+      position:sticky;
+      top:112px;
+    }
+
+    .side-card{
+      background:linear-gradient(180deg, rgba(16,28,53,.96), rgba(10,18,35,.96));
+      border:1px solid rgba(100,140,220,.12);
+      border-radius:22px;
+      box-shadow:var(--shadow);
+      padding:14px;
+    }
+
+    .side-card h3{
+      margin:0 0 12px;
+      font-size:18px;
+    }
+
+    .pick-item, .leader-item, .feed-item{
+      background:rgba(255,255,255,.025);
+      border:1px solid rgba(255,255,255,.06);
+      border-radius:16px;
+      padding:12px;
+    }
+
+    .pick-list, .leader-list, .feed-list{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+
+    .muted{
+      color:var(--muted);
+    }
+
+    .leader-item{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+    }
+
+    .leader-left{
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+
+    .rank{
+      width:32px;
+      height:32px;
+      border-radius:10px;
+      display:grid;
+      place-items:center;
+      background:#0b1730;
+      border:1px solid rgba(255,255,255,.07);
+      font-weight:900;
+      color:#9fcbff;
+    }
+
+    .feed-item{
+      font-size:13px;
+      color:var(--muted);
+      line-height:1.45;
+    }
+
+    .feed-item strong{
+      color:var(--text);
+    }
+
+    .footer-bar{
+      position:fixed;
+      left:0;
+      right:0;
+      bottom:0;
+      z-index:60;
+      padding:10px 14px 16px;
+      background:linear-gradient(180deg, rgba(5,11,22,0), rgba(5,11,22,.96) 35%);
+      pointer-events:none;
+    }
+
+    .footer-nav{
+      width:min(760px, 100%);
+      margin:0 auto;
+      border:1px solid rgba(255,255,255,.08);
+      background:rgba(11,18,32,.88);
+      backdrop-filter: blur(12px);
+      box-shadow:var(--shadow);
+      border-radius:22px;
+      padding:10px;
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:8px;
+      pointer-events:auto;
+    }
+
+    .nav-btn{
+      border:none;
+      background:transparent;
+      color:var(--muted);
+      border-radius:14px;
+      padding:12px 8px;
+      font-weight:800;
+      font-size:13px;
+    }
+
+    .nav-btn.active{
+      background:rgba(77,163,255,.14);
+      color:var(--text);
+      border:1px solid rgba(77,163,255,.2);
+    }
+
+    .toast{
+      position:fixed;
+      left:50%;
+      bottom:96px;
+      transform:translateX(-50%) translateY(30px);
+      background:#0f1d38;
+      border:1px solid rgba(77,163,255,.25);
+      color:#fff;
+      border-radius:16px;
+      padding:14px 16px;
+      min-width:min(92vw, 360px);
+      box-shadow:var(--shadow);
+      opacity:0;
+      pointer-events:none;
+      transition:.22s ease;
+      z-index:100;
+      text-align:center;
+      font-weight:700;
+    }
+
+    .toast.show{
+      opacity:1;
+      transform:translateX(-50%) translateY(0);
+    }
+
+    @media (max-width: 980px){
+      .hero,
+      .layout{
+        grid-template-columns:1fr;
+      }
+
+      .sidebar{
+        position:static;
+      }
+    }
+
+    @media (max-width: 720px){
+      .shell{
+        padding:10px 10px 24px;
+      }
+
+      .topbar{
+        border-radius:20px;
+        padding:12px;
+      }
+
+      .brand-row{
+        flex-direction:column;
+        align-items:flex-start;
+      }
+
+      .wallet{
+        width:100%;
+        justify-content:flex-start;
+      }
+
+      .brand-text h1{
+        font-size:22px;
+      }
+
+      .hero-card h2{
+        font-size:24px;
+      }
+
+      .teams{
+        grid-template-columns:1fr;
+      }
+
+      .score-wrap{
+        order:-1;
+        min-width:auto;
+      }
+
+      .team,
+      .team.right{
+        justify-content:flex-start;
+        text-align:left;
+      }
+
+      .odds-grid{
+        grid-template-columns:1fr;
+      }
+
+      .side-mini{
+        grid-template-columns:1fr 1fr;
+      }
     }
   </style>
 </head>
 <body>
+  <div class="shell">
+    <div class="topbar">
+      <div class="brand-row">
+        <div class="brand">
+          <div class="brand-badge">PZ</div>
+          <div class="brand-text">
+            <h1>PickZone</h1>
+            <p>NBA picks board • entertainment points mode</p>
+          </div>
+        </div>
 
-<div class="header">NBA PICKS DEMO</div>
+        <div class="wallet">
+          <div class="pill">
+            <span class="label">Balance</span>
+            <span class="value" id="balanceValue">1,250</span>
+          </div>
+          <div class="pill">
+            <span class="label">Level</span>
+            <span class="value">Rookie 3</span>
+          </div>
+          <div class="pill">
+            <span class="label">Streak</span>
+            <span class="value">4W</span>
+          </div>
+        </div>
+      </div>
+    </div>
 
-<div id="games"></div>
+    <div class="hero">
+      <div class="hero-card">
+        <h2>Fast picks. Clean board. Game vibe.</h2>
+        <p>
+          Bản này là mockup nâng cấp để bạn nhìn cho đã mắt hơn. Hiện đang chạy bằng dữ liệu demo, nhưng flow đã giống kiểu picks game: chọn line, nhập point, bấm pick, theo dõi bảng xếp hạng và activity.
+        </p>
 
-<script>
+        <div class="hero-stats">
+          <div class="hero-stat">
+            <strong>3</strong>
+            Games Today
+          </div>
+          <div class="hero-stat">
+            <strong>2</strong>
+            Open Markets
+          </div>
+          <div class="hero-stat">
+            <strong>30s</strong>
+            Refresh Mock Cycle
+          </div>
+          <div class="hero-stat">
+            <strong>Private</strong>
+            Family Testing
+          </div>
+        </div>
+      </div>
 
-const games = [
-  {
-    home: "Lakers",
-    away: "Rockets",
-    homeScore: 0,
-    awayScore: 0,
-    startTime: new Date().getTime() + 60000 // 1 phút nữa bắt đầu
-  }
-];
+      <div class="hero-side">
+        <div class="bonus-box">
+          <h3>Daily Bonus</h3>
+          <p>Nhấn để nhận thêm point test cho vui. Sau này bạn có thể đổi thành check-in bonus hoặc weekly reward.</p>
+          <button class="bonus-btn" onclick="claimBonus()">Claim +100 Points</button>
+        </div>
 
-function getStatus(game) {
-  const now = Date.now();
+        <div class="side-mini">
+          <div class="mini-card">
+            <div class="title">My Rank</div>
+            <div class="big">#2</div>
+          </div>
+          <div class="mini-card">
+            <div class="title">Correct Picks</div>
+            <div class="big">14</div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-  if (now < game.startTime) return "UPCOMING";
-  if (now < game.startTime + 2 * 60 * 60 * 1000) return "LIVE";
-  return "FINAL";
-}
+    <div class="tabs">
+      <button class="tab active" onclick="setFilter('all', this)">All Games</button>
+      <button class="tab" onclick="setFilter('upcoming', this)">Upcoming</button>
+      <button class="tab" onclick="setFilter('live', this)">Live</button>
+      <button class="tab" onclick="setFilter('final', this)">Final</button>
+    </div>
 
-function render() {
-  const container = document.getElementById("games");
-  container.innerHTML = "";
+    <div class="layout">
+      <div class="games" id="games"></div>
 
-  games.forEach((game, index) => {
-    const status = getStatus(game);
+      <div class="sidebar">
+        <div class="side-card">
+          <h3>My Picks</h3>
+          <div class="pick-list" id="myPicks">
+            <div class="muted">No picks yet. Tap a side and enter your points.</div>
+          </div>
+        </div>
 
-    if (status === "LIVE") {
-      game.homeScore += Math.floor(Math.random() * 3);
-      game.awayScore += Math.floor(Math.random() * 3);
+        <div class="side-card">
+          <h3>Leaderboard</h3>
+          <div class="leader-list">
+            <div class="leader-item">
+              <div class="leader-left"><div class="rank">1</div><div><strong>Tommy</strong><div class="muted">Hot streak</div></div></div>
+              <strong>18 pts</strong>
+            </div>
+            <div class="leader-item">
+              <div class="leader-left"><div class="rank">2</div><div><strong>Nick</strong><div class="muted">You</div></div></div>
+              <strong>14 pts</strong>
+            </div>
+            <div class="leader-item">
+              <div class="leader-left"><div class="rank">3</div><div><strong>Chloe</strong><div class="muted">Steady</div></div></div>
+              <strong>11 pts</strong>
+            </div>
+            <div class="leader-item">
+              <div class="leader-left"><div class="rank">4</div><div><strong>Brody</strong><div class="muted">Grinding</div></div></div>
+              <strong>9 pts</strong>
+            </div>
+          </div>
+        </div>
+
+        <div class="side-card">
+          <h3>Activity</h3>
+          <div class="feed-list">
+            <div class="feed-item"><strong>Tommy</strong> locked in Celtics -6.5 with 25 pts</div>
+            <div class="feed-item"><strong>Chloe</strong> took Spurs -4.5 with 10 pts</div>
+            <div class="feed-item"><strong>Brody</strong> is waiting for Lakers line movement</div>
+            <div class="feed-item"><strong>Nick</strong> claimed daily bonus</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bar">
+    <div class="footer-nav">
+      <button class="nav-btn active">Board</button>
+      <button class="nav-btn">My Picks</button>
+      <button class="nav-btn">Leaders</button>
+      <button class="nav-btn">Profile</button>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    let balance = 1250;
+    let currentFilter = "all";
+
+    const myPicks = [];
+
+    const games = [
+      {
+        id: 1,
+        status: "upcoming",
+        home: "Celtics",
+        away: "76ers",
+        homeCode: "BOS",
+        awayCode: "PHI",
+        homeScore: 0,
+        awayScore: 0,
+        periodText: "Pregame",
+        gameTime: "Apr 21 • 6:00 PM",
+        venue: "TD Garden",
+        markets: {
+          home: { line: "-6.5", odds: "-110", hint: "Home favorite" },
+          away: { line: "+6.5", odds: "-105", hint: "Away cover" }
+        }
+      },
+      {
+        id: 2,
+        status: "live",
+        home: "Spurs",
+        away: "Trail Blazers",
+        homeCode: "SAS",
+        awayCode: "POR",
+        homeScore: 84,
+        awayScore: 78,
+        periodText: "Q3 • 05:21",
+        gameTime: "Apr 21 • 7:00 PM",
+        venue: "Frost Bank Center",
+        markets: {
+          home: { line: "-4.5", odds: "-112", hint: "Market locked" },
+          away: { line: "+4.5", odds: "-102", hint: "Market locked" }
+        }
+      },
+      {
+        id: 3,
+        status: "final",
+        home: "Lakers",
+        away: "Rockets",
+        homeCode: "LAL",
+        awayCode: "HOU",
+        homeScore: 108,
+        awayScore: 101,
+        periodText: "Final",
+        gameTime: "Apr 21 • 9:30 PM",
+        venue: "Crypto.com Arena",
+        markets: {
+          home: { line: "-3.5", odds: "-110", hint: "Closed" },
+          away: { line: "+3.5", odds: "-108", hint: "Closed" }
+        }
+      }
+    ];
+
+    function formatBalance() {
+      document.getElementById("balanceValue").textContent = balance.toLocaleString();
     }
 
-    const div = document.createElement("div");
-    div.className = "game";
+    function getStatusBadge(status) {
+      if (status === "upcoming") {
+        return '<span class="status-badge status-upcoming">● UPCOMING</span>';
+      }
+      if (status === "live") {
+        return '<span class="status-badge status-live">● LIVE</span>';
+      }
+      return '<span class="status-badge status-final">● FINAL</span>';
+    }
 
-    div.innerHTML = `
-      <div class="status">${status}</div>
+    function showToast(text) {
+      const toast = document.getElementById("toast");
+      toast.textContent = text;
+      toast.classList.add("show");
+      clearTimeout(window.toastTimer);
+      window.toastTimer = setTimeout(() => {
+        toast.classList.remove("show");
+      }, 2200);
+    }
 
-      <div class="teams">
-        <div>${game.home}</div>
-        <div class="score">${game.homeScore} - ${game.awayScore}</div>
-        <div>${game.away}</div>
-      </div>
+    function setFilter(filter, el) {
+      currentFilter = filter;
+      document.querySelectorAll(".tab").forEach(tab => tab.classList.remove("active"));
+      el.classList.add("active");
+      renderGames();
+    }
 
-      <div class="buttons">
-        <div class="btn ${status !== 'UPCOMING' ? 'locked' : ''}">
-          ${game.home} -3.5 (-110)
+    function claimBonus() {
+      balance += 100;
+      formatBalance();
+      showToast("Daily bonus claimed: +100 points");
+    }
+
+    function makePick(gameId, side) {
+      const game = games.find(g => g.id === gameId);
+      if (!game || game.status !== "upcoming") return;
+
+      const input = document.getElementById(`stake-${gameId}-${side}`);
+      const stake = parseInt(input.value || "0", 10);
+
+      if (!stake || stake < 1) {
+        showToast("Enter your points first");
+        return;
+      }
+
+      if (stake > balance) {
+        showToast("Not enough points");
+        return;
+      }
+
+      balance -= stake;
+      formatBalance();
+
+      const pickTeam = side === "home" ? game.home : game.away;
+      const market = game.markets[side];
+
+      myPicks.unshift({
+        gameId,
+        team: pickTeam,
+        line: market.line,
+        odds: market.odds,
+        stake,
+        gameLabel: `${game.away} @ ${game.home}`,
+        createdAt: new Date().toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'})
+      });
+
+      renderMyPicks();
+      showToast(`Picked ${pickTeam} ${market.line} with ${stake} pts`);
+      input.value = 10;
+    }
+
+    function renderMyPicks() {
+      const box = document.getElementById("myPicks");
+      if (!myPicks.length) {
+        box.innerHTML = '<div class="muted">No picks yet. Tap a side and enter your points.</div>';
+        return;
+      }
+
+      box.innerHTML = myPicks.map(p => `
+        <div class="pick-item">
+          <div style="display:flex;justify-content:space-between;gap:10px;align-items:start;">
+            <div>
+              <strong>${p.team} ${p.line}</strong>
+              <div class="muted" style="margin-top:4px;font-size:12px;">${p.gameLabel}</div>
+            </div>
+            <strong>${p.stake} pts</strong>
+          </div>
+          <div style="margin-top:8px;display:flex;justify-content:space-between;gap:10px;font-size:12px;">
+            <span class="muted">Odds ${p.odds}</span>
+            <span class="muted">${p.createdAt}</span>
+          </div>
         </div>
-        <div class="btn ${status !== 'UPCOMING' ? 'locked' : ''}">
-          ${game.away} +3.5 (-105)
-        </div>
-      </div>
-    `;
+      `).join("");
+    }
 
-    container.appendChild(div);
-  });
-}
+    function renderGames() {
+      const wrap = document.getElementById("games");
 
-setInterval(render, 2000);
-render();
+      const list = currentFilter === "all"
+        ? games
+        : games.filter(g => g.status === currentFilter);
 
-</script>
+      wrap.innerHTML = list.map(game => {
+        const locked = game.status !== "upcoming";
 
+        return `
+          <div class="game-card">
+            <div class="game-top">
+              <div>${getStatusBadge(game.status)}</div>
+              <div class="game-meta">
+                <div>${game.gameTime}</div>
+                <div>${game.venue}</div>
+              </div>
+            </div>
+
+            <div class="teams">
+              <div class="team">
+                <div class="logo">${game.homeCode}</div>
+                <div>
+                  <div class="team-name">${game.home}</div>
+                  <div class="team-sub">Home Team</div>
+                </div>
+              </div>
+
+              <div class="score-wrap">
+                <div class="score">${game.homeScore} - ${game.awayScore}</div>
+                <div class="period">${game.periodText}</div>
+              </div>
+
+              <div class="team right">
+                <div>
+                  <div class="team-name">${game.away}</div>
+                  <div class="team-sub">Away Team</div>
+                </div>
+                <div class="logo">${game.awayCode}</div>
+              </div>
+            </div>
+
+            <div class="market-head">
+              <div class="market-title">Main Pick Market</div>
+              <div class="market-lock">${locked ? 'Locked now' : 'Open for picks'}</div>
+            </div>
+
+            <div class="odds-grid">
+              <div class="bet-box ${locked ? 'locked' : ''}">
+                <div class="bet-line">${game.home} ${game.markets.home.line}</div>
+                <div class="bet-odds">${game.markets.home.odds}</div>
+                <div class="bet-hint">${game.markets.home.hint}</div>
+                <div class="stake-row">
+                  <input class="stake-input" id="stake-${game.id}-home" type="number" min="1" value="10" placeholder="Points" ${locked ? 'disabled' : ''}>
+                  <button class="pick-btn" onclick="makePick(${game.id}, 'home')" ${locked ? 'disabled' : ''}>Pick</button>
+                </div>
+              </div>
+
+              <div class="bet-box ${locked ? 'locked' : ''}">
+                <div class="bet-line">${game.away} ${game.markets.away.line}</div>
+                <div class="bet-odds">${game.markets.away.odds}</div>
+                <div class="bet-hint">${game.markets.away.hint}</div>
+                <div class="stake-row">
+                  <input class="stake-input" id="stake-${game.id}-away" type="number" min="1" value="10" placeholder="Points" ${locked ? 'disabled' : ''}>
+                  <button class="pick-btn" onclick="makePick(${game.id}, 'away')" ${locked ? 'disabled' : ''}>Pick</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join("");
+    }
+
+    formatBalance();
+    renderGames();
+    renderMyPicks();
+
+    // mock movement for live game only, just for vibe
+    setInterval(() => {
+      const liveGame = games.find(g => g.status === "live");
+      if (liveGame) {
+        liveGame.homeScore += Math.floor(Math.random() * 3);
+        liveGame.awayScore += Math.floor(Math.random() * 3);
+
+        const clockStates = ["Q3 • 04:58", "Q3 • 03:41", "Q3 • 02:16", "Q3 • 01:02", "Q4 • 10:55", "Q4 • 08:42"];
+        liveGame.periodText = clockStates[Math.floor(Math.random() * clockStates.length)];
+      }
+      renderGames();
+    }, 6000);
+  </script>
 </body>
 </html>
