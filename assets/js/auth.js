@@ -1,4 +1,4 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { initializeApp, getApps, getApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import {
   getAuth,
   GoogleAuthProvider,
@@ -18,7 +18,11 @@ const firebaseConfig = {
   appId: "1:880038628212:web:c7608e6ef87ce3f4927a21"
 };
 
-const app = initializeApp(firebaseConfig);
+const ADMIN_EMAIL = "ddh2755@gmail.com";
+
+// ✅ tránh lỗi initializeApp trùng
+const app = getApps().length ? getApp() : initializeApp(firebaseConfig);
+
 const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
 
@@ -30,6 +34,44 @@ const authName = document.getElementById("authName");
 
 function hasHomepageUI() {
   return !!(authUser && authAvatar && authName && logoutBtn && loginBtn);
+}
+
+function getNavLinks() {
+  return document.querySelector(".nav-links");
+}
+
+function removeAdminLink() {
+  const oldLink = document.getElementById("adminLink");
+  if (oldLink) oldLink.remove();
+}
+
+function ensureAdminLink() {
+  const nav = getNavLinks();
+  if (!nav) return;
+
+  let adminLink = document.getElementById("adminLink");
+  if (adminLink) return;
+
+  adminLink = document.createElement("a");
+  adminLink.href = "./admin.html";
+  adminLink.id = "adminLink";
+  adminLink.textContent = "Admin";
+
+  if (logoutBtn && logoutBtn.parentNode === nav) {
+    nav.insertBefore(adminLink, logoutBtn);
+  } else {
+    nav.appendChild(adminLink);
+  }
+}
+
+function toggleAdminLink(user) {
+  const email = (user?.email || "").toLowerCase();
+
+  if (email === ADMIN_EMAIL.toLowerCase()) {
+    ensureAdminLink();
+  } else {
+    removeAdminLink();
+  }
 }
 
 function showHomepageLoggedOut() {
@@ -73,7 +115,6 @@ async function loginGoogle() {
   } catch (error) {
     console.error("Login failed:", error);
 
-    // 👇 thêm đoạn này để tránh alert khi user tự đóng popup
     if (error.code === "auth/popup-closed-by-user") {
       return;
     }
@@ -120,6 +161,8 @@ onAuthStateChanged(auth, (user) => {
     } else {
       showHomepageLoggedOut();
     }
+
+    toggleAdminLink(user);
     return;
   }
 
@@ -128,4 +171,8 @@ onAuthStateChanged(auth, (user) => {
   } else {
     showSimpleLoggedOut();
   }
+
+  toggleAdminLink(user);
 });
+
+export { auth };
