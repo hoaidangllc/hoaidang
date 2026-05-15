@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tài khoản Premium | Hoài Đặng</title>
+  <meta name="description" content="Tài khoản premium với giá hợp lý, thao tác đơn giản, hỗ trợ nhanh. Chọn gói phù hợp và liên hệ trực tiếp qua SMS hoặc Messenger." />
+  <link rel="canonical" href="https://hoaidang.com/premium-store/" />
+  <meta name="theme-color" content="#081227" />
+
+  <style>
+    :root {
+      --bg: #081227;
+      --bg2: #112041;
+      --card: rgba(255,255,255,0.08);
+      --border: rgba(255,255,255,0.12);
+      --text: #f5f7ff;
+      --muted: #bcc6dd;
+      --gold: #ffd54a;
+      --gold2: #f0b90b;
+      --green: #25d366;
+      --blue: #1185ff;
+      --shadow: 0 18px 45px rgba(0,0,0,0.32);
+      --radius: 22px;
+      --max: 1220px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(17,133,255,0.18), transparent 28%),
+        radial-gradient(circle at top right, rgba(255,213,74,0.10), transparent 22%),
+        linear-gradient(180deg, #0d1832 0%, #081227 100%);
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+    button { font: inherit; }
+
+    .container {
+      width: min(calc(100% - 28px), var(--max));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(7, 11, 22, 0.78);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .topbar-inner {
+      min-height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      padding: 10px 0;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+    }
+
+    .brand-mark {
+      width: 38px;
+      height: 38px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, var(--gold), var(--gold2));
+      color: #231900;
+      font-weight: 900;
+      box-shadow: 0 12px 24px rgba(240,185,11,0.22);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .pill,
+    .btn,
+    .login-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 16px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      transition: transform 0.18s ease, background 0.18s ease, border-color 0.18s ease;
+    }
+
+    .pill {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--gold), var(--gold2));
+      color: #231900;
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+    }
+
+    .btn-sms {
+      background: var(--green);
+      color: #07170c;
+    }
+
+    .btn-msg {
+      background: var(--blue);
+      color: #fff;
+    }
+
+    .login-btn {
+      min-width: 92px;
+      min-height: 42px;
+      border: 1px solid rgba(255,255,255,0.14);
+      color: var(--text);
+      background: rgba(255,255,255,0.08);
+      cursor: pointer;
+      gap: 8px;
+    }
+
+    .login-btn img {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .pill:hover,
+    .btn:hover,
+    .login-btn:hover,
+    .card:hover,
+    .mini-card:hover,
+    .policy-card:hover,
+    .faq:hover,
+    .info-card:hover,
+    .contact-card:hover {
+      transform: translateY(-1px);
+    }
+
+    .hero {
+      padding: 56px 0 30px;
+    }
+
+    .hero-wrap {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 28px;
+      align-items: center;
+      padding: 28px;
+      border-radius: 30px;
+      border: 1px solid rgba(255,255,255,0.1);
+      background: linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.04));
+      box-shadow: var(--shadow);
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 14px;
+      border-radius: 999px;
+      background: #71f1cb;
+      color: #062236;
+      font-weight: 900;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      margin: 0 0 14px;
+      font-size: clamp(2.2rem, 4.8vw, 4.6rem);
+      line-height: 1.03;
+      letter-spacing: -0.05em;
+    }
+
+    .hero p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.75;
+      font-size: 1.08rem;
+      max-width: 720px;
+    }
+
+    .hero-actions,
+    .contact-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 22px;
+    }
+
+    .hero-points {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 18px;
+    }
+
+    .hero-point {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 11px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      font-weight: 700;
+    }
+
+    .hero-right {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .mini-card {
+      min-height: 140px;
+      border-radius: 22px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      padding: 22px;
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .mini-card strong {
+      font-size: 1.05rem;
+      line-height: 1.4;
+    }
+
+    .mini-card span {
+      color: var(--muted);
+      line-height: 1.6;
+      font-size: 0.95rem;
+    }
+
+    .section {
+      padding: 30px 0;
+    }
+
+    .section-head {
+      margin-bottom: 20px;
+    }
+
+    .section-head h2 {
+      margin: 0 0 10px;
+      font-size: clamp(1.6rem, 2.7vw, 2.6rem);
+      letter-spacing: -0.03em;
+    }
+
+    .section-head p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.75;
+      max-width: 860px;
+    }
+
+    .info-grid,
+    .policy-grid,
+    .contact-grid,
+    .faq-grid {
+      display: grid;
+      gap: 18px;
+    }
+
+    .info-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .policy-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .contact-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .faq-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+    .info-card,
+    .policy-card,
+    .contact-card,
+    .faq {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 22px;
+      padding: 20px;
+      box-shadow: var(--shadow);
+    }
+
+    .info-card h3,
+    .policy-card h3,
+    .contact-card h3,
+    .faq h3 {
+      margin: 0 0 10px;
+      font-size: 1.05rem;
+    }
+
+    .info-card p,
+    .policy-card p,
+    .contact-card p,
+    .faq p,
+    .notice {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 0.96rem;
+    }
+
+    .products {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .card {
+      position: relative;
+      background: linear-gradient(180deg, rgba(255,255,255,0.09), rgba(255,255,255,0.05));
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 24px;
+      padding: 18px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .card.popular {
+      border-color: rgba(255,213,74,0.42);
+      box-shadow: 0 20px 55px rgba(0,0,0,0.3), 0 0 0 1px rgba(255,213,74,0.1) inset;
+    }
+
+    .label {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      padding: 7px 12px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--gold), var(--gold2));
+      color: #201700;
+      font-size: 0.78rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .logo-box {
+      margin-top: 22px;
+      min-height: 160px;
+      display: grid;
+      place-items: center;
+      border-radius: 22px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      padding: 18px;
+    }
+
+    .logo-box img {
+      width: 112px;
+      height: 112px;
+      object-fit: contain;
+    }
+
+    .title {
+      margin: 16px 0 5px;
+      font-size: 1.15rem;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+    }
+
+    .sub {
+      color: var(--muted);
+      font-size: 0.95rem;
+      margin-bottom: 10px;
+      min-height: 24px;
+    }
+
+    .price {
+      font-size: 2rem;
+      font-weight: 900;
+      margin-bottom: 4px;
+      letter-spacing: -0.04em;
+    }
+
+    .old-price {
+      color: var(--muted);
+      font-size: 0.92rem;
+      margin-bottom: 14px;
+    }
+
+    .old-price span {
+      text-decoration: line-through;
+      opacity: 0.82;
+    }
+
+    .features {
+      display: grid;
+      gap: 9px;
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.55;
+      margin-bottom: 18px;
+    }
+
+    .actions {
+      display: grid;
+      gap: 10px;
+    }
+
+    .notice {
+      margin-top: 18px;
+      padding: 16px 18px;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(255,255,255,0.05);
+    }
+
+    .notice strong {
+      color: #fff;
+    }
+
+    footer {
+      padding: 34px 0 42px;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .footer-box {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      flex-wrap: wrap;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding-top: 18px;
+    }
+
+    @media (max-width: 1100px) {
+      .products { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .info-grid { grid-template-columns: 1fr; }
+      .faq-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 900px) {
+      .hero-wrap,
+      .policy-grid,
+      .contact-grid { grid-template-columns: 1fr; }
+      .hero-right { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 640px) {
+      .container { width: min(calc(100% - 18px), var(--max)); }
+      .products,
+      .policy-grid,
+      .contact-grid,
+      .hero-right { grid-template-columns: 1fr; }
+      .hero { padding-top: 34px; }
+      .hero-wrap,
+      .card,
+      .info-card,
+      .policy-card,
+      .contact-card,
+      .faq,
+      .mini-card { padding: 18px; }
+      h1 { font-size: clamp(2rem, 10vw, 3.2rem); }
+      .logo-box { min-height: 145px; }
+      .logo-box img { width: 96px; height: 96px; }
+      .topbar-inner { min-height: 60px; }
+      .nav { gap: 8px; }
+      .pill, .btn, .login-btn { padding: 9px 13px; font-size: 0.88rem; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <a class="brand" href="https://hoaidang.com/" aria-label="Về trang chủ">
+        <span class="brand-mark">HD</span>
+        <span>HoaiDang Home</span>
+      </a>
+
+      <nav class="nav">
+        <a class="pill" href="https://hoaidang.com/">Trang chủ</a>
+        <a class="pill" href="#san-pham">Sản phẩm</a>
+        <a class="btn btn-secondary" href="#chinh-sach">Chính sách</a>
+        <button id="loginBtn" class="login-btn" type="button">Login</button>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-wrap">
+        <div>
+          <div class="eyebrow">Tài khoản Premium • Giá hợp lý • Hỗ trợ nhanh</div>
+          <h1>Tài Khoản Premium Dễ Chọn, Dễ Dùng</h1>
+          <p>Chọn nhanh dịch vụ phù hợp với nhu cầu giải trí và sử dụng hằng ngày. Không cần thao tác rườm rà, chỉ cần chọn gói rồi liên hệ trực tiếp để được hướng dẫn.</p>
+
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#san-pham">Xem sản phẩm</a>
+            <a class="btn btn-secondary" href="#lien-he">Liên hệ nhanh</a>
+          </div>
+
+          <div class="hero-points">
+            <div class="hero-point">✔ Giá rõ ràng</div>
+            <div class="hero-point">✔ Chọn gói nhanh</div>
+            <div class="hero-point">✔ Hỗ trợ khi cần</div>
+          </div>
+        </div>
+
+        <div class="hero-right">
+          <div class="mini-card">
+            <strong>Gọn gàng, dễ chọn</strong>
+            <span>Chỉ giữ những dịch vụ phổ biến để khách xem nhanh và quyết định dễ hơn.</span>
+          </div>
+          <div class="mini-card">
+            <strong>Giá hiển thị rõ ràng</strong>
+            <span>Mức giá được trình bày trực tiếp để bạn dễ so sánh và chọn ngay.</span>
+          </div>
+          <div class="mini-card">
+            <strong>Liên hệ đơn giản</strong>
+            <span>Không cần tạo tài khoản trên web, chỉ cần nhắn tin để được hỗ trợ.</span>
+          </div>
+          <div class="mini-card">
+            <strong>Phù hợp dùng hằng ngày</strong>
+            <span>Các dịch vụ được chọn theo nhu cầu giải trí và sử dụng phổ biến.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="san-pham">
+      <div class="container">
+        <div class="section-head">
+          <h2>Sản phẩm nổi bật</h2>
+          <p>Chọn nhanh dịch vụ phù hợp. Mỗi sản phẩm đều có thông tin rõ ràng để bạn dễ quyết định.</p>
+        </div>
+
+        <div class="products">
+          <article class="card popular">
+            <div class="label">Bán chạy</div>
+            <div class="logo-box"><img src="Netflix.png" alt="Netflix Premium"></div>
+            <div class="title">Netflix Premium</div>
+            <div class="sub">Gói Full – 1 Năm</div>
+            <div class="price">$79.99</div>
+            <div class="old-price">Giá thường: <span>$149.99 / năm</span></div>
+            <div class="features">
+              <span>• Trải nghiệm nội dung 4K</span>
+              <span>• Xem phim và series tiện lợi</span>
+              <span>• Không cần thanh toán hàng tháng</span>
+            </div>
+            <div class="actions">
+              <a class="btn btn-primary" href="sms:+14192999999?body=Chào%2C%20tôi%20muốn%20mua%20Netflix%201%20năm.">Mua ngay</a>
+              <a class="btn btn-secondary" href="#lien-he">Liên hệ</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="logo-box"><img src="Disney.png" alt="Disney+ Bundle"></div>
+            <div class="title">Disney+ Bundle</div>
+            <div class="sub">Gói Full – 1 Năm</div>
+            <div class="price">$69.99</div>
+            <div class="old-price">Giá thường: <span>$139.99 / năm</span></div>
+            <div class="features">
+              <span>• Nội dung đa dạng cho gia đình</span>
+              <span>• Dễ sử dụng trên nhiều thiết bị</span>
+              <span>• Truy cập ổn định</span>
+            </div>
+            <div class="actions">
+              <a class="btn btn-primary" href="sms:+14192999999?body=Disney%201%20năm">Mua ngay</a>
+              <a class="btn btn-secondary" href="#lien-he">Liên hệ</a>
+            </div>
+          </article>
+
+          <article class="card popular">
+            <div class="label">Phổ biến</div>
+            <div class="logo-box"><img src="Max.png" alt="HBO Max"></div>
+            <div class="title">HBO Max</div>
+            <div class="sub">Gói Full – 1 Năm</div>
+            <div class="price">$64.99</div>
+            <div class="old-price">Giá thường: <span>$129.99 / năm</span></div>
+            <div class="features">
+              <span>• Nội dung phim chất lượng cao</span>
+              <span>• Trải nghiệm xem mượt mà</span>
+              <span>• Phù hợp giải trí hằng ngày</span>
+            </div>
+            <div class="actions">
+              <a class="btn btn-primary" href="sms:+14192999999?body=HBO%20Max%201%20năm">Mua ngay</a>
+              <a class="btn btn-secondary" href="#lien-he">Liên hệ</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="label">Giá tốt</div>
+            <div class="logo-box"><img src="Spotify.png" alt="Spotify Premium"></div>
+            <div class="title">Spotify Premium</div>
+            <div class="sub">Gói Full – 1 Năm</div>
+            <div class="price">$49.99</div>
+            <div class="old-price">Giá thường: <span>$99.99 / năm</span></div>
+            <div class="features">
+              <span>• Nghe nhạc không quảng cáo</span>
+              <span>• Chất lượng âm thanh cao</span>
+              <span>• Dùng tiện lợi mỗi ngày</span>
+            </div>
+            <div class="actions">
+              <a class="btn btn-primary" href="sms:+14192999999?body=Spotify%201%20năm">Mua ngay</a>
+              <a class="btn btn-secondary" href="#lien-he">Liên hệ</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="logo-box"><img src="Youtube.png" alt="YouTube Premium"></div>
+            <div class="title">YouTube Premium</div>
+            <div class="sub">Gói Full – 1 Năm</div>
+            <div class="price">$54.99</div>
+            <div class="old-price">Giá thường: <span>$109.99 / năm</span></div>
+            <div class="features">
+              <span>• Xem video không quảng cáo</span>
+              <span>• Phát nền tiện lợi</span>
+              <span>• Trải nghiệm mượt hơn</span>
+            </div>
+            <div class="actions">
+              <a class="btn btn-primary" href="sms:+14192999999?body=YouTube%201%20năm">Mua ngay</a>
+              <a class="btn btn-secondary" href="#lien-he">Liên hệ</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="logo-box"><img src="nordvpn.png" alt="NordVPN"></div>
+            <div class="title">NordVPN</div>
+            <div class="sub">Gói Full – 1 Năm</div>
+            <div class="price">$69.99</div>
+            <div class="old-price">Giá thường: <span>$139.99 / năm</span></div>
+            <div class="features">
+              <span>• Bảo mật kết nối internet</span>
+              <span>• Truy cập nội dung linh hoạt</span>
+              <span>• Ổn định và dễ sử dụng</span>
+            </div>
+            <div class="actions">
+              <a class="btn btn-primary" href="sms:+14192999999?body=NordVPN%201%20năm">Mua ngay</a>
+              <a class="btn btn-secondary" href="#lien-he">Liên hệ</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="logo-box"><img src="expressvpn.png" alt="ExpressVPN"></div>
+            <div class="title">ExpressVPN</div>
+            <div class="sub">Mobile – 1 Năm</div>
+            <div class="price">$39.99</div>
+            <div class="old-price">Giá thường: <span>$79.99 / năm</span></div>
+            <div class="features">
+              <span>• Kết nối nhanh và ổn định</span>
+              <span>• Dễ thao tác</span>
+              <span>• Phù hợp dùng mobile</span>
+            </div>
+            <div class="actions">
+              <a class="btn btn-primary" href="sms:+14192999999?body=ExpressVPN%201%20năm">Mua ngay</a>
+              <a class="btn btn-secondary" href="#lien-he">Liên hệ</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="label">Rẻ nhất</div>
+            <div class="logo-box"><img src="Canva.png" alt="Canva Pro"></div>
+            <div class="title">Canva Pro</div>
+            <div class="sub">Gói Full – 1 Năm</div>
+            <div class="price">$29.99</div>
+            <div class="old-price">Giá thường: <span>$59.99 / năm</span></div>
+            <div class="features">
+              <span>• Thiết kế hình ảnh nhanh chóng</span>
+              <span>• Phù hợp cho công việc</span>
+              <span>• Dễ sử dụng</span>
+            </div>
+            <div class="actions">
+              <a class="btn btn-primary" href="sms:+14192999999?body=Canva%201%20năm">Mua ngay</a>
+              <a class="btn btn-secondary" href="#lien-he">Liên hệ</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-head">
+          <h2>Vì sao nhiều người chọn mua tại đây</h2>
+          <p>Thông tin được trình bày gọn gàng, dễ hiểu và thuận tiện cho người muốn chọn nhanh.</p>
+        </div>
+        <div class="info-grid">
+          <article class="info-card">
+            <h3>Dễ chọn</h3>
+            <p>Sản phẩm được sắp xếp rõ ràng để bạn xem nhanh, so sánh dễ và chọn đúng nhu cầu.</p>
+          </article>
+          <article class="info-card">
+            <h3>Giá rõ ràng</h3>
+            <p>Mức giá hiển thị trực tiếp theo từng dịch vụ để bạn dễ cân nhắc trước khi liên hệ.</p>
+          </article>
+          <article class="info-card">
+            <h3>Hỗ trợ nhanh</h3>
+            <p>Sau khi chọn sản phẩm, bạn có thể nhắn trực tiếp qua SMS hoặc Messenger để được hướng dẫn.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="lien-he">
+      <div class="container">
+        <div class="section-head">
+          <h2>Liên hệ nhanh</h2>
+          <p>Chọn sản phẩm phù hợp, sau đó nhắn tin để được hướng dẫn nhanh.</p>
+        </div>
+
+        <div class="contact-grid">
+          <article class="contact-card">
+            <h3>Nhắn tin qua SMS</h3>
+            <p>Các nút mua phía trên đã có sẵn nội dung để bạn thao tác nhanh hơn.</p>
+            <div class="contact-actions">
+              <a class="btn btn-sms" href="sms:+14192999999?body=Chào%2C%20tôi%20muốn%20mua%20tài%20khoản%20premium.">Nhắn SMS</a>
+              <a class="btn btn-secondary" href="#san-pham">Chọn sản phẩm</a>
+            </div>
+          </article>
+
+          <article class="contact-card">
+            <h3>Nhắn qua Messenger</h3>
+            <p>Nếu bạn muốn trao đổi trước, có thể liên hệ qua Messenger để được phản hồi thuận tiện hơn.</p>
+            <div class="contact-actions">
+              <a class="btn btn-msg" href="https://m.me/hoaidangllc" target="_blank" rel="noopener">Mở Messenger</a>
+              <a class="btn btn-secondary" href="https://hoaidang.com/">Về trang chủ</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="chinh-sach">
+      <div class="container">
+        <div class="section-head">
+          <h2>Chính sách sử dụng</h2>
+          <p>Vui lòng đọc kỹ trước khi sử dụng để đảm bảo trải nghiệm tốt nhất.</p>
+        </div>
+
+        <div class="policy-grid">
+          <article class="policy-card">
+            <h3>1. Thời hạn sử dụng</h3>
+            <p>Mỗi sản phẩm đều có thời hạn hiển thị rõ trên từng thẻ. Nếu trong quá trình sử dụng có vấn đề, vui lòng liên hệ để được kiểm tra và hỗ trợ.</p>
+          </article>
+          <article class="policy-card">
+            <h3>2. Không hoàn tiền</h3>
+            <p>Do đặc thù là sản phẩm kỹ thuật số, đơn hàng sau khi đã giao sẽ không áp dụng hoàn tiền. Nếu cần hỏi kỹ hơn, vui lòng liên hệ trước khi mua.</p>
+          </article>
+          <article class="policy-card">
+            <h3>3. Không thay đổi thông tin tài khoản</h3>
+            <p>Khách hàng không tự ý đổi mật khẩu, email hoặc bất kỳ cài đặt bảo mật nào liên quan đến tài khoản được cung cấp.</p>
+          </article>
+          <article class="policy-card">
+            <h3>4. Ngừng hỗ trợ nếu tự thay đổi</h3>
+            <p>Nếu tài khoản bị thay đổi thông tin hoặc quyền truy cập bởi người dùng, đơn hàng đó sẽ không còn thuộc phạm vi hỗ trợ.</p>
+          </article>
+        </div>
+
+        <div class="notice"><strong>Lưu ý:</strong> Việc mua hàng đồng nghĩa với việc bạn đã đọc, hiểu và đồng ý với các điều khoản trên. Website này không đại diện cho bất kỳ thương hiệu nào được nhắc đến.</div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-head">
+          <h2>Câu hỏi thường gặp</h2>
+          <p>Ngắn gọn, dễ hiểu, đủ để bạn nắm nhanh trước khi chọn.</p>
+        </div>
+        <div class="faq-grid">
+          <article class="faq">
+            <h3>Làm sao để nhận tài khoản?</h3>
+            <p>Sau khi chọn sản phẩm, bạn chỉ cần nhắn SMS hoặc Messenger để được hướng dẫn nhanh.</p>
+          </article>
+          <article class="faq">
+            <h3>Có cần tạo tài khoản trên web không?</h3>
+            <p>Không cần. Bạn chỉ cần chọn gói phù hợp và liên hệ trực tiếp.</p>
+          </article>
+          <article class="faq">
+            <h3>Nếu có lỗi thì sao?</h3>
+            <p>Liên hệ lại để được kiểm tra và hỗ trợ. Không áp dụng nếu tài khoản đã bị tự ý thay đổi thông tin.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-box">
+      <div>© 2026 Hoài Đặng.</div>
+      <a class="pill" href="https://hoaidang.com/">Back to Home</a>
+    </div>
+  </footer>
+
+  <script type="module" src="/assets/js/auth.js"></script>
+</body>
+</html>

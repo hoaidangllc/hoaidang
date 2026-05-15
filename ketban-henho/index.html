@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kết Nối Việt Mỹ</title>
+  <meta name="description" content="Nơi người Việt tại Mỹ có thể tạo hồ sơ, kết bạn, làm quen và tham gia live cuối tuần trên TikTok @hoaidangllc.">
+  <link rel="canonical" href="https://hoaidang.com/ketnoi/">
+
+  <meta property="og:title" content="Kết Nối Việt Mỹ">
+  <meta property="og:description" content="Tạo hồ sơ, xem thành viên và tham gia live cuối tuần dành cho người Việt tại Mỹ.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://hoaidang.com/ketnoi/">
+  <meta property="og:image" content="https://hoaidang.com/image/hoaidangllc.jpeg">
+
+  <link rel="stylesheet" href="./assets/css/styles.css">
+
+  <style>
+    body {
+      background:
+        radial-gradient(circle at top left, rgba(255,45,120,.08), transparent 28%),
+        radial-gradient(circle at top right, rgba(0,234,255,.07), transparent 24%),
+        linear-gradient(135deg,#0c0c14,#141428);
+      color:#fff;
+    }
+
+    .glass-card {
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.1);
+      backdrop-filter: blur(14px);
+      border-radius: 26px;
+      box-shadow: 0 25px 60px rgba(0,0,0,.35);
+    }
+
+    .hero-card.glass-card {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-card.glass-card::before {
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        linear-gradient(120deg, rgba(255,45,120,.08), transparent 35%),
+        linear-gradient(300deg, rgba(0,234,255,.06), transparent 35%);
+      pointer-events:none;
+    }
+
+    .stats-row {
+      display:grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap:14px;
+      margin-top:22px;
+    }
+
+    .stat-chip {
+      padding:14px 16px;
+      border-radius:18px;
+      background:rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.08);
+    }
+
+    .stat-chip strong {
+      display:block;
+      font-size:1.15rem;
+      color:#fff;
+    }
+
+    .stat-chip span {
+      color:#bbb;
+      font-size:.92rem;
+    }
+
+    .premium-grid {
+      display:grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap:18px;
+    }
+
+    .premium-card {
+      transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+    }
+
+    .premium-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(255,255,255,.16);
+      box-shadow: 0 30px 70px rgba(0,0,0,.42);
+    }
+
+    .premium-card .card-body {
+      padding:20px;
+    }
+
+    .benefit-list {
+      display:grid;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap:16px;
+    }
+
+    .benefit-box {
+      padding:18px;
+      border-radius:22px;
+      background:rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.08);
+    }
+
+    .benefit-box h3 {
+      margin:0 0 8px;
+      color:#fff;
+    }
+
+    .benefit-box p {
+      margin:0;
+      color:#c7c7c7;
+      line-height:1.6;
+    }
+
+    .cta-final {
+      text-align:center;
+      padding:28px;
+    }
+
+    .cta-final h2 {
+      margin:0 0 10px;
+    }
+
+    .cta-final p {
+      margin:0;
+      color:#c7c7c7;
+    }
+
+    @media (max-width: 900px) {
+      .stats-row,
+      .premium-grid,
+      .benefit-list {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Kết Nối Việt Mỹ",
+    "url": "https://hoaidang.com/ketnoi/",
+    "description": "Nơi người Việt tại Mỹ có thể tạo hồ sơ, kết bạn, làm quen và tham gia live cuối tuần."
+  }
+  </script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container nav">
+    <a href="./index.html" class="brand">
+      <span class="brand-badge">❤</span>
+      <span>Kết Nối Việt Mỹ</span>
+    </a>
+
+    <nav class="nav-links">
+      <a href="/">Trang chủ</a>
+      <a href="./profiles.html">Thành viên</a>
+      <a href="./register.html">Đăng ký</a>
+      <a href="./live.html">Lịch live</a>
+      <a href="./my-profile.html">Hồ sơ của tôi</a>
+
+      <span id="authUser" class="auth-user"></span>
+
+      <button id="loginBtn" class="btn btn-secondary" type="button">Đăng nhập Google</button>
+      <button id="logoutBtn" class="btn btn-secondary" type="button" style="display:none;">Đăng xuất</button>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="container">
+      <div class="hero-card glass-card">
+        <div class="eyebrow">✨ Người Việt tại Mỹ • Kết bạn • Làm quen • Live cuối tuần</div>
+        <h1>Kết bạn thật. <span>Làm quen rõ hơn qua live TikTok cuối tuần.</span></h1>
+        <p>
+          Đây là nơi để bạn tạo hồ sơ, xem người phù hợp và đăng ký tham gia các buổi live cuối tuần
+          trên TikTok <strong>@hoaidangllc</strong>.
+        </p>
+
+        <div class="hero-actions">
+          <a href="./register.html" class="btn btn-primary">Tạo hồ sơ ngay</a>
+          <a href="./profiles.html" class="btn btn-secondary">Xem thành viên</a>
+          <a href="./live.html" class="btn btn-secondary">Xem lịch live</a>
+        </div>
+
+        <div class="stats-row">
+          <div class="stat-chip">
+            <strong>Tạo hồ sơ</strong>
+            <span>Bắt đầu nhanh bằng Google login</span>
+          </div>
+          <div class="stat-chip">
+            <strong>Xem thành viên</strong>
+            <span>Tìm người phù hợp dễ hơn</span>
+          </div>
+          <div class="stat-chip">
+            <strong>Live cuối tuần</strong>
+            <span>Kết nối thật qua TikTok</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-title">
+        <h2>Web này có gì?</h2>
+        <p>Đi từng bước đơn giản để người dùng dễ hiểu và dễ tham gia hơn.</p>
+      </div>
+
+      <div class="premium-grid">
+        <div class="glass-card premium-card">
+          <div class="card-body">
+            <h3>1. Tạo hồ sơ</h3>
+            <p>Nhập tên, tuổi, công việc, bang đang sống và link Facebook hoặc TikTok.</p>
+          </div>
+        </div>
+
+        <div class="glass-card premium-card">
+          <div class="card-body">
+            <h3>2. Xem thành viên</h3>
+            <p>Xem danh sách người đã đăng ký để tìm người phù hợp với mình.</p>
+          </div>
+        </div>
+
+        <div class="glass-card premium-card">
+          <div class="card-body">
+            <h3>3. Live cuối tuần</h3>
+            <p>Đăng ký khung giờ để tham gia live làm quen trên TikTok @hoaidangllc.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-title">
+        <h2>Vì sao nên tham gia?</h2>
+        <p>Không chỉ là danh sách hồ sơ. Đây là nơi giúp kết nối dễ và rõ hơn.</p>
+      </div>
+
+      <div class="benefit-list">
+        <div class="benefit-box">
+          <h3>Dễ bắt đầu</h3>
+          <p>Đăng nhập Google, tạo hồ sơ, thêm ảnh đại diện và chọn nền tảng liên hệ chính.</p>
+        </div>
+
+        <div class="benefit-box">
+          <h3>Dễ xem người phù hợp</h3>
+          <p>Xem hồ sơ thành viên, thông tin cơ bản, mục tiêu và khung giờ live mong muốn.</p>
+        </div>
+
+        <div class="benefit-box">
+          <h3>Dễ tạo trust hơn</h3>
+          <p>Avatar, bio và link liên hệ rõ ràng giúp hồ sơ nhìn thật và đáng tin hơn.</p>
+        </div>
+
+        <div class="benefit-box">
+          <h3>Dễ kết nối qua live</h3>
+          <p>Không chỉ nhắn tin. Bạn còn có thể xuất hiện trong live cuối tuần để giao lưu tự nhiên hơn.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="glass-card cta-final">
+        <h2>Sẵn sàng tạo hồ sơ chưa?</h2>
+        <p>Tạo hồ sơ trước để bắt đầu kết nối và chọn khung giờ live phù hợp.</p>
+
+        <div class="hero-actions" style="justify-content:center; margin-top:18px;">
+          <a href="./register.html" class="btn btn-primary">Bắt đầu ngay</a>
+          <a href="./profiles.html" class="btn btn-secondary">Xem thành viên</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="footer">
+    <div class="container">
+      © 2026 Kết Nối Việt Mỹ • TikTok:
+      <a href="https://www.tiktok.com/@hoaidangllc" target="_blank">@hoaidangllc</a>
+    </div>
+  </section>
+</main>
+
+<script type="module" src="/assets/js/auth.js"></script>
+</body>
+</html>

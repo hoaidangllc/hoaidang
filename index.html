@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <title>Hoài Đặng | Cuộc sống ở Mỹ, digital services và online business tại Texas</title>
+  <meta name="description" content="Website chính thức của Hoài Đặng tại Odessa, Texas. Khám phá digital services, Zynga Chips, social channels, kết bạn hẹn hò và blog cá nhân trong một giao diện gọn gàng, hiện đại." />
+  <meta name="author" content="Hoài Đặng" />
   <meta name="robots" content="index, follow, max-image-preview:large" />
   <meta name="theme-color" content="#6d4cff" />
   <meta name="geo.region" content="US-TX" />
@@ -17,6 +19,7 @@
   <meta property="og:locale" content="vi_VN" />
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Hoài Đặng | Cuộc sống ở Mỹ, digital services và online business tại Texas" />
+  <meta property="og:description" content="Trang chính thức của Hoài Đặng — nơi kết nối digital services, Zynga Chips, social channels, kết bạn hẹn hò và blog cá nhân." />
   <meta property="og:url" content="https://hoaidang.com/" />
   <meta property="og:site_name" content="Hoài Đặng" />
   <meta property="og:image" content="https://hoaidang.com/assets/images/profile.jpeg" />
@@ -24,6 +27,7 @@
 
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Hoài Đặng | Cuộc sống ở Mỹ, digital services và online business tại Texas" />
+  <meta name="twitter:description" content="Khám phá digital services, Zynga Chips, social channels, kết bạn hẹn hò và blog cá nhân của Hoài Đặng." />
   <meta name="twitter:image" content="https://hoaidang.com/assets/images/profile.jpeg" />
 
   <script type="application/ld+json">
@@ -64,6 +68,7 @@
   }
   </script>
 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q5GNXWFBRG"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
@@ -231,6 +236,7 @@
       padding: 24px 24px 24px;
     }
 
+   .auth-bar {
   position: absolute;
   top: 20px;
   right: 20px;
@@ -240,6 +246,7 @@
   z-index: 20;
 }
 
+.auth-btn {
   height: 42px;
   padding: 0 14px;
   border-radius: 999px;
@@ -253,15 +260,18 @@
   transition: all 0.2s ease;
 }
 
+.auth-btn.google {
   background: linear-gradient(135deg, #7c3aed, #4c1d95);
   color: #fff;
   box-shadow: 0 8px 20px rgba(124,58,237,.4);
 }
 
+.auth-btn.google:hover {
   transform: translateY(-1px);
   opacity: 0.9;
 }
 
+.auth-btn-icon {
   width: 20px;
   height: 20px;
   border-radius: 50%;
@@ -274,6 +284,7 @@
   font-weight: 900;
 }
 
+.auth-user {
   display: none;
   align-items: center;
   gap: 8px;
@@ -284,20 +295,24 @@
   color: #fff;
 }
 
+.auth-user img {
   width: 32px;
   height: 32px;
   border-radius: 50%;
 }
 
+.auth-user-name {
   font-size: 13px;
   font-weight: 700;
 }
 
+.auth-btn.logout {
   background: rgba(255,255,255,.1);
   color: #fff;
   padding: 0 10px;
 }
 
+.auth-btn.logout:hover {
   background: rgba(255,255,255,.2);
 }
 
@@ -533,6 +548,7 @@
       border: 1px dashed rgba(124,58,237,.24);
     }
 
+    .social-wrap {
       position: relative;
       z-index: 1;
       margin-top: 18px;
@@ -545,6 +561,7 @@
       overflow: hidden;
     }
 
+    .social-head {
       position: relative;
       display: flex;
       align-items: center;
@@ -554,12 +571,14 @@
       padding: 2px 4px 0;
     }
 
+    .social-head h2 {
       margin: 0;
       font-size: 1rem;
       color: #fff;
       letter-spacing: -.02em;
     }
 
+    .social-head span {
       color: var(--muted-2);
       font-size: .84rem;
       font-weight: 700;
@@ -700,6 +719,7 @@
         padding: 18px;
       }
 
+      .auth-bar {
         justify-content: space-between;
         flex-wrap: wrap;
         margin-bottom: 14px;
@@ -776,9 +796,18 @@
 
       <section class="hero">
         <div class="hero-overlay">
+   <div class="auth-bar">
+  <div id="authUser" class="auth-user">
+    <img id="authAvatar" src="" alt="Avatar" />
+    <div class="auth-user-text">
+      <span id="authName" class="auth-user-name">User</span>
     </div>
+    <button id="logoutBtn" class="auth-btn logout" type="button">Logout</button>
   </div>
 
+  <button id="loginBtn" class="auth-btn google" type="button">
+    <span class="auth-btn-icon">G</span>
+    <span class="auth-label">Login</span>
   </button>
 </div>
 
@@ -799,7 +828,11 @@
       </section>
 
       <div class="cta-row">
+        <a class="cta primary" href="/premium-store/">Dịch vụ Premium</a>
+        <a class="cta secondary" href="/ketban-henho/">Kết bạn hẹn hò</a>
+        <a class="cta secondary" href="/zynga/">Zynga Chips</a>
         <a class="cta secondary" href="/blog/">Xem Blog</a>
+        <a class="cta secondary" href="/social/">Social Growth</a>
       </div>
 
       <section class="section">
@@ -807,18 +840,25 @@
         <p class="section-sub">Ưu tiên những trang quan trọng nhất để khách vào là biết bấm ngay.</p>
 
         <div class="service-grid">
+          <a class="service-card" href="/premium-store/">
             <div class="service-badge">Main Service</div>
             <strong>Dịch vụ Premium</strong>
             <span>Trang dịch vụ chính với các tài khoản giải trí và tiện ích số được trình bày rõ ràng, dễ chọn và dễ liên hệ.</span>
           </a>
 
+          <a class="service-card" href="/social/">
             <div class="service-badge">New</div>
+            <strong>Social Growth</strong>
             <span>Tăng tương tác TikTok, Facebook, Instagram và YouTube với cách trình bày đơn giản, dễ chọn.</span>
           </a>
 
+          <a class="service-card" href="/zynga/">
             <div class="service-badge">Game Store</div>
+            <strong>Zynga Chips</strong>
+            <span>Trang bán Zynga Poker Chips riêng biệt, tối ưu cho người cần xem nhanh, chọn gói nhanh và liên hệ ngay.</span>
           </a>
 
+          <a class="service-card" href="/ketban-henho/">
             <div class="service-badge">Community</div>
             <strong>Kết bạn hẹn hò</strong>
             <span>Khu vực kết nối dành cho người Việt tại Mỹ và Việt Nam muốn làm quen, trò chuyện hoặc tìm mối quan hệ nghiêm túc.</span>
@@ -851,7 +891,10 @@
         </div>
       </section>
 
+      <section class="social-wrap">
+        <div class="social-head">
           <h2>Kết nối & nội dung</h2>
+          <span>Tất cả social ở một chỗ</span>
         </div>
 
         <div class="dock">
@@ -911,6 +954,10 @@
   </a> · Odessa, Texas
 </strong>
         <span>
+  <a href="/premium-store/">Dịch vụ Premium</a> ·
+  <a href="/ketban-henho/">Kết bạn hẹn hò</a> ·
+  <a href="/zynga/">Zynga Chips</a> ·
+  <a href="/social/">Social Growth</a> ·
   <a href="/blog/">Blog</a> ·
   hoaidang.com © 2026
 </span>
@@ -918,5 +965,6 @@
     </section>
   </main>
 
+  <script type="module" src="/assets/js/auth.js"></script>
 </body>
 </html>

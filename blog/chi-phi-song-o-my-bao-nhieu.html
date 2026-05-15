@@ -1,7 +1,376 @@
 <!DOCTYPE html>
-<html>
+<html lang="vi">
 <head>
-<meta http-equiv="refresh" content="0; url=/blog/chi-phi-song-o-my-bao-nhieu.html">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Chi Phí Sinh Hoạt Ở Mỹ Bao Nhiêu Một Tháng?</title>
+<meta name="description" content="Chi phí sinh hoạt ở Mỹ bao nhiêu một tháng? Tìm hiểu tiền nhà, ăn uống, xe cộ, bảo hiểm và các khoản cơ bản khi sống ở Mỹ.">
+<link rel="stylesheet" href="blog.css">
+
+<style>
+*{
+  box-sizing:border-box;
+}
+
+:root{
+  --bg:#eef2ff;
+  --card:#ffffff;
+  --text:#1f2937;
+  --muted:#6b7280;
+  --line:#e5e7eb;
+  --primary:#2563eb;
+  --dark:#0f172a;
+  --shadow:0 20px 50px rgba(15,23,42,.10);
+  --radius:24px;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  margin:0;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+  background:
+    radial-gradient(circle at top left, rgba(99,102,241,.12), transparent 30%),
+    radial-gradient(circle at top right, rgba(59,130,246,.10), transparent 28%),
+    linear-gradient(180deg, #f8fbff 0%, #eef2ff 100%);
+  color:var(--text);
+  line-height:1.85;
+}
+
+/* nav */
+.nav{
+  position:sticky;
+  top:0;
+  z-index:100;
+  backdrop-filter:blur(12px);
+  background:rgba(15,23,42,.88);
+  color:#fff;
+  padding:16px 22px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+.brand{
+  font-weight:800;
+  letter-spacing:.2px;
+}
+
+.nav-links{
+  display:flex;
+  align-items:center;
+  gap:18px;
+}
+
+.nav a{
+  color:#fff;
+  text-decoration:none;
+  font-weight:600;
+  opacity:.9;
+  transition:.25s ease;
+}
+
+.nav a:hover{
+  opacity:1;
+  transform:translateY(-1px);
+}
+
+/* page wrap */
+.container{
+  max-width:980px;
+  margin:48px auto;
+  padding:0 20px;
+}
+
+/* article shell */
+.article{
+  background:var(--card);
+  border:1px solid rgba(255,255,255,.7);
+  padding:0;
+  border-radius:32px;
+  box-shadow:var(--shadow);
+  overflow:hidden;
+}
+
+/* hero */
+.article-hero{
+  padding:44px 40px 28px;
+  background:
+    linear-gradient(135deg, rgba(37,99,235,.08), rgba(99,102,241,.10)),
+    linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+  border-bottom:1px solid var(--line);
+}
+
+.back{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  margin-bottom:18px;
+  text-decoration:none;
+  color:var(--primary);
+  font-weight:700;
+  font-size:15px;
+}
+
+.back:hover{
+  text-decoration:underline;
+}
+
+.article-tag{
+  display:inline-block;
+  padding:8px 14px;
+  border-radius:999px;
+  background:#dbeafe;
+  color:#1d4ed8;
+  font-size:13px;
+  font-weight:800;
+  letter-spacing:.3px;
+  margin-bottom:18px;
+}
+
+h1{
+  font-size:clamp(30px, 4vw, 44px);
+  line-height:1.15;
+  margin:0 0 14px;
+  color:var(--dark);
+}
+
+.article-sub{
+  font-size:18px;
+  color:var(--muted);
+  max-width:760px;
+  margin:0;
+}
+
+/* content */
+.article-body{
+  padding:36px 40px 44px;
+}
+
+.article-body p{
+  font-size:18px;
+  margin:0 0 22px;
+}
+
+.article-body h2{
+  margin:38px 0 14px;
+  font-size:28px;
+  line-height:1.25;
+  color:var(--dark);
+}
+
+.highlight{
+  margin:28px 0;
+  padding:22px 22px;
+  background:linear-gradient(180deg,#f8fafc 0%, #f1f5f9 100%);
+  border:1px solid #e2e8f0;
+  border-left:5px solid var(--primary);
+  border-radius:18px;
+  font-size:17px;
+  color:#334155;
+}
+
+.quick-list{
+  margin:22px 0 30px;
+  padding:0;
+  list-style:none;
+  display:grid;
+  gap:12px;
+}
+
+.quick-list li{
+  background:#f8fafc;
+  border:1px solid #e5e7eb;
+  padding:14px 16px;
+  border-radius:16px;
+  font-size:17px;
+}
+
+.quick-list strong{
+  color:#111827;
+}
+
+/* related */
+.related{
+  margin-top:36px;
+  padding:26px;
+  background:linear-gradient(180deg,#f8fbff 0%, #eef4ff 100%);
+  border:1px solid #dbeafe;
+  border-radius:24px;
+}
+
+.related h3{
+  margin:0 0 16px;
+  font-size:22px;
+  color:var(--dark);
+}
+
+.related-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:14px;
+}
+
+.related a{
+  display:block;
+  text-decoration:none;
+  color:var(--text);
+  background:#fff;
+  border:1px solid #e5e7eb;
+  padding:18px;
+  border-radius:18px;
+  font-weight:700;
+  transition:.25s ease;
+  box-shadow:0 8px 20px rgba(15,23,42,.05);
+}
+
+.related a:hover{
+  transform:translateY(-3px);
+  border-color:#bfdbfe;
+  box-shadow:0 16px 30px rgba(37,99,235,.10);
+  color:var(--primary);
+}
+
+/* footer */
+footer{
+  text-align:center;
+  padding:34px 20px 42px;
+  color:var(--muted);
+  font-size:15px;
+}
+
+/* mobile */
+@media (max-width:768px){
+  .nav{
+    padding:14px 16px;
+  }
+
+  .nav-links{
+    gap:12px;
+    font-size:14px;
+  }
+
+  .container{
+    margin:24px auto;
+    padding:0 14px;
+  }
+
+  .article-hero,
+  .article-body{
+    padding:26px 20px;
+  }
+
+  .article-body p{
+    font-size:17px;
+  }
+
+  .article-body h2{
+    font-size:24px;
+  }
+
+  .related-grid{
+    grid-template-columns:1fr;
+  }
+}
+</style>
 </head>
-<body></body>
+
+<body>
+
+<div class="nav">
+  <div class="brand">Hoài Đặng</div>
+ <div class="nav-links">
+  <a href="/">Home</a>
+  <a href="/blog/">Blog</a>
+  <a href="/pages/about.html">About</a>
+</div>
+</div>
+
+<div class="container">
+  <article class="article">
+
+    <div class="article-hero">
+      <a class="back" href="/blog/">← Quay lại Blog</a>
+      <div class="article-tag">CUỘC SỐNG Ở MỸ</div>
+      <h1>Chi Phí Sinh Hoạt Ở Mỹ Bao Nhiêu Một Tháng?</h1>
+      <p class="article-sub">
+        Tìm hiểu các khoản chi cơ bản như tiền nhà, ăn uống, xe cộ, bảo hiểm và những chi phí thường gặp khi sống tại Mỹ.
+      </p>
+    </div>
+
+    <div class="article-body">
+      <p>
+        Sống ở Mỹ tốn bao nhiêu tiền mỗi tháng là câu hỏi rất nhiều người quan tâm, nhất là những ai đang chuẩn bị sang Mỹ hoặc mới bắt đầu cuộc sống tại đây. Thực tế, chi phí sinh hoạt ở Mỹ không giống nhau ở mọi nơi. Có bang rất đắt, nhưng cũng có nơi dễ thở hơn nhiều.
+      </p>
+
+      <div class="highlight">
+        Ở Mỹ, tiền kiếm được có thể khác nhau theo công việc, nhưng thứ quyết định bạn dư hay thiếu mỗi tháng lại nằm ở cách quản lý chi phí sinh hoạt.
+      </div>
+
+      <p>
+        Khoản lớn nhất thường là tiền nhà. Nếu ở thành phố lớn hoặc khu đông dân, tiền thuê nhà sẽ cao hơn rõ rệt. Ngược lại, ở những khu như Texas hoặc các thành phố nhỏ hơn, chi phí nhà cửa thường mềm hơn so với California hay New York. Ngoài tiền nhà, bạn cũng cần tính thêm điện, nước, internet và điện thoại.
+      </p>
+
+      <h2>Những khoản chi chính mỗi tháng</h2>
+      <ul class="quick-list">
+        <li><strong>Tiền nhà:</strong> thường là khoản lớn nhất trong tổng chi hàng tháng.</li>
+        <li><strong>Ăn uống:</strong> tiết kiệm được khá nhiều nếu nấu ăn ở nhà.</li>
+        <li><strong>Xe cộ:</strong> bao gồm xăng, bảo hiểm, bảo trì và tiền xe nếu đang trả góp.</li>
+        <li><strong>Bảo hiểm và chi phí khác:</strong> sức khỏe, điện thoại, internet, học phí, giải trí.</li>
+      </ul>
+
+      <h2>Tiền ăn uống</h2>
+      <p>
+        Tiền ăn uống cũng là khoản quan trọng. Nếu nấu ăn ở nhà thường xuyên, bạn có thể tiết kiệm đáng kể. Còn nếu ăn ngoài nhiều, chi phí sẽ đội lên khá nhanh.
+      </p>
+
+      <p>
+        Ở Mỹ, ăn ngoài thường khá đắt, đặc biệt khi tính thêm tiền tip và thuế. Vì vậy nhiều gia đình thường chọn cách mua thực phẩm về nấu tại nhà để tiết kiệm.
+      </p>
+
+      <h2>Chi phí xe cộ</h2>
+      <p>
+        Xe cộ ở Mỹ gần như là nhu cầu thiết yếu tại nhiều nơi, nên xăng, bảo hiểm xe, bảo trì và trả góp xe nếu có cũng là phần không thể bỏ qua.
+      </p>
+
+      <p>
+        Nếu di chuyển nhiều cho công việc như chạy DoorDash hoặc Uber, chi phí xăng và bảo dưỡng xe càng cần được tính toán kỹ.
+      </p>
+
+      <h2>Các chi phí khác</h2>
+      <p>
+        Bên cạnh đó còn có bảo hiểm sức khỏe, quần áo, học phí cho con, giải trí và các chi phí phát sinh khác. Với người độc thân và sống tiết kiệm, mức chi có thể thấp hơn. Nhưng với gia đình có con nhỏ, tổng chi phí hàng tháng chắc chắn cao hơn nhiều.
+      </p>
+
+      <h2>Kết luận</h2>
+      <p>
+        Nói chung, sống ở Mỹ có thể tốn ít hay nhiều tùy cách sống và nơi bạn ở. Điều quan trọng không phải chỉ là kiếm được bao nhiêu, mà là quản lý dòng tiền ra vào sao cho hợp lý.
+      </p>
+
+      <p>
+        Kiếm tiền hay mà tiêu kiểu đua xe F1 thì vẫn mệt như thường.
+      </p>
+
+      <div class="related">
+        <h3>Xem thêm</h3>
+        <div class="related-grid">
+          <a href="/blog/cuoc-song-o-texas-co-tot-khong.html">Cuộc Sống Ở Texas Có Tốt Không?</a>
+          <a href="/blog/nguoi-viet-lam-gi-o-my.html">Người Việt Làm Nghề Gì Ở Mỹ?</a>
+          <a href="/blog/lam-nail-o-my-kiem-bao-nhieu.html">Làm Nail Ở Mỹ Kiếm Bao Nhiêu?</a>
+        </div>
+      </div>
+    </div>
+
+  </article>
+</div>
+
+<footer>
+  © 2026 Hoài Đặng · hoaidang.com
+</footer>
+
+</body>
 </html>
