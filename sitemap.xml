@@ -1,94 +1,99 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-
   <url>
     <loc>https://hoaidang.com/</loc>
+    <lastmod>2026-05-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
-
-  <url>
-    <loc>https://hoaidang.com/premium-store/</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.95</priority>
-  </url>
-
-  <url>
-    <loc>https://hoaidang.com/zynga/</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.95</priority>
-  </url>
-
-  <url>
-    <loc>https://hoaidang.com/social/</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.95</priority>
-  </url>
-
-  <url>
-  <loc>https://hoaidang.com/ketban-henho/</loc>
-  <changefreq>weekly</changefreq>
-  <priority>0.95</priority>
-</url>
-
   <url>
     <loc>https://hoaidang.com/blog/</loc>
+    <lastmod>2026-05-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
-
   <url>
-    <loc>https://hoaidang.com/blog/pages/about.html</loc>
+    <loc>https://hoaidang.com/pages/about.html</loc>
+    <lastmod>2026-05-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
-
   <url>
-    <loc>https://hoaidang.com/blog/blog/lam-nail-o-my-kiem-bao-nhieu.html</loc>
+    <loc>https://hoaidang.com/about-hoai-dang.html</loc>
+    <lastmod>2026-05-15</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
   </url>
-
   <url>
-    <loc>https://hoaidang.com/blog/blog/lam-nail-o-my-co-de-khong.html</loc>
+    <loc>https://hoaidang.com/blog/lam-nail-o-my-kiem-bao-nhieu.html</loc>
+    <lastmod>2026-05-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
   </url>
-
   <url>
-    <loc>https://hoaidang.com/blog/blog/hoc-lam-nail-o-my-mat-bao-nhieu.html</loc>
+    <loc>https://hoaidang.com/blog/lam-nail-o-my-co-de-khong.html</loc>
+    <lastmod>2026-05-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
   </url>
-
   <url>
-    <loc>https://hoaidang.com/blog/blog/mo-tiem-nail-o-my-can-bao-nhieu-von.html</loc>
+    <loc>https://hoaidang.com/blog/hoc-lam-nail-o-my-mat-bao-nhieu.html</loc>
+    <lastmod>2026-05-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
   </url>
-
   <url>
-    <loc>https://hoaidang.com/blog/blog/tho-nail-o-my-co-can-bang-khong.html</loc>
+    <loc>https://hoaidang.com/blog/mo-tiem-nail-o-my-can-bao-nhieu-von.html</loc>
+    <lastmod>2026-05-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
   </url>
-
   <url>
-    <loc>https://hoaidang.com/blog/blog/chi-phi-song-o-my-bao-nhieu.html</loc>
+    <loc>https://hoaidang.com/blog/tho-nail-o-my-co-can-bang-khong.html</loc>
+    <lastmod>2026-05-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
   </url>
-
   <url>
-    <loc>https://hoaidang.com/blog/blog/nguoi-viet-lam-gi-o-my.html</loc>
+    <loc>https://hoaidang.com/blog/chi-phi-song-o-my-bao-nhieu.html</loc>
+    <lastmod>2026-05-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
   </url>
-
   <url>
-    <loc>https://hoaidang.com/blog/blog/lam-doordash-o-my-kiem-bao-nhieu.html</loc>
+    <loc>https://hoaidang.com/blog/nguoi-viet-lam-gi-o-my.html</loc>
+    <lastmod>2026-05-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
   </url>
-
   <url>
-    <loc>https://hoaidang.com/blog/blog/cuoc-song-o-texas-co-tot-khong.html</loc>
+    <loc>https://hoaidang.com/blog/lam-doordash-o-my-kiem-bao-nhieu.html</loc>
+    <lastmod>2026-05-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
   </url>
-
   <url>
-    <loc>https://hoaidang.com/blog/blog/mot-ngay-lam-viec-o-tiem-nail-my.html</loc>
+    <loc>https://hoaidang.com/blog/cuoc-song-o-texas-co-tot-khong.html</loc>
+    <lastmod>2026-05-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
   </url>
-
   <url>
-    <loc>https://hoaidang.com/blog/blog/nguoi-viet-o-odessa-texas.html</loc>
+    <loc>https://hoaidang.com/blog/mot-ngay-lam-viec-o-tiem-nail-my.html</loc>
+    <lastmod>2026-05-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
   </url>
-
   <url>
-    <loc>https://hoaidang.com/blog/blog/3-sai-lam-website-tiem-nail.html</loc>
+    <loc>https://hoaidang.com/blog/nguoi-viet-o-odessa-texas.html</loc>
+    <lastmod>2026-05-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
   </url>
-
+  <url>
+    <loc>https://hoaidang.com/blog/3-sai-lam-website-tiem-nail.html</loc>
+    <lastmod>2026-05-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
 </urlset>
