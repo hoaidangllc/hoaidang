@@ -4,222 +4,469 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>Blog Hoài Đặng | Cuộc sống ở Mỹ, Nail, Kinh doanh & Texas</title>
-  <meta name="description" content="Blog Hoài Đặng chia sẻ kinh nghiệm thực tế về cuộc sống ở Mỹ, nghề nail, kinh doanh nhỏ, Odessa Texas và hành trình người Việt tại Mỹ." />
+  <title>Blog Hoài Đặng | hoaidang.com — Cuộc sống ở Mỹ, Nail, Odessa Texas</title>
+  <meta name="description" content="Blog Hoài Đặng tại hoaidang.com — chia sẻ kinh nghiệm thực tế về cuộc sống ở Mỹ, nghề nail, kinh doanh nhỏ, Odessa Texas và hành trình người Việt tại Mỹ." />
+  <meta name="keywords" content="Hoài Đặng, hoaidang.com, blog Hoài Đặng, cuộc sống ở Mỹ, nghề nail ở Mỹ, Odessa Texas, người Việt ở Texas" />
+  <meta name="author" content="Hoài Đặng" />
+  <meta name="robots" content="index, follow, max-image-preview:large" />
+  <meta name="theme-color" content="#0a0a0a" />
+  <meta name="geo.region" content="US-TX" />
+  <meta name="geo.placename" content="Odessa, Texas" />
+
   <link rel="canonical" href="https://hoaidang.com/blog/" />
+  <link rel="icon" type="image/jpeg" href="https://hoaidang.com/assets/images/profile.jpeg" />
+
+  <meta property="og:locale" content="vi_VN" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Blog Hoài Đặng | hoaidang.com — Cuộc sống ở Mỹ, Nail, Odessa Texas" />
+  <meta property="og:description" content="Chia sẻ thật về cuộc sống ở Mỹ, nghề nail và Odessa Texas — bởi Hoài Đặng tại hoaidang.com." />
+  <meta property="og:url" content="https://hoaidang.com/blog/" />
+  <meta property="og:site_name" content="Hoài Đặng" />
+  <meta property="og:image" content="https://hoaidang.com/assets/images/profile.jpeg" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Blog",
+        "@id": "https://hoaidang.com/blog/#blog",
+        "url": "https://hoaidang.com/blog/",
+        "name": "Blog Hoài Đặng",
+        "description": "Blog của Hoài Đặng tại hoaidang.com — chia sẻ về cuộc sống ở Mỹ, nghề nail và Odessa Texas.",
+        "inLanguage": "vi",
+        "author": { "@id": "https://hoaidang.com/#person" },
+        "publisher": { "@id": "https://hoaidang.com/#person" }
+      },
+      {
+        "@type": "Person",
+        "@id": "https://hoaidang.com/#person",
+        "name": "Hoài Đặng",
+        "alternateName": ["Hoai Dang", "hoaidang.com"],
+        "url": "https://hoaidang.com",
+        "image": "https://hoaidang.com/assets/images/profile.jpeg",
+        "jobTitle": "Entrepreneur & Founder TxPick",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Odessa",
+          "addressRegion": "TX",
+          "addressCountry": "US"
+        },
+        "sameAs": [
+          "https://www.facebook.com/hoaidangllc",
+          "https://www.youtube.com/@hoaidangllc",
+          "https://www.tiktok.com/@hoaidangllc",
+          "https://txpick.com"
+        ]
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Hoài Đặng", "item": "https://hoaidang.com/" },
+          { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://hoaidang.com/blog/" }
+        ]
+      }
+    ]
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,500&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
   <style>
+    *{box-sizing:border-box;margin:0;padding:0}
     :root{
-      --bg:#090414;
-      --card:#171022;
-      --card2:#211332;
-      --text:#fff;
-      --muted:#c9bddd;
-      --brand:#9b5cff;
-      --brand2:#ffcc70;
-      --line:rgba(255,255,255,.12);
+      --bg:#0a0a0a;
+      --bg-2:#111111;
+      --bg-3:#161616;
+      --gold:#c9a84c;
+      --gold-2:#d4b76a;
+      --text:#f5f1e6;
+      --muted:#9a948a;
+      --line:rgba(201,168,76,.18);
+      --line-2:rgba(245,241,230,.08);
+      --serif:"Playfair Display", Georgia, serif;
+      --sans:"DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     }
-    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
     body{
-      margin:0;
-      font-family:Arial,Helvetica,sans-serif;
-      background:
-        radial-gradient(circle at top left,rgba(155,92,255,.35),transparent 35%),
-        radial-gradient(circle at bottom right,rgba(255,204,112,.18),transparent 35%),
-        var(--bg);
+      font-family:var(--sans);
+      background:var(--bg);
       color:var(--text);
+      line-height:1.6;
+      -webkit-font-smoothing:antialiased;
     }
-    a{text-decoration:none;color:inherit}
-    .wrap{max-width:1180px;margin:auto;padding:28px 18px 60px}
-    .nav{display:flex;justify-content:space-between;align-items:center;margin-bottom:28px}
-    .logo{font-weight:900;font-size:20px}
-    .home{color:var(--muted);font-size:14px}
+    a{color:inherit;text-decoration:none;transition:color .2s}
+    .container{max-width:1180px;margin:0 auto;padding:0 24px}
+
+    /* NAV */
+    .nav{
+      position:sticky;top:0;z-index:50;
+      background:rgba(10,10,10,.85);
+      backdrop-filter:blur(14px);
+      -webkit-backdrop-filter:blur(14px);
+      border-bottom:1px solid var(--line);
+    }
+    .nav-inner{display:flex;align-items:center;justify-content:space-between;padding:18px 0}
+    .brand{display:flex;align-items:center;gap:12px}
+    .brand-dot{width:6px;height:6px;border-radius:50%;background:var(--gold);box-shadow:0 0 12px var(--gold)}
+    .brand-name{font-family:var(--serif);font-weight:700;font-size:22px;color:var(--text)}
+    .brand-url{font-size:13px;color:var(--gold);font-weight:500}
+    .nav-links{display:flex;align-items:center;gap:28px}
+    .nav-links a{font-size:14px;font-weight:500;opacity:.78}
+    .nav-links a:hover{opacity:1;color:var(--gold)}
+    .nav-links a.active{color:var(--gold);opacity:1}
+
+    /* HERO */
     .hero{
-      padding:42px 28px;
-      border:1px solid var(--line);
-      border-radius:28px;
-      background:linear-gradient(135deg,rgba(255,255,255,.10),rgba(255,255,255,.03));
-      box-shadow:0 20px 70px rgba(0,0,0,.35);
+      padding:72px 0 56px;
+      position:relative;
+      overflow:hidden;
     }
-    .badge{
-      display:inline-block;
-      padding:8px 12px;
-      border-radius:999px;
-      background:rgba(155,92,255,.22);
-      color:#eadcff;
-      font-weight:800;
+    .hero::before{
+      content:"";position:absolute;top:-160px;right:-100px;
+      width:480px;height:480px;
+      background:radial-gradient(circle,rgba(201,168,76,.10),transparent 65%);
+    }
+    .breadcrumb{
       font-size:12px;
-      letter-spacing:.05em;
+      letter-spacing:.18em;
       text-transform:uppercase;
-      margin-bottom:16px;
+      color:var(--muted);
+      margin-bottom:18px;
     }
-    h1{font-size:clamp(36px,7vw,72px);line-height:.95;margin:0 0 16px}
-    .hero p{max-width:760px;font-size:18px;line-height:1.7;color:var(--muted);margin:0}
-    .tools{display:grid;grid-template-columns:1fr auto;gap:12px;margin:24px 0}
+    .breadcrumb a{color:var(--gold)}
+    .breadcrumb span{margin:0 8px;color:var(--gold)}
+    .hero-eyebrow{
+      display:inline-flex;align-items:center;gap:10px;
+      font-size:12px;font-weight:600;letter-spacing:.22em;
+      text-transform:uppercase;color:var(--gold);margin-bottom:20px;
+    }
+    .hero-eyebrow::before{content:"";width:32px;height:1px;background:var(--gold)}
+    h1{
+      font-family:var(--serif);
+      font-weight:700;
+      font-size:clamp(40px, 6vw, 76px);
+      line-height:1.05;
+      letter-spacing:-.02em;
+      margin-bottom:20px;
+      max-width:880px;
+    }
+    h1 .accent{color:var(--gold);font-style:italic;font-weight:500}
+    .hero-sub{
+      max-width:680px;
+      color:var(--muted);
+      font-size:17px;
+      line-height:1.75;
+    }
+
+    /* TOOLS */
+    .tools{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:14px;
+      margin:40px 0 32px;
+    }
+    .search-wrap{
+      position:relative;
+    }
     input{
       width:100%;
+      background:var(--bg-2);
       border:1px solid var(--line);
-      border-radius:16px;
-      background:rgba(255,255,255,.08);
-      color:white;
-      padding:15px 16px;
-      font-size:16px;
+      color:var(--text);
+      font-family:var(--sans);
+      font-size:15px;
+      padding:16px 20px 16px 50px;
       outline:none;
+      transition:border-color .25s;
+    }
+    input:focus{border-color:var(--gold)}
+    .search-wrap::before{
+      content:"";
+      position:absolute;
+      left:20px;top:50%;
+      width:16px;height:16px;
+      transform:translateY(-50%);
+      background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23c9a84c' stroke-width='2'><circle cx='11' cy='11' r='7'/><path d='m21 21-4.3-4.3'/></svg>") center/contain no-repeat;
     }
     .chips{display:flex;gap:10px;flex-wrap:wrap}
     .chip{
+      background:transparent;
       border:1px solid var(--line);
-      background:rgba(255,255,255,.08);
-      color:white;
-      border-radius:999px;
-      padding:11px 14px;
-      cursor:pointer;
-      font-weight:700;
+      color:var(--text);
+      font-family:var(--sans);
+      font-weight:500;
       font-size:13px;
+      letter-spacing:.04em;
+      padding:11px 18px;
+      cursor:pointer;
+      transition:all .25s;
     }
-    .chip.active{background:var(--brand);border-color:var(--brand)}
-    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .chip:hover{border-color:var(--gold);color:var(--gold)}
+    .chip.active{
+      background:var(--gold);
+      border-color:var(--gold);
+      color:var(--bg);
+      font-weight:600;
+    }
+
+    /* GRID */
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:24px;
+      padding-bottom:80px;
+    }
     .card{
-      background:linear-gradient(180deg,var(--card2),var(--card));
-      border:1px solid var(--line);
-      border-radius:24px;
-      padding:22px;
-      min-height:230px;
-      transition:.2s;
       display:flex;
       flex-direction:column;
       justify-content:space-between;
+      padding:32px 28px;
+      background:var(--bg-2);
+      border:1px solid var(--line-2);
+      transition:all .3s ease;
+      min-height:280px;
     }
-    .card:hover{transform:translateY(-4px);border-color:rgba(155,92,255,.65)}
-    .tag{color:var(--brand2);font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px}
-    .card h2{font-size:22px;line-height:1.18;margin:0 0 12px}
-    .card p{color:var(--muted);line-height:1.6;margin:0 0 18px}
-    .read{font-weight:900;color:#fff}
-    .footer{margin-top:34px;color:var(--muted);font-size:14px;text-align:center}
-    @media(max-width:850px){
+    .card:hover{
+      border-color:var(--gold);
+      transform:translateY(-4px);
+    }
+    .tag{
+      display:inline-block;
+      font-size:11px;
+      font-weight:600;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      color:var(--gold);
+      margin-bottom:16px;
+    }
+    .card h2{
+      font-family:var(--serif);
+      font-size:22px;
+      line-height:1.3;
+      font-weight:600;
+      margin-bottom:14px;
+      color:var(--text);
+    }
+    .card h2 a:hover{color:var(--gold)}
+    .card p{
+      color:var(--muted);
+      font-size:14.5px;
+      line-height:1.65;
+      margin-bottom:22px;
+    }
+    .read{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      color:var(--gold);
+      font-size:13px;
+      font-weight:600;
+      letter-spacing:.04em;
+    }
+
+    /* FOOTER */
+    footer{
+      padding:48px 0;
+      border-top:1px solid var(--line);
+      background:var(--bg-2);
+      text-align:center;
+    }
+    .footer-line strong{
+      font-family:var(--serif);
+      color:var(--text);
+      font-weight:600;
+      font-size:16px;
+    }
+    .footer-line{
+      color:var(--muted);
+      font-size:14px;
+      margin-bottom:14px;
+    }
+    .footer-line .sep{color:var(--gold);margin:0 8px}
+    .footer-nav{
+      display:flex;
+      justify-content:center;
+      gap:24px;
+      flex-wrap:wrap;
+      font-size:13px;
+      color:var(--muted);
+    }
+    .footer-nav a:hover{color:var(--gold)}
+    .copyright{
+      margin-top:20px;
+      font-size:12px;
+      color:var(--muted);
+    }
+
+    @media (max-width:900px){
       .grid{grid-template-columns:1fr}
-      .tools{grid-template-columns:1fr}
-      .hero{padding:30px 20px}
+      .hero{padding:48px 0 32px}
+      .nav-links{gap:18px}
+    }
+    @media (max-width:560px){
+      .container{padding:0 18px}
+      .brand-url{display:none}
+      .nav-links a:not(.active):not([href="/"]){display:none}
+      h1{font-size:42px}
     }
   </style>
 </head>
-
 <body>
-  <main class="wrap">
-    <nav class="nav">
-      <a class="logo" href="/">Hoài Đặng</a>
-      <a class="home" href="/">← Về trang chủ</a>
-    </nav>
 
+  <header class="nav">
+    <div class="container nav-inner">
+      <a href="/" class="brand">
+        <span class="brand-dot"></span>
+        <span class="brand-name">Hoài Đặng</span>
+        <span class="brand-url">· hoaidang.com</span>
+      </a>
+      <nav class="nav-links">
+        <a href="/">Home</a>
+        <a href="/blog/" class="active">Blog</a>
+        <a href="/#txpick">TxPick</a>
+        <a href="/#connect">Connect</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
     <section class="hero">
-      <div class="badge">Vietnamese Creator in Texas</div>
-      <h1>Blog Hoài Đặng</h1>
-      <p>
-        Chia sẻ thật về cuộc sống ở Mỹ, nghề nail, kinh doanh nhỏ, Odessa Texas,
-        kiếm tiền online và những kinh nghiệm thực tế cho người Việt tại Mỹ.
-      </p>
-    </section>
+      <div class="container">
+        <div class="breadcrumb">
+          <a href="/">Hoài Đặng</a><span>·</span>Blog
+        </div>
+        <div class="hero-eyebrow">Editorial · hoaidang.com</div>
+        <h1>Blog của <span class="accent">Hoài Đặng</span></h1>
+        <p class="hero-sub">
+          Chia sẻ thật về cuộc sống ở Mỹ, nghề nail, kinh doanh nhỏ, Odessa Texas,
+          kiếm tiền online và kinh nghiệm thực tế cho người Việt tại Mỹ —
+          viết bởi Hoài Đặng tại hoaidang.com.
+        </p>
 
-    <section class="tools">
-      <input id="searchInput" type="text" placeholder="Tìm bài viết: nail, Texas, chi phí, DoorDash..." />
-      <div class="chips">
-        <button class="chip active" data-filter="all">Tất cả</button>
-        <button class="chip" data-filter="nail">Nail</button>
-        <button class="chip" data-filter="life">Cuộc sống Mỹ</button>
-        <button class="chip" data-filter="business">Kinh doanh</button>
-        <button class="chip" data-filter="texas">Texas</button>
+        <div class="tools">
+          <div class="search-wrap">
+            <input id="searchInput" type="text" placeholder="Tìm bài viết: nail, Texas, chi phí, DoorDash..." />
+          </div>
+          <div class="chips">
+            <button class="chip active" data-filter="all">Tất cả</button>
+            <button class="chip" data-filter="nail">Nail</button>
+            <button class="chip" data-filter="life">Cuộc sống Mỹ</button>
+            <button class="chip" data-filter="business">Kinh doanh</button>
+            <button class="chip" data-filter="texas">Texas</button>
+          </div>
+        </div>
       </div>
     </section>
 
-    <section class="grid" id="postGrid">
+    <section class="container">
+      <div class="grid" id="postGrid">
 
-      <article class="card" data-category="nail business" data-title="làm nail ở mỹ kiếm bao nhiêu">
-        <div>
-          <div class="tag">Nail Business</div>
-          <h2><a href="/blog/lam-nail-o-my-kiem-bao-nhieu.html">Làm nail ở Mỹ kiếm bao nhiêu?</a></h2>
-          <p>Góc nhìn thực tế về thu nhập nghề nail, tip, mùa cao điểm và những điều ít ai nói.</p>
-        </div>
-        <a class="read" href="/blog/lam-nail-o-my-kiem-bao-nhieu.html">Đọc bài →</a>
-      </article>
+        <article class="card" data-category="nail business" data-title="làm nail ở mỹ kiếm bao nhiêu">
+          <div>
+            <div class="tag">Nail Business</div>
+            <h2><a href="/blog/lam-nail-o-my-kiem-bao-nhieu.html">Làm nail ở Mỹ kiếm bao nhiêu?</a></h2>
+            <p>Góc nhìn thực tế về thu nhập nghề nail, tip, mùa cao điểm và những điều ít ai nói.</p>
+          </div>
+          <a class="read" href="/blog/lam-nail-o-my-kiem-bao-nhieu.html">Đọc bài →</a>
+        </article>
 
-      <article class="card" data-category="nail" data-title="làm nail ở mỹ có dễ không">
-        <div>
-          <div class="tag">Nail Career</div>
-          <h2><a href="/blog/lam-nail-o-my-co-de-khong.html">Làm nail ở Mỹ có dễ không?</a></h2>
-          <p>Nghề nail nhìn đơn giản nhưng có nhiều áp lực, kỹ năng và kinh nghiệm cần biết.</p>
-        </div>
-        <a class="read" href="/blog/lam-nail-o-my-co-de-khong.html">Đọc bài →</a>
-      </article>
+        <article class="card" data-category="nail" data-title="làm nail ở mỹ có dễ không">
+          <div>
+            <div class="tag">Nail Career</div>
+            <h2><a href="/blog/lam-nail-o-my-co-de-khong.html">Làm nail ở Mỹ có dễ không?</a></h2>
+            <p>Nghề nail nhìn đơn giản nhưng có nhiều áp lực, kỹ năng và kinh nghiệm cần biết.</p>
+          </div>
+          <a class="read" href="/blog/lam-nail-o-my-co-de-khong.html">Đọc bài →</a>
+        </article>
 
-      <article class="card" data-category="business nail" data-title="mở tiệm nail ở mỹ cần bao nhiêu vốn">
-        <div>
-          <div class="tag">Business</div>
-          <h2><a href="/blog/mo-tiem-nail-o-my-can-bao-nhieu-von.html">Mở tiệm nail ở Mỹ cần bao nhiêu vốn?</a></h2>
-          <p>Chi phí mở tiệm, vận hành, nhân sự, rủi ro và góc nhìn của người làm thật.</p>
-        </div>
-        <a class="read" href="/blog/mo-tiem-nail-o-my-can-bao-nhieu-von.html">Đọc bài →</a>
-      </article>
+        <article class="card" data-category="business nail" data-title="mở tiệm nail ở mỹ cần bao nhiêu vốn">
+          <div>
+            <div class="tag">Business</div>
+            <h2><a href="/blog/mo-tiem-nail-o-my-can-bao-nhieu-von.html">Mở tiệm nail ở Mỹ cần bao nhiêu vốn?</a></h2>
+            <p>Chi phí mở tiệm, vận hành, nhân sự, rủi ro và góc nhìn của người làm thật.</p>
+          </div>
+          <a class="read" href="/blog/mo-tiem-nail-o-my-can-bao-nhieu-von.html">Đọc bài →</a>
+        </article>
 
-      <article class="card" data-category="life texas" data-title="cuộc sống ở texas có tốt không">
-        <div>
-          <div class="tag">Texas Life</div>
-          <h2><a href="/blog/cuoc-song-o-texas-co-tot-khong.html">Cuộc sống ở Texas có tốt không?</a></h2>
-          <p>Một góc nhìn thực tế về chi phí, công việc, thời tiết và đời sống ở Texas.</p>
-        </div>
-        <a class="read" href="/blog/cuoc-song-o-texas-co-tot-khong.html">Đọc bài →</a>
-      </article>
+        <article class="card" data-category="life texas" data-title="cuộc sống ở texas có tốt không">
+          <div>
+            <div class="tag">Texas Life</div>
+            <h2><a href="/blog/cuoc-song-o-texas-co-tot-khong.html">Cuộc sống ở Texas có tốt không?</a></h2>
+            <p>Một góc nhìn thực tế về chi phí, công việc, thời tiết và đời sống ở Texas.</p>
+          </div>
+          <a class="read" href="/blog/cuoc-song-o-texas-co-tot-khong.html">Đọc bài →</a>
+        </article>
 
-      <article class="card" data-category="texas life" data-title="người việt ở odessa texas">
-        <div>
-          <div class="tag">Odessa Texas</div>
-          <h2><a href="/blog/nguoi-viet-o-odessa-texas.html">Người Việt ở Odessa Texas</a></h2>
-          <p>Cộng đồng, công việc, cuộc sống và cơ hội cho người Việt tại Odessa, Texas.</p>
-        </div>
-        <a class="read" href="/blog/nguoi-viet-o-odessa-texas.html">Đọc bài →</a>
-      </article>
+        <article class="card" data-category="texas life" data-title="người việt ở odessa texas">
+          <div>
+            <div class="tag">Odessa Texas</div>
+            <h2><a href="/blog/nguoi-viet-o-odessa-texas.html">Người Việt ở Odessa Texas</a></h2>
+            <p>Cộng đồng, công việc, cuộc sống và cơ hội cho người Việt tại Odessa, Texas.</p>
+          </div>
+          <a class="read" href="/blog/nguoi-viet-o-odessa-texas.html">Đọc bài →</a>
+        </article>
 
-      <article class="card" data-category="life" data-title="chi phí sống ở mỹ bao nhiêu">
-        <div>
-          <div class="tag">Life in America</div>
-          <h2><a href="/blog/chi-phi-song-o-my-bao-nhieu.html">Chi phí sống ở Mỹ bao nhiêu?</a></h2>
-          <p>Các khoản chi tiêu phổ biến: nhà, xe, bảo hiểm, ăn uống, điện nước và gia đình.</p>
-        </div>
-        <a class="read" href="/blog/chi-phi-song-o-my-bao-nhieu.html">Đọc bài →</a>
-      </article>
+        <article class="card" data-category="life" data-title="chi phí sống ở mỹ bao nhiêu">
+          <div>
+            <div class="tag">Life in America</div>
+            <h2><a href="/blog/chi-phi-song-o-my-bao-nhieu.html">Chi phí sống ở Mỹ bao nhiêu?</a></h2>
+            <p>Các khoản chi tiêu phổ biến: nhà, xe, bảo hiểm, ăn uống, điện nước và gia đình.</p>
+          </div>
+          <a class="read" href="/blog/chi-phi-song-o-my-bao-nhieu.html">Đọc bài →</a>
+        </article>
 
-      <article class="card" data-category="life business" data-title="làm doordash ở mỹ kiếm bao nhiêu">
-        <div>
-          <div class="tag">Side Hustle</div>
-          <h2><a href="/blog/lam-doordash-o-my-kiem-bao-nhieu.html">Làm DoorDash ở Mỹ kiếm bao nhiêu?</a></h2>
-          <p>Kinh nghiệm chạy app, thu nhập, xăng xe, thời gian và cách nhìn thực tế.</p>
-        </div>
-        <a class="read" href="/blog/lam-doordash-o-my-kiem-bao-nhieu.html">Đọc bài →</a>
-      </article>
+        <article class="card" data-category="life business" data-title="làm doordash ở mỹ kiếm bao nhiêu">
+          <div>
+            <div class="tag">Side Hustle</div>
+            <h2><a href="/blog/lam-doordash-o-my-kiem-bao-nhieu.html">Làm DoorDash ở Mỹ kiếm bao nhiêu?</a></h2>
+            <p>Kinh nghiệm chạy app, thu nhập, xăng xe, thời gian và cách nhìn thực tế.</p>
+          </div>
+          <a class="read" href="/blog/lam-doordash-o-my-kiem-bao-nhieu.html">Đọc bài →</a>
+        </article>
 
-      <article class="card" data-category="life" data-title="người việt làm gì ở mỹ">
-        <div>
-          <div class="tag">Vietnamese in USA</div>
-          <h2><a href="/blog/nguoi-viet-lam-gi-o-my.html">Người Việt làm gì ở Mỹ?</a></h2>
-          <p>Những công việc phổ biến, hướng đi thực tế và cơ hội cho người Việt tại Mỹ.</p>
-        </div>
-        <a class="read" href="/blog/nguoi-viet-lam-gi-o-my.html">Đọc bài →</a>
-      </article>
+        <article class="card" data-category="life" data-title="người việt làm gì ở mỹ">
+          <div>
+            <div class="tag">Vietnamese in USA</div>
+            <h2><a href="/blog/nguoi-viet-lam-gi-o-my.html">Người Việt làm gì ở Mỹ?</a></h2>
+            <p>Những công việc phổ biến, hướng đi thực tế và cơ hội cho người Việt tại Mỹ.</p>
+          </div>
+          <a class="read" href="/blog/nguoi-viet-lam-gi-o-my.html">Đọc bài →</a>
+        </article>
 
-      <article class="card" data-category="nail" data-title="thợ nail ở mỹ có cần bằng không">
-        <div>
-          <div class="tag">Nail License</div>
-          <h2><a href="/blog/tho-nail-o-my-co-can-bang-khong.html">Thợ nail ở Mỹ có cần bằng không?</a></h2>
-          <p>Những điều cơ bản về license, học nghề và chuẩn bị trước khi đi làm nail.</p>
-        </div>
-        <a class="read" href="/blog/tho-nail-o-my-co-can-bang-khong.html">Đọc bài →</a>
-      </article>
+        <article class="card" data-category="nail" data-title="thợ nail ở mỹ có cần bằng không">
+          <div>
+            <div class="tag">Nail License</div>
+            <h2><a href="/blog/tho-nail-o-my-co-can-bang-khong.html">Thợ nail ở Mỹ có cần bằng không?</a></h2>
+            <p>Những điều cơ bản về license, học nghề và chuẩn bị trước khi đi làm nail.</p>
+          </div>
+          <a class="read" href="/blog/tho-nail-o-my-co-can-bang-khong.html">Đọc bài →</a>
+        </article>
 
+      </div>
     </section>
-
-    <div class="footer">
-      © Hoài Đặng — Life in America, Nail Business & Vietnamese Creator in Texas.
-    </div>
   </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-line">
+        <strong>Hoài Đặng</strong>
+        <span class="sep">·</span>hoaidang.com
+        <span class="sep">·</span>Odessa, Texas
+      </div>
+      <nav class="footer-nav">
+        <a href="/">Trang chủ</a>
+        <a href="/blog/">Blog</a>
+        <a href="/#txpick">TxPick</a>
+        <a href="https://www.facebook.com/hoaidangllc" target="_blank" rel="noopener">Facebook</a>
+        <a href="https://www.youtube.com/@hoaidangllc" target="_blank" rel="noopener">YouTube</a>
+        <a href="https://www.tiktok.com/@hoaidangllc" target="_blank" rel="noopener">TikTok</a>
+      </nav>
+      <div class="copyright">© 2026 Hoài Đặng — hoaidang.com</div>
+    </div>
+  </footer>
 
   <script>
     const input = document.getElementById('searchInput');
