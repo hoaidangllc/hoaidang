@@ -4,617 +4,250 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>Blog Hoài Đặng | Cuộc sống ở Mỹ, nghề nail, DoorDash và Texas</title>
-  <meta
-    name="description"
-    content="Blog của Hoài Đặng chia sẻ cuộc sống ở Mỹ, nghề nail, DoorDash, Texas và kinh nghiệm thực tế của người Việt tại Mỹ."
-  />
-  <meta
-    name="keywords"
-    content="blog Hoài Đặng, cuộc sống ở Mỹ, nghề nail ở Mỹ, DoorDash ở Mỹ, người Việt ở Texas, Odessa Texas, làm nail ở Mỹ"
-  />
-  <meta name="author" content="Hoài Đặng" />
-  <meta name="robots" content="index, follow" />
+  <title>Blog Hoài Đặng | Cuộc sống ở Mỹ, Nail, Kinh doanh & Texas</title>
+  <meta name="description" content="Blog Hoài Đặng chia sẻ kinh nghiệm thực tế về cuộc sống ở Mỹ, nghề nail, kinh doanh nhỏ, Odessa Texas và hành trình người Việt tại Mỹ." />
   <link rel="canonical" href="https://hoaidang.com/blog/" />
-  <link rel="icon" type="image/jpeg" href="/assets/images/profile.jpeg" />
-  <meta name="theme-color" content="#6d4cff" />
-
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="Blog Hoài Đặng | Cuộc sống ở Mỹ, nghề nail, DoorDash và Texas" />
-  <meta
-    property="og:description"
-    content="Chia sẻ thực tế về nghề nail, cuộc sống ở Mỹ, DoorDash, Texas và hành trình của người Việt tại Mỹ."
-  />
-  <meta property="og:url" content="https://hoaidang.com/blog/" />
-  <meta property="og:site_name" content="Hoài Đặng" />
-  <meta property="og:image" content="https://hoaidang.com/assets/images/profile.jpeg" />
-  <meta property="og:image:alt" content="Blog Hoài Đặng" />
 
   <style>
-    * {
-      box-sizing: border-box;
+    :root{
+      --bg:#090414;
+      --card:#171022;
+      --card2:#211332;
+      --text:#fff;
+      --muted:#c9bddd;
+      --brand:#9b5cff;
+      --brand2:#ffcc70;
+      --line:rgba(255,255,255,.12);
     }
-
-    :root {
-      --bg1: #18132e;
-      --bg2: #3c2676;
-      --bg3: #7c3aed;
-      --bg4: #ec4899;
-      --white: #ffffff;
-      --text: #111827;
-      --muted: #6b7280;
-      --line: #ebe5f8;
-      --card: rgba(255, 255, 255, 0.96);
-      --glass: rgba(255, 255, 255, 0.1);
-      --glass-border: rgba(255, 255, 255, 0.18);
-      --shadow-xl: 0 30px 80px rgba(0, 0, 0, 0.20);
-      --shadow-lg: 0 18px 40px rgba(0, 0, 0, 0.12);
-      --radius-xl: 34px;
-      --radius-lg: 24px;
-      --radius-md: 18px;
-      --max: 1240px;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      margin: 0;
-      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-      color: var(--white);
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:Arial,Helvetica,sans-serif;
       background:
-        radial-gradient(circle at 0% 0%, rgba(255,255,255,.14), transparent 24%),
-        radial-gradient(circle at 100% 0%, rgba(255,255,255,.12), transparent 24%),
-        radial-gradient(circle at 50% 100%, rgba(255,255,255,.08), transparent 24%),
-        linear-gradient(135deg, var(--bg1) 0%, var(--bg2) 28%, var(--bg3) 66%, var(--bg4) 100%);
-      min-height: 100vh;
+        radial-gradient(circle at top left,rgba(155,92,255,.35),transparent 35%),
+        radial-gradient(circle at bottom right,rgba(255,204,112,.18),transparent 35%),
+        var(--bg);
+      color:var(--text);
     }
-
-    a {
-      color: inherit;
-      text-decoration: none;
+    a{text-decoration:none;color:inherit}
+    .wrap{max-width:1180px;margin:auto;padding:28px 18px 60px}
+    .nav{display:flex;justify-content:space-between;align-items:center;margin-bottom:28px}
+    .logo{font-weight:900;font-size:20px}
+    .home{color:var(--muted);font-size:14px}
+    .hero{
+      padding:42px 28px;
+      border:1px solid var(--line);
+      border-radius:28px;
+      background:linear-gradient(135deg,rgba(255,255,255,.10),rgba(255,255,255,.03));
+      box-shadow:0 20px 70px rgba(0,0,0,.35);
     }
-
-    .wrap {
-      width: min(calc(100% - 32px), var(--max));
-      margin: 0 auto;
-      padding: 20px 0 44px;
+    .badge{
+      display:inline-block;
+      padding:8px 12px;
+      border-radius:999px;
+      background:rgba(155,92,255,.22);
+      color:#eadcff;
+      font-weight:800;
+      font-size:12px;
+      letter-spacing:.05em;
+      text-transform:uppercase;
+      margin-bottom:16px;
     }
-
-    .topnav {
-      position: sticky;
-      top: 0;
-      z-index: 20;
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      background: rgba(17, 24, 39, 0.18);
-      border-bottom: 1px solid rgba(255,255,255,.14);
+    h1{font-size:clamp(36px,7vw,72px);line-height:.95;margin:0 0 16px}
+    .hero p{max-width:760px;font-size:18px;line-height:1.7;color:var(--muted);margin:0}
+    .tools{display:grid;grid-template-columns:1fr auto;gap:12px;margin:24px 0}
+    input{
+      width:100%;
+      border:1px solid var(--line);
+      border-radius:16px;
+      background:rgba(255,255,255,.08);
+      color:white;
+      padding:15px 16px;
+      font-size:16px;
+      outline:none;
     }
-
-    .topnav-inner {
-      width: min(calc(100% - 32px), var(--max));
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      padding: 14px 0;
+    .chips{display:flex;gap:10px;flex-wrap:wrap}
+    .chip{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.08);
+      color:white;
+      border-radius:999px;
+      padding:11px 14px;
+      cursor:pointer;
+      font-weight:700;
+      font-size:13px;
     }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      min-width: 0;
+    .chip.active{background:var(--brand);border-color:var(--brand)}
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .card{
+      background:linear-gradient(180deg,var(--card2),var(--card));
+      border:1px solid var(--line);
+      border-radius:24px;
+      padding:22px;
+      min-height:230px;
+      transition:.2s;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
     }
-
-    .brand img {
-      width: 42px;
-      height: 42px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 2px solid rgba(255,255,255,.55);
-      box-shadow: 0 8px 18px rgba(0,0,0,.18);
-    }
-
-    .brand strong {
-      display: block;
-      font-size: 1rem;
-      line-height: 1.2;
-    }
-
-    .brand span {
-      display: block;
-      font-size: .88rem;
-      color: rgba(255,255,255,.78);
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    .nav-links a {
-      padding: 10px 14px;
-      border-radius: 999px;
-      background: rgba(255,255,255,.10);
-      border: 1px solid rgba(255,255,255,.12);
-      font-size: .94rem;
-      font-weight: 700;
-      transition: .18s ease;
-    }
-
-    .nav-links a:hover {
-      background: rgba(255,255,255,.18);
-      transform: translateY(-1px);
-    }
-
-    .hero {
-      margin-top: 22px;
-      position: relative;
-      overflow: hidden;
-      border-radius: var(--radius-xl);
-      background:
-        linear-gradient(rgba(17,12,28,.18), rgba(17,12,28,.48)),
-        url("/assets/images/profile.jpeg") center/cover;
-      min-height: 360px;
-      display: flex;
-      align-items: end;
-      box-shadow: var(--shadow-xl);
-      border: 1px solid rgba(255,255,255,.14);
-    }
-
-    .hero-overlay {
-      width: 100%;
-      padding: 30px 26px 26px;
-      background: linear-gradient(180deg, transparent 0%, rgba(10,10,18,.58) 100%);
-    }
-
-    .hero-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 9px 14px;
-      border-radius: 999px;
-      background: rgba(255,255,255,.16);
-      border: 1px solid rgba(255,255,255,.16);
-      font-size: .82rem;
-      font-weight: 800;
-      letter-spacing: .05em;
-      text-transform: uppercase;
-      margin-bottom: 14px;
-      backdrop-filter: blur(8px);
-    }
-
-    .hero h1 {
-      margin: 0;
-      font-size: clamp(2.4rem, 6vw, 4.4rem);
-      line-height: 1.03;
-      letter-spacing: -.05em;
-      font-weight: 900;
-      max-width: 11ch;
-    }
-
-    .hero p {
-      max-width: 680px;
-      margin: 12px 0 0;
-      color: rgba(255,255,255,.9);
-      font-size: 1.06rem;
-      line-height: 1.7;
-    }
-
-    .intro-grid {
-      display: grid;
-      grid-template-columns: 1.15fr .85fr;
-      gap: 16px;
-      margin-top: 18px;
-    }
-
-    .glass-card {
-      background: var(--glass);
-      border: 1px solid var(--glass-border);
-      border-radius: 24px;
-      padding: 18px;
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      box-shadow: 0 14px 32px rgba(0,0,0,.10);
-    }
-
-    .glass-card h2 {
-      margin: 0 0 10px;
-      font-size: 1.1rem;
-      letter-spacing: -.02em;
-    }
-
-    .glass-card p {
-      margin: 0;
-      color: rgba(255,255,255,.86);
-      line-height: 1.75;
-      font-size: 1rem;
-    }
-
-    .stats {
-      display: grid;
-      gap: 10px;
-    }
-
-    .stat {
-      background: rgba(255,255,255,.10);
-      border: 1px solid rgba(255,255,255,.14);
-      border-radius: 18px;
-      padding: 14px;
-    }
-
-    .stat strong {
-      display: block;
-      margin-bottom: 4px;
-      font-size: 1rem;
-    }
-
-    .stat span {
-      display: block;
-      color: rgba(255,255,255,.78);
-      font-size: .93rem;
-      line-height: 1.45;
-    }
-
-    .section-head {
-      margin-top: 28px;
-      margin-bottom: 18px;
-      display: flex;
-      align-items: end;
-      justify-content: space-between;
-      gap: 20px;
-      flex-wrap: wrap;
-    }
-
-    .section-head h2 {
-      margin: 0;
-      font-size: clamp(1.7rem, 3vw, 2.5rem);
-      line-height: 1.1;
-      letter-spacing: -.04em;
-    }
-
-    .section-head p {
-      margin: 6px 0 0;
-      color: rgba(255,255,255,.82);
-      max-width: 720px;
-      line-height: 1.65;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 20px;
-    }
-
-    .post {
-      background: var(--card);
-      color: var(--text);
-      border-radius: 24px;
-      overflow: hidden;
-      box-shadow: var(--shadow-lg);
-      transition: transform .22s ease, box-shadow .22s ease;
-      display: flex;
-      flex-direction: column;
-      min-height: 100%;
-      border: 1px solid rgba(255,255,255,.45);
-    }
-
-    .post:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 24px 48px rgba(0,0,0,.16);
-    }
-
-    .thumb {
-      position: relative;
-      min-height: 190px;
-      padding: 22px;
-      display: flex;
-      align-items: flex-end;
-      background: linear-gradient(135deg, #ede9fe 0%, #ddd6fe 46%, #fbcfe8 100%);
-    }
-
-    .thumb span {
-      position: absolute;
-      top: 18px;
-      left: 18px;
-      display: inline-flex;
-      padding: 8px 12px;
-      border-radius: 999px;
-      background: rgba(255,255,255,.92);
-      color: #6d28d9;
-      font-size: .8rem;
-      font-weight: 800;
-      box-shadow: 0 8px 16px rgba(0,0,0,.08);
-    }
-
-    .thumb h3 {
-      margin: 0;
-      font-size: 1.35rem;
-      line-height: 1.25;
-      letter-spacing: -.03em;
-      color: #1f2937;
-      max-width: 15ch;
-    }
-
-    .content {
-      padding: 22px 20px 22px;
-      display: flex;
-      flex-direction: column;
-      flex: 1;
-    }
-
-    .content p {
-      margin: 0 0 18px;
-      color: #4b5563;
-      line-height: 1.7;
-      font-size: .98rem;
-      flex: 1;
-    }
-
-    .readmore {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-weight: 800;
-      color: #6d28d9;
-      font-size: 1rem;
-    }
-
-    .footer {
-      margin-top: 34px;
-      padding-top: 22px;
-      border-top: 1px solid rgba(255,255,255,.14);
-      text-align: center;
-      color: rgba(255,255,255,.76);
-      font-size: .95rem;
-    }
-
-    @media (max-width: 1024px) {
-      .grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-    }
-
-    @media (max-width: 760px) {
-      body {
-        padding: 0;
-      }
-
-      .topnav-inner {
-        width: calc(100% - 32px);
-        padding-left: 0;
-        padding-right: 0;
-      }
-
-      .wrap {
-        width: calc(100% - 32px);
-        padding: 0 0 30px;
-      }
-
-      .hero {
-        border-radius: 26px;
-        min-height: 320px;
-      }
-
-      .intro-grid,
-      .grid {
-        grid-template-columns: 1fr;
-      }
-
-      .hero h1 {
-        max-width: 100%;
-      }
+    .card:hover{transform:translateY(-4px);border-color:rgba(155,92,255,.65)}
+    .tag{color:var(--brand2);font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px}
+    .card h2{font-size:22px;line-height:1.18;margin:0 0 12px}
+    .card p{color:var(--muted);line-height:1.6;margin:0 0 18px}
+    .read{font-weight:900;color:#fff}
+    .footer{margin-top:34px;color:var(--muted);font-size:14px;text-align:center}
+    @media(max-width:850px){
+      .grid{grid-template-columns:1fr}
+      .tools{grid-template-columns:1fr}
+      .hero{padding:30px 20px}
     }
   </style>
 </head>
+
 <body>
-
-  <nav class="topnav">
-    <div class="topnav-inner">
-      <a class="brand" href="/">
-        <img src="/assets/images/profile.jpeg" alt="Hoài Đặng" />
-        <div>
-          <strong>Hoài Đặng</strong>
-          <span>Blog cuộc sống ở Mỹ</span>
-        </div>
-      </a>
-
-      <div class="nav-links">
-        <a href="/">Home</a>
-        <a href="/blog/">Blog</a>
-      </div>
-    </div>
-  </nav>
-
   <main class="wrap">
+    <nav class="nav">
+      <a class="logo" href="/">Hoài Đặng</a>
+      <a class="home" href="/">← Về trang chủ</a>
+    </nav>
+
     <section class="hero">
-      <div class="hero-overlay">
-        <div class="hero-pill">Blog Hoài Đặng</div>
-        <h1>Cuộc sống ở Mỹ, nghề nail và chuyện thật mỗi ngày.</h1>
-        <p>
-          Nơi mình chia sẻ kinh nghiệm thực tế về nghề nail ở Mỹ, cuộc sống người Việt tại Texas, DoorDash, chi phí sinh hoạt, kinh doanh và những góc nhìn rất thật từ hành trình sống và làm việc tại Mỹ.
-        </p>
+      <div class="badge">Vietnamese Creator in Texas</div>
+      <h1>Blog Hoài Đặng</h1>
+      <p>
+        Chia sẻ thật về cuộc sống ở Mỹ, nghề nail, kinh doanh nhỏ, Odessa Texas,
+        kiếm tiền online và những kinh nghiệm thực tế cho người Việt tại Mỹ.
+      </p>
+    </section>
+
+    <section class="tools">
+      <input id="searchInput" type="text" placeholder="Tìm bài viết: nail, Texas, chi phí, DoorDash..." />
+      <div class="chips">
+        <button class="chip active" data-filter="all">Tất cả</button>
+        <button class="chip" data-filter="nail">Nail</button>
+        <button class="chip" data-filter="life">Cuộc sống Mỹ</button>
+        <button class="chip" data-filter="business">Kinh doanh</button>
+        <button class="chip" data-filter="texas">Texas</button>
       </div>
     </section>
 
-    <section class="intro-grid">
-      <div class="glass-card">
-        <h2>Blog dành cho ai?</h2>
-        <p>
-          Nếu bạn đang tìm hiểu về cuộc sống ở Mỹ, muốn biết nghề nail ở Mỹ ra sao, đang quan tâm đến DoorDash, chi phí sinh hoạt, hoặc đơn giản là muốn đọc những chia sẻ thật từ một người Việt sống tại Texas, thì đây là nơi dành cho bạn.
-        </p>
-      </div>
+    <section class="grid" id="postGrid">
 
-      <div class="stats">
-        <div class="stat">
-          <strong>Nghề nail ở Mỹ</strong>
-          <span>Thu nhập, license, học nghề, mở tiệm và chuyện đi làm thực tế.</span>
+      <article class="card" data-category="nail business" data-title="làm nail ở mỹ kiếm bao nhiêu">
+        <div>
+          <div class="tag">Nail Business</div>
+          <h2><a href="/blog/lam-nail-o-my-kiem-bao-nhieu.html">Làm nail ở Mỹ kiếm bao nhiêu?</a></h2>
+          <p>Góc nhìn thực tế về thu nhập nghề nail, tip, mùa cao điểm và những điều ít ai nói.</p>
         </div>
-        <div class="stat">
-          <strong>Texas & Odessa</strong>
-          <span>Cuộc sống, cộng đồng người Việt và trải nghiệm sống tại địa phương.</span>
+        <a class="read" href="/blog/lam-nail-o-my-kiem-bao-nhieu.html">Đọc bài →</a>
+      </article>
+
+      <article class="card" data-category="nail" data-title="làm nail ở mỹ có dễ không">
+        <div>
+          <div class="tag">Nail Career</div>
+          <h2><a href="/blog/lam-nail-o-my-co-de-khong.html">Làm nail ở Mỹ có dễ không?</a></h2>
+          <p>Nghề nail nhìn đơn giản nhưng có nhiều áp lực, kỹ năng và kinh nghiệm cần biết.</p>
         </div>
-        <div class="stat">
-          <strong>DoorDash & đời sống</strong>
-          <span>Kinh nghiệm chạy app, chi phí sinh hoạt và góc nhìn đời thường.</span>
+        <a class="read" href="/blog/lam-nail-o-my-co-de-khong.html">Đọc bài →</a>
+      </article>
+
+      <article class="card" data-category="business nail" data-title="mở tiệm nail ở mỹ cần bao nhiêu vốn">
+        <div>
+          <div class="tag">Business</div>
+          <h2><a href="/blog/mo-tiem-nail-o-my-can-bao-nhieu-von.html">Mở tiệm nail ở Mỹ cần bao nhiêu vốn?</a></h2>
+          <p>Chi phí mở tiệm, vận hành, nhân sự, rủi ro và góc nhìn của người làm thật.</p>
         </div>
-      </div>
+        <a class="read" href="/blog/mo-tiem-nail-o-my-can-bao-nhieu-von.html">Đọc bài →</a>
+      </article>
+
+      <article class="card" data-category="life texas" data-title="cuộc sống ở texas có tốt không">
+        <div>
+          <div class="tag">Texas Life</div>
+          <h2><a href="/blog/cuoc-song-o-texas-co-tot-khong.html">Cuộc sống ở Texas có tốt không?</a></h2>
+          <p>Một góc nhìn thực tế về chi phí, công việc, thời tiết và đời sống ở Texas.</p>
+        </div>
+        <a class="read" href="/blog/cuoc-song-o-texas-co-tot-khong.html">Đọc bài →</a>
+      </article>
+
+      <article class="card" data-category="texas life" data-title="người việt ở odessa texas">
+        <div>
+          <div class="tag">Odessa Texas</div>
+          <h2><a href="/blog/nguoi-viet-o-odessa-texas.html">Người Việt ở Odessa Texas</a></h2>
+          <p>Cộng đồng, công việc, cuộc sống và cơ hội cho người Việt tại Odessa, Texas.</p>
+        </div>
+        <a class="read" href="/blog/nguoi-viet-o-odessa-texas.html">Đọc bài →</a>
+      </article>
+
+      <article class="card" data-category="life" data-title="chi phí sống ở mỹ bao nhiêu">
+        <div>
+          <div class="tag">Life in America</div>
+          <h2><a href="/blog/chi-phi-song-o-my-bao-nhieu.html">Chi phí sống ở Mỹ bao nhiêu?</a></h2>
+          <p>Các khoản chi tiêu phổ biến: nhà, xe, bảo hiểm, ăn uống, điện nước và gia đình.</p>
+        </div>
+        <a class="read" href="/blog/chi-phi-song-o-my-bao-nhieu.html">Đọc bài →</a>
+      </article>
+
+      <article class="card" data-category="life business" data-title="làm doordash ở mỹ kiếm bao nhiêu">
+        <div>
+          <div class="tag">Side Hustle</div>
+          <h2><a href="/blog/lam-doordash-o-my-kiem-bao-nhieu.html">Làm DoorDash ở Mỹ kiếm bao nhiêu?</a></h2>
+          <p>Kinh nghiệm chạy app, thu nhập, xăng xe, thời gian và cách nhìn thực tế.</p>
+        </div>
+        <a class="read" href="/blog/lam-doordash-o-my-kiem-bao-nhieu.html">Đọc bài →</a>
+      </article>
+
+      <article class="card" data-category="life" data-title="người việt làm gì ở mỹ">
+        <div>
+          <div class="tag">Vietnamese in USA</div>
+          <h2><a href="/blog/nguoi-viet-lam-gi-o-my.html">Người Việt làm gì ở Mỹ?</a></h2>
+          <p>Những công việc phổ biến, hướng đi thực tế và cơ hội cho người Việt tại Mỹ.</p>
+        </div>
+        <a class="read" href="/blog/nguoi-viet-lam-gi-o-my.html">Đọc bài →</a>
+      </article>
+
+      <article class="card" data-category="nail" data-title="thợ nail ở mỹ có cần bằng không">
+        <div>
+          <div class="tag">Nail License</div>
+          <h2><a href="/blog/tho-nail-o-my-co-can-bang-khong.html">Thợ nail ở Mỹ có cần bằng không?</a></h2>
+          <p>Những điều cơ bản về license, học nghề và chuẩn bị trước khi đi làm nail.</p>
+        </div>
+        <a class="read" href="/blog/tho-nail-o-my-co-can-bang-khong.html">Đọc bài →</a>
+      </article>
+
     </section>
 
-    <section class="section-head">
-      <div>
-        <h2>Bài viết nổi bật</h2>
-        <p>Những chủ đề thực tế, dễ đọc và gần với điều nhiều người đang tìm hiểu khi nghĩ đến cuộc sống ở Mỹ.</p>
-      </div>
-    </section>
-
-    <section class="grid">
-      <article class="post">
-        <div class="thumb">
-          <span>Nail ở Mỹ</span>
-          <h3>Làm Nail Ở Mỹ Kiếm Bao Nhiêu?</h3>
-        </div>
-        <div class="content">
-          <p>Thu nhập thật của nghề nail ở Mỹ, các yếu tố ảnh hưởng đến lương và cơ hội phát triển lâu dài.</p>
-          <a class="readmore" href="lam-nail-o-my-kiem-bao-nhieu.html">Đọc bài →</a>
-        </div>
-      </article>
-
-      <article class="post">
-        <div class="thumb">
-          <span>Nail ở Mỹ</span>
-          <h3>Làm Nail Ở Mỹ Có Dễ Không?</h3>
-        </div>
-        <div class="content">
-          <p>Sự thật về công việc nail tại Mỹ dành cho người mới bắt đầu tìm hiểu nghề này.</p>
-          <a class="readmore" href="lam-nail-o-my-co-de-khong.html">Đọc bài →</a>
-        </div>
-      </article>
-
-      <article class="post">
-        <div class="thumb">
-          <span>Học nghề</span>
-          <h3>Học Làm Nail Ở Mỹ Mất Bao Nhiêu Tiền?</h3>
-        </div>
-        <div class="content">
-          <p>Chi phí học nail school, thời gian học và cách lấy license để đi làm hợp pháp ở Mỹ.</p>
-          <a class="readmore" href="hoc-lam-nail-o-my-mat-bao-nhieu.html">Đọc bài →</a>
-        </div>
-      </article>
-
-      <article class="post">
-        <div class="thumb">
-          <span>Kinh doanh</span>
-          <h3>Mở Tiệm Nail Ở Mỹ Cần Bao Nhiêu Vốn?</h3>
-        </div>
-        <div class="content">
-          <p>Những khoản chi chính khi mở tiệm nail và điều cần chuẩn bị trước khi kinh doanh.</p>
-          <a class="readmore" href="mo-tiem-nail-o-my-can-bao-nhieu-von.html">Đọc bài →</a>
-        </div>
-      </article>
-
-      <article class="post">
-        <div class="thumb">
-          <span>Website tiệm nail</span>
-          <h3>3 Sai Lầm Về Website Mà Nhiều Chủ Tiệm Nail Ở Mỹ Đang Mắc Phải</h3>
-        </div>
-        <div class="content">
-          <p>Nhiều tiệm nail có website nhưng thực tế lại không thật sự sở hữu nó. Đây là 3 sai lầm rất nhiều chủ tiệm chỉ nhận ra khi đã quá muộn.</p>
-          <a class="readmore" href="3-sai-lam-website-tiem-nail.html">Đọc bài →</a>
-        </div>
-      </article>
-
-      <article class="post">
-        <div class="thumb">
-          <span>License</span>
-          <h3>Thợ Nail Ở Mỹ Có Cần Bằng Không?</h3>
-        </div>
-        <div class="content">
-          <p>Tìm hiểu license nail technician ở Mỹ và vì sao nó quan trọng với người làm nghề.</p>
-          <a class="readmore" href="tho-nail-o-my-co-can-bang-khong.html">Đọc bài →</a>
-        </div>
-      </article>
-
-      <article class="post">
-        <div class="thumb">
-          <span>Chi phí sống</span>
-          <h3>Chi Phí Sinh Hoạt Ở Mỹ Bao Nhiêu?</h3>
-        </div>
-        <div class="content">
-          <p>Tiền nhà, tiền ăn, xe cộ, bảo hiểm và những khoản cơ bản khi sống ở Mỹ.</p>
-          <a class="readmore" href="chi-phi-song-o-my-bao-nhieu.html">Đọc bài →</a>
-        </div>
-      </article>
-
-      <article class="post">
-        <div class="thumb">
-          <span>Người Việt tại Mỹ</span>
-          <h3>Người Việt Làm Nghề Gì Ở Mỹ?</h3>
-        </div>
-        <div class="content">
-          <p>Những nghề phổ biến của người Việt tại Mỹ và cơ hội phát triển trong nhiều lĩnh vực.</p>
-          <a class="readmore" href="nguoi-viet-lam-gi-o-my.html">Đọc bài →</a>
-        </div>
-      </article>
-
-      <article class="post">
-        <div class="thumb">
-          <span>DoorDash</span>
-          <h3>Chạy DoorDash Ở Mỹ Kiếm Bao Nhiêu?</h3>
-        </div>
-        <div class="content">
-          <p>Thu nhập thực tế của tài xế DoorDash và những yếu tố ảnh hưởng đến số tiền kiếm được.</p>
-          <a class="readmore" href="lam-doordash-o-my-kiem-bao-nhieu.html">Đọc bài →</a>
-        </div>
-      </article>
-
-      <article class="post">
-        <div class="thumb">
-          <span>Texas</span>
-          <h3>Cuộc Sống Ở Texas Có Tốt Không?</h3>
-        </div>
-        <div class="content">
-          <p>Ưu điểm và khó khăn khi sinh sống, làm việc và gây dựng cuộc sống ở Texas.</p>
-          <a class="readmore" href="cuoc-song-o-texas-co-tot-khong.html">Đọc bài →</a>
-        </div>
-      </article>
-
-      <article class="post">
-        <div class="thumb">
-          <span>Tiệm nail Mỹ</span>
-          <h3>Một Ngày Làm Việc Ở Tiệm Nail Mỹ</h3>
-        </div>
-        <div class="content">
-          <p>Chia sẻ chân thực về lịch làm việc, khách hàng và áp lực trong tiệm nail ở Mỹ.</p>
-          <a class="readmore" href="mot-ngay-lam-viec-o-tiem-nail-my.html">Đọc bài →</a>
-        </div>
-      </article>
-
-      <article class="post">
-        <div class="thumb">
-          <span>Odessa Texas</span>
-          <h3>Cuộc Sống Người Việt Ở Odessa Texas</h3>
-        </div>
-        <div class="content">
-          <p>Góc nhìn gần gũi về cộng đồng người Việt, việc làm và cuộc sống tại Odessa, Texas.</p>
-          <a class="readmore" href="nguoi-viet-o-odessa-texas.html">Đọc bài →</a>
-        </div>
-      </article>
-    </section>
-
-    <footer class="footer">
-      © 2026 Hoài Đặng · hoaidang.com
-    </footer>
-
-    <div style="opacity:0;height:0;overflow:hidden">
-      cuộc sống ở Mỹ, nghề nail ở Mỹ, làm nail ở Texas, người Việt tại Mỹ, người Việt ở Odessa Texas, làm nail tại Mỹ, mở tiệm nail ở Mỹ
+    <div class="footer">
+      © Hoài Đặng — Life in America, Nail Business & Vietnamese Creator in Texas.
     </div>
   </main>
 
+  <script>
+    const input = document.getElementById('searchInput');
+    const cards = [...document.querySelectorAll('.card')];
+    const chips = [...document.querySelectorAll('.chip')];
+
+    function filterCards(type = 'all') {
+      const q = input.value.toLowerCase().trim();
+      cards.forEach(card => {
+        const title = card.dataset.title || '';
+        const cat = card.dataset.category || '';
+        const matchSearch = !q || title.includes(q) || cat.includes(q);
+        const matchCat = type === 'all' || cat.includes(type);
+        card.style.display = matchSearch && matchCat ? 'flex' : 'none';
+      });
+    }
+
+    let active = 'all';
+    input.addEventListener('input', () => filterCards(active));
+
+    chips.forEach(chip => {
+      chip.addEventListener('click', () => {
+        chips.forEach(c => c.classList.remove('active'));
+        chip.classList.add('active');
+        active = chip.dataset.filter;
+        filterCards(active);
+      });
+    });
+  </script>
 </body>
 </html>
