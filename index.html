@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <title>Hoài Đặng | Cuộc sống ở Mỹ, digital services và online business tại Texas</title>
-  <meta name="author" content="Hoài Đặng" />
   <meta name="robots" content="index, follow, max-image-preview:large" />
   <meta name="theme-color" content="#6d4cff" />
   <meta name="geo.region" content="US-TX" />
@@ -65,7 +64,6 @@
   }
   </script>
 
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q5GNXWFBRG"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
@@ -233,7 +231,6 @@
       padding: 24px 24px 24px;
     }
 
-   .auth-bar {
   position: absolute;
   top: 20px;
   right: 20px;
@@ -243,7 +240,6 @@
   z-index: 20;
 }
 
-.auth-btn {
   height: 42px;
   padding: 0 14px;
   border-radius: 999px;
@@ -257,18 +253,15 @@
   transition: all 0.2s ease;
 }
 
-.auth-btn.google {
   background: linear-gradient(135deg, #7c3aed, #4c1d95);
   color: #fff;
   box-shadow: 0 8px 20px rgba(124,58,237,.4);
 }
 
-.auth-btn.google:hover {
   transform: translateY(-1px);
   opacity: 0.9;
 }
 
-.auth-btn-icon {
   width: 20px;
   height: 20px;
   border-radius: 50%;
@@ -281,7 +274,6 @@
   font-weight: 900;
 }
 
-.auth-user {
   display: none;
   align-items: center;
   gap: 8px;
@@ -292,24 +284,20 @@
   color: #fff;
 }
 
-.auth-user img {
   width: 32px;
   height: 32px;
   border-radius: 50%;
 }
 
-.auth-user-name {
   font-size: 13px;
   font-weight: 700;
 }
 
-.auth-btn.logout {
   background: rgba(255,255,255,.1);
   color: #fff;
   padding: 0 10px;
 }
 
-.auth-btn.logout:hover {
   background: rgba(255,255,255,.2);
 }
 
@@ -712,7 +700,6 @@
         padding: 18px;
       }
 
-      .auth-bar {
         justify-content: space-between;
         flex-wrap: wrap;
         margin-bottom: 14px;
@@ -789,18 +776,9 @@
 
       <section class="hero">
         <div class="hero-overlay">
-   <div class="auth-bar">
-  <div id="authUser" class="auth-user">
-    <img id="authAvatar" src="" alt="Avatar" />
-    <div class="auth-user-text">
-      <span id="authName" class="auth-user-name">User</span>
     </div>
-    <button id="logoutBtn" class="auth-btn logout" type="button">Logout</button>
   </div>
 
-  <button id="loginBtn" class="auth-btn google" type="button">
-    <span class="auth-btn-icon">G</span>
-    <span class="auth-label">Login</span>
   </button>
 </div>
 
@@ -940,6 +918,5 @@
     </section>
   </main>
 
-  <script type="module" src="/assets/js/auth.js"></script>
 </body>
 </html>
