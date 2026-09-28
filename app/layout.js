@@ -1,4 +1,5 @@
 import './globals.css';
+import './secondary.css';
 
 export const metadata = {
   metadataBase: new URL('https://hoaidang.com'),
