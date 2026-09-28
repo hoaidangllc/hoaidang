@@ -1,6 +1,13 @@
 import { NextResponse } from 'next/server';
 import { createClient } from '../../../../../lib/supabase/server';
 
+function uploadPlan(size) {
+  const MB = 1024 * 1024;
+  if (size <= 64 * MB) return { chunk_size: size, total_chunk_count: 1 };
+  const chunkSize = 32 * MB;
+  return { chunk_size: chunkSize, total_chunk_count: Math.floor(size / chunkSize) };
+}
+
 export async function POST(request) {
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
@@ -10,9 +17,10 @@ export async function POST(request) {
 
   const input = await request.json();
   const size = Number(input.video_size);
-  if (!Number.isFinite(size) || size <= 0) return NextResponse.json({ error: 'invalid_video_size' }, { status: 400 });
+  if (!Number.isSafeInteger(size) || size <= 0) return NextResponse.json({ error: 'invalid_video_size' }, { status: 400 });
   const privacy = String(input.privacy_level || 'SELF_ONLY');
   const title = String(input.title || '').slice(0, 2200);
+  const plan = uploadPlan(size);
   const payload = {
     post_info: {
       title,
@@ -23,7 +31,7 @@ export async function POST(request) {
       brand_organic_toggle: Boolean(input.brand_organic_toggle),
       is_aigc: Boolean(input.is_aigc),
     },
-    source_info: { source: 'FILE_UPLOAD', video_size: size, chunk_size: size, total_chunk_count: 1 },
+    source_info: { source: 'FILE_UPLOAD', video_size: size, ...plan },
   };
   const response = await fetch('https://open.tiktokapis.com/v2/post/publish/video/init/', {
     method: 'POST',
@@ -31,5 +39,6 @@ export async function POST(request) {
     body: JSON.stringify(payload), cache: 'no-store',
   });
   const result = await response.json();
+  if (response.ok && result?.data) result.data.upload_plan = plan;
   return NextResponse.json(result, { status: response.ok ? 200 : response.status });
 }
