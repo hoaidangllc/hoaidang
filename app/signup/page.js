@@ -1,0 +1,3 @@
+import Link from 'next/link';
+export const metadata={title:'Create account'};
+export default function Signup(){return <main className="authPage"><Link className="brand authBrand" href="/">Hoai<span>Studio</span></Link><section className="authCard"><div className="eyebrow">GET STARTED</div><h1>Create your workspace.</h1><p>Set up your HoaiStudio account. Connect a supported social account when you are ready.</p><form><label>Name</label><input placeholder="Your name"/><label>Email</label><input type="email" placeholder="you@example.com"/><label>Password</label><input type="password" placeholder="Create a password"/><button type="button">Create account</button></form><p className="authFoot">Already have an account? <Link href="/login">Log in</Link></p></section></main>}
