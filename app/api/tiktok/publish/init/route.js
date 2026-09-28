@@ -18,7 +18,8 @@ export async function POST(request) {
   const input = await request.json();
   const size = Number(input.video_size);
   if (!Number.isSafeInteger(size) || size <= 0) return NextResponse.json({ error: 'invalid_video_size' }, { status: 400 });
-  const privacy = String(input.privacy_level || 'SELF_ONLY');
+  const privacy = String(input.privacy_level || '');
+  if (!privacy) return NextResponse.json({ error: 'privacy_selection_required' }, { status: 400 });
   const title = String(input.title || '').slice(0, 2200);
   const plan = uploadPlan(size);
   const payload = {
@@ -28,6 +29,7 @@ export async function POST(request) {
       disable_comment: Boolean(input.disable_comment),
       disable_duet: Boolean(input.disable_duet),
       disable_stitch: Boolean(input.disable_stitch),
+      brand_content_toggle: Boolean(input.brand_content_toggle),
       brand_organic_toggle: Boolean(input.brand_organic_toggle),
       is_aigc: Boolean(input.is_aigc),
     },
