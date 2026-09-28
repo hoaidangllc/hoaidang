@@ -1,0 +1,3 @@
+import Link from 'next/link';
+export const metadata={title:'About'};
+export default function About(){return <main className="legal"><Link className="brand" href="/">Hoai<span>Studio</span></Link><div className="eyebrow">ABOUT</div><h1>Publishing should feel clear, not complicated.</h1><p>HoaiStudio is a social content workspace built around a simple idea: people should understand what account they are using, what content they are sending, and what will happen when they publish.</p><p>The product is being developed in focused stages. TikTok publishing is the first connected workflow, with additional content and platform tools planned over time.</p><Link className="textLink" href="/">Back to HoaiStudio</Link></main>}
