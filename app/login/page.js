@@ -1,0 +1,3 @@
+import Link from 'next/link';
+export const metadata={title:'Log in'};
+export default function Login(){return <main className="authPage"><Link className="brand authBrand" href="/">Hoai<span>Studio</span></Link><section className="authCard"><div className="eyebrow">WELCOME BACK</div><h1>Log in to your workspace.</h1><p>Manage your connected accounts and publishing activity.</p><form><label>Email</label><input type="email" placeholder="you@example.com"/><label>Password</label><input type="password" placeholder="Your password"/><button type="button">Log in</button></form><p className="authFoot">New to HoaiStudio? <Link href="/signup">Create an account</Link></p></section></main>}
