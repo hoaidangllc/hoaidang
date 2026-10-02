@@ -15,16 +15,20 @@ export const metadata={
  keywords:['HoaiStudio','creator publishing workspace','content publishing','creator tools','TikTok publishing workspace','social media publishing'],
  alternates:{canonical:'/'},
  robots:{index:true,follow:true,googleBot:{index:true,follow:true,'max-image-preview':'large','max-snippet':-1,'max-video-preview':-1}},
- icons:{icon:{url:'/assets/images/hoaistudio_icon.png',type:'image/png',sizes:'512x512'},shortcut:'/assets/images/hoaistudio_icon.png',apple:'/assets/images/hoaistudio_icon.png'},
- openGraph:{title:'HoaiStudio — Creator Publishing Workspace',description,url:siteUrl,siteName,type:'website',locale:'en_US',images:[{url:'/assets/images/hoaistudio_icon.png',width:512,height:512,alt:'HoaiStudio logo'}]},
- twitter:{card:'summary',title:'HoaiStudio — Creator Publishing Workspace',description,images:['/assets/images/hoaistudio_icon.png']},
+ icons:{
+  icon:[{url:'/hoaistudio-icon-48.png',type:'image/png',sizes:'48x48'},{url:'/hoaistudio-icon-512.png',type:'image/png',sizes:'512x512'}],
+  shortcut:'/hoaistudio-icon-48.png',
+  apple:{url:'/hoaistudio-icon-512.png',type:'image/png',sizes:'512x512'}
+ },
+ openGraph:{title:'HoaiStudio — Creator Publishing Workspace',description,url:siteUrl,siteName,type:'website',locale:'en_US',images:[{url:'/hoaistudio-icon-512.png',width:512,height:512,alt:'HoaiStudio logo'}]},
+ twitter:{card:'summary',title:'HoaiStudio — Creator Publishing Workspace',description,images:['/hoaistudio-icon-512.png']},
 };
 
 const structuredData={
  '@context':'https://schema.org',
  '@graph':[
   {'@type':'WebSite','@id':`${siteUrl}/#website`,url:siteUrl,name:siteName,alternateName:'Hoai Studio',description,inLanguage:'en-US',publisher:{'@id':`${siteUrl}/#organization`}},
-  {'@type':'Organization','@id':`${siteUrl}/#organization`,name:siteName,alternateName:'Hoai Studio',url:siteUrl,logo:{'@type':'ImageObject',url:`${siteUrl}/assets/images/hoaistudio_icon.png`,contentUrl:`${siteUrl}/assets/images/hoaistudio_icon.png`,width:512,height:512},description},
+  {'@type':'Organization','@id':`${siteUrl}/#organization`,name:siteName,alternateName:'Hoai Studio',url:siteUrl,logo:{'@type':'ImageObject',url:`${siteUrl}/hoaistudio-icon-512.png`,contentUrl:`${siteUrl}/hoaistudio-icon-512.png`,width:512,height:512},description},
   {'@type':'SoftwareApplication','@id':`${siteUrl}/#software`,name:siteName,alternateName:'Hoai Studio',url:siteUrl,applicationCategory:'MultimediaApplication',operatingSystem:'Web',description,publisher:{'@id':`${siteUrl}/#organization`}}
  ]
 };
