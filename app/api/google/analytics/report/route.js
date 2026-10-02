@@ -1,7 +1,17 @@
 import { NextResponse } from 'next/server';
 
-const PROPERTY_ID = '553973685';
-const GSC_SITE = 'sc-domain:phonenumbersale.com';
+const SITES = {
+  pns: {
+    name: 'PhoneNumberSale.com',
+    propertyId: '553973685',
+    gscSite: 'sc-domain:phonenumbersale.com'
+  },
+  annie: {
+    name: "Annie's Nails & Spa",
+    propertyId: '335787197',
+    gscSite: null
+  }
+};
 
 async function getStoredConnection() {
   const base = process.env.NEXT_PUBLIC_SUPABASE_URL;
@@ -27,8 +37,8 @@ async function getAccessToken(refreshToken) {
   return data.access_token;
 }
 
-async function ga4(accessToken, body) {
-  const r = await fetch(`https://analyticsdata.googleapis.com/v1beta/properties/${PROPERTY_ID}:runReport`, {
+async function ga4(accessToken, propertyId, body) {
+  const r = await fetch(`https://analyticsdata.googleapis.com/v1beta/properties/${propertyId}:runReport`, {
     method: 'POST', headers: { Authorization: `Bearer ${accessToken}`, 'Content-Type': 'application/json' }, body: JSON.stringify(body), cache: 'no-store'
   });
   const data = await r.json();
@@ -36,8 +46,8 @@ async function ga4(accessToken, body) {
   return data;
 }
 
-async function gsc(accessToken, body) {
-  const r = await fetch(`https://www.googleapis.com/webmasters/v3/sites/${encodeURIComponent(GSC_SITE)}/searchAnalytics/query`, {
+async function gsc(accessToken, gscSite, body) {
+  const r = await fetch(`https://www.googleapis.com/webmasters/v3/sites/${encodeURIComponent(gscSite)}/searchAnalytics/query`, {
     method: 'POST', headers: { Authorization: `Bearer ${accessToken}`, 'Content-Type': 'application/json' }, body: JSON.stringify(body), cache: 'no-store'
   });
   const data = await r.json();
@@ -48,17 +58,43 @@ async function gsc(accessToken, body) {
 export async function GET(request) {
   try {
     const url = new URL(request.url);
+    const siteKey = (url.searchParams.get('site') || 'pns').toLowerCase();
+    const site = SITES[siteKey];
+    if (!site) {
+      return NextResponse.json({ ok: false, error: 'Unknown site. Use site=pns or site=annie.' }, { status: 400 });
+    }
+
     const days = Math.min(Math.max(Number(url.searchParams.get('days') || 7), 1), 90);
     const connection = await getStoredConnection();
     const accessToken = await getAccessToken(connection.refresh_token);
     const dateRanges = [{ startDate: `${days}daysAgo`, endDate: 'today' }];
-    const [summary, channels, pages, search] = await Promise.all([
-      ga4(accessToken, { dateRanges, metrics: [{ name: 'activeUsers' }, { name: 'sessions' }, { name: 'screenPageViews' }, { name: 'engagedSessions' }] }),
-      ga4(accessToken, { dateRanges, dimensions: [{ name: 'sessionDefaultChannelGroup' }], metrics: [{ name: 'sessions' }, { name: 'activeUsers' }], orderBys: [{ metric: { metricName: 'sessions' }, desc: true }], limit: 10 }),
-      ga4(accessToken, { dateRanges, dimensions: [{ name: 'landingPagePlusQueryString' }], metrics: [{ name: 'sessions' }, { name: 'activeUsers' }], orderBys: [{ metric: { metricName: 'sessions' }, desc: true }], limit: 15 }),
-      gsc(accessToken, { startDate: new Date(Date.now() - days * 86400000).toISOString().slice(0,10), endDate: new Date().toISOString().slice(0,10), dimensions: ['query'], rowLimit: 25 })
+
+    const [summary, channels, pages] = await Promise.all([
+      ga4(accessToken, site.propertyId, { dateRanges, metrics: [{ name: 'activeUsers' }, { name: 'sessions' }, { name: 'screenPageViews' }, { name: 'engagedSessions' }] }),
+      ga4(accessToken, site.propertyId, { dateRanges, dimensions: [{ name: 'sessionDefaultChannelGroup' }], metrics: [{ name: 'sessions' }, { name: 'activeUsers' }], orderBys: [{ metric: { metricName: 'sessions' }, desc: true }], limit: 10 }),
+      ga4(accessToken, site.propertyId, { dateRanges, dimensions: [{ name: 'landingPagePlusQueryString' }], metrics: [{ name: 'sessions' }, { name: 'activeUsers' }], orderBys: [{ metric: { metricName: 'sessions' }, desc: true }], limit: 15 })
     ]);
-    return NextResponse.json({ ok: true, site: 'PhoneNumberSale.com', days, propertyId: PROPERTY_ID, gscSite: GSC_SITE, ga4: { summary, channels, landingPages: pages }, gsc: { queries: search.rows || [] } }, { headers: { 'Cache-Control': 'private, no-store' } });
+
+    let search = null;
+    if (site.gscSite) {
+      search = await gsc(accessToken, site.gscSite, {
+        startDate: new Date(Date.now() - days * 86400000).toISOString().slice(0, 10),
+        endDate: new Date().toISOString().slice(0, 10),
+        dimensions: ['query'],
+        rowLimit: 25
+      });
+    }
+
+    return NextResponse.json({
+      ok: true,
+      site: site.name,
+      siteKey,
+      days,
+      propertyId: site.propertyId,
+      gscSite: site.gscSite,
+      ga4: { summary, channels, landingPages: pages },
+      gsc: site.gscSite ? { queries: search?.rows || [] } : null
+    }, { headers: { 'Cache-Control': 'private, no-store' } });
   } catch (error) {
     return NextResponse.json({ ok: false, error: error.message }, { status: 500, headers: { 'Cache-Control': 'private, no-store' } });
   }
