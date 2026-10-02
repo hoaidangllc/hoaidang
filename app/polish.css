@@ -1,0 +1,20 @@
+/* Final visual polish: preserve product behavior, improve readability and hierarchy. */
+:root{--hs-surface:#141419;--hs-surface-2:#18181f;--hs-border:#2d2b36;--hs-text:#f6f4f9;--hs-copy:#aaa6b3;--hs-subtle:#85818e;--hs-purple:#a994ff}
+
+/* Global readability */
+body{letter-spacing:-.005em}.navlinks a,.quiet{color:#aaa6b3}.lead,.sectionCopy p,.platformSection p{color:#aaa6b3}.hero h1 em{color:#aaa6b3}.trust{color:#918d99}.eyebrow{color:#a994ff}.textLink{color:#ece8f1;border-color:#77717f}.miniProof{color:#98939f}.reviewCards p{color:#9e99a6}.footer p,.footerLinks a{color:#918d99}
+
+/* Homepage: stronger hierarchy without adding glare */
+.hero{padding-top:104px;padding-bottom:112px}.hero h1{max-width:1060px}.heroGlow{opacity:.85}.product{padding-top:72px}.mock{border-color:#312e3a}.mockBody aside{color:#918d99}.panelHead small,.panel label,.settings small,.creatorRow small,.disclosure small{color:#aaa5b0}.field{color:#918d99}.platform>span{color:#96919d}.stepGrid p,.stepsIntro p{color:#aaa5b0}.reviewCards article>span{color:#8e8995}
+
+/* Dashboard: denser, calmer, easier to scan */
+.dashMain{max-width:1180px;padding-top:54px;padding-bottom:80px}.dashMain header{margin-bottom:38px}.dashMain header h1{letter-spacing:-.045em}.dashMain header p{color:#a09ba8;font-size:14px}.dashSide nav b{color:#77727f;letter-spacing:.14em}.dashSide nav span,.dashSide nav a{color:#9d98a5}.dashSide nav .active{color:#d9d0ff!important;background:#2b2342!important}.dashUser>div span{color:#8e8996}.connectCard{padding:38px 42px;min-height:164px}.connectCard small{color:#9a8ee0}.connectCard h2{letter-spacing:-.025em}.connectCard p{color:#aaa5b1;line-height:1.55}.connectCard .connectButton{background:#f3f0f7;color:#111116;border:1px solid #f3f0f7;box-shadow:none}.connectCard form .connectButton{background:#191820;color:#c9c4d0;border-color:#383542}.connectCard form .connectButton:hover{background:#211f29;border-color:#4b4658;color:#fff}.dashTitle{margin-top:42px;margin-bottom:16px}.toolGrid{gap:16px}.toolGrid article,.analyticsTool article{min-height:205px;padding:27px!important;border-radius:18px!important}.toolGrid b{font-size:14px}.toolGrid p{color:#9b96a3;line-height:1.65}.toolGrid em{color:#b09dff;letter-spacing:.12em}.toolIcon{color:#c6baff}.note{margin-top:24px;padding:24px 27px}.note p{color:#918c99;line-height:1.55}
+
+/* Publisher */
+.publishTop p{color:#aaa5b2}.publisherCard{border-color:#302e39}.publisherCard p{color:#9f9aa7}.publisherCard textarea::placeholder{color:#706c78}.publisherCard textarea:focus,.publisherCard select:focus{outline:3px solid #806cff18;border-color:#806cff}.dropZone{color:#b5afbc!important}.publishButton:hover{filter:brightness(1.08);transform:translateY(-1px)}
+
+/* Keyboard and interaction quality */
+a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:2px solid #a994ff;outline-offset:3px}.toolGrid article,.analyticsTool article,.connectCard,.publisherCard,.reviewCards article{transition:border-color .2s ease,transform .2s ease,background .2s ease}.analyticsTool{text-decoration:none}.analyticsTool:hover article{border-color:#4a4160!important;transform:translateY(-2px)}
+
+@media(max-width:900px){.dashMain{padding-top:34px}.connectCard{padding:30px}.toolGrid article,.analyticsTool article{min-height:180px}}
+@media(max-width:800px){.hero{padding-top:68px;padding-bottom:84px}.dashMain header{margin-bottom:26px}.connectCard{padding:25px 22px}.dashTitle{margin-top:30px}.note{padding:20px}}
