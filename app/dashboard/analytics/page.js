@@ -3,26 +3,28 @@ import Link from 'next/link';
 import { cookies } from 'next/headers';
 import { createClient } from '../../../lib/supabase/server';
 
-const OWNER_EMAIL = 'ddh2755@gmail.com';
-export const metadata = { title: 'Analytics | HoaiStudio' };
-function value(report,index){return report?.rows?.[0]?.metricValues?.[index]?.value||'0'}
+const OWNER_EMAIL='ddh2755@gmail.com';
+export const metadata={title:'Analytics | HoaiStudio'};
+const metric=(report,index)=>Number(report?.rows?.[0]?.metricValues?.[index]?.value||0).toLocaleString();
+const cleanPath=(raw='')=>{try{const s=String(raw);const q=s.indexOf('?');return q>=0?s.slice(0,q)||'/':s||'/'}catch{return raw||'/'}};
+const n=v=>Number(v||0).toLocaleString();
 
 export default async function AnalyticsPage({searchParams}){
-  const params=await searchParams;
-  const supabase=await createClient();
-  const {data:{user}}=await supabase.auth.getUser();
-  if(!user) redirect('/login');
-  if((user.email||'').toLowerCase()!==OWNER_EMAIL) redirect('/dashboard');
-  const site=params?.site==='annie'?'annie':'pns';
-  const days=Math.min(Math.max(Number(params?.days||7),1),90);
-  const base=process.env.NEXT_PUBLIC_SITE_URL||'https://hoaidang.com';
-  let data=null,error=null;
-  try{
-    const cookieStore=await cookies();
-    const cookieHeader=cookieStore.getAll().map(c=>`${c.name}=${c.value}`).join('; ');
-    const r=await fetch(`${base}/api/google/analytics/report?site=${site}&days=${days}`,{headers:{cookie:cookieHeader},cache:'no-store'});
-    data=await r.json(); if(!r.ok||!data?.ok) error=data?.error||`Report failed (${r.status})`;
-  }catch(e){error=e.message}
-  const summary=data?.ga4?.summary,channels=data?.ga4?.channels?.rows||[],pages=data?.ga4?.landingPages?.rows||[];
-  return <main style={{maxWidth:1100,margin:'0 auto',padding:'40px 24px',fontFamily:'system-ui'}}><div style={{display:'flex',justifyContent:'space-between',alignItems:'center',gap:16,flexWrap:'wrap'}}><div><small>OWNER ONLY</small><h1 style={{margin:'6px 0'}}>Analytics</h1><p style={{margin:0}}>GA4 reports for your properties.</p></div><Link href="/dashboard">← Workspace</Link></div><div style={{display:'flex',gap:10,margin:'28px 0',flexWrap:'wrap'}}><Link href={`/dashboard/analytics?site=pns&days=${days}`}>PhoneNumberSale</Link><Link href={`/dashboard/analytics?site=annie&days=${days}`}>Annie's Nails</Link><span>•</span><Link href={`/dashboard/analytics?site=${site}&days=1`}>1 day</Link><Link href={`/dashboard/analytics?site=${site}&days=7`}>7 days</Link><Link href={`/dashboard/analytics?site=${site}&days=30`}>30 days</Link></div>{error?<div style={{padding:18,border:'1px solid currentColor',borderRadius:12}}><b>Report unavailable</b><p>{error}</p></div>:<><h2>{data?.site} · last {days} day{days===1?'':'s'}</h2><div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(160px,1fr))',gap:12,margin:'20px 0 32px'}}>{[['Active users',value(summary,0)],['Sessions',value(summary,1)],['Page views',value(summary,2)],['Engaged sessions',value(summary,3)]].map(([k,v])=><div key={k} style={{padding:18,border:'1px solid #4444',borderRadius:12}}><small>{k}</small><div style={{fontSize:30,fontWeight:700,marginTop:6}}>{v}</div></div>)}</div><h3>Traffic channels</h3><div style={{overflowX:'auto'}}><table style={{width:'100%',borderCollapse:'collapse'}}><thead><tr><th align="left">Channel</th><th align="right">Sessions</th><th align="right">Users</th></tr></thead><tbody>{channels.map((r,i)=><tr key={i}><td style={{padding:'8px 0'}}>{r.dimensionValues?.[0]?.value}</td><td align="right">{r.metricValues?.[0]?.value}</td><td align="right">{r.metricValues?.[1]?.value}</td></tr>)}</tbody></table></div><h3 style={{marginTop:30}}>Landing pages</h3><div style={{overflowX:'auto'}}><table style={{width:'100%',borderCollapse:'collapse'}}><thead><tr><th align="left">Page</th><th align="right">Sessions</th><th align="right">Users</th></tr></thead><tbody>{pages.map((r,i)=><tr key={i}><td style={{padding:'8px 0'}}>{r.dimensionValues?.[0]?.value}</td><td align="right">{r.metricValues?.[0]?.value}</td><td align="right">{r.metricValues?.[1]?.value}</td></tr>)}</tbody></table></div></>}</main>
+ const params=await searchParams; const supabase=await createClient(); const {data:{user}}=await supabase.auth.getUser();
+ if(!user) redirect('/login'); if((user.email||'').toLowerCase()!==OWNER_EMAIL) redirect('/dashboard');
+ const site=params?.site==='annie'?'annie':'pns'; const days=[1,7,30,90].includes(Number(params?.days))?Number(params.days):7;
+ const base=process.env.NEXT_PUBLIC_SITE_URL||'https://hoaidang.com'; let data=null,error=null;
+ try{const cs=await cookies();const cookie=cs.getAll().map(c=>`${c.name}=${c.value}`).join('; ');const r=await fetch(`${base}/api/google/analytics/report?site=${site}&days=${days}`,{headers:{cookie},cache:'no-store'});data=await r.json();if(!r.ok||!data?.ok)error=data?.error||`Report failed (${r.status})`}catch(e){error=e.message}
+ const summary=data?.ga4?.summary,channels=data?.ga4?.channels?.rows||[],rawPages=data?.ga4?.landingPages?.rows||[];
+ const pageMap=new Map(); rawPages.forEach(r=>{const p=cleanPath(r.dimensionValues?.[0]?.value);const old=pageMap.get(p)||[0,0];pageMap.set(p,[old[0]+Number(r.metricValues?.[0]?.value||0),old[1]+Number(r.metricValues?.[1]?.value||0)])});
+ const pages=[...pageMap.entries()].sort((a,b)=>b[1][0]-a[1][0]).slice(0,12);
+ const title=site==='annie'?"Annie's Nails & Spa":'PhoneNumberSale.com';
+ const cards=[['Active users',metric(summary,0),'People who visited'],['Sessions',metric(summary,1),'Visits in this period'],['Page views',metric(summary,2),'Pages viewed'],['Engaged sessions',metric(summary,3),'Meaningful visits']];
+ return <main className="analyticsShell"><header className="analyticsTop"><div><div className="analyticsKicker">PRIVATE · OWNER ANALYTICS</div><h1>Performance at a glance.</h1><p>Clean GA4 reporting for your businesses, without the Google Analytics clutter.</p></div><Link className="analyticsBack" href="/dashboard">← Workspace</Link></header>
+ <section className="analyticsToolbar"><div className="analyticsTabs"><Link className={site==='pns'?'selected':''} href={`/dashboard/analytics?site=pns&days=${days}`}>PhoneNumberSale</Link><Link className={site==='annie'?'selected':''} href={`/dashboard/analytics?site=annie&days=${days}`}>Annie's Nails</Link></div><div className="analyticsRange">{[1,7,30,90].map(d=><Link key={d} className={days===d?'selected':''} href={`/dashboard/analytics?site=${site}&days=${d}`}>{d===1?'Today':`${d}D`}</Link>)}</div></section>
+ {error?<section className="analyticsError"><b>Report unavailable</b><p>{error}</p></section>:<><div className="analyticsHeading"><div><span>{site==='annie'?'LOCAL BUSINESS':'NATIONWIDE'}</span><h2>{title}</h2></div><div className="analyticsLive"><i/> Live GA4 data · last {days===1?'day':`${days} days`}</div></div>
+ <section className="analyticsMetrics">{cards.map(([label,value,sub],i)=><article key={label} className={i===2?'featured':''}><span>{label}</span><strong>{value}</strong><small>{sub}</small></article>)}</section>
+ <section className="analyticsGrid"><article className="analyticsPanel"><div className="analyticsPanelHead"><div><span>ACQUISITION</span><h3>Traffic channels</h3></div><small>Sessions / Users</small></div><div className="analyticsRows">{channels.slice(0,10).map((r,i)=>{const sessions=Number(r.metricValues?.[0]?.value||0);const max=Number(channels[0]?.metricValues?.[0]?.value||1);return <div className="analyticsRow" key={i}><div className="channelName"><b>{r.dimensionValues?.[0]?.value||'Unknown'}</b><div className="bar"><i style={{width:`${Math.max(2,sessions/max*100)}%`}}/></div></div><strong>{n(sessions)}</strong><span>{n(r.metricValues?.[1]?.value)}</span></div>})}</div></article>
+ <article className="analyticsPanel"><div className="analyticsPanelHead"><div><span>ENTRY PAGES</span><h3>Top landing pages</h3></div><small>Sessions / Users</small></div><div className="analyticsRows pages">{pages.map(([path,vals],i)=><div className="analyticsRow" key={path}><div className="pageName"><em>{i+1}</em><b title={path}>{path}</b></div><strong>{n(vals[0])}</strong><span>{n(vals[1])}</span></div>)}</div></article></section></>}
+ </main>
 }
