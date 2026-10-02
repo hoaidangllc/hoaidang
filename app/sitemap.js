@@ -3,14 +3,9 @@ export default function sitemap(){
   const pages=[
     {path:'',changeFrequency:'weekly',priority:1},
     {path:'/about',changeFrequency:'monthly',priority:.8},
-    {path:'/contact',changeFrequency:'monthly',priority:.8},
-    {path:'/privacy',changeFrequency:'monthly',priority:.6},
-    {path:'/terms',changeFrequency:'monthly',priority:.6},
+    {path:'/contact',changeFrequency:'monthly',priority:.7},
+    {path:'/privacy',changeFrequency:'yearly',priority:.5},
+    {path:'/terms',changeFrequency:'yearly',priority:.5},
   ];
-  return pages.map(({path,changeFrequency,priority})=>({
-    url:`${base}${path}`,
-    lastModified:new Date(),
-    changeFrequency,
-    priority,
-  }));
+  return pages.map(({path,changeFrequency,priority})=>({url:`${base}${path}`,changeFrequency,priority}));
 }
